@@ -1,0 +1,26 @@
+1.前端最火的MVVM框架，数据驱动，组件化，轻量，简洁，高效 20kb左右
+
+2.后端交互vue-resource 前端路由vue-router 第三方js库better-scroll webpack可以将源码经过编译生成浏览器可以运行的代码 Es6 + eslint检测es6代码风格
+
+3.View 视图DOM   ViewModel 通讯观察者   Model 数据 javascript对象 
+
+4.Angular.js 56k 难 
+  react.js 44k
+  vue.js都是MVVM框架 gzip后20k 借鉴了angular的指令和react的组件化，自己的特性如计算属性
+
+5.组件设计原则 页面上每个独立的可视／可交互区域都可为一个组件，每个组件对应一个工程目录，组件所需资源在这个目录下就近维护，每个页面就是一个或多个组件的容器
+
+6.Vue.cli是Vue的脚手架工具，目录结构 本地调试 代码部署 热加载 单元测试
+
+模版 webpack模版，模版有很多，一般选这个
+
+7.安装vue-cli 
+  $ sudo npm install -g vue-cli
+  查看模版
+  $ vue list
+  创建一个使用webpack模版的项目名为sell
+  $ vue init webpack sell
+  启动项目
+  $ npm run dev
+
+8.
