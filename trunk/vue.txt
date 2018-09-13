@@ -1,0 +1,90 @@
+1.前端最火的MVVM框架，数据驱动，组件化，轻量，简洁，高效 20kb左右
+
+2.后端交互vue-resource 前端路由vue-router 第三方js库better-scroll webpack可以将源码经过编译生成浏览器可以运行的代码 Es6 + eslint检测es6代码风格
+
+3.View 视图DOM   ViewModel 通讯观察者   Model 数据 javascript对象 
+
+4.Angular.js 56k 难 双向数据绑定
+  react.js 44k 组件化
+  vue.js都是MVVM框架 gzip后20k 借鉴了angular的指令和react的组件化，自己的特性如计算属性
+
+5.组件设计原则 页面上每个独立的可视／可交互区域都可为一个组件，每个组件对应一个工程目录，组件所需资源在这个目录下就近维护，每个页面就是一个或多个组件的容器
+
+6.Vue.cli是Vue的脚手架工具，目录结构 本地调试 代码部署 热加载 单元测试
+
+模版 webpack模版，模版有很多，一般选这个
+
+7.安装vue-cli 
+  $ sudo npm install -g vue-cli
+  查看模版
+  $ vue list
+  创建一个使用webpack模版的项目名为sell
+  $ vue init webpack sell
+  启动项目
+  $ npm run dev
+
+8.command + option + L代码进行自动格式化
+9.注释需要留空格
+
+
+*********************************
+第一节课
+1.传统的通过js操作dom非常耗性
+2.DOM Vue JS
+3.Object.defineProperty()函数，在对象的set和get方法里面对DOM。进行操作属于自动的，这样就形成了初步的数据和DOM绑定，完成此案例
+4.SPA单页面应用
+
+第二节课
+前端：Vue.js 包含Vue-Router Axios Vuex(自定义组件) Util 依赖
+后端 Node Express（对node.js的封装，学习此框架非常重要）
+数据库 MongoDB
+工具支持: vue-cli生成模版 webpack进行构建
+线上部署
+
+慕课上有Vue的基础课程
+ES6要学习
+
+第三节课
+cnpm是npm使用淘宝做的的镜像
+npm install -g cnpm — -registry=https://registry.npm.taobao.org,cnpm和npm是一样的
+升级npm： npm install -g npm
+
+cnpm command：
+cnpm i vue — -save 安装一个包
+
+node命令
+1.先进入node的环境，写函数和变量，都是js的语法
+2.node node-test.js执行js文件
+
+第四节课
+1.Vue多页面应用文件引用
+  直接通过script引用vue.js
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  npm安装:
+  下载vue.js包
+  cnpm -i vue — -save
+2.vue-cli构建SPA单页面应用
+  $ sudo npm install -g vue-cli
+  查看模版
+  $ vue list
+  创建一个使用webpack模版的项目名为sell
+  $ vue init webpack demo5
+  $ vue init webpack-simple demo5
+
+  index.html单页面入口
+  脚本的运行必须在对应的工程目录下
+  在package.json里面找到scripts查看运行起来的脚本，执行里面的命令
+  如果npm run dev跑开发模式，跑不起来，先安装依赖，在README.md里面查看使用命令
+
+
+
+
+   
+
+
+
+
+
+
+
+

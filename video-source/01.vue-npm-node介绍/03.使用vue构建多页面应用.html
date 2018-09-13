@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue多页面应用</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    </head>
+    <body>
+
+        <hr color="red"/>
+        <ul style="margin-top: 5rem">
+            <li class="lis">{{msg}}</li>
+            <li class="lis">{{message}}</li>
+            <li class="lis">{{message}}</li>
+        </ul>
+        <div id="box">{{message}}</div>
+        <script>
+            new Vue({
+//                el: '#box',
+                el: ".lis, #box",
+                data: {
+                    "message": "Hello World",
+                    'msg': "哈哈"
+                }
+            });
+        </script>
+    </body>
+</html>

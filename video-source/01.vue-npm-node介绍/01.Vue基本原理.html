@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue原理</title>
+    <style>
+        input {
+            padding: 1rem 3rem;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<input id="input" type="text" placeholder="测试input的监听">
+<script>
+    // 一般监听的写法
+    //            document.getElementById('input').addEventListener('keyup',function (event) {
+    //               document.getElementById('box').innerText = event.target.value;
+    //            });
+
+    // 引入数据绑定原理
+    // setter 和 getter方法传递的值就是function的参数ev
+    var obj = {};
+
+    // 中间使用temp承接用于getter方法
+    obj.temp = "";
+
+    Object.defineProperty(obj, 'message', {
+        set: function (ev) {
+//                    console.log('setter方法');
+            // 在这里进行DOM操作
+            document.getElementById('box').innerText = ev;
+            obj.temp = ev;
+        },
+        get: function (ev) {
+//                    console.log('getter方法')
+            document.getElementById('input').value = obj.temp;
+        }
+    });
+    obj.message = '我是obj的messgae';
+</script>
+</body>
+</html>
