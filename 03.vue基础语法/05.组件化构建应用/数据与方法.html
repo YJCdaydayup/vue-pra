@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{name}}</span>
+    </div>
+
+    <script>
+        // 提前创建data,一般提前将需要的属性写好,初始化为空
+        var data = {
+            name: "Sara",
+            newTodoList: "",
+            visitCount: 0,
+            hide: false,
+            todos: [],
+            error: null
+        };
+
+        // 一旦冻结对象，就不会双向绑定了
+        // Object.freeze(data);
+
+        var vm = new Vue({
+            el: "#app",
+            data: data,
+        });
+
+        vm.name = "Mack";
+        vm.$data.name = "Sunday";
+
+        // 暴露出来的属性和方法 都用$作为前缀以示区分
+        console.log(vm.$data);
+        console.log(vm.$el);
+
+        // 监听属性变化
+        vm.$watch('name',function (newValue, oldValue) {
+           alert(newValue);
+        });
+
+        vm.name = 'HAHA';
+
+
+
+    </script>
+</body>
+</html>

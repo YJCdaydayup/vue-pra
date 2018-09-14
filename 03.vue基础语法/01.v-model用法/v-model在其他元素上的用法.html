@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <!--
+        直接绑定值
+        input的value和sex属性进行绑定，标签里面没有绑定事件时，标签的初始化操作会根据data的sex属性
+    -->
+    <div id="app">
+        <label>
+            男 <input v-model="sex" type="radio" value="male">
+        </label>
+        <label>
+            女 <input v-model="sex" type="radio" value="female">
+        </label>
+        {{sex}}
+    </div>
+    <script>
+        var app = new Vue({
+           el: "#app",
+           data: {
+               sex : 'female'
+           }
+        });
+    </script>
+</body>
+</html>

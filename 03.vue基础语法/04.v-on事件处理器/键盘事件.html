@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--<form @keyup.enter="onKeyAction" action="http://www.baidu.com" @submit.prevent="submit">-->
+            <!--<input type="text">-->
+        <input type="text" @keyup.enter="onKeyAction">
+        <span id="span"></span>
+        <!--</form>-->
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            methods: {
+                onKeyAction: function (ev) {
+                    document.getElementById('span').innerText = ev.target;
+                    debugger
+                },
+                submit: function () {
+                    alert('sd');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

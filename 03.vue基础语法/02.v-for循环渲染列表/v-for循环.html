@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- food每输出一项，就渲染生成一个li -->
+            <li v-for="food in foodlist">
+                {{food.name}} {{food.discount ? food.discount * food.price : food.price}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        // 一般用于迭代数组
+        var app = new Vue({
+           el: "#app",
+           data: {
+               foodlist: [
+                   {
+                       name: "葱",
+                       price: 13,
+                       discount: 0.5
+                   },
+                   {
+                       name: "姜",
+                       price: 12,
+                       discount: 0.5
+                   },
+                   {
+                       name: "蒜",
+                       price: 11,
+                       discount: null
+                   }
+               ]
+           }
+        });
+    </script>
+</body>
+</html>

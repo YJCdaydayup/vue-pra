@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <textarea v-model="article"></textarea>
+        <span>{{article}}</span>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                article: "ascssccsas"
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <!-- 定义一个id，一个组件对应一个最外层的id -->
+    <div id="app">
+        <div>
+
+             <!--
+
+                // 数据绑定后，就做了双向绑定，
+                第一步:数据赋初始值时，改变标签，
+                第二步:value改变，就改变对应的数据
+
+             -->
+
+            <!-- 这里的name就是下面js中app.data.name -->
+            <!--<input type="text" v-model="name">-->
+            <!--<input v-bind:value="test" v-on:input="test = $event.target.value">-->
+            <input :value="name" @input="name = $event.target.value" />
+            <!--
+                v-model的三个指令:
+                v-model.lazy 点击空包处才更新
+                v-model.trim 去掉前面空格
+                v-model.number 将数据转数值型,只能输入数字
+            -->
+            <!--<input type="text" v-model.lazy="test">-->
+            <!--<input type="text" v-model.trim="test">-->
+            <!--<input type="text" v-model.number="test">-->
+
+            <!-- {{}}输出对象属性/函数返回值 -->
+            <!-- v-show控制当前标签的显示/隐藏,定义为true时，就一直显示出来
+                 1.bool值
+                 2.当是app.data的test时，有值显示，为空不显示
+                 3.与v-if的区别是，v-if对应的属性为空时，删除该元素
+            -->
+            <span v-show="test">你的名字: {{test}}</span>
+
+            <div>
+                <input type="text" v-model="age">
+                <span v-show="age">你的年龄{{age}}</span>
+            </div>
+
+            <div>
+                <input type="text" v-model="sex">
+                <span v-if="sex">您的性别是: {{sex}}</span>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // 定义数据
+        var app = new Vue({
+            // 作用的元素
+            el: "#app",
+            // 定义属性
+            data: {
+                test:"10",
+                age:10,
+                sex:null // 不定义不报错，为null是将值定义为空
+            },
+            method: {
+
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>

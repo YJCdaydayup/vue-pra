@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>你是</div>
+        <select v-model="sex">
+            <option value="1">男</option>
+            <option value="2">女</option>
+        </select>
+        {{sex}}
+        <div>您的爱好</div>
+        <select v-model="hobby" multiple="multiple">
+            <option value="1">吃</option>
+            <option value="2">玩</option>
+        </select>
+        {{hobby}}
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                // 默认为空
+//                sex: null
+                sex: 2,
+                hobby: 1
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .btn {
+            padding: 10px;
+            font-size: 0.8rem;
+            background-color: orange;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .active {
+            display: block;
+            margin-top: 3rem;
+            padding: 2rem;
+            font-size: 1rem;
+            background-color: hotpink;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <!--
+          1. 一般省略v-bind前缀,可以绑定所有标签的所有属性
+         -->
+        <a href="http://www.baidu.com">点击</a>
+        <!--<a v-bind:href="url">点击</a>-->
+        <a :href="url">点击</a>
+
+        <!--添加图片，点击图片直接跳转-->
+        <a :href="url"><img :src="img" alt=""></a>
+
+
+        <!--
+          2.绑定一个class(其实class也是一个属性，只是单独拿出来对待)
+        -->
+        <hr color="red"/>
+        <!--<a v-bind:class="anniu" v-bind:href="url">点击</a>-->
+        <a :class="anniu" :href="url">按钮</a>
+
+
+        <!--
+          3.以对象形式添加class
+        -->
+        <hr color="red"/>
+        <!-- 这里的active就是类名，用isActive来控制给不给添加这个类名 -->
+        <a :class="{active: isActive}" :href="url">点击</a>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                url: "https://www.baidu.com",
+                img: "http://img.zcool.cn/community/0117e2571b8b246ac72538120dd8a4.jpg@1280w_1l_2o_100sh.jpg",
+                anniu: "btn", // 类名为btn
+                isActive: false
+            }
+        });
+    </script>
+</body>
+</html>

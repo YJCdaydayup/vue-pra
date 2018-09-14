@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个元素绑定多个事件</title>
+    <script src="js/vue.js"></script>
+    <style>
+        button {
+            padding: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--<button v-on="{mouseenter:onEnter,mouseout:onOut}" @click="onClick">-->
+            <!--点击-->
+        <!--</button>-->
+
+        <!-- 所有的事件放在一个对象中 -->
+        <button v-on="{mouseenter:onEnter,mouseout:onOut,click:onClick}">点击</button>
+
+        <!-- 表单提交 -->
+        <form @submit="onSubmit()" action="index.html">
+            <input type="text">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            methods: {
+                onEnter: function () {
+                    console.log("mouseenter");
+                },
+                onOut: function () {
+                    console.log("mouseout");
+                },
+                onClick: function () {
+                    console.log('你好');
+                },
+                onSubmit: function (ev) {
+                    console.log(ev);
+                    // 事件阻止
+                    ev.preventDefault();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

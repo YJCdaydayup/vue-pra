@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件化构建应用</title>
+    <script src="js/vue.js"></script>
+
+</head>
+<body>
+
+    <!--
+        组件化必须的三步骤:
+        1. 定义一个组件
+        2. 使用组件的标签
+        3. 创建new Vue()这个组件
+    -->
+
+    <script>
+        Vue.component("todo-item", {
+            props: ["todo"],
+            template: '<li>{{todo.text}}</li>'
+        });
+    </script>
+    <div id="app">
+        <ol>
+            <!-- 1. for循环里面的参数，在后面的绑定中可以使用 -->
+            <!-- 2. 属性绑定可以是字符串，也可以是对象 -->
+            <todo-item
+                v-for="item in items"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
+    <script>
+        // Vue实例是从这个函数开始的
+        var app = new Vue({
+            el: "#app",
+            data: {
+                items: [
+                    {
+                        id: 0,
+                        text: "蔬菜"
+                    },
+                    {
+                        id: 1,
+                        text: "青菜"
+                    },
+                    {
+                        id: 2,
+                        text: "白菜"
+                    }
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

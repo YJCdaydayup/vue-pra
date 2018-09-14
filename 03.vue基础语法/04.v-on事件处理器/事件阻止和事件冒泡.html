@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件阻止和事件冒泡</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 在事件后面跟prevent就阻止了事件 -->
+        <form @submit.prevent="submitAction()" action="http://www.baidu.com">
+            <input type="text">
+            <input type="submit" value="提交">
+        </form>
+
+        <!-- 在事件后面跟stop就防止了事件冒泡 -->
+        <div @click="divClick" style="width: 300px;height: 300px;" >
+            <input @click.stop="btnClick" type="button" value="点击">
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            methods: {
+                submitAction: function (e) {
+                    console.log(e.target);
+                },
+                divClick: function () {
+                    alert('divClick');
+                },
+                btnClick: function () {
+                    alert('btnClick');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
