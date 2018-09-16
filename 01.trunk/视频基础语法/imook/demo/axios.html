@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="../node_modules/axios/dist/axios.js"></script>
+</head>
+<body>
+  <div id="app">
+    <a href="javascript:;" @click="get">get</a>
+    <a href="javascript:;" @click="post">post</a>
+    <a href="javascript:;" @click="http">http</a>
+    <div>{{msg}}</div>
+  </div>
+  <script>
+      new Vue({
+        el: "#app",
+        data: {
+          msg: null
+        },
+        mounted: function () {
+          // 全局拦截
+          // 开始请求的拦截
+          axios.interceptors.request.use(function (config) {
+            console.log("开始loading");
+            return config; // 这里可以对request进行处理
+          });
+
+          // 接收到回应的回调
+          axios.interceptors.response.use(function (response) {
+            // 隐藏loading，这里可以对response进行处理
+            return response;
+          });
+        },
+        methods: {
+          get: function () {
+            axios.get("../package1.json",{
+              params: {
+                userId: "999"
+              },
+              headers: {
+                token: "jack"
+              }
+            }).then(res=>{
+              this.msg = res.data;
+            }).catch(function (error) {
+              console.log(error);
+            });
+          },
+          post: function () {
+            axios.post("../package.json",{
+              userId: "888"
+            },{
+              headers: {
+                token: "tom"
+              }
+            }).then(res=>{
+              this.msg = res.data;
+            });
+          },
+          http: function () {
+            axios({
+              url: "../package.json",
+              method: "post",
+              data: {
+                // post才在data里面定义
+                userId: "121"
+              },
+              params: {
+                // get请求在params里面定义
+                userId: "123"
+              },
+              headers: {
+                token: "http"
+              }
+            }).then(res=>{
+              this.msg = res.data;
+            })
+          }
+        }
+      });
+  </script>
+</body>
+</html>

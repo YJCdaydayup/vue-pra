@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="../node_modules/vue-resource/dist/vue-resource.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>vue-resource插件讲解</h1>
+    <a href="javascript:;" @click="get">GET请求</a>
+    <a href="javascript:;" @click="post">POST请求</a>
+    <a href="">JSONP请求</a>
+    <a href="javascript:;" @click="http">http</a>
+    <div>
+        <span>{{msg}}</span>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        msg: null
+      },
+      // 定义全局拦截器
+      mounted: function () {
+        Vue.http.interceptors.push(function (request, next) {
+          console.log("request init");
+          next(function (response) {
+            console.log("response init");
+            console.log(response.$data);
+            return response;
+          });
+        });
+      },
+      http: {
+        // 配置相同的根路径
+        root: "http://localhost:63342/imook"
+      },
+      methods: {
+        get: function () {
+
+          // vue实例对象已经做了vue-source对象的代理了
+          // this.$http就是vue-resource实例了
+          // 也可以Vue.http发起请求
+
+          // 这里同级目录下的文件可以请求到
+          this.$http.get("package.json",{
+            params: {
+              userId: "101",
+            },
+            headers: {
+                token: "abcd"
+              }
+            }).then(result=>{
+            // 成功回调
+            this.msg = result.data;
+          },error=>{
+            // 失败回调
+            this.msg = error;
+          });
+        },
+        post: function () {
+          this.$http.post("package.json", {
+            userId: "102"
+          }, {
+            headers: {
+              access_token: "abc"
+            }
+          }).then(function (res) {
+            this.msg = res.data;
+          });
+        },
+        http: function () {
+          this.$http({
+            url: "package.json",
+            params: {
+              userId: '103'
+            },
+            headers: {
+              token: "123"
+            },
+            timeout: 5,
+            before:  function () {
+              // 请求前执行
+              console.log("init");
+            }
+          }).then(function (res) {
+            this.msg = res.data;
+          },error=>{
+            console.log(error);
+          });
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -76,6 +76,104 @@ node命令
   在package.json里面找到scripts查看运行起来的脚本，执行里面的命令
   如果npm run dev跑开发模式，跑不起来，先安装依赖，在README.md里面查看使用命令
 
+第五节课
+1.{{msg}}
+2.html赋值 v-html=“”
+3.v-bind:id=“”
+4.表达式:{{ok ? : }}
+5.v-text=“”
+6.v-if指令
+7.过滤器 {{msg|cap}}和v-bind:id=“”
+
+class绑定
+对象语法:v-bind:class=“{active:isActive,”text-danger”:hasError}”
+数组语法:v-bind:class=“[class1,class2]”
+
+style绑定
+v-bind:style=“{color:activeColor变量,fontSize:fontSize+’px’}”
+
+条件渲染
+v-show 
+v-if 显示／隐藏，删除DOM
+v-else
+v-else-if 
+v-cloak 
+
+事件处理器
+v-on:click=
+@click
+(stop冒泡 prevent默认事件 self绑定自己，子元素无作用 once绑定一次)
+
+v-on:keyup.enter监听enter键的事件
+
+组件
+全局组件（多页面）和局部组件(SPA)
+父子组件，父—>prop—>子组件 子—>emit—>父 父子组件通信
+slot插槽
+
+
+第六节课
+前端路由: SPA程序，只改变内容，结构不变
+优点，体验好，看似10张页面，实际一张，速度快
+缺点，不利于SEO，不利于百度搜到，前进后退重新发请求，无法缓存
+     无法记住滚动条的位置
+
+vue-router构建SPA关键
+<router-link>标签跳转，类似a标签，this.$router.push({path:””})
+<router-view>标签渲染
+
+ 	
+动态路由匹配
+./ 当前目录
+../ 上级目录
+@配置里面设置了属于src目录
+{{$route.params.username}}
+
+嵌套路由
+就是一种a标签，实现页面的跳转跳转后，又是一个新的页面，这个页面会包含上一级页面的内容，以及自己页面的内容
+
+编程式路由
+通过js实现页面跳转
+$router.push(“name”)
+$router.push({path:”name”})
+$router.push({path:”name?a=123”})或者$router.push({path:”name”})
+$trouter.go(1/-1)
+
+命名路由和命名视图
+
+
+第七节课
+1.通过CDN引入vue.resource.min.js
+2.通过npm安装 npm install vue-resource - - save
+
+7种api
+get(URL,[])
+head
+Delete
+Jsonp
+Post
+put
+Patch
+
+Url
+Method
+Body
+Params
+headers
+Timeout
+Before
+Progress
+credientials 传递凭证
+emulateHTTP 在请求头里设置
+
+全局拦截器
+Interceptors,管理loading
+
+GET,POST,JSONP,HTTP
+
+Axios异步请求插件
+CDN方式
+npm install axios - -save
 
 
 
