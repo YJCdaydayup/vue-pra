@@ -32,4 +32,8 @@ export default {
     float: left;
   }
 
+  .right {
+    margin-left: -1px;
+  }
+
 </style>

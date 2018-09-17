@@ -27,7 +27,7 @@
       必须使用v-bind:to -->
       <router-link :to="{name: 'cart'}">跳转购物车页面</router-link>
       <!-- 动态路由 -->
-      <router-link :to="{name:'cart',params:{cartId:123}}"></router-link>
+      <router-link :to="{name:'cart',params:{cartId:123}}">跳转带参数</router-link>
 
 
     </div>
@@ -53,6 +53,15 @@
 //            this.$router.push({path: "/cart?goodsId=123"})
 
             this.$router.go(1);
+
+
+            // 可以在这里导入Util.js文件，然后直接使用Util.js里面的方法（报错了！！！）
+//            import "../Utils"
+//            import "../App"
+            // 或
+//            import * as Helper from '../Utils'
+
+//            Helper.sum(100,200);
           }
       }
     }

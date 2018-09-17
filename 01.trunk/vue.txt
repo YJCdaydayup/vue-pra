@@ -176,6 +176,67 @@ CDN方式
 npm install axios - -save
 
 
+第八节课
+ES6简介
+1.函数的Rest参数和扩展
+2.Promise使用
+3.moudle.exports和ES6
+4.import 导入
+5.export 导出
+
+
+第九节课
+AMD,是Reuqire.js推广过程中的产出物，动态异步的加载js文件，依赖前置,require.js也完善了CMD
+定义模块的时候:
+define([‘package/lib’],function(lib){
+   function foo(){
+	lib.log(‘hello world!’);
+   }
+
+   return {
+      foo: foo;
+   }
+})
+
+CMD,是SeaJS在推广过程中对模块化定义的产出物，同步模块定义，淘宝团队，依赖就近，什么地方使用，就在什么地方require:
+   define(function(require, exports,module){
+      // 通过require引入依赖
+      var $ = require(‘jquery’);
+      var Spinning = require(‘./spinning’);
+   });
+
+
+CommonJs,module.exports node.js才使用的
+export.area = function(r) {
+    return Math.PI * r * r;
+  }
+
+ES6:export import
+export default {
+   props:[“num”],
+   data() {
+     return {}
+   },
+   methods: {
+     increment() {
+       this.$emit(“incre”);
+       
+       // 导入外部js
+       import(‘./../util’);
+     }
+   }
+}
+
+第十节课
+商品列表基础组件拆分
+Header组件
+Footer组件
+面包屑组件
+
+
+
+
+
 
    
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/01.trunk/视频基础语法/imook" libraries="{vue-pra/01.trunk/视频基础语法/imook/node_modules}" />
+    <file url="file://$PROJECT_DIR$/02.video-source/01.vue-npm-node介绍/02.通过命令安装vue" libraries="{vue-pra/02.video-source/01.vue-npm-node介绍/02.通过命令安装vue/node_modules}" />
+    <file url="file://$PROJECT_DIR$/03.vue基础语法" libraries="{vue-pra/03.vue基础语法/node_modules}" />
+    <includedPredefinedLibrary name="ECMAScript 6" />
+  </component>
+</project>
