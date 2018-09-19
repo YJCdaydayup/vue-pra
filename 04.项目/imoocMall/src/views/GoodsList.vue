@@ -7,7 +7,7 @@
     <!-- 带插槽了组件 -->
     <nav-bread>
       <!-- 组件里面留<slot></slot>，这里直接填写新内容如下即可 -->
-      <!--<span>商城</span>-->
+      <span>商城</span>
 
       <!-- 指定内容写在哪个插槽下 -->
       <span slot="bread">我是面包屑</span>
@@ -49,49 +49,14 @@
           <div class="accessory-list-wrap">
             <div class="accessory-list col-4">
               <ul>
-                <li>
+                <li v-for="(item,index) in goodsList">
                   <div class="pic">
-                    <a href="#"><img src="static/1.jpg" alt=""></a>
+                    <!-- v-bind绑定后，等号后面都是表达式了，如果使用字符串需要用单引号 -->
+                    <a href="#"><img :src = "'/static' + item.productImg" alt=""></a>
                   </div>
                   <div class="main">
-                    <div class="name">XX</div>
-                    <div class="price">999</div>
-                    <div class="btn-area">
-                      <a href="javascript:;" class="btn btn--m">加入购物车</a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="pic">
-                    <a href="#"><img src="static/2.jpg" alt=""></a>
-                  </div>
-                  <div class="main">
-                    <div class="name">XX</div>
-                    <div class="price">1000</div>
-                    <div class="btn-area">
-                      <a href="javascript:;" class="btn btn--m">加入购物车</a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="pic">
-                    <a href="#"><img src="static/3.jpg" alt=""></a>
-                  </div>
-                  <div class="main">
-                    <div class="name">XX</div>
-                    <div class="price">500</div>
-                    <div class="btn-area">
-                      <a href="javascript:;" class="btn btn--m">加入购物车</a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="pic">
-                    <a href="#"><img src="static/4.jpg" alt=""></a>
-                  </div>
-                  <div class="main">
-                    <div class="name">XX</div>
-                    <div class="price">2499</div>
+                    <div class="name">{{item.productName}}</div>
+                    <div class="price">{{item.productPrice}}</div>
                     <div class="btn-area">
                       <a href="javascript:;" class="btn btn--m">加入购物车</a>
                     </div>
@@ -118,22 +83,39 @@
   // 引入css文件
     import './../assets/css/base.css'
     import './../assets/css/product.css'
-
+    import './../assets/css/login.css'
 
     import NavHeader from '../components/NavHeader'
     import NavFooter from './../components/NavFooter'
     import NavBread from  './../components/NavBread'
+//    import axios from './../../node_modules/axios/dist/axios'
+  // nodemoudle里面的插件这里不需要我们做路径了，默认会去找了
+  import axios from  'axios'
 
     export default {
+    // 组件里面的data都是函数，保证状态是独立的
         data() {
             return {
-                msg: "hello vue"
+                goodsList: []
             }
         },
       components: {
           NavHeader,
           NavFooter,
           NavBread
+      },
+      mounted: function () {
+        this.getGoodsList();
+      },
+      methods: {
+        // 这里的方法可以这样写
+        getGoodsList(){
+          axios.get("/api").then(function (result) {
+            var res = result.data;
+            this.goodsList = res.result;
+            console.log(this.goodsList);
+          });
+        }
       }
 
     }

@@ -235,7 +235,14 @@ Footer组件
 
 组件和页面要区分开，虽然都是.vue文件
 assets 存放组件的相关资源
-Static 存放页面相关的资源
+static 存放页面相关的资源
+
+第十一节课
+1.mock数据，渲染列表信息
+2.最新版的vue-cli的配置中浏览器服务都在webpack.dev.server这个插件中，所以本地服务器的处理在webpack.dev.conf.js中修改，安装express cnpm install express — —save-dev
+
+3.图片懒加载插件 在npm里面搜索vue-lazyload 安装cnpm i vue-lazyload — —save
+
 
 
 
