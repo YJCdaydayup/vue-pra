@@ -21,15 +21,18 @@
           <span class="sortby">Sort by:</span>
           <a href="javascript:void(0)" class="default cur">Default</a>
           <a href="javascript:void(0)" class="price">Price <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
-          <a href="javascript:void(0)" class="filterby stopPop">Filter by</a>
+          <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">Filter by</a>
         </div>
         <div class="accessory-result">
           <!-- filter -->
-          <div class="filter" id="filter">
+          <div class="filter" id="filter" :class="filterObj">
             <dl class="filter-price">
               <dt>Price:</dt>
-              <dd v-for="(price,index) in goodsPrices">
-                <a @click="selectPrice(index)" href="javascript:void(0)">{{index == 0 ? 'All': price.minPrice + ' - ' + price.maxPrice}}</a>
+              <dd>
+                <a href="javascript:void(0)" :class="{cur: priceChecked=='all'}" @click="setPriceFilter('all')">All</a>
+              </dd>
+              <dd v-for="(price,index) in goodsPrices" @click="setPriceFilter(index)">
+                <a :class="{cur:priceChecked==index}" href="javascript:void(0)">{{price.minPrice + ' - ' + price.maxPrice}}</a>
               </dd>
             </dl>
           </div>
@@ -57,7 +60,7 @@
         </div>
       </div>
     </div>
-
+    <div class="md-overlay" v-show="overLayFlag" @click="closePop"></div>
     <nav-footer></nav-footer>
 
   </div>
@@ -89,10 +92,6 @@
           goodsPrices:[
             {
               minPrice: 0,
-              maxPrice: 1500
-            },
-            {
-              minPrice: 0,
               maxPrice: 200
             },
             {
@@ -107,7 +106,12 @@
               minPrice: 1000,
               maxPrice: 1500
             }
-          ]
+          ],
+          priceChecked: 'all',
+          filterObj : {
+            "filterby-show": false
+          },
+          overLayFlag: false
         }
       },
       components: {
@@ -126,21 +130,17 @@
             console.log(this.goodsList)
           });
         },
-        selectPrice(index){
-          var filter = document.getElementById('filter');
-          var as = filter.getElementsByTagName('a');
-          if (index === 0) {
-            for (var i =0;i<as.length;i++) {
-              var a = as[i];
-              a.className = a.className + ' cur';
-            }
-          }else {
-            for (var i =0;i<as.length;i++) {
-              var a = as[i];
-              a.className = "";
-            }
-            as[index].className = ' cur';
-          }
+        showFilterPop(){
+          this.filterObj["filterby-show"] = true;
+          this.overLayFlag = true;
+        },
+        closePop(){
+          this.filterObj["filterby-show"] = false;
+          this.overLayFlag = false;
+        },
+        setPriceFilter(ev){
+          this.priceChecked = ev;
+          this.closePop();
         }
       }
     }

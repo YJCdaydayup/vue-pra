@@ -251,6 +251,8 @@ static 存放页面相关的资源
 
 7.{{}}里面支持js语法，字符串用'', 不支持js自定义的变量 不能有var ，可以访问白名单里面的Math和Date
 
+8.@click=“priceChecked=“all”” 绑定事件里面，可以写表达式
+9.:class="{cur:priceChecked==index}"  绑定class里面也可以写表达式，但是当处理的事件比较复杂的时候，还是使用方法
 
 
 
