@@ -243,6 +243,12 @@ static 存放页面相关的资源
 
 3.图片懒加载插件 在npm里面搜索vue-lazyload 安装cnpm i vue-lazyload — —save
 
+4.created:在组件渲染成html前调用 mounted:组件渲染成html后调用，这个时候各个标签已经渲染出来了，相当于window.onload方法
+
+5.服务网络请求时，网络配置修改以及请求的文件修改后，必须重新启动项目
+
+6.三元运算，里面的用法和js一样的 {{index == 0 ? 'All': price.minPrice + ' - ' + price.maxPrice}}
+
 
 
 

@@ -430,7 +430,7 @@
 }
 
 .filter-nav .filterby {
-  display: none;
+  display: block;
   letter-spacing: .25em;
   text-transform: uppercase;
   font-size: 12px;
