@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定class属性</title>
+    <style>
+        .class1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .class2 {
+            font-weight: bold;
+            color: white;
+        }
+
+        .defaultClass {
+            border: 2px solid blue;
+        }
+
+    </style>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.绑定字符串 -->
+        <!--<div :class="classStr">我是div标签</div>-->
+
+        <!-- 2.绑定对象 -->
+        <!--<div :class="{class1: isActive1,class2: isActive2}">我是div标签2</div>-->
+
+        <!-- 3.绑定对象属性 -->
+        <!--<div class="defaultClass" :class="classObject">我是div标签3</div>-->
+
+        <!-- 4.绑定计算属性 -->
+        <div :class="computedClassObject">我是div标签4</div>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                classStr: 'class1',
+                isActive1: true,
+                isActive2: true,
+                classObject: {
+                    class1: false,
+                    class2: true
+                }
+            },
+            computed: {
+                computedClassObject: function () {
+                   return {
+                       class1: this.isActive1,
+                       class2: this.isActive2
+                   }
+                }
+            }
+        });
+
+        vm.classObject.class1 = true;
+
+    </script>
+</body>
+</html>

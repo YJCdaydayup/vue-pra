@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-html用法及注意事项</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--
+            1.使用v-html作数据绑定后，v-html会识别数据里面的html标签，展示在span标签里面
+            2.会取代span标签里面原有的内容
+            3.rawHtml里面不能使用复合v-html
+            4.容易导致XSS攻击，绝不要使用用户提供的内容进行插值
+        -->
+        <span v-html="rawHtml">我是span</span>
+
+
+        <span>{{'这里完全可以使用js语法：'}}</span>
+        <!--<span>{{text = "abc",abc}}</span>-->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                rawHtml:'<p style="color: red;width: 100px;height: 200px;margin: 100px auto;">我是p标签</p>'
+            }
+        });
+    </script>
+</body>
+</html>

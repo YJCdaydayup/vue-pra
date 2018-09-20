@@ -25,8 +25,8 @@
       <file leaf-file-name="GoodsList.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imoocMall/src/views/GoodsList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+            <state relative-caret-position="147">
+              <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="22" />
               <folding>
                 <element signature="e#2241#2274#0" expanded="true" />
                 <marker date="1537424055000" expanded="true" signature="4134:4142" ph="{&quot;NavHeader&quot;: NavHeader...}" />
@@ -357,12 +357,12 @@
       <option name="presentableId" value="Default" />
       <updated>1537389318419</updated>
       <workItem from="1537389322145" duration="4639000" />
-      <workItem from="1537405603259" duration="9089000" />
+      <workItem from="1537405603259" duration="9153000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13728000" />
+    <option name="totallyTimeSpent" value="13792000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="883" y="23" width="1419" height="1417" extended-state="0" />
@@ -673,8 +673,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imoocMall/src/views/GoodsList.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        <state relative-caret-position="147">
+          <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="22" />
           <folding>
             <element signature="e#2241#2274#0" expanded="true" />
             <marker date="1537424055000" expanded="true" signature="4134:4142" ph="{&quot;NavHeader&quot;: NavHeader...}" />

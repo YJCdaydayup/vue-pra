@@ -247,8 +247,9 @@ static 存放页面相关的资源
 
 5.服务网络请求时，网络配置修改以及请求的文件修改后，必须重新启动项目
 
-6.三元运算，里面的用法和js一样的 {{index == 0 ? 'All': price.minPrice + ' - ' + price.maxPrice}}
+6.不支持ifelse语句，使用三元运算，里面的用法和js一样的 {{index == 0 ? 'All': price.minPrice + ' - ' + price.maxPrice}}
 
+7.{{}}里面支持js语法，字符串用'', 不支持js自定义的变量 不能有var ，可以访问白名单里面的Math和Date
 
 
 

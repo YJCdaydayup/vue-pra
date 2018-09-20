@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>computed属性</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <span style="display: block">{{reverseMessage}}</span>
+    </div>
+    <script>
+
+        // 一般是需要获取属性处理后的值时就使用
+        // computed里面的属性用方法来定义的，但是也是属性，也可以用vm.reverseMessage
+        // 使用和data里面属性一样
+        // reverseMessage依赖message的变化而变化
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                message: "this is my message"
+            },
+            // 计算属性是依赖缓存的，只要message不变，这个属性直接从缓存中获取，无需重新计算
+            computed: {
+                // 这里默认都是getter方法
+                reverseMessage: function () {
+                    return this.message.split('').reverse().join('');
+                },
+                // 也可以为reverseMessage属性添加setter方法
+                reverseMessage: {
+                    get: function () {
+
+                    },
+                    set: function () {
+
+                    }
+                }
+            }
+
+            /** 由于Date.now()不是模版语法，所以now值一直不变
+             computed: {
+                now: function () {
+                return Date.now()
+                }
+             }
+             **/
+        });
+    </script>
+</body>
+</html>
