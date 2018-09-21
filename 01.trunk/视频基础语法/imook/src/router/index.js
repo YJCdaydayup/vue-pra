@@ -20,7 +20,7 @@ export let router = new Router({
   routes: [
     {
       // 一级路由
-      path: '/goods',
+      path: '/',
       name: 'Goodslist',
       // component: Goodslist,
       // 页面入口加载三个组件
@@ -28,27 +28,37 @@ export let router = new Router({
         default: Goodslist,
         title: Title,
         img: Image
-      }
-      // children:[
-      //   // 二级路由
-      //   {
-      //     // 不加/
-      //     path: 'title',
-      //     name: 'title',
-      //     component: Title
-      //   },
-      //   {
-      //     // 不加/
-      //     path: 'img',
-      //     name: 'img',
-      //     component: Image
-      //   }
-      // ]
+      },
+      children:[
+        // 二级路由
+        // {
+        //   // 不加/
+        //   path: 'title',
+        //   name: 'title',
+        //   component: Title
+        // },
+        // {
+        //   // 不加/
+        //   path: 'img',
+        //   name: 'img',
+        //   component: Image
+        // }
+      ]
     },
     {
       path: "/cart/:cartId",
       name: 'cart',
       component: Cart
+    },
+    {
+      path: '/title',
+      name: 'title',
+      component: Title
+    },
+    {
+      path: '/img',
+      name: 'img',
+      component: Image
     }
   ]
 })

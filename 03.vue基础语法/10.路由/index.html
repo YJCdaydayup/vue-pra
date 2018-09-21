@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Hello App</h1>
+        <p>
+            <router-link to="/foo">go to foo</router-link>
+            <router-link to="/bar">go to bar</router-link>
+            <router-link to="/sara">go to sara</router-link>
+        </p>
+        <hr>
+        <div>
+            <router-view></router-view>
+        </div>
+        <hr>
+    </div>
+    <script>
+
+        // 1. 创建组件，可以是外部组件
+        const Foo = {
+            template: '<div>foo</div>'
+        };
+
+        const Bar = {
+            template: '<div>bar</div>'
+        };
+
+        // 拿到这个组件
+        const Sara = Vue.component("Sara",{
+           template: "<div>Sara</div>"
+        });
+
+        // 2.配置路由
+        const routes = [
+            {
+                path: "/foo",
+                component: Foo
+            },
+            {
+                path: "/bar",
+                component: Bar
+            },
+            {
+                path: "/sara",
+                component: Sara
+            }
+        ];
+
+        // 3.创建路由实例
+        const router = new VueRouter({
+            routes: routes // 相当于routes
+        });
+
+        // 4.创建/挂载根元素
+        const app = new Vue({
+            // 注入路由
+            router: router // 相当于router
+        }).$mount('#app');
+
+
+
+
+    </script>
+</body>
+</html>

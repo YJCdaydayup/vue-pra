@@ -18,7 +18,13 @@
     <script>
         Vue.component("todo-item", {
             props: ["todo"],
-            template: '<li>{{todo.text}}</li>'
+            template: '<li>{{todo.text}}</li>',
+            data: function () {
+                return {};
+            },
+            methods: {
+
+            }
         });
     </script>
     <div id="app">

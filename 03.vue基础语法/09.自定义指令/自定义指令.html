@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>定义一个指令，当页面载入时input获取焦点</p>
+        <input type="text" >
+        <input type="text" v-wholefocus>
+    </div>
+    <script>
+        // 1.使用directive注册全局指令 指令必须小写
+        Vue.directive('focus',{
+            // 当元素插入DOM时
+            inserted: function (el) {
+                el.focus();
+            }
+        });
+
+        new Vue({
+            el: "#app",
+            // 2.使用directives注册局部指令
+        directives: {
+                wholefocus: {
+                    inserted: function (el) {
+                        el.focus();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

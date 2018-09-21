@@ -8,13 +8,15 @@
        <!-- 就是一种a标签，实现页面的跳转
            跳转后，又是一个新的页面，这个页面会包含上一级页面的内容，以及自己页面的内容
         -->
-      <router-link to="/goods/title">显示标题</router-link>
-      <router-link to="/goods/img">显示图片</router-link>
+      <router-link to="/title">显示标题</router-link>
+      <router-link to="/img">显示图片</router-link>
+      <hr color="red">
 
-       <!-- 渲染展示子组件的 -->
        <div>
+         <!-- 渲染展示子组件的地方，只有当上面的title和img是GoodsList的Children时才使用 -->
          <router-view></router-view>
        </div>
+      <hr color="red">
 
       <!-- 通过js实现跳转，跳转的是新的一级页面，这个时候上一级页面的东西不存在了，只存在这个新的一级页面的内容 -->
       <router-link to="/cart">跳转到购物车页面</router-link>

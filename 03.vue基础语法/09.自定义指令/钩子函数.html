@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>钩子函数</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--
+            1.创建指令，传递参数进来设置标签
+         -->
+        <div v-runoob="{color: 'red',fontSize: '20px'}">我是div标签</div>
+
+        <hr>
+
+        <!--
+            1.多个指令可以作用于一个标签
+            2.指令可以不传递参数，在指令内部拿到el这个作用的元素进行默认设置
+        -->
+        <div v-success v-runoob="{color: 'white',fontSize: '20px'}">我是div标签</div>
+    </div>
+    <script>
+        // 钩子函数: bind只调用一次，第一次绑定调用 inserted update unbind
+        Vue.directive("runoob",{
+            bind: function (el,bindingObj,vnode) {
+                // name 指令名
+                console.log(bindingObj.name);
+                console.log(bindingObj.value);
+                console.log(bindingObj.expression);
+                console.log(bindingObj.arguments);
+                console.log(bindingObj.modifiers);
+                console.log(bindingObj.vnode);
+                el.style.color = bindingObj.value.color;
+                el.style.fontSize = bindingObj.value.fontSize;
+            }
+        });
+
+        Vue.directive("success",{
+           bind: function (el) {
+               el.style.backgroundColor = "red";
+               el.style.width = '100px';
+               el.style.height = "100px";
+               el.style.margin = " 100px auto";
+           }
+        });
+
+        new Vue({
+            el: "#app",
+            data: {
+
+            }
+        });
+    </script>
+</body>
+</html>
