@@ -124,8 +124,12 @@
       },
       methods: {
         // 这里的方法可以这样写
+        // localhost:3000 已经跨域了，axios不支持跨域，需要做一个代理，
+        // 在config/index.js下找到proxyTable:{'/goods':{target: 'http://localhost:3000'},方便做转发
+        // 当我们访问'/goods'时，默认转发到http://localhost:3000里面去找
+        // 这个只限于开发模式，部署的时候一定要和服务器部署到一起才能访问到
         getGoodsList(){
-          axios.get("/goods/product").then((res) => {
+          axios.get("/goods").then((res) => {
             this.goodsList = res.data.data;
             console.log(this.goodsList)
           });

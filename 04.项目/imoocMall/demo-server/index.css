@@ -1,0 +1,11 @@
+body {
+  background-color: red;
+}
+
+div {
+  width: 500px;
+  height: 500px;
+  margin: 20rem auto;
+  color: white;
+  font-size: 3rem;
+}

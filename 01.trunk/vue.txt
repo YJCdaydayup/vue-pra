@@ -255,11 +255,121 @@ static 存放页面相关的资源
 9.:class="{cur:priceChecked==index}"  绑定class里面也可以写表达式，但是当处理的事件比较复杂的时候，还是使用方法
 
 
+第十二节课
+1.Linux系统安装 https://nodejs.cn/download/
+2.node基础编程: 基于Chrome V8引擎 单线程 使用javascript开发后端服务(不能用一些前端框架，语法一样)
+3.Common规范
+4.创建一个Http Server
+5.创建一个web容器，可以访问HTML内容
+6.nodejs是支持ES6的，前端的代码很多浏览器不支持，就需要前端的代码需要解析和反编译的
 
+7.nodejs.cn/api查看nodejs文档
+
+第十三节课
+1.搭建Express框架的运行环境
+2.安装express generator生成器脚手架 cnpm i -g express-generator
+3.创建项目 express server
+4.配置分析使用
+  bin/www是可执行文件,修改了要重启
+  res.render('index', { title: 'Express' }); 默认加载views下面的index文件 ，传递的参数为Express
+5.由于当前server前后端在一个项目里面，这里可以共用依赖，同一个package.json,赋值过来，进行cnpm i安装依赖
+6.启动服务 node bin/www
+
+
+7.views里面也可以不使用jada文件，而使用html
+
+
+第十四节课
+1.下载安装包 https://www.mongodb.com/download-center?jmp=nav#community 上传服务器解压缩 添加db存储和日志存储文件夹
+2.去阿里云买一个服务器 服务器一般是Ubuntu或Linux系统
+3.登陆服务器 ssh root@133.444.4.4 
+4.传递文件到服务器: ftp / ssh / scp  scp file root@123.33.3.3:/(/就是根目录)
+5.下载mongodb客户端 http://mac.brothersoft.com/mongohub-download.html
+6.Mac上安装mongodb可以直接参考菜鸟网站
+7.创建一个数据库存储目录/data/db这个是默认的目录 
+8.启动mongodb，sudo mongod(找不到命令 export PATH=/usr/local/mongodb/bin:$PATH)
+
+
+第十五节课
+启动: 1.启动数据库 2.启动mongodb shell终端 3.打开mongohud客户端工具
+1.两种方式保证安全性，
+  绑定IP，一台机器是服务器，另一台机器是数据库，将两个进行绑定，只允许某台服务器访问该数据库；
+  给数据库创建账号和密码
+2.创建管理员
+  sudo mongod非授权的方式进去 -> 执行mongo进入shell终 -> show dbs 查看数据库 
+  -> use admin 创建一个admin数据库 -> db.createUser（db.addUser）({user: “admin”,pwd: “admin”,roles: [“root”]})回车创建账号密码 -> db.auth(‘admin’,”admin”)进行认证
+  -> 切换数据库，给test数据添加账号密码 use test -> db.createUser({user:”root”,pwd:”123456”,roles:[{role:’dbOwner’,db:”test”}]}); 
+  -> 再次通过 sudo mongod --auth认证的方式启动数据库 -> 打开客户端，给test数据库添加账号密码
+3.授权认证，
+4.添加账号密码
+5.插入数据必须要指定是哪个集合
+
+
+第十六节课
+1.非关系型数据库 database数据库 collection表 document数据行/文档 field(键值对) index索引  
+2.主键，primary key 自动将_id设置为主键
+3.由于mongo数据库存在子文档结构，所以不需要像mysql一样定义一张新的表再建立表关系
+
+3.插入文档(即行)(表名称最好用s结尾，如goods，usrs)
+  $ show dbs 查看数据库
+  $ use demo 创建数据库(不插数据或表这个数据库依然不存在) 默认就切换到当前数据库了
+  $ db.createCollection("user") 创建表user
+  $ db.users.insert({id: 123}) 创建表users 并插入数据
+  $ show collections 查看当前数据库下的所有表
+  $ db.dropDatabase() 删除当前数据库
+  $ db.user.drop() 删除当前数据下的user表
+  $ db.user.find().pretty()格式化查看当前数据库下user表下的数据，pretty()格式化查看
+  $ db.user.find({userName:"jack"}) 查询jack的信息，查询条件必须是对象
+  $ db.user.find({'class.name':'taobao’})查询子文档
+  $ db.user.findOne() 查看第一条数据
+  $ db.user.find({age:{$gt:40}})查询年龄大于40的
+  $ db.user.find({age:{$lt:40}})查询年龄小于40的
+  $ db.user.find({age:{$eq:58}})查看等于年龄58的
+  $ db.user.find({age:{$gte:58}})查看大于等于58的
+  $ db.user.find({age:{$lte:58}})查看小于等于58的
+  $ db.user.update({userName:"jack"},{$set:{age:30}}) 更新数据库jack的年龄，条件和值必须都是对象
+  $ db.user.update({userName:"jack"},{$set:{'class.name':"imooc-test”}})更新子文档class，注意:‘class.name’要用引号
+  $ db.user.remove({userId: 101}) 删除数据
+
+  // 分页 排序 自己学会
+
+第十七节课
+1.使用mysql作为数据库的话，每类数据都要建立一张表，最后通过userid建立表的关联，比较麻烦
+2.可以使用命令来导入数据，mongoimport -d db_demo -c users --file /Users/yangli/Desktop/users.json (执行的前提是数据库服务开启，mongodb的shell终端要关闭)
+
+
+第十八节课
+1.node.js的启动方式三种
+  通过node命令启动
+  Webstorm配置启动入口 只能通过webstorm进行调试
+  pm2 负载均衡 npm包里面的插件 通过进程的方式来管理的
+  $ cnpm i pm2 -g 安装
+  $ pm2 start bin/www
+  $ pm2 stop all 或bin/www这个停止
+  $ pm2 log 查看日志
+  $ pm2 list查看开启的服务
+  
+
+
+2.routes里面每个js文件就对应一个页面，app.js里面通过app.use(‘/users’,users)定义的是一级路由
+3.二级路由在route目录下面某个页面里面定义
+
+第十九节课
+1.基于Express开发商品列表查询接口
+  安装mongoose 是mongodb的封装，类似FMDB.  cnpm i mongoose - - save （mongoose精细化学习）
+  创建model，和数据库关联
+  创建路由 通过model查询数据库
+  基于mongoose实现商品列表的查询功能
+
+2.https://blog.csdn.net/sps900608/article/details/79599121查看Vue全家桶技术栈
    
 
 
+  
+   
 
+
+  
 
 
 
