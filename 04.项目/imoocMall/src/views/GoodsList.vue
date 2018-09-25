@@ -44,7 +44,7 @@
                 <li v-for="(item,index) in goodsList">
                   <div class="pic">
                     <!-- v-bind绑定后，等号后面都是表达式了，如果使用字符串需要用单引号 -->
-                    <a href="#"><img v-lazy="'../../static/' + item.productImg" alt=""></a>
+                    <a href="#"><img v-lazy="'../../static/' + item.productImage" alt=""></a>
                   </div>
                   <div class="main">
                     <div class="name">{{item.productName}}</div>
@@ -130,8 +130,8 @@
         // 这个只限于开发模式，部署的时候一定要和服务器部署到一起才能访问到
         getGoodsList(){
           axios.get("/goods").then((res) => {
-            this.goodsList = res.data.data;
-            console.log(this.goodsList)
+//            console.log(res.data.result.list)
+            this.goodsList = res.data.result.list;
           });
         },
         showFilterPop(){

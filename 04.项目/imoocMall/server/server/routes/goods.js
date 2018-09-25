@@ -32,14 +32,37 @@ mongoose.connection.on("disconnected",function () {
 });
 
 
-// 实现路由
+// 实现路由, get请求
 router.get('/',function (request, response, next) {
+
+
+  // 获取排序参数(获取前端传过来的参数param直接获取),page pageSize 都需要数字类型
+  var page = parseInt(request.param('page'));
+  var pageSize = parseInt(request.param('pageSize'));
+  var sort = request.param('sort');
+
+  // 查询的条件
+  let params = {};
+
+  // find()方法是查找所有的数据，返回模型的
+  // skip()用于分页的，跳过多少条数据
+  // limit 每页条数
+  let skip = (page - 1) * pageSize;
+  let goodsModel = Goods.find(params).skip(skip).limit(pageSize);
+
+  // sort()方法，第一个字段是排序字段，sort: 1 升序 -1 降序
+  goodsModel.sort({"salePrice": sort});
+
+  // exec() 前面的链式语法依然返回goodModel对象
+  // 由于前面的参数和条件都设置了，这里直接使用exec()不带参数，获取数据
+  goodsModel.exec((err, doc) => {
+
   // request.header('Access-Control-Allow-Origin:*');//允许所有来源访问
   // request.header('Access-Control-Allow-Method:POST,GET');//允许访问的方式
   // response.send("Hello goods list ...");
   // 在这里写业务代码
   // 第一个是查找的条件，第二个是查到的内容
-  Goods.find({}, (err, doc) => {
+  // Goods.find({}, (err, doc) => {
     // res.json 就是返回一个json对象
     if (err) {
       // 报错 就输出一个json对象出去
