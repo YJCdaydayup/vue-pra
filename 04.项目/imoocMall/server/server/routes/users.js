@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 // 定义二级路由就是在一级路由页面里面定义的
-router.get('/test', function(req, res, next) {
+router.get('/test/index.html', function(req, res, next) {
   res.render('test/index', { title: 'Express Very Good' });
 });
 

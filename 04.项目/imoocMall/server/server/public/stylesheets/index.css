@@ -1,0 +1,25 @@
+body {
+  color: #d7d8dd;
+}
+
+h1 {
+  width: 300px;
+  height: 200px;
+  margin: 100px auto;
+  border: 2px dotted red;
+  line-height: 200px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+h1:hover {
+  -webkit-transform: rotate(45deg) scale(1.2);
+  -moz-transform: rotate(45deg) scale(1.2);
+  -ms-transform: rotate(45deg) scale(1.2);
+  -o-transform: rotate(45deg) scale(1.2);
+  transform: rotate(45deg) scale(1.2);
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transform动画</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="showAction">slide-fade</button>
+        <transition name="slide-fade">
+            <p v-show="show">我是p标签</p>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                show: true
+            }
+        });
+    </script>
+</body>
+</html>

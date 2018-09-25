@@ -31,6 +31,7 @@ let server = http.createServer((req, res)=>{
       });
       res.write(data.toString());
     }
+    console.log(data.toString());
     // 返回输出,这个end()要写在文件读取里面
     res.end();
   });

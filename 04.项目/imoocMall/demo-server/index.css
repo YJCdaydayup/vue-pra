@@ -2,7 +2,7 @@ body {
   background-color: red;
 }
 
-div {
+.app {
   width: 500px;
   height: 500px;
   margin: 20rem auto;

@@ -261,19 +261,19 @@ static 存放页面相关的资源
 3.Common规范
 4.创建一个Http Server
 5.创建一个web容器，可以访问HTML内容
-6.nodejs是支持ES6的，前端的代码很多浏览器不支持，就需要前端的代码需要解析和反编译的
+6.nodejs是支持ES6的，前端的代码很多浏览器不支持，就需要前端的代码需要解析和编译的
 
 7.nodejs.cn/api查看nodejs文档
 
 第十三节课
 1.搭建Express框架的运行环境
 2.安装express generator生成器脚手架 cnpm i -g express-generator
-3.创建项目 express server
+3.创建后端项目 express servercn	
 4.配置分析使用
   bin/www是可执行文件,修改了要重启
   res.render('index', { title: 'Express' }); 默认加载views下面的index文件 ，传递的参数为Express
 5.由于当前server前后端在一个项目里面，这里可以共用依赖，同一个package.json,赋值过来，进行cnpm i安装依赖
-6.启动服务 node bin/www
+6.启动服务 node bin/www 端口的配置在app.js里面，默认是3000
 
 
 7.views里面也可以不使用jada文件，而使用html
