@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="show=!show">animate</button>
+
+        <!-- transition的用法
+            1.用transition包住要执行动画的标签
+            2.使用v-show或v-if引发动画
+            3.真正执行v-show/v-if前，会执行transition里面定义的动画
+            4.transition动画包括了css里面的两种动画效果:
+                设置transition时间，改变属性，如02的用法
+                自定义animation，如上用法
+         -->
+
+        <transition name="bounce">
+            <p v-show="show">this is a technology</p>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                show: true
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+
+        let myProduct = {
+            id: 1,
+            name: "book",
+            price: '20.00',
+        };
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                test: 1,
+                counter: 1,
+                products: myProduct
+            }
+        });
+
+        // 1.要实现监听，这个属性必须要有setter和getter方法
+        // data里面存在对象属性时，最好提前把属性写好，这样可以直接监听到，"products.qty",function
+        // 直接给vm的对象属性添加属性，这个属性是没有setter和getter方法的
+        // 如果没有写好，比如要扩展，这个时候可以使用Vue.set给这个对象对象添加属性，也可以实现监听
+        Vue.set(vm.products, 'qty', 1);
+
+        vm.$watch("products.qty",function () {
+            alert('changed');
+        });
+
+//        setTimeout(function () {
+//            vm.products.qty = 2;
+//        },2000);
+
+
+        // 2.Vue.delete删除对象属性的属性
+        delete vm.products.name;
+//        Vue.delete(vm.products,'name');
+        console.log(vm.products);
+
+    </script>
+</body>
+</html>

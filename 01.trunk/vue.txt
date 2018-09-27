@@ -268,7 +268,7 @@ static 存放页面相关的资源
 第十三节课
 1.搭建Express框架的运行环境
 2.安装express generator生成器脚手架 cnpm i -g express-generator
-3.创建后端项目 express servercn	
+3.创建后端项目 express server	
 4.配置分析使用
   bin/www是可执行文件,修改了要重启
   res.render('index', { title: 'Express' }); 默认加载views下面的index文件 ，传递的参数为Express

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="node_modules/animate.css/animate.css">
+</head>
+<body>
+<div id="app">
+    <button @click="show=!show">Start</button>
+    <!--<h1 id="ani" class="animated" :class="{flipOutY:act}">插件动画测试</h1>-->
+    <!-- enter-active-class 显示时的动画效果 -->
+    <!-- leave-active-class 隐藏时的动画效果 -->
+    <transition
+            enter-active-class="animated tada"
+            leave-active-class="animated bounceOutRight"
+    >
+        <p v-show="show">svsacsacas</p>
+    </transition>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            act: false,
+            show: true
+        },
+        methods: {
+            animate: function () {
+                this.act = true;
+            }
+        }
+    })
+</script>
+</body>
+</html>

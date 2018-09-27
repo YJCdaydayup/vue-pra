@@ -41,8 +41,12 @@ router.get('/',function (request, response, next) {
   var pageSize = parseInt(request.param('pageSize'));
   var sort = request.param('sort');
 
+  // 添加价格范围
+  var minPrice = parseInt(request.param('minPrice'));
+  var maxPrice = parseInt(request.param('maxPrice'));
+
   // 查询的条件
-  let params = {};
+  let params = {salePrice: { $gt: minPrice, $lt: maxPrice},};
 
   // find()方法是查找所有的数据，返回模型的
   // skip()用于分页的，跳过多少条数据

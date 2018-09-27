@@ -58,7 +58,7 @@
                 </li>
               </ul>
               <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
-                加载中，在这里可以添加loading加载框更好
+                <p v-show="showLoading" style="font-size: 2rem">加载中...</p>
               </div>
             </div>
           </div>
@@ -101,15 +101,15 @@
             },
             {
               minPrice: 200,
-              maxPrice: 600
+              maxPrice: 500
             },
             {
-              minPrice: 600,
+              minPrice: 500,
               maxPrice: 1000
             },
             {
               minPrice: 1000,
-              maxPrice: 1500
+              maxPrice: 10000
             }
           ],
           priceChecked: 'all',
@@ -120,7 +120,10 @@
           sortFlag: true,
           page: 1,
           pageSize: 8,
-          budy: false
+          budy: false,
+          showLoading: true,
+          minPrice: 0,
+          maxPrice: 0
         }
       },
       components: {
@@ -129,10 +132,12 @@
           NavBread
       },
       mounted: function () {
+        this.minPrice = 0;
+        this.maxPrice = this.goodsPrices[this.goodsPrices.length - 1].maxPrice;
         this.getGoodsList();
       },
-      methods: {
-        // 这里的方法可以这样写
+        methods: {
+          // 这里的方法可以这样写
         // localhost:3000 已经跨域了，axios不支持跨域，需要做一个代理，
         // 在config/index.js下找到proxyTable:{'/goods':{target: 'http://localhost:3000'},方便做转发
         // 当我们访问'/goods'时，默认转发到http://localhost:3000里面去找
@@ -141,7 +146,9 @@
           var param = {
             page: this.page,
             pageSize: this.pageSize,
-            sort: this.sortFlag? 1 : -1
+            sort: this.sortFlag? 1 : -1,
+            minPrice: this.minPrice,
+            maxPrice: this.maxPrice
           };
           axios.get("/goods",{
             params: param
@@ -151,13 +158,15 @@
                 // 如果是true，就说明是下拉加载的，数据要累加
                 this.goodsList = this.goodsList.concat(res.data.result.list);
                 // 数据全部拿到后，禁止滚动加载
-                if (res.data.result.length < this.pageSize) {
-                  this.busy = true;
-                }else {
-                  this.busy = false;
-                }
               }else  {
                 this.goodsList = res.data.result.list;
+              }
+              if (res.data.result.list.length < this.pageSize) {
+                this.busy = true;
+                this.showLoading = false;
+              }else {
+                this.busy = false;
+                this.showLoading = true;
               }
             }else {
               this.goodsList = [];
@@ -182,9 +191,13 @@
         setPriceFilter(ev){
           this.priceChecked = ev;
           this.closePop();
+          this.page = 1;
+          // 过滤查找
+          this.minPrice = ev == "all" ? 0 : this.goodsPrices[ev].minPrice;
+          this.maxPrice = ev == 'all' ? this.goodsPrices[this.goodsPrices.length-1].maxPrice : this.goodsPrices[ev].maxPrice;
+          this.getGoodsList();
         },
         loadMore() {
-//          alert('loading more');
           this.busy = true;
           // 防止代码无止尽加载
           setTimeout(() => {
