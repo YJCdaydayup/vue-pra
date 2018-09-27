@@ -85,8 +85,87 @@ router.get('/',function (request, response, next) {
       });
     }
   });
+});
 
 
+// 加入购物车接口(提交数据用post)
+router.post("/addCart",function (req,res,next) {
+  // 这里默认此用户登陆了,post请求需要从body里面拿参数
+  var userId = '100000077',
+    productId = req.body.productId;
+  var User = require('../models/user');
+  User.findOne({
+    userId: userId
+  },function (err, userDoc) {
+    if (err)  {
+      res.json({
+        status: '1',
+        msg: err.message
+      });
+    }else {
+      if (userDoc) {
+
+        let goodsItem = null;
+        // 先去遍历用户购物车里面有没有这个产品
+        userDoc.cartList.forEach(function (item,index) {
+          if (item.productId == productId) {
+            goodsItem = item;
+            item.productNum ++;
+          }
+        });
+
+        if (goodsItem) {
+          // 如果有这个商品
+          userDoc.save(function (err2, doc2) {
+            if (err2) {
+              res.json({
+                status: '1',
+                msg: err.message
+              });
+            }else {
+              res.json({
+                status: '0',
+                msg: '',
+                result: 'success'
+              });
+            }
+          });
+        }else {
+          // 如果没有这个商品
+          Goods.findOne({
+            productId: productId
+          },(err, goodDoc)=>{
+            if (err) {
+              res.json({
+                status: '1',
+                msg: err.message
+              });
+            }else {
+              if (goodDoc) {
+                goodDoc.productNum = 1;
+                goodDoc.checked = 1;
+                userDoc.cartList.push(goodDoc);
+                userDoc.save(function (err2, doc2) {
+                  if (err2) {
+                    res.json({
+                      status: '1',
+                      msg: err.message
+                    });
+                  }else {
+                    res.json({
+                      status: '0',
+                      msg: '',
+                      result: 'success'
+                    });
+                  }
+                })
+              }
+            }
+          });
+        }
+      }
+    }
+  });
 });
 
 
