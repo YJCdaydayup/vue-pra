@@ -366,6 +366,7 @@ static 存放页面相关的资源
 
 第二十节课
 1.排序
+2.vue-infinite-scroll 插件实现滚动加载更多 cnpm i vue-infinite-scroll — — save
 
    
 

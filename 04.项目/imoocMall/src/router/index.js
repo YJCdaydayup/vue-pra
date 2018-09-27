@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 
-import VueLazyload from 'vue-lazyload'
+import  VueLazyload from 'vue-lazyload'
 
 import GoodsList from  '@/views/GoodsList'
 
