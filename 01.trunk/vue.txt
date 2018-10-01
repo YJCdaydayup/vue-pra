@@ -370,7 +370,8 @@ static 存放页面相关的资源
 3.svg可以在github找很多
 
 第二十一节课
-
+1.模块cookie-parse是专门用于做Cookie处理的
+2.<span v-text=“nickName” v-if=“nickName”></span>
    
 
 
