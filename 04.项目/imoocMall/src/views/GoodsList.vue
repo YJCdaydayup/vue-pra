@@ -22,8 +22,8 @@
           <a href="javascript:void(0)" class="default cur">Default</a>
           <a @click="sortGoods" href="javascript:void(0)" class="price">
             Price
-            <svg class="icon icon-arrow-short">
-              <use xlink:href="#icon-arrow-short"></use>
+            <svg class="icon-arrow-short">
+              <use xmlns:xlink="http://www.w3.org/1999/xhtml" xlink:href="#icon-arrow-short"></use>
             </svg>
           </a>
           <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">Filter by</a>
@@ -154,7 +154,7 @@
           minPrice: this.minPrice,
           maxPrice: this.maxPrice
         };
-        axios.get("/goods", {
+        axios.get("/goods/list", {
           params: param
         }).then((res) => {
           if (res.data.status == '0') {
@@ -217,7 +217,7 @@
           if (res.data.status == '0') {
             alert('加入成功');
           }else {
-            alert(res.msg);
+            alert(res.data.msg);
           }
         });
       }

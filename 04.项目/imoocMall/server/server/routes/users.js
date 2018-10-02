@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 //   res.render('test/index', { title: 'Express Very Good' });
 // });
 
-// 找到用户的路由
+// 1.登录接口 找到用户的路由
 router.post('/login',function (req,  res, next) {
   let param = {
     userName: req.body.userName,
@@ -30,9 +30,15 @@ router.post('/login',function (req,  res, next) {
       })
     }else {
       if (doc) {
-        // 1.写cookie到某个地方
+        // 1.写cookie到某个地方,保存在前端去了
         res.cookie('userId',doc.userId,{
           path: "/", // cookie放在根目录下
+          maxAge: 1000*60*60
+        });
+
+        // 2.保存用户名到cookie里面
+        res.cookie('userName',doc.userName,{
+          path: '/',
           maxAge: 1000*60*60
         });
 
@@ -50,5 +56,43 @@ router.post('/login',function (req,  res, next) {
     }
   });
 });
+
+// 2.登出请求
+router.post("/logout",function (req, res, next) {
+  // 清理cookie
+  res.cookie('userId','',{
+    path: '/',
+    maxAge: -1 // -1就是直接让cookie失效
+  });
+  res.cookie('userName','',{
+    path: '/',
+    maxAge: -1
+  });
+  res.json({
+    status: "0",
+    msg: "",
+    result: ""
+  });
+});
+
+// 3.登录校验
+router.get('/checkLogin',function (req, res, next) {
+  if (req.cookies.userId) {
+    res.json({
+      status: "0",
+      msg: "已登录",
+      result: {
+        userName: req.cookies.userName
+      }
+    })
+  }else {
+    res.json({
+      status: '1',
+      msg: "未登录",
+      result: ''
+    });
+  }
+});
+
 
 module.exports = router;

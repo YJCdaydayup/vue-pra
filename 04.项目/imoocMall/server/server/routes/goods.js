@@ -33,7 +33,7 @@ mongoose.connection.on("disconnected",function () {
 
 
 // 实现路由, get请求
-router.get('/',function (request, response, next) {
+router.get('/list',function (request, response, next) {
 
 
   // 获取排序参数(获取前端传过来的参数param直接获取),page pageSize 都需要数字类型
