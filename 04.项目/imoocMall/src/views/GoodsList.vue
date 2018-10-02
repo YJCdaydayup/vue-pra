@@ -70,14 +70,34 @@
       </div>
     </div>
     <div class="md-overlay" v-show="overLayFlag" @click="closePop"></div>
+
+    <!-- 1.用于登录的模态框 -->
+    <modal :mdShow="mdShow" @close="closeModal">
+      <p slot="message">
+        请先登录，否则无法加入购物车
+      </p>
+      <div slot="btnGroup">
+        <!-- 通过插槽添加的元素，是属于父组件的元素，事件和属性正常去写 -->
+        <a href="javascript:;" class="btn btn--m" @click="closeModal">关闭</a>
+      </div>
+    </modal>
+
+    <!-- 2.用于加入购物车成功时的模态框 -->
+    <modal :mdShow="mdShowCart" @close="closeModal">
+      <p slot="message">
+        <span>加入购物车成功</span>
+      </p>
+      <div slot="btnGroup">
+        <!-- 通过插槽添加的元素，是属于父组件的元素，事件和属性正常去写 -->
+        <a href="javascript:;" class="btn btn--m" @click="mdShowCart=false">继续购物</a>
+        <router-link href="javascript:;" class="btn btn--m" to="/cart">查看购物车</router-link>
+      </div>
+    </modal>
+
     <nav-footer></nav-footer>
 
   </div>
 </template>
-
-<!--<style>-->
-<!---->
-<!--</style>-->
 
 <script>
 
@@ -89,6 +109,9 @@
   import NavHeader from '../components/NavHeader'
   import NavFooter from './../components/NavFooter'
   import NavBread from  './../components/NavBread'
+  import Modal from './../components/Modal'
+
+
   //    import axios from './../../node_modules/axios/dist/axios'
   // nodemoudle里面的插件这里不需要我们做路径了，默认会去找了
   import axios from  "axios"
@@ -127,13 +150,16 @@
         budy: false,
         showLoading: true,
         minPrice: 0,
-        maxPrice: 0
+        maxPrice: 0,
+        mdShow: false,
+        mdShowCart: false
       }
     },
     components: {
       NavHeader,
       NavFooter,
-      NavBread
+      NavBread,
+      Modal
     },
     mounted: function () {
       this.minPrice = 0;
@@ -215,11 +241,14 @@
         }).then((res)=>{
           console.log(res.data);
           if (res.data.status == '0') {
-            alert('加入成功');
+            this.mdShowCart = true;
           }else {
-            alert(res.data.msg);
+            this.mdShow = true;
           }
         });
+      },
+      closeModal(){
+        this.mdShow = false;
       }
     }
   }
