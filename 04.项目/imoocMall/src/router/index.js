@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import  VueLazyload from 'vue-lazyload'
 
 import GoodsList from  '@/views/GoodsList'
+import Cart from '@/views/Cart'
 
 // 在入口出初始化，进行全局化
 Vue.use(VueLazyload,{
@@ -22,6 +23,11 @@ export default new Router({
       path: '/',
       name: 'GoodsList',
       component: GoodsList
+    },
+    {
+      path: "/cart",
+      name: 'Cart',
+      component: Cart
     }
   ]
 })

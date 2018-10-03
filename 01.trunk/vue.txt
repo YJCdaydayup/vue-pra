@@ -322,7 +322,7 @@ static 存放页面相关的资源
   $ db.user.find({userName:"jack"}) 查询jack的信息，查询条件必须是对象
   $ db.user.find({'class.name':'taobao’})查询子文档
   $ db.user.findOne() 查看第一条数据
-  $ db.user.find({age:{$gt:40}})查询年龄大于40的
+  $ db.user.find({age:{$gt:40}})查询年龄大于40的 100000077
   $ db.user.find({age:{$lt:40}})查询年龄小于40的
   $ db.user.find({age:{$eq:58}})查看等于年龄58的
   $ db.user.find({age:{$gte:58}})查看大于等于58的
@@ -330,6 +330,8 @@ static 存放页面相关的资源
   $ db.user.update({userName:"jack"},{$set:{age:30}}) 更新数据库jack的年龄，条件和值必须都是对象
   $ db.user.update({userName:"jack"},{$set:{'class.name':"imooc-test”}})更新子文档class，注意:‘class.name’要用引号
   $ db.user.remove({userId: 101}) 删除数据
+  // 删除子文档下某些数据
+  $ db.users.update({"userName":"admin"},{$pull: {cartList: {productNum: "NaN"}}})
 
   // 分页 排序 自己学会
 
@@ -385,7 +387,18 @@ static 存放页面相关的资源
 7.vuex可以实现组件之间的数据传递，登录校验可以使用接口进行校验
 8.研究一下svg图片的原理
 9.由于登录模态框有header组件控制，最好将模态框写在header组件里面，也可以再将模态框定义成一个组件，通信组件来完成交互
+10.定义的组件就是一个新的标签，父子通信有两种，一种是信息传递通过props:[“mdShow”]，子组件通信给父组件其实是使用$emit(‘close’)，类似于trigger让父组件执行他的close特殊定义的事件，改变mdShow属性来改变子组件
 
+
+第二十三节课
+1.NavHeader 定义的组件标签根据W3C标准最好使用小写，对于驼峰式的组件名，要使用nav-header作为标签名
+2.在密码输入框上加@keyup.enter=“login”开启键盘回车事件
+3.v-for循环上的遍历时，子标签的属性只要和item有关，这个属性就必须绑定 如: <img :src=“” :alt=“”>
+4.开发过程中使用的是代理重定向的形式实现请求的，线上部署时使用ngix实现重定向
+5.开发过程中的重定向使用: /users/* 只能匹配二级路由，/users/**能所有users下的请求,三级路由…，这个只能用于开发模式，线上部署时这块的代码是不会编译进去的
+6.禁止浏览器缓存，Network下勾选Disable cache即可
+7.操作node数据库时，数据字段插不进去很可能是数据model里面没有定义这个字段
+8.通过for循环遍历生成的列表，在函数中拿到item后对item.checked字段进行操作时，也会形成数据驱动
 
   
    

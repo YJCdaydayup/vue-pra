@@ -94,5 +94,81 @@ router.get('/checkLogin',function (req, res, next) {
   }
 });
 
+// 4.购物车列表
+router.get('/cartList',function (req, res, next) {
+  let userId = req.cookies.userId;
+  console.log(userId);
+  User.findOne({userId: userId},function (err, doc) {
+    console.log(userId);
+    if (err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      });
+    }else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: doc.cartList
+      });
+    }
+  });
+});
+
+// 5.购物车删除
+router.post('/cartDel',function (req, res, next) {
+  let userId = req.cookies.userId,
+    productId = req.body.productId;
+  User.update(
+    {userId: userId},
+    {
+      $pull:
+      {'cartList':
+        {productId: productId}
+      }
+    },function (err, doc) {
+      if (err) {
+        res.json({
+          status: "1",
+          msg: err.message,
+          result: ""
+        })
+      }else {
+        res.json({
+          status: "0",
+          msg: "",
+          result: "succuss"
+        });
+      }
+    });
+});
+
+// 6.购物车修改（更新子文档）
+router.post('/cartEdit',function (req, res, next) {
+  let userId = req.cookies.userId,
+    productId = req.body.productId,
+    productNum = req.body.productNum,
+    checked = req.body.checked;
+  User.update({userId: userId,"cartList.productId": productId},{
+    "cartList.$.productNum": productNum,
+    "cartList.$.checked": checked
+  },function (err, doc) {
+    if (err) {
+      res.json({
+        status: "1",
+        msg: err.message,
+        result: ""
+      })
+    }else {
+      res.json({
+        status: "0",
+        msg: "",
+        result: "succuss"
+      })
+    }
+  });
+});
+
 
 module.exports = router;

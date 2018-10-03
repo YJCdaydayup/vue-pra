@@ -17,7 +17,7 @@ module.exports = {
       '/goods/*': {
         target: "http://127.0.0.1:3000"
       },
-      '/users/*': {
+      '/users/**': {
         // 将此路由下的域名换成这个域名
         target: "http://127.0.0.1:3000"
       }

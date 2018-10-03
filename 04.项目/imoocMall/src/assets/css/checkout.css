@@ -627,9 +627,27 @@ html {
   cursor: default;
 }
 
+.select-self-area {
+  margin-top: 15px;
+  width: 220px;
+  padding-left: 50px;
+}
+
+.select-self-area a {
+  float: left;
+  width: 20px;
+}
+
 .order-item .select-self-area .select-ipt {
   padding: 0;
   text-align: center;
+}
+
+.select-ipt {
+  width: 50px;
+  float: left;
+  box-sizing: border-box;
+  margin-left: 20px;
 }
 
 @media only screen and (max-width: 991px) {

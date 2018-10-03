@@ -23,7 +23,9 @@ var productSchema = new Schema({
   "productId": String,
   "productName": {type: String},
   "salePrice": Number,
-  "productImage": String
+  "productImage": String,
+  "checked": String,
+  "productNum": String
 });
 
 // 4.将这个商品模型输出(在这里定义连接的数据库以及对应的表)
