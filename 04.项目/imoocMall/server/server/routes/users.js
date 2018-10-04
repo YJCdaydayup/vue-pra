@@ -170,5 +170,40 @@ router.post('/cartEdit',function (req, res, next) {
   });
 });
 
+// 全选/取消全选
+router.post("/editCheckAll",function (req, res, next) {
+  let userId = req.cookies.userId,
+    checkAll = req.body.checkAll;
+  User.findOne({userId: userId}, function (err, doc) {
+    if (err) {
+      res.json({
+        status: "1",
+        msg: err.message,
+        result: ""
+      })
+    }else {
+     let cartList = doc.cartList;
+      cartList.forEach((item) => {
+        item.checked = checkAll? '1': '0';
+      });
+      doc.save(function (err, doc2) {
+        if (err) {
+          res.json({
+            status: "1",
+            msg: err.message,
+            result: ""
+          })
+        }else {
+          res.json({
+            status: "0",
+            msg: "",
+            result: "succuss"
+          })
+        }
+      });
+    }
+  });
+});
+
 
 module.exports = router;

@@ -76,7 +76,7 @@
                     </div>
                   </div>
                   <div class="cart-tab-2">
-                    <div class="item-price">{{item.salePrice}}</div>
+                    <div class="item-price">{{item.salePrice | currency('$')}}</div>
                   </div>
                   <div class="cart-tab-3">
                     <div class="item-quantity">
@@ -90,7 +90,7 @@
                     </div>
                   </div>
                   <div class="cart-tab-4">
-                    <div class="item-price-total">{{item.productNum * item.salePrice}}</div>
+                    <div class="item-price-total">{{item.productNum * item.salePrice| currency('$')}}</div>
                   </div>
                   <div class="cart-tab-5">
                     <div class="cart-item-opration">
@@ -108,9 +108,9 @@
           <div class="cart-foot-wrap">
             <div class="cart-foot-inner">
               <div class="cart-foot-l">
-                <div class="item-all-check">
+                <div class="item-all-check" @click="toggleCheckAll">
                   <a href="javascipt:;">
-                  <span class="checkbox-btn item-check-btn">
+                  <span class="checkbox-btn item-check-btn" :class="{check: checkAllFlag}">
                       <svg class="icon icon-ok"><use xlink:href="#icon-ok"/></svg>
                   </span>
                     <span>Select all</span>
@@ -119,7 +119,7 @@
               </div>
               <div class="cart-foot-r">
                 <div class="item-total">
-                  Item total: <span class="total-price">500</span>
+                  Item total: <span class="total-price">{{totalPrice | currency('$')}}</span>
                 </div>
                 <div class="btn-wrap">
                   <a class="btn btn--red">Checkout</a>
@@ -164,12 +164,36 @@
       mounted: function () {
         this.init();
       },
-        components: {
+      computed: {
+        // 这里写了实时计算这个属性，在data中的就不需要了
+        checkAllFlag(){
+          return this.cartList.length == this.checkCount;
+        },
+        checkCount() {
+          var i = 0;
+          this.cartList.forEach(item=>{
+            if (item.checked == '1') {
+              i ++;
+            }
+          })
+          return i;
+        },
+        totalPrice(){
+          let totalPrice = 0;
+          this.cartList.forEach((item)=>{
+            if (item.checked == '1') {
+              totalPrice += parseFloat(item.salePrice) * item.productNum;
+            }
+          });
+          return totalPrice;
+        }
+      },
+      components: {
           NavHeader,
           NavFooter,
           NavBread,
           Modal
-        },
+      },
       methods: {
           init(){
             axios.get('/users/cartList').then((response)=>{
@@ -210,7 +234,28 @@
             }).then((response)=>{
               let res = response.data;
             });
-          }
+          },
+        toggleCheckAll(){
+//            if (this.checkAllFlag) {
+//              this.cartList.forEach((item)=>{
+//                item.checked = '0';
+//              })
+//            }else {
+//              this.cartList.forEach((item)=>{
+//                item.checked = '1';
+//              })
+//            }
+            // this.checkAllFlag无法改变，就赋值给flag，然后通过flag改变元素属性
+            let flag = !this.checkAllFlag;
+            this.cartList.forEach((item)=>{
+              item.checked = flag?"1": "0";
+            });
+            axios.post('/users/editCheckAll',{
+              checkAll: this.checkAllFlag
+            }).then((res)=>{
+              console.log(res.data);
+            });
+        }
       }
     }
 </script>

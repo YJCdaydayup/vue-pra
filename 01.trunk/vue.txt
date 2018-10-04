@@ -400,6 +400,21 @@ static 存放页面相关的资源
 7.操作node数据库时，数据字段插不进去很可能是数据model里面没有定义这个字段
 8.通过for循环遍历生成的列表，在函数中拿到item后对item.checked字段进行操作时，也会形成数据驱动
 
+第二十四节课
+1.js中数组遍历:  this.cartList.forEach((item)=>{})
+2.mongoose里面没有找到批量更新子文档的方式，一般都是通过遍历子文档的方式
+3.computed里面的属性只能通过计算改变，在其他地方是无法改变的，可以在事件里面改变计算属性的表达式里面元素的值即可
+4.需要实时计算的属性不要写在data里，要写在computed里
+5.定义过滤器: // 全局过滤器就需要在main.js中导入,然后 Vue.filter(‘currency’, currency即可)
+  // 导入有名字的js文件就要用{}
+  import {currency} from ‘’
+  fileters: {
+    currency: currenty // 因为currenty本身已经是一个函数了
+  }
+  // 使用
+  {{money | currency(‘$’)}}
+
+
   
    
 
