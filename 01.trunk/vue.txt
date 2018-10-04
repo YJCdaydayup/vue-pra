@@ -415,6 +415,10 @@ static 存放页面相关的资源
   {{money | currency(‘$’)}}
 
 
+第二十五节课
+1.this.$router.push({path: “/address”}) // push其实是对history的封装
+
+
   
    
 

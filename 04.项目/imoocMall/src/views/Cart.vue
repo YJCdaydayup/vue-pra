@@ -121,8 +121,8 @@
                 <div class="item-total">
                   Item total: <span class="total-price">{{totalPrice | currency('$')}}</span>
                 </div>
-                <div class="btn-wrap">
-                  <a class="btn btn--red">Checkout</a>
+                <div class="btn-wrap" @click="checkOut">
+                  <a class="btn btn--red" :class="{'btn--dis': checkCount == 0}">Checkout</a>
                 </div>
               </div>
             </div>
@@ -150,7 +150,6 @@
   import NavFooter from '../components/NavFooter'
   import NavBread from '../components/NavBread'
   import Modal from '../components/Modal'
-
   import axios from 'axios'
 
     export default {
@@ -255,6 +254,14 @@
             }).then((res)=>{
               console.log(res.data);
             });
+        },
+        checkOut() {
+          if (this.checkCount > 0) {
+            // 跳转
+            this.$router.push({
+              path: "/address"
+            });
+          }
         }
       }
     }

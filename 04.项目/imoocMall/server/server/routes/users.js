@@ -170,7 +170,7 @@ router.post('/cartEdit',function (req, res, next) {
   });
 });
 
-// 全选/取消全选
+// 7.全选/取消全选
 router.post("/editCheckAll",function (req, res, next) {
   let userId = req.cookies.userId,
     checkAll = req.body.checkAll;
@@ -201,6 +201,31 @@ router.post("/editCheckAll",function (req, res, next) {
           })
         }
       });
+    }
+  });
+});
+
+// 8.查询用户地址
+router.get("/addressList",function (req, res, next) {
+  let userId = req.cookies.userId;
+  User.findOne({userId: userId},function (err, doc) {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      });
+    }else {
+      console.log(doc);
+      if (doc) {
+        res.json({
+          status: "0",
+          msg: "",
+          result: {
+            list: doc.addressList
+          }
+        });
+      }
     }
   });
 });
