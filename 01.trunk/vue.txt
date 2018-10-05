@@ -417,6 +417,8 @@ static 存放页面相关的资源
 
 第二十五节课
 1.this.$router.push({path: “/address”}) // push其实是对history的封装
+2.切换展开/收起功能，使用计算属性，tempList 和 limit
+3.
 
 
   

@@ -60,7 +60,7 @@
           <div class="addr-list-wrap">
             <div class="addr-list">
               <ul>
-                <li v-for="item in addressList">
+                <li v-for="(item,index) in addressListFilter" :class="{check: checkIndex == index}" @click="checkIndex = index">
                   <dl>
                     <dt>{{item.userName}}</dt>
                     <dd class="address">{{item.streetName}}</dd>
@@ -71,10 +71,10 @@
                       <svg class="icon icon-del"><use xlink:href="#icon-del"></use></svg>
                     </a>
                   </div>
-                  <div class="addr-opration addr-set-default">
+                  <div class="addr-opration addr-set-default" v-if="!item.isDefault" @click="setDefault(item.addressId)">
                     <a href="javascript:;" class="addr-set-default-btn"><i>Set default</i></a>
                   </div>
-                  <div class="addr-opration addr-default">Default address</div>
+                  <div class="addr-opration addr-default" v-if="item.isDefault">Default address</div>
                 </li>
                 <li class="addr-new">
                   <div class="add-new-inner">
@@ -87,8 +87,8 @@
               </ul>
             </div>
 
-            <div class="shipping-addr-more">
-              <a class="addr-more-btn up-down-btn" href="javascript:;">
+            <div class="shipping-addr-more" @click="addMore">
+              <a class="addr-more-btn up-down-btn" href="javascript:;" :class="{'open': limit > 3}">
                 more
                 <i class="i-up-down">
                   <i class="i-up-down-l"></i>
@@ -137,7 +137,9 @@
   export default{
     data(){
       return{
-        addressList: []
+        limit: 3,
+        addressList: [],
+        checkIndex: 0
       }
     },
     components: {
@@ -149,6 +151,12 @@
     mounted: function () {
       this.init();
     },
+    computed: {
+      addressListFilter() {
+        // slice产生的是全新的数组
+        return this.addressList.slice(0,this.limit)
+      }
+    },
     methods: {
       init() {
         axios.get("/users/addressList").then((res)=>{
@@ -157,6 +165,21 @@
             console.log(this.addressList);
           }
         })
+      },
+      addMore() {
+        if (this.limit == 3) {
+          this.limit = this.addressList.length;
+        }else {
+          this.limit = 3;
+        }
+      },
+      setDefault(addressId) {
+        axios.post("/users/setDefault",{
+          addressId: addressId
+        }).then((response)=>{
+          console.log(response.data);
+          this.init();
+        });
       }
     }
   }

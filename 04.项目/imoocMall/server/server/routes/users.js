@@ -205,7 +205,7 @@ router.post("/editCheckAll",function (req, res, next) {
   });
 });
 
-// 8.查询用户地址
+// 8.查询用户地址列表
 router.get("/addressList",function (req, res, next) {
   let userId = req.cookies.userId;
   User.findOne({userId: userId},function (err, doc) {
@@ -226,6 +226,54 @@ router.get("/addressList",function (req, res, next) {
           }
         });
       }
+    }
+  });
+});
+
+// 9.设置默认地址接口
+router.post('/setDefault',function (req, res, next) {
+  let userId = req.cookies.userId,
+    addressId = req.body.addressId;
+  if (!addressId) {
+    res.json({
+      status: '1',
+      msg: "addressId is null",
+      result: ''
+    });
+  }
+  User.findOne({userId: userId},function (err, doc) {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      });
+    }else {
+      let addressList = doc.addressList;
+      console.log(addressList);
+      addressList.forEach((item)=>{
+        if (item.addressId == addressId) {
+          item.isDefault = true;
+        }else {
+          item.isDefault = false;
+        }
+      });
+      doc.save(function (err, doc2) {
+        if (err) {
+          res.json({
+            status: '1',
+            msg: err.message,
+            result: ''
+          });
+        }else {
+          res.json({
+            status: '0',
+            msg: '',
+            result: "succuess"
+          });
+
+        }
+      })
     }
   });
 });
