@@ -119,7 +119,7 @@
             <!--<a class="btn btn&#45;&#45;m btn&#45;&#45;red" href="#">Next</a>-->
             <!--<router-link class="btn btn&#45;&#45;m btn&#45;&#45;red" to="/orderConfirm">NEXT</router-link>-->
             <!-- 带参数 -->
-            <router-link class="btn btn--m btn--red" :to="{path: 'orderConfirm',query:{addressId:selectedAddressId}}">NEXT</router-link>
+            <router-link class="btn btn--m btn--red" :to="{path: 'orderComfirm',query:{addressId:selectedAddressId}}">NEXT</router-link>
           </div>
         </div>
       </div>

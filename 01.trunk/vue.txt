@@ -422,12 +422,27 @@ static 存放页面相关的资源
 2.切换展开/收起功能，使用计算属性，tempList 和 limit
 3.文档包括的删除，插入，更新，可以使用update pull push来实现，复杂一点也可以遍历后修改，最后将文档save一下
 4.页面跳转方式依然是这两种:
-  通过this.$router.push跳转
-  使用router-link跳转:
+  i.通过this.$router.push跳转。
+  this.$router.push({
+              path: '/orderSuccuss?orderId=' + res.result.orderId
+            });
+  // {{$route.query.goodsId}} 标签上拿取方式
+  ii.使用router-link跳转:
   // 是一种a标签，但是它有to属性 <a class="btn btn--m btn--red" href="#">Next</a>
   <router-link class="btn btn--m btn--red" to="/orderConfirm">NEXT</router-link>
   // 带参数 to要加冒号，path不要/ 
   <router-link class="btn btn--m btn--red" :to="{path: 'orderConfirm',query:{addressId:selectedAddressId}}">NEXT</router-link>
+5.写SPA项目时，因为只有一个html页面入口，每个vue组件和页面，一般是在.html和.css文件中写好后，copy进来的,对于封装好的header bread footer可以在编写html静态页面是不写，只写需要的
+
+
+第二十六节课
+1.v-for和v-if结合使用<li v-for=“item in cartList” v-if=“item.checked == ‘1’”><li>
+
+
+第二十七节课
+1.通过route跳转传参后，参数拿取方式: let addressId = this.$route.query.addressId; //this.$router是跳转，而route是获取参数
+2.通过doc.save(function(err, doc))时，doc中新增的数据字段也会在数据库中创建新字段进行保存
+
 
 
 

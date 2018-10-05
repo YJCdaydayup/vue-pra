@@ -97,7 +97,6 @@ router.get('/checkLogin',function (req, res, next) {
 // 4.购物车列表
 router.get('/cartList',function (req, res, next) {
   let userId = req.cookies.userId;
-  console.log(userId);
   User.findOne({userId: userId},function (err, doc) {
     console.log(userId);
     if (err) {
@@ -308,6 +307,80 @@ router.post('/deleteAdress',function (req, res, next) {
       }
     }
   );
+});
+
+// 11.生成订单
+require('./../util/util');
+router.post("/payMent",function (req, res, next) {
+  let userId = req.cookies.userId,
+    orderTotal = req.body.orderTotal,
+    addressId = req.body.addressId;
+  User.findOne({userId: userId},function (err, doc) {
+    if (err) {
+      res.json({
+        status: "1",
+        msg: err.message,
+        result: ""
+      });
+    }else {
+      let address = "", goodsList = [];
+      // 获取当前用户的地址信息
+      doc.addressList.forEach((item)=>{
+        if (item.addressId = addressId) {
+          address = item;
+        }
+      });
+      // 获取商品信息
+      doc.cartList.filter((item)=>{
+        if (item.checked == '1') {
+          goodsList.push(item);
+        }
+      });
+
+      // 创建订单
+      // 1.平台码
+      let platform = '622';
+
+      // 2.生成一个0-9的随机数
+      let r1 = Math.floor(Math.random()*10);
+      let r2 = Math.floor(Math.random()*10);
+
+      // 3.生成时间参数
+      let sysDate = new Date().Format("yyyyMMddhhmmss");
+      let createDate = new Date().Format('yyyy-MM-dd hh:mm:ss');
+
+      let orderId = platform + r1 + sysDate + r2;
+
+
+      var order = {
+        orderId: orderId,
+        orderTotal: orderTotal,
+        addressInfo: address,
+        goodsList: goodsList,
+        orderStatus: "1",
+        createDate: createDate
+      };
+      doc.orderList.push(order);
+      doc.save(function (err1, doc1) {
+        if (err1) {
+          res.json({
+            status: "1",
+            msg: err.message,
+            result: ""
+          })
+        }else {
+          res.json({
+            status: '0',
+            msg: '',
+            result: {
+              orderId: order.orderId,
+              orderTotal: order.orderTotal
+            }
+          });
+        }
+      })
+    }
+  })
 });
 
 
