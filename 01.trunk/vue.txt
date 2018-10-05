@@ -332,6 +332,8 @@ static 存放页面相关的资源
   $ db.user.remove({userId: 101}) 删除数据
   // 删除子文档下某些数据
   $ db.users.update({"userName":"admin"},{$pull: {cartList: {productNum: "NaN"}}})
+  // 更新或者插入子文档
+  $  db.users.update({userName:"admin"},{$push:{"addressList":{addressId:'10002',userName:"Macheal",streetName:"北京市老街","postCode":888888,"tel":1234567890,isDefault: false}}})
 
   // 分页 排序 自己学会
 
@@ -418,7 +420,15 @@ static 存放页面相关的资源
 第二十五节课
 1.this.$router.push({path: “/address”}) // push其实是对history的封装
 2.切换展开/收起功能，使用计算属性，tempList 和 limit
-3.
+3.文档包括的删除，插入，更新，可以使用update pull push来实现，复杂一点也可以遍历后修改，最后将文档save一下
+4.页面跳转方式依然是这两种:
+  通过this.$router.push跳转
+  使用router-link跳转:
+  // 是一种a标签，但是它有to属性 <a class="btn btn--m btn--red" href="#">Next</a>
+  <router-link class="btn btn--m btn--red" to="/orderConfirm">NEXT</router-link>
+  // 带参数 to要加冒号，path不要/ 
+  <router-link class="btn btn--m btn--red" :to="{path: 'orderConfirm',query:{addressId:selectedAddressId}}">NEXT</router-link>
+
 
 
   

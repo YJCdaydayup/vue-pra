@@ -60,13 +60,13 @@
           <div class="addr-list-wrap">
             <div class="addr-list">
               <ul>
-                <li v-for="(item,index) in addressListFilter" :class="{check: checkIndex == index}" @click="checkIndex = index">
+                <li v-for="(item,index) in addressListFilter" :class="{check: checkIndex == index}" @click="checkIndex = index; selectedAddressId = item.addressId">
                   <dl>
                     <dt>{{item.userName}}</dt>
                     <dd class="address">{{item.streetName}}</dd>
                     <dd class="tel">{{item.tel}}</dd>
                   </dl>
-                  <div class="addr-opration addr-del">
+                  <div class="addr-opration addr-del" @click="showDelModal(item.addressId)">
                     <a href="javascript:;" class="addr-del-btn">
                       <svg class="icon icon-del"><use xlink:href="#icon-del"></use></svg>
                     </a>
@@ -116,12 +116,23 @@
             </div>
           </div>
           <div class="next-btn-wrap">
-            <a class="btn btn--m btn--red" href="#">Next</a>
+            <!--<a class="btn btn&#45;&#45;m btn&#45;&#45;red" href="#">Next</a>-->
+            <!--<router-link class="btn btn&#45;&#45;m btn&#45;&#45;red" to="/orderConfirm">NEXT</router-link>-->
+            <!-- 带参数 -->
+            <router-link class="btn btn--m btn--red" :to="{path: 'orderConfirm',query:{addressId:selectedAddressId}}">NEXT</router-link>
           </div>
         </div>
       </div>
     </div>
     <nav-footer></nav-footer>
+    <modal :mdShow="mdShow" @close="mdShow = false">
+      <p slot="message">您确定要删除吗?</p>
+      <div slot="btnGroup">
+        <!-- 通过插槽添加的元素，是属于父组件的元素，事件和属性正常去写 -->
+        <a href="javascript:;" class="btn btn--m" @click="deleteAddress">确定</a>
+        <a href="javascript:;" class="btn btn--m" @click="mdShow = false">关闭</a>
+      </div>
+    </modal>
   </div>
 </template>
 <style>
@@ -139,7 +150,10 @@
       return{
         limit: 3,
         addressList: [],
-        checkIndex: 0
+        checkIndex: 0,
+        mdShow: false,
+        addressId: "",
+        selectedAddressId: ""
       }
     },
     components: {
@@ -162,7 +176,6 @@
         axios.get("/users/addressList").then((res)=>{
           if (res.data.status == '0') {
             this.addressList = res.data.result.list;
-            console.log(this.addressList);
           }
         })
       },
@@ -179,6 +192,21 @@
         }).then((response)=>{
           console.log(response.data);
           this.init();
+        });
+      },
+      showDelModal(addressId) {
+        this.mdShow = true;
+        this.addressId = addressId;
+      },
+      deleteAddress() {
+        axios.post('/users/deleteAdress',{
+          addressId: this.addressId
+        }).then((response)=>{
+          let res = response.data;
+          if (res.status == '0') {
+            this.init();
+            this.mdShow = false;
+          }
         });
       }
     }

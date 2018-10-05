@@ -24,7 +24,6 @@ var userSchema = new mongoose.Schema({
     {
       addressId: String,
       userName: String,
-      streetName: Number,
       postCode: Number,
       streetName: String,
       tel: {

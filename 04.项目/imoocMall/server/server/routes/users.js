@@ -278,5 +278,37 @@ router.post('/setDefault',function (req, res, next) {
   });
 });
 
+// 10.删除地址
+router.post('/deleteAdress',function (req, res, next) {
+  let userId = req.cookies.userId,
+    addressId = req.body.addressId;
+  User.update(
+    {
+      userId: userId
+    },
+    {
+      $pull: {
+        'addressList': {
+          addressId: addressId
+        }
+      }
+    },function (err, doc) {
+      if (err) {
+        res.json({
+          status: '1',
+          msg: err.message,
+          result: ''
+        });
+      }else {
+        res.json({
+          status: '0',
+          msg: '',
+          result: 'succuss'
+        })
+      }
+    }
+  );
+});
+
 
 module.exports = router;
