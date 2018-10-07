@@ -384,7 +384,7 @@ static 存放页面相关的资源
 2.在app.js中设置捕获登录功能
 3.location.pathname获取的是完整的路由，不包括域名，端口和参数
 4.location.href获取的是整个url地址，包括了路由，域名，端口，参数
-5.location.origin获取的是域名 端口和路由 不包括参数
+5.location.origin获取的是域名 端口和路由 不包括参数,location.hash可以拿到hash值
 6.express-session用于做session存储的
 7.vuex可以实现组件之间的数据传递，登录校验可以使用接口进行校验
 8.研究一下svg图片的原理
@@ -443,6 +443,8 @@ static 存放页面相关的资源
 1.通过route跳转传参后，参数拿取方式: let addressId = this.$route.query.addressId; //this.$router是跳转，而route是获取参数
 2.通过doc.save(function(err, doc))时，doc中新增的数据字段也会在数据库中创建新字段进行保存
 
+第二十八节课
+1.node.js中，get请求获取请求参数时，用括号！！！ req.param('orderId')
 
 
 
