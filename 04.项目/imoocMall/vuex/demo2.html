@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="./../node_modules/vue/dist/vue.js"></script>
+  <!-- 如果是SPA开发，需要Vue.use()一下 -->
+  <script src="./../node_modules/vuex/dist/vuex.js"></script>
+</head>
+<body>
+<div id="app">
+  <h2>{{msg}}</h2>
+  <a href="javascript:;" @click="add">Add</a>
+  <a href="javascript:;" @click="add1">传递参数</a>
+  <a href="javascript:;" @click="add1">传递参数</a>
+
+  <counter></counter>
+</div>
+<script>
+
+  const counter = {
+    // 模版这必须有一个div根元素
+    template: '<div>' +
+    '<div> {{count}}</div><div>{{name}}</div><div>{{userName}}</div></div>',
+    computed: {
+      count () {
+        return this.$store.state.count;
+      },
+      name(){
+        return this.$store.state.name;
+      },
+      userName() {
+        return this.$store.getters.userName;
+      }
+    }
+  };
+
+  // 取代父子组件通讯
+  // 1.vuex其实是一种数据存储的方式，一般叫store,创建一个
+  const storeVuex = new Vuex.Store({
+    state: {
+      count: 10, // 所有的页面，组件都可以使用了
+      name: "jack"
+    },
+    // 只能在这里改变state里面的属性的值
+    mutations: {
+      // 这个state是默认的，就是当前vuex的state
+      add(state,num) {
+         state.count += num || 1;
+      },
+      updateName(state, userName) {
+        state.name = userName;
+      }
+    },
+    actions: {
+      // 提交mutations的
+      addAction(context,num) {
+        context.commit("add",num);
+      }
+    },
+    getters: {
+      // 不是改变，而是对state数据的包装，用法的compute的类似
+      userName(state){
+        return state.name + ', Hello';
+      }
+    }
+  });
+
+  var vm = new Vue({
+    el: "#app",
+    // ES6中，如果key和value是一样的，只需要写一个即可
+    // store
+    store: storeVuex,
+    data: {
+      msg: "Vuex的使用"
+    },
+    // 多页面里面创建的组件必须在这里声明
+    components: {
+      counter
+    },
+    methods: {
+      add() {
+        // 在这里也是通过this.$store，一定要使用commit来执行mutations里面的事件
+        this.$store.commit("add");
+        this.$store.commit("updateName","马云");
+        this.$store.dispatch("addAction",5);
+      },
+      add1() {
+        this.$store.commit("add",100);
+      }
+    }
+  });
+</script>
+</body>
+</html>

@@ -81,7 +81,12 @@
         userPwd: "",
         errorTip: false,
         loginModalFlag: false,
-        nickName: ""
+//        nickName: ""
+      }
+    },
+    computed: {
+      nickName() {
+        return this.$store.state.nickName;
       }
     },
     mounted: function () {
@@ -102,7 +107,8 @@
           let res = response.data;
           if (res.status == '0') {
             this.errorTip = false;
-            this.nickName = res.result.userName;
+//            this.nickName = res.result.userName;
+            this.$store.commit("updateUserInfo",res.result.userName);
             // to-do
             this.loginModalFlag = false;
           } else {

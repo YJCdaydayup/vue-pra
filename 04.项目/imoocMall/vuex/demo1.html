@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./../node_modules/vue/dist/vue.js"></script>
+    <!-- 如果是SPA开发，需要Vue.use()一下 -->
+    <script src="./../node_modules/vuex/dist/vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{msg}}</h2>
+    <counter></counter>
+  </div>
+  <script>
+
+      const counter = {
+        template: '<div> {{count}}</div>',
+        computed: {
+          count () {
+            return this.$store.state.count;
+          }
+        }
+      };
+
+      // 取代父子组件通讯
+      // 1.vuex其实是一种数据存储的方式，一般叫store,创建一个
+      const storeVuex = new Vuex.Store({
+        state: {
+          count: 10  // 所有的页面，组件都可以使用了
+        }
+      });
+
+      var vm = new Vue({
+        el: "#app",
+        // ES6中，如果key和value是一样的，只需要写一个即可
+        // store
+        store: storeVuex,
+        data: {
+          msg: "Vuex的使用"
+        },
+        // 多页面里面创建的组件必须在这里声明
+        components: {
+          counter
+        }
+      });
+  </script>
+</body>
+</html>
