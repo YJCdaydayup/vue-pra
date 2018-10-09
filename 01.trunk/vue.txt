@@ -35,7 +35,7 @@
 4.SPA单页面应用
 
 第二节课
-前端：Vue.js 包含Vue-Router Axios Vuex Util 依赖
+前端：Vue.js 包含Vue-Router Axios Vuex(自定义组件) Util 依赖
 后端 Node Express（对node.js的封装，学习此框架非常重要）
 数据库 MongoDB
 工具支持: vue-cli生成模版 webpack进行构建
@@ -507,8 +507,9 @@ store.commit(‘add’)来出发这个函数
 8.要定义一个store文件夹，添加不同的js文件作为不同的vuex模块
 
 第三十节课
-1.使用vuex的情况，某个组件被多个组件同时引用，同时还要和组件交互 
+1.使用vuex的情况，集中管理状态，某个组件被多个组件同时引用，同时还要和组件交互 
 2.组件使用vuex里面的属性时，一般通过计算属性
+3.import { funcName } from ‘vuex’ // 即从vuex中导出某个funcName函数，直接使用
 
   
 

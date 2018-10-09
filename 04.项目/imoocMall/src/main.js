@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 
 // 1.
-import Vuex from './../node_modules/vuex/dist/vuex'
+import Vuex from 'vuex'
 
 // 2.
 Vue.use(Vuex);
@@ -22,6 +22,10 @@ const store = new Vuex.Store({
    },
     updateCartCount(state,cartCount) {
      state.cartCount += cartCount;
+    },
+    // 防止累加
+    initCartCount(state,cartCount) {
+      state.cartCount = cartCount;
     }
   }
 });

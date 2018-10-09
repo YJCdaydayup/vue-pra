@@ -212,6 +212,7 @@
               if (res.status == '0') {
                 this.modalConform = false;
                 this.cartList.pop(this.product);
+                this.$store.commit('updateCartCount', -1 * parseInt(this.product.productNum));
               }
             })
           },
@@ -232,6 +233,13 @@
               checked: item.checked
             }).then((response)=>{
               let res = response.data;
+              let num = 0;
+              if (flag == 'add') {
+                num = 1;
+              }else if(flag == 'minu') {
+                num = -1;
+              }
+              this.$store.commit('updateCartCount', num);
             });
           },
         toggleCheckAll(){
