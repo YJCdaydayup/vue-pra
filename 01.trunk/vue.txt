@@ -35,7 +35,7 @@
 4.SPA单页面应用
 
 第二节课
-前端：Vue.js 包含Vue-Router Axios Vuex(自定义组件) Util 依赖
+前端：Vue.js 包含Vue-Router Axios Vuex Util 依赖
 后端 Node Express（对node.js的封装，学习此框架非常重要）
 数据库 MongoDB
 工具支持: vue-cli生成模版 webpack进行构建
