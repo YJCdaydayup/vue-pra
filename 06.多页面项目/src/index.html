@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <h1>首页</h1>
+    <div id="app">
+        <!--<runoob></runoob>-->
+        <cartoob></cartoob>
+    </div>
+</body>
+
+<script>
+
+//    const runoob = Vue.component("runoob",{
+//        template: '<div class="box"> <div class="child-1"></div><div class="child-2"></div></div>'
+//    });
+
+    import cartoob from  './cartoob.vue'
+
+    new Vue({
+        el: "#app",
+        data: {},
+        components: {
+            cartoob
+        }
+    })
+
+</script>
+
+</html>

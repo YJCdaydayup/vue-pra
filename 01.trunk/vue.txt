@@ -510,12 +510,18 @@ store.commit(‘add’)来出发这个函数
 1.使用vuex的情况，集中管理状态，某个组件被多个组件同时引用，同时还要和组件交互 
 2.组件使用vuex里面的属性时，一般通过计算属性
 3.import { funcName } from ‘vuex’ // 即从vuex中导出某个funcName函数，直接使用
+4.绑定class添加动画: :class=“[visible?’false-in’:’fade-out’]”
 
-  
+第三十一节课
+1.部署server服务器，一般通过ftp传文件到服务器 ／ scp
+2.ls -la查看权限 chmod 777 demo
+3.scp file root@ip:/address
+4.查看某个端口占用情况: lsof -i:3000 拿到pid进程ID， kill -9 pid杀掉这个进程
+5.ctrl -z 进程依然存在
+6.域名和ip是一一对应的
+7.重命名 mv name newname
+8.pm2 logs查看日志
 
-
-  
-   
 
 
   

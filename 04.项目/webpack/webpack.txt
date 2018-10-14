@@ -1,0 +1,39 @@
+1.对js和css，jpg，png的压缩合并，减少请求，提高访问速度，版本号的替换，webpack通过配置的形式进行打包，grunt是写代码的形式进行打包
+2.webpakc只解析js文件，遇到不认识的文件，借助各种loader处理，处理完成后就扔给js处理
+  解析css文件 css-loader 
+  sass less scss stylus sass-loader less-loader node-sass
+  图片png jpg svg gif file-loader／url-loader
+  给css添加前缀 postcss-loader autoprefixer
+
+3.去慕课网，webpack的深入与实战
+4.html-webpck-plugin 多页面 指定同一个模版生成n个页面
+5.extract-text-webpack-plugin 
+6.UglifyJsPlugin
+7.CommonsChunkPlugin 共用文件的抽离
+8.clean-webpack-plugin
+9.copy-webpck-plugin
+
+10.npm，是一种包管理器，大部分插件都可以通过npm下载
+
+11.自定义插件
+   npm init 建立一个package.json
+   源码一般放在src里面
+   建一个index.html写静态页面进行调试
+   建一个lib，创建一个vue，将写好的文件拷进去
+   建一个入口文件，梳理文件,可以在package.json里面看到main,编写入口文件
+   建一个webpack.config.js配置文件，编写入口和输出，loader
+   安装webpack cnpm i webpack --save subline
+   打包: webpack （全局安装webpack cnpm i webpack -g） 
+   安装babel和基础的vue-loader: 
+   npm install -D babel-loader @babel/core @babel/preset-env vue-loader
+   创建 .babelrc文件 {‘presets’: [‘env’]}
+   babel-loader报错解决办法: https://segmentfault.com/q/1010000011769446/a-1020000011784511
+   安装scssloader:  cnpm i sass-loader node-sass css-loader
+
+
+12. 注册npm账号， npm adducer nom publish
+   
+   
+
+   
+

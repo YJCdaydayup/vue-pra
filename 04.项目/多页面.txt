@@ -1,0 +1,5 @@
+1.防止webstrom对某个文件进行编译，设置-directorirs设置为excluded
+2.多页面程序不需要使用路由，页面之间使用链接进行跳转
+3.html-webpack-plugin
+4.@指定安装的版本 ^
+5.ES6语法的转换打包，babel-core babel-loader babel-preset-env 

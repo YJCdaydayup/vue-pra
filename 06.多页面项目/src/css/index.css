@@ -1,0 +1,19 @@
+.box {
+    width: 600px;
+    height: 600px;
+    margin: 100px auto;
+}
+
+.child-1, .child-2 {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.child-1 {
+    background-color: red;
+}
+
+.child-2 {
+    background-color: yellow;
+}
