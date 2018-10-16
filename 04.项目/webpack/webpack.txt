@@ -1,5 +1,5 @@
 1.对js和css，jpg，png的压缩合并，减少请求，提高访问速度，版本号的替换，webpack通过配置的形式进行打包，grunt是写代码的形式进行打包
-2.webpakc只解析js文件，遇到不认识的文件，借助各种loader处理，处理完成后就扔给js处理
+2.webpack只解析js文件，遇到不认识的文件，借助各种loader处理，处理完成后就扔给js处理
   解析css文件 css-loader 
   sass less scss stylus sass-loader less-loader node-sass
   图片png jpg svg gif file-loader／url-loader
