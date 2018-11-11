@@ -32,7 +32,7 @@ Toast.install = function (Vue, options) {
         // 继承这个组件后，得到一个全新的Vue实例
         const ToastComponent = Vue.extend(ToastComponent);
 
-        // 将这个实例
+        // 将这个实例挂载到一个标签上
         var instance = new ToastComponent().$mount(document.createElement('div'));
 
         instance.message = message;
@@ -65,7 +65,7 @@ Toast.install = function (Vue, options) {
 };
 
 
-// 这个是打包是设置成umd后会添加到window上，如果添加到window上，就默认使用VUe.use
+// 这个是打包是设置成umd后会添加到window上，如果添加到window上，就默认使用Vue.use
 if (window.Vue) {
     Vue.use(Toast);
 }
