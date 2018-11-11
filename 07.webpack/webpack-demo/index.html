@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+
+</head>
+<body>
+<script src="<%= htmlWebpackPlugin.files.chunks.a.entry %>"></script>
+<%= htmlWebpackPlugin.options.date %>
+
+<!-- 遍历 -->
+<% for (var key in htmlWebpackPlugin.files) { %>
+<%= key %> : <%= JSON.stringify(htmlWebpackPlugin.files[key]) %>
+<% } %>
+
+
+
+<!--  我是一行注释 -->
+js:
+<% for (var key in htmlWebpackPlugin.options) { %>
+<%= key %> : <%= JSON.stringify(htmlWebpackPlugin.options[key]) %>
+<% } %>
+
+<script src="bundle.js"></script>
+</body>
+</html>

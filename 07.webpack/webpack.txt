@@ -26,4 +26,10 @@
 9. — —dispay -reasons看到为什么要使用某个模块，看到模块的依赖关系
 
 
- 
+第三节课
+1.webpack.config.js是默认的配置名，可以通过webpack —config filename重新指定
+2.entry: 可以是字符串和数组，这是针对于单页面，只有一个入口，当传入对象时就是针对多页面模式了,要用到[name][hash]不会变[chunkhash]会变，相当于具体文件的版本号
+
+
+第四节课
+1.自动生成页面插件 html-webpack-plugin 如果报错就将webpack指向全局的webpack npm link webpack
