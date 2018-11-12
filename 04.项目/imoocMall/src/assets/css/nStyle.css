@@ -1,0 +1,84 @@
+.modalBox {
+  background-color: white;
+  border-radius: 10px;
+  z-index: 999;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 80%;
+  padding: 20px;
+  transform: translate(-50%,50%);
+  transition: all 2s;
+  opacity: 1;
+  -webkit-animation: easeIn 0.3s;
+  -o-animation: easeIn 0.3s;
+  animation: easeIn 0.3s;
+}
+
+@keyframes easeIn {
+  0% {
+    transform: translate(-50%,70%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(-50%,50%);
+    opacity: 1;
+  }
+}
+
+.close {
+  position: absolute;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: black;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 2px;
+  padding-left: 1px;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.close:active {
+  color: #aaa;
+}
+
+.titleArea {
+  min-height: 80px;
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.btnArea button {
+  min-height: 36px;
+  padding: 3px 30px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.confirm-btn {
+  background-color: green;
+  margin-left: 10px;
+}
+
+.cancel-btn {
+  margin-left: 70px;
+  background-color: red;
+}
+
+.n-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(29,29,29,0.45);
+  z-index: -1;
+}
