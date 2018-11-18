@@ -5,6 +5,8 @@ module.exports = {
   entry: {
     main: './src/script/main.js',
     a: './src/script/a.js',
+    b: './src/script/b.js',
+    c: './src/script/c.js'
   },
   output: {
     path: __dirname + '/dist',
@@ -15,15 +17,43 @@ module.exports = {
 
   plugins: [
       new htmlWebpackPlugin({
-        filename: 'index.html',
+        filename: 'a.html',
         template: 'index.html',
-        inject: 'false', // 将js脚本嵌入到head标签里面
-        title: 'WEBPACK IS GOOD!!!',
-        date: new Date(),
+        inject: false, // 将js脚本嵌入到head标签里面
+        title: 'this is a.html',
+        // date: new Date(),
         minify: {
-          removeComments: true,    // 删除注释
-          collapseWhitespace: true // 删除空格
-        }
-      })
+          removeComments: false,    // 删除注释
+          collapseWhitespace: false // 删除空格
+        },
+        // chunks: ['main', 'a']
+        excludeChunks:['b','c']
+      }),
+    new htmlWebpackPlugin({
+      filename: 'b.html',
+      template: 'index.html',
+      inject: false, // 将js脚本嵌入到head标签里面
+      title: 'this is b.html',
+      // date: new Date(),
+      minify: {
+        removeComments: false,    // 删除注释
+        collapseWhitespace: false // 删除空格
+      },
+      chunks: ['main','b']
+    }),
+    new htmlWebpackPlugin({
+      filename: 'c.html',
+      template: 'index.html',
+      inject: false, // 将js脚本嵌入到head标签里面
+      title: 'this is c.html',
+      // date: new Date(),
+      minify: {
+        removeComments: false,    // 删除注释
+        collapseWhitespace: false // 删除空格
+      },
+      chunks: ['main','c']
+    }),
+
+
   ]
 }

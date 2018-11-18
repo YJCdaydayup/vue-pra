@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+    <script type="text/javascript">
+        <%=
+               compilation.assets[htmlWebpackPlugin.files.chunks.main.entry.substr(htmlWebpackPlugin.files.publicPath.length)].source() %>
+    </script>
 
 </head>
 <body>
-<script src="<%= htmlWebpackPlugin.files.chunks.a.entry %>"></script>
 <%= htmlWebpackPlugin.options.date %>
 
 <!-- 遍历 -->
@@ -24,6 +26,14 @@ js:
 <%= key %> : <%= JSON.stringify(htmlWebpackPlugin.options[key]) %>
 <% } %>
 
-<script src="bundle.js"></script>
+<% for (var k in htmlWebpackPlugin.files.chunks) { %>
+
+    <% if ( k != 'main' ) {  %>
+        <script src=" <%=
+            htmlWebpackPlugin.files.chunks[k].entry %>"></script>
+    <% } %>
+<% } %>
+
+<!--<script src="bundle.js"></script>-->
 </body>
 </html>
