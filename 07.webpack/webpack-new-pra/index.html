@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <script>
+        <%=
+            compilation.assets[htmlWebpackPlugin.files.chunks.main.entry.substr(htmlWebpackPlugin.files.publicPath.length)].source()%>
+    </script>
+</head>
+<body>
+    <!--<% for (var key in htmlWebpackPlugin.files) { %>-->
+        <!--<%= key %>-->
+        <!--<%= JSON.stringify(htmlWebpackPlugin.files[key]) %>-->
+    <!--<% } %>-->
+
+
+        <% for (var key in htmlWebpackPlugin.options) { %>
+            <%= key %>
+            <%= JSON.stringify(htmlWebpackPlugin.options[key]) %>
+        <% } %>
+
+        <% for (var key in htmlWebpackPlugin.files.chunks) { %>
+            <% if (key != 'main') { %>
+                <script src="<%= htmlWebpackPlugin.files.chunks[key].entry %>"></script>
+            <% } %>
+        <% } %>
+</body>
+</html>

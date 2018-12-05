@@ -11,10 +11,16 @@ module.exports = {
     		{
     			test: /\.js$/,
     			loader: 'babel-loader',
-    			query: {
+                exclude: __dirname + 'node_modules',
+                include: __dirname + 'src',
+                query: {
     				presets: ['latest']
     			}
-    		}
+    		},
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
+            }
     	]
     },
     plugins: [

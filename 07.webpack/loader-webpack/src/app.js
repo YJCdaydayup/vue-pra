@@ -1,7 +1,7 @@
-// import layer form './components/layer/layer.js'
+import layer from './components/layer/layer.js'
 
 const App = function () {
-	// console.log(layer);
+	console.log(layer);
 }
 
-// new App();                          
+new App();

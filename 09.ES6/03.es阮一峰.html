@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+  </head>
+  <body>
+  <script>
+    //  1.作用域，js只有函数作用域和全局作用域，let是块级作用域
+    //  2.箭头函数，箭头指向一个表达式，就是return这个表达式
+    var f = (a,b)=> a + b;
+
+    var f = function (a, b) {
+      return a + b;
+    }
+    console.log(f(1,2));
+
+    // 3.解构字符串
+    var str = 'hello world';
+    var arr = [...str];
+    console.log(arr);
+
+    //
+
+  </script>
+  </body>
+</html>
