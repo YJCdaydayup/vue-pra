@@ -38,4 +38,8 @@
 1.多页面
 2.安装babel cnpm i —save-dev babel-loader babel-core 可以使用.babelrc配置文件或者query: {preset: [‘lastest’]}选择需要处理哪些js(可以直接写在package里面)cnpm I —save-dev babel-preset-latest,运行cnpm run dev
 3.loader的参数: test loader exclude:’./node_modules’ 排除的范围 include: ‘./src’只找src目录下
-4.最新的版本需要使用rules代替loaders 并且在loader:’babel-loader’具体化x
+4.最新的版本需要使用rules代替loaders 并且在loader:’babel-loader’具体化
+
+第六节课
+1.css比如flex适配不同浏览器，需要使用postcss-loader和autoprefixer来处理
+2.
