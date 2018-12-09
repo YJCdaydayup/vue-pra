@@ -42,4 +42,9 @@
 
 第六节课
 1.css比如flex适配不同浏览器，需要使用postcss-loader和autoprefixer来处理
-2.
+
+
+第七节课
+1.模版文件处理:一般模版时html，也可以是.tpl文件，处理ejs语法，需要引入ejs-loader
+2.处理文件和图片: file-loader
+3.url-loader: 有一个阀值，大于就使用fileloader进行http请求有缓存。小于就转化成base64文件，增大了文件的体积，这个时候可以使用image-webpack进行压缩

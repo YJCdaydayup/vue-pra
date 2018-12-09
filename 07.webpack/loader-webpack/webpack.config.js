@@ -40,7 +40,19 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: 'style-loader!css-loader!postcss-loader!sass-loader',
-    		}
+    		},
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
+            },
+            {
+                test: /\.tpl$/,
+                loader: 'ejs-loader'
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                loader: 'file-loader'
+            }
     	]
     },
     // 在这里为postcss-loader做配置
