@@ -49,9 +49,28 @@ module.exports = {
                 test: /\.tpl$/,
                 loader: 'ejs-loader'
             },
+            // {
+            //     // css中的图片指定
+            //     test: /\.(png|jpg|gif|svg)$/,
+            //     loader: 'file-loader',
+            //     query: {
+            //         name: 'assets/[name]-[hash].[ext]'
+            //     }
+            // }
             {
+                // css中的图片指定
                 test: /\.(png|jpg|gif|svg)$/,
-                loader: 'file-loader'
+                // loader: 'url-loader',
+                loaders: [
+                    "url-loader?limit=20000&name=assets/[name]-[hash].[ext]",
+                    // 先压缩
+                    "image-webpack"
+                ],
+                // query: {
+                //     // 大于这个值就使用fileloader，通过http请求load进来有缓存 小于就转化成base64打包进文件中了无缓存
+                //     limit: 20000,
+                //     name: 'assets/[name]-[hash].[ext]'
+                // }
             }
     	]
     },

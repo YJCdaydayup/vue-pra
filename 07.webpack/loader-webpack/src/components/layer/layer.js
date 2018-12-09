@@ -1,3 +1,4 @@
+import './layer.less'
 import tpl from './layer.html'
 
 function layer(){
