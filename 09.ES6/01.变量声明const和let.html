@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>const和let变量声明</title>
+  </head>
+  <body>
+    <script>
+      function aa() {
+        if (0) {
+          let test = 'hello';
+        }else {
+          console.log(test);
+        }
+      }
+//      aa();
+    </script>
+
+    <!-- 字符串拼接 -->
+    <script>
+      // 字符串拼接
+      function strconcat() {
+        var name = "lux";
+        console.log(`hello ${name}`);
+      }
+
+      const tpl = `<div>
+            <span>hello world</span>
+            </div>`;
+//      document.write(tpl);
+//      strconcat();
+    </script>
+
+    <!-- 字符串函数 -->
+    <script>
+      const str = 'hahay';
+      console.log(str.includes('y'));
+      console.log(str.repeat(3.6));
+      console.log(str.startsWith('ha'));
+      console.log(str.endsWith('y'));
+
+      // padStart(2,0) 总共两位，且用0补全头部
+      setTimeout(()=>{
+        const now = new Date()
+        const hours = now.getHours().toString()
+        const minutes = now.getMinutes().toString()
+        const seconds = now.getSeconds().toString()
+        console.log(`${hours.padStart(2, '0')}:${minutes.padStart(2, 0)}:${seconds.padStart(2, 0)}`)
+      },1000);
+
+      // 模版字符串实现
+      let address = '北京海淀区';
+      let name = 'lala';
+      let strs = '${name}在${address}上班...';
+      // 模拟一个方法 myTemplate(str) 最终输出 'lala在北京海淀区上班...'
+      function myTemplate(str) {
+        var x = '`' + str + '`';
+        return eval(x);
+      }
+      console.log(myTemplate(strs)) // lala在北京海淀区上班...
+
+    </script>
+
+    <!-- 函数默认值和箭头函数 -->
+    <script>
+      function action(num = 200) {
+        console.log(num);
+      }
+
+      function action2(num) {
+        num = num || 200;
+        console.log(num);
+      }
+
+//      action(0);
+//      action();
+//      action2(0);
+//      action2()
+
+      const cal = (x,y,z)=> {
+        x = typeof x != 'number' ? 0 : x;
+        y = typeof y != 'number' ? 0: y;
+        return x % y === z;
+      }
+
+//      console.log(cal(1,2,1));
+
+    </script>
+
+    <!-- 对象功能 -->
+    <script>
+        <!-- 1.键值对同名可只写一个; 2.方法可以直接这样写 -->
+        function people(name, age) {
+          return {
+            name,
+            age,
+            say() {
+
+            }
+          }
+        }
+
+        // 浅拷贝
+        const A = {name: 'Sara', age: 18};
+        const B = {address: 'beijing'};
+        const C = {};
+        const obj = Object.assign(C, A, B);
+        console.log(obj.name == A.name);
+
+    </script>
+
+    <!-- 解构 -->
+    <script>
+        // 对象解构
+        //对象（键值对要对应，且键名要相同）
+        const pe = {
+          name: 'lux',
+          age: 20
+        }
+        const { name:n, age:a } = pe
+        console.log(`${n} --- ${a}`)
+
+        const arr = ['red','green'];
+        const [c ,d] = arr;
+        console.log(c);
+        console.log(`${d}`);
+
+        // 重构例子
+//        var jsonParse = require('body-parser').jsonParser;
+//        import { jsonParse } from 'body-parser'
+//
+//        var body = request.body;
+//        var username = body.username;
+//        var password = body.password;
+//
+//
+//        const {body, body: {username, password}} = request;
+
+      const request = {
+        body: {
+          username: 'Sara',
+          password: '123456'
+        }
+      };
+
+      const {body: body, body: {username:username,password:psw}} = request;
+      console.log(username,psw);
+
+//        const {username: username,password: password} = request.body;
+//        console.log(username);
+
+    </script>
+
+    <!-- 三个点... -->
+    <script>
+      // 组装数组
+      const color = ['red', 'green'];
+      const colorful = [...color, 'green', 'pink'];
+      console.log(colorful);
+
+      // 组装对象
+      const alp = {first: 'a', second: 'b'};
+      const bets = {...alp, third: 'c'};
+      console.log(bets);
+
+      // 获取数据某些项
+      const arr1 = [1,2,3,4,5,6];
+      const [e,f,...c1] = arr1;
+      console.log(c1);
+
+      const obj1 = {t:1,h:2,k:3};
+      const {t,...g} = obj1;
+      console.log(g);
+
+
+    </script>
+
+
+  </body>
+</html>
