@@ -12,7 +12,6 @@ module.exports = {
     	rules: [
     		{
     			test: /\.js$/,
-<<<<<<< HEAD
     			loader: 'babel-loader', // 非常耗时的语法转换
                 // exclude: './node_modules/', // 这些不需要转换
                 // include: './src/',
@@ -41,19 +40,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: 'style-loader!css-loader!postcss-loader!sass-loader',
-=======
-    			loader: 'babel-loader',
-                exclude: __dirname + 'node_modules',
-                include: __dirname + 'src',
-                query: {
-    				presets: ['latest']
-    			}
-    		},
-            {
-                test: /\.html$/,
-                loader: 'html-loader'
->>>>>>> 5c50baf9895ba9e691bcb3d1e5babd54158a58ef
-            }
+    		}
     	]
     },
     // 在这里为postcss-loader做配置
