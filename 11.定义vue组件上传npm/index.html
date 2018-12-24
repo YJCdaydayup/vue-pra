@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="dist/vue-toast-demo.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="show">show</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            methods: {
+                show() {
+                    this.$toast.show('再来',{
+                        duration: 1000
+                    },function () {
+                        console.log("调用完毕，立即执行")
+                    })
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>

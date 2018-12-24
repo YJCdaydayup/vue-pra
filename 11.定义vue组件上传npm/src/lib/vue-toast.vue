@@ -1,14 +1,14 @@
 <template>
-    <section class="toast-container" :class="[visible?'fade-in':'fade-out']">
-        <div class="toast">
-            <span>{{message}}</span>
+    <div class="toast-container">
+        <div class="toast" :class="[visible? 'fadeIn':'fadeOut']">
+            <span>{{ message }}</span>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>
-    import "./toast.css"
 
+    import "./toast.css"
     export default {
         data() {
             return {
@@ -18,5 +18,3 @@
         }
     }
 </script>
-
-

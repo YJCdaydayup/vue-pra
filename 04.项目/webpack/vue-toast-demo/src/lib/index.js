@@ -36,12 +36,12 @@ Toast.install = function (Vue, options) {
         var instance = new ToastComponent().$mount(document.createElement('div'));
 
         instance.message = message;
-        instance.visibility = true;
+        instance.visible = true;
 
         document.body.appendChild(instance.$el);
 
         setTimeout(()=>{
-            instance.visibility = false;
+            instance.visible = false;
             document.body.removeChild(instance.$el);
         },opt.duration);
     }
