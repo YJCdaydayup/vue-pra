@@ -1,0 +1,3 @@
+1.一个组件包括html标签 css js以及入口js，有时候css，js包含在html中如vue文件，也可以是外部文件导入到vue中
+2.vue组件必须安装vue依赖 cnpm i --save-dev vue
+3.vue-loader必须添加plugin配置:  const { VueLoaderPlugin } = require('vue-loader')  new VueLoaderPlugin()
