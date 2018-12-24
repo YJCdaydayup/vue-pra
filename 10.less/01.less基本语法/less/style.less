@@ -1,0 +1,52 @@
+// 变量
+@color: #4d926f;
+
+h1 {
+  color: @color;
+}
+
+h2 {
+  color: @color;
+}
+
+// 混合(继承)
+
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+header {
+  width: 100px;
+  height: 100px;
+  background-color: @color;
+  .rounded-corners;
+}
+
+footer {
+  width: 100px;
+  height: 100px;
+  background-color: @color * 2;
+  .rounded-corners(10px);
+}
+
+// 嵌套
+@fz: 26px;
+header {
+  h1 {
+    font-size: @fz * 2;
+    font-weight: bold;
+  }
+  p {
+    font-size: @fz;
+    a {
+      text-decoration: none;
+      // 代表伪类选择器
+      &:hover {
+        border: 1px solid red;
+      }
+    }
+  }
+}
+

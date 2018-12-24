@@ -1,0 +1,35 @@
+h1 {
+  color: #4d926f;
+}
+h2 {
+  color: #4d926f;
+}
+header {
+  width: 100px;
+  height: 100px;
+  background-color: #4d926f;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+footer {
+  width: 100px;
+  height: 100px;
+  background-color: #9affde;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+header h1 {
+  font-size: 52px;
+  font-weight: bold;
+}
+header p {
+  font-size: 26px;
+}
+header p a {
+  text-decoration: none;
+}
+header p a:hover {
+  border: 1px solid red;
+}
