@@ -31,4 +31,4 @@ npm install --save expose-loader
 
 ### 8.安装@^2.00版本，就会安装2.00和3.00之间的某个版本
 
-### 9.可以直接使用require.js的语法来写js
+### 9.可以直接使用require.js的语法来写js,css文件直接import进来来导入样式
