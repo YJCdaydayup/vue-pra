@@ -10,6 +10,43 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+// 定义本地服务
+const express = require('express')
+const app = express()
+var appData = require('./../data.json')
+var seller = appData.seller
+var goods = appData.goods
+var ratings = appData.ratings
+
+var apiRoutes = express.Router();
+
+// seller接口
+apiRoutes.get('/seller', (req, res)=> {
+  res.json({
+    errno: 0,
+    data: seller
+  })
+})
+
+// 商品接口
+apiRoutes.get('/goods', (req, res)=> {
+  res.json({
+    errno: 0,
+    data: goods
+  })
+})
+
+// 评分接口
+apiRoutes.get('/ratings', (req, res)=> {
+  res.json({
+    errno: 0,
+    data: ratings
+  })
+})
+
+// 启动路由
+app.use('/api',apiRoutes);
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
