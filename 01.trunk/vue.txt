@@ -522,11 +522,15 @@ store.commit(‘add’)来出发这个函数
 7.重命名 mv name newname
 8.pm2 logs查看日志
 
-
-
-  
-
-
+第三十二节课
+1.publicPath使用: 将服务器的文件夹或者CDN的域名配置到这里
+2.在vue的单页面应用中，将所在文件夹名或者CDN的地址放到assetsPublicPath里面 
+3.二级域名: 
+4.将dist里面的资源放在服务器里面，第一种是ngnix里面，第二种是放到node里面
+5.传递文件夹到远程服务器:
+  scp -r /Imooc/dist/** root@123.57.2.144:/alidata/www/default/demo
+6.通过设置代理解决ngnix服务器的跨域问题:
+  在ngnix里面vhosts里面设置端口为80，
 
 
 
