@@ -8,7 +8,6 @@
 # 实现 5秒 消失
 # 关闭后的回调
 
-
 # npm adduser 
 # npm whoami
 # npm publish 发布官网
@@ -20,6 +19,8 @@ a mobile toast plugin for vue
 ## Usage
 import VueToast from ''
 Vue.use(VueToast)
+naming
+===>naming9_9_9_0-0_0===>
 this.$toast.show("show");
 
 
