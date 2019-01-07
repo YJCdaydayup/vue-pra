@@ -5,3 +5,4 @@
 1.制作图标字体,svg矢量图，https://icomoon.io,修改fontname为自己的名字
 2.定义一个组件就创建一个文件夹，此组件的资源就进维护
 3.stylus就是在css基础上不需要冒号和括号
+4.基本的样式，比如reset.css可以直接写在模版html里面

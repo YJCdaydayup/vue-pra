@@ -14,6 +14,7 @@ const portfinder = require('portfinder')
 const express = require('express')
 const app = express()
 var appData = require('./../data.json')
+// 开启本地服务不需要跨域问题，每个数据可以分别定义一个接口
 var seller = appData.seller
 var goods = appData.goods
 var ratings = appData.ratings
@@ -21,30 +22,30 @@ var ratings = appData.ratings
 var apiRoutes = express.Router();
 
 // seller接口
-apiRoutes.get('/seller', (req, res)=> {
-  res.json({
-    errno: 0,
-    data: seller
-  })
-})
-
-// 商品接口
-apiRoutes.get('/goods', (req, res)=> {
-  res.json({
-    errno: 0,
-    data: goods
-  })
-})
-
-// 评分接口
-apiRoutes.get('/ratings', (req, res)=> {
-  res.json({
-    errno: 0,
-    data: ratings
-  })
-})
-
-// 启动路由
+// apiRoutes.get('/seller', (req, res)=> {
+//   res.json({
+//     errno: 0,
+//     data: seller
+//   })
+// })
+//
+// // 商品接口
+// apiRoutes.get('/goods', (req, res)=> {
+//   res.json({
+//     errno: 0,
+//     data: goods
+//   })
+// })
+//
+// // 评分接口
+// apiRoutes.get('/ratings', (req, res)=> {
+//   res.json({
+//     errno: 0,
+//     data: ratings
+//   })
+// })
+//
+// // 启动路由
 app.use('/api',apiRoutes);
 
 const HOST = process.env.HOST
@@ -79,6 +80,26 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before(app) {
+      app.get('/api/seller', (req, res) => {
+        res.json({
+          errno: 0,
+          data: seller
+        })
+      }),
+        app.get('/api/goods', (req, res) => {
+          res.json({
+            errno: 0,
+            data: goods
+          })
+        }),
+        app.get("/api/ratings", (req, res) => {
+          res.json({
+            errno: 0,
+            data: ratings
+          })
+        })
     }
   },
   plugins: [
