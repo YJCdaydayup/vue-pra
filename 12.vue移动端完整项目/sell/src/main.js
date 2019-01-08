@@ -9,21 +9,9 @@ import goods from './components/goods/goods.vue'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-// new Vue({
-//   el: '#app',
-//   router,
-//   components: { App },
-//   template: '<App/>'
-// })
-
-let app = Vue.extend(App);
-
-let Router = new router();
-
-Router.map({
-  '/goods': {
-    components: goods
-  }
+new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
 })
-
-Router.start(app,'#app');
