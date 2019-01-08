@@ -1,5 +1,5 @@
 <template>
-    <div class="header" @click="push">
+    <div class="header">
       我是header sca
     </div>
 </template>
@@ -21,9 +21,6 @@
 
         },
         methods: {
-          push() {
-            this.$emit('push');
-          }
         }
     }
 </script>
