@@ -6,3 +6,5 @@
 2.定义一个组件就创建一个文件夹，此组件的资源就进维护
 3.stylus就是在css基础上不需要冒号和括号
 4.基本的样式，比如reset.css可以直接写在模版html里面
+5.mounted钩子里面可以直接写函数和表达式，获取上一个页面传递的值都是通过$route.query
+6.使用router-link和router-view做页面内组件切换时，注意2点，先设置页面路由的children，在设置router-link的to="/goods"路径即可

@@ -1,14 +1,12 @@
 <template>
   <div class="hello">
-    <v-header></v-header>
+    <v-header @push="push"></v-header>
     <div class="tab">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
-        <!--<a v-link="{path: '/goods'}">商品</a>-->
       </div>
       <div class="tab-item">
         <router-link to="/ratings">评论</router-link>
-        <!--<a v-link="{path: '/ratings'}">评论</a>-->
       </div>
       <div class="tab-item">
         <router-link to="/seller">商家</router-link>
@@ -26,11 +24,19 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      showing: true
     }
   },
   components: {
-    'v-header': Header
+    'v-header': Header,
+  },
+  methods: {
+    push() {
+      alert('134')
+      this.$router.push({
+        path: '/second?orderId=cqcjkcakcasjkcnasjkcas'
+      });
+    }
   }
 }
 </script>

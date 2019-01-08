@@ -4,6 +4,7 @@ import Main from '@/components/Main'
 import Goods from './../components/goods/goods.vue'
 import Ratings from './../components/ratings/ratings.vue'
 import Seller from './../components/seller/seller.vue'
+import Second from './../components/Second.vue'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
           component: Seller
         }
       ]
+    },
+    {
+      path: '/second',
+      name: 'second',
+      component: Second
     }
   ]
 })

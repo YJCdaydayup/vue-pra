@@ -1,10 +1,13 @@
 <template>
-    <div class="header">
+    <div class="header" @click="push">
       我是header sca
     </div>
 </template>
 <style>
-
+  .header {
+    padding: 2rem;
+    background-color: red;
+  }
 </style>
 
 <script>
@@ -14,7 +17,14 @@
                 msg: "hello vue"
             }
         },
-        components: {}
+        components: {
+
+        },
+        methods: {
+          push() {
+            this.$emit('push');
+          }
+        }
     }
 </script>
 
