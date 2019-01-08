@@ -1,9 +1,16 @@
 <template>
     <div>
-        这里是商品的标题子组件
+        <div class="title">这里是商品的标题子组件</div>
     </div>
 </template>
 <style>
+
+  .title {
+    width: 100%;
+    height: 500px;
+    background-color: green;
+    color: white;
+  }
 
 </style>
 

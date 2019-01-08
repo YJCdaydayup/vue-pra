@@ -26,23 +26,23 @@ export let router = new Router({
       // 页面入口加载三个组件
       components: {
         default: Goodslist,
-        title: Title,
-        img: Image
+        // title: Title,
+        // img: Image
       },
       children:[
         // 二级路由
-        // {
-        //   // 不加/
-        //   path: 'title',
-        //   name: 'title',
-        //   component: Title
-        // },
-        // {
-        //   // 不加/
-        //   path: 'img',
-        //   name: 'img',
-        //   component: Image
-        // }
+        {
+          // 不加/
+          path: 'title',
+          name: 'title',
+          component: Title
+        },
+        {
+          // 不加/
+          path: 'img',
+          name: 'img',
+          component: Image
+        }
       ]
     },
     {
