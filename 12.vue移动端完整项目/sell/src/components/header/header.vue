@@ -38,6 +38,7 @@
         vertical-align: top
         img
           border-radius: 2px
+
       .content
         display: inline-block
         font-size: 14px

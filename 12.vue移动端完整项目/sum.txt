@@ -20,4 +20,5 @@
 第四节课
 1.如果设置vertical-align对不齐，可能是空格字符没有去掉的问题，父标签的font-size：0即可
 2.&.active 是表示给自己找个元素添加一个新的class为active，一般用于要动态改变的class
+3.生命周期中的created函数，是在vm创建之后，里面可以直接使用this.name='Sara'，就默认给它添加了一个属性name
 
