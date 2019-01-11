@@ -1,6 +1,6 @@
 ### 1.由于使用requirejs来定义模块，引用的第三方模块会打包成0.js，html页面里面看不到，但是在资源里面会异步加载这个0.js文件。
 ### 2.clean-webpack-plugin 每次打包删除dist目录
-### 3.extract-text-webpack-plugin将css抽取出来放入一个文件中再导入页面内,需要在plugins里面new一下才可以
+### 3.extract-text-webpack-plugin将css抽取出来放入一个文件中再导入页面内,需要在plugins里面new一下才可以，如果使用这个插件，那么单独为某个页面引入的css就打不进来，如果要单独某个页面的css打进来，就需要使用style-loader css-loader
 ### 4.当打包完后跑起来报错，如果是报define找不到或者一些js的错误，那么需要使用babel-loader进行解析，现在使用的是babel-preset-env了
 ### 5.jquery打包成全局变量进行使用：
 1.vendor: ['jquery','./src/js/common.js']

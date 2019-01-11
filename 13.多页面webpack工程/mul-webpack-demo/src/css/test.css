@@ -1,0 +1,19 @@
+body {
+    background-color: hotpink;
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.box {
+    display: flex;
+    height: 100px;
+    line-height: 100px;
+    background-color: yellow;
+}
+
+.box-item {
+    flex: 1;
+    line-height: 100px;
+    height: 100%;
+    text-align: center;
+}

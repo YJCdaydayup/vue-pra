@@ -16,24 +16,34 @@ module.exports = {
     },
     module: {
         rules: [
-            // {
-            //     test: /\.css$/,
-            //     exclude: /node_modules/,
-            //     include: __dirname + '/src',
-            //     loaders: [
-            //         "style-loader",
-            //         "css-loader"
-            //     ]
-            // },
             {
                 test: /\.css$/,
-                // include: __dirname + '/src',
                 exclude: /node_modules/,
-                use: ExtractTextWebpackPlugin.extract({
-                    fallback: "style-loader",
-                    use: 'css-loader'
-                })
+                include: __dirname + '/src',
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    }
+                ]
             },
+            // {
+            //     test: /\.css$/,
+            //     // include: __dirname + '/src',
+            //     exclude: /node_modules/,
+            //     use: ExtractTextWebpackPlugin.extract({
+            //         fallback: "style-loader",
+            //         use: 'css-loader'
+            //     })
+            // },
             {
                 test: /\.js$/,
                 include: __dirname + '/src',
@@ -67,8 +77,8 @@ module.exports = {
             inject: 'head',
             chunks: ['index','vendor'],
             minify: {
-                removeCommonts: true,
-                collapseWhitespace: true
+                // removeCommonts: true,
+                // collapseWhitespace: true
             }
         }),
         new HtmlWebpackPlugin({
@@ -87,6 +97,6 @@ module.exports = {
                 warnings: true
             }
         }),
-        new ExtractTextWebpackPlugin("index.css")
+        // new ExtractTextWebpackPlugin("index.css")
     ]
 }
