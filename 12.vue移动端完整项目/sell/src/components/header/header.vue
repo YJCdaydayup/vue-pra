@@ -2,7 +2,7 @@
     <div class="header">
       <div class="content-wrapper">
         <div class="avatar">
-          <img :src="seller.avatar" alt="" width="64" height="64">
+          <img :src="seller.avatar" alt="" width="64px" height="64px">
         </div>
         <div class="content">
           <div class="title">
@@ -42,6 +42,8 @@
         display: inline-block
         font-size: 14px
         margin-left: 16px
+        .description
+          margin-bottom: 8px
         .title
           margin: 2px 0 8px 0
           .brand
@@ -58,13 +60,10 @@
             font-size 16px
             line-height 18px
             font-weight bold
-
-
         .description
           margin-bottom: 10px
           line-height: 12px
           font-size: 12px
-
         .support
           font-size: 0
           .icon
@@ -88,10 +87,6 @@
           .text
             line-height: 12px
             font-size: 12px
-
-
-
-
 </style>
 
 <script>
