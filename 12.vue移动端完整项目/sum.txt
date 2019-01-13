@@ -22,3 +22,22 @@
 2.&.active 是表示给自己找个元素添加一个新的class为active，一般用于要动态改变的class
 3.生命周期中的created函数，是在vm创建之后，里面可以直接使用this.name='Sara'，就默认给它添加了一个属性name
 
+第五节课
+1.熟练掌握sticky-footer布局，内容高度不满屏时，在屏幕下面，满屏时，在内容下面
+   分两层子div
+	<div class=detail-wrapper> // 设置detail-wrapper的高度min-height：100%
+	    <div class=“detail-main”></div> // 设置detail-main的paddding-bottom: 64px
+	</div>
+	<div class=“detail-close”></div> // 设置detail-close的margin：-64px auto
+2.学习 阮一峰的网络日志: Flex 布局教程: 语法篇
+3.flex布局，当父标签为display: flex时，子标签flex都为1则平分，只设置部分为flex：1,其他的子标签不设置的话，会在父标签宽度下减去没有设置的标签的宽度，再进行平分flex；1的标签的宽度
+4.stylus语法要求严格缩减格式，不然会报错
+5.Vue中的动画，谁需要动画，就用<transition name=“fade”></transition>包住，然后定义:
+	.fade-enter-active, .fade-leave-active {
+ 		 transition: opacity .5s; // 此为进入或离开的过渡，这里写时间和效果
+	}
+	.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+		  opacity: 0; // 这里写进来的状态
+	}	
+
+
