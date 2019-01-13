@@ -38,6 +38,7 @@
 	}
 	.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
 		  opacity: 0; // 这里写进来的状态
-	}	
+	}
+6.:class=“itemClass” 如果单独使用，就是和属性联合起来使用，如果和v-for结合使用，就是动态的class就是对应的变量的值
 
 
