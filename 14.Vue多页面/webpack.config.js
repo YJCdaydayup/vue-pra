@@ -10,6 +10,14 @@ module.exports = {
         path: __dirname + '/dist',
         filename: 'js/[name].js'
     },
+    devServer: {
+        clientLogLevel: 'warning',
+        historyApiFallback: true,
+        // hot: true,
+        compress: true,
+        host: 'localhost',
+        port: 8080
+    },
     module: {
         rules: [
             {
