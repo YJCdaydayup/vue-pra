@@ -3,9 +3,8 @@
       <div class="menu-wrapper" ref="menuWrapper">
         <ul>
           <li class="menu-item" v-for="item in goods">
-            <span class="text border-1px">
-              <span v-if="item.type>0" class="icon" :class="classMap[item.type]">
-              </span>{{item.name}}</span>
+            <!--<span class="text border-1px"><span v-if="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}</span>-->
+            <span class="text border-1px"><icon v-if="item.type > 0" class="icon" :name="classMap[item.type]" :size="3"></icon>{{item.name}}</span>
           </li>
         </ul>
       </div>
@@ -22,12 +21,10 @@
                   <h2 class="name">{{food.name}}</h2>
                   <p class="desc">{{food.description}}</p>
                   <div class="extra">
-                    <span class="count">月售{{food.sellCount}}份</span>
-                    <span>好评率{{food.rating}}%</span>
+                    <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
                   </div>
                   <div class="price">
-                    <span class="now">¥{{food.price}}</span>
-                    <span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
+                    <span class="now">¥{{food.price}}</span><span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                   </div>
                 </div>
               </li>
@@ -65,23 +62,8 @@
           vertical-align: middle
           border-1px(rgba(7,17,27,0.1))
           .icon
-            display: inline-block
             vertical-align: top
-            width: 12px
-            height: 12px
-            background-repeat: no-repeat
-            background-size: 12px 12px
             margin-right: 2px
-            &.decrease
-              bg-image('decrease_3')
-            &.discount
-              bg-image('discount_3')
-            &.guarantee
-              bg-image('guarantee_3')
-            &.invoice
-              bg-image('invoice_3')
-            &.special
-              bg-image('special_3')
     .foods-wrapper
       flex: 1
       background-color: #fff
@@ -105,10 +87,9 @@
           flex: 0 0 57px
           margin-right: 10px
         .content
-          float: 1;
+          flex: 1;
           .name
             margin: 2px 0 8px 0
-            height: 14px
             line-height: 16px
             font-size: 14px
             color: rgb(7,17,27)
@@ -143,6 +124,7 @@
 <script>
 
     import BScroll from 'better-scroll'
+    import icon from './../icon/icon.vue'
 
     const ERR_OK =0;
 
@@ -163,19 +145,26 @@
             if (res.data.errno == ERR_OK) {
               this.goods = res.data.data;
               this.$nextTick(()=>{
-                this._initScroll();
+                this.menuScroll.refresh()
+                this.foodsScroll.refresh()
               })
+
             }
           })
         },
+        mounted() {
+          this._initScroll();
+        },
         methods: {
           _initScroll() {
-            this.menuScoll = new BScroll(this.$refs.menuWrapper,{});
+            this.menuScroll = new BScroll(this.$refs.menuWrapper,{});
 
             this.foodsScroll = new BScroll(this.$refs.foodsWrapper,{});
           }
         },
-        components: {}
+        components: {
+          icon
+        }
     }
 </script>
 

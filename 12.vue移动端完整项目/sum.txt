@@ -13,7 +13,7 @@
 1.改变router-link的样式，可以直接给这个router-link添加class来改
 2.通过伪类和缩放实现1px
 3.生命周期的钩子函数，就需要写成es6的写法，里面可以直接写表达式了
-4.消除子元素之间的空字符间隔，先设置父元素font-size:0,在设置资源的font-size即可
+4.消除子元素之间的空字符间隔，先设置父元素font-size:0,在设置子元素的font-size即可
 5.设置路由激活状态为active，然后设置对应的router-link的ative的样式，linkActiveClass: 'active'
 6.全局使用某个插件 import VueResource from 'vue-resource'   Vue.use(VueResource)
 
@@ -31,6 +31,7 @@
 	<div class=“detail-close”></div> // 设置detail-close的margin：-64px auto
 2.学习 阮一峰的网络日志: Flex 布局教程: 语法篇
 3.flex布局，当父标签为display: flex时，子标签flex都为1则平分，只设置部分为flex：1,其他的子标签不设置的话，会在父标签宽度下减去没有设置的标签的宽度，再进行平分flex；1的标签的宽度
+  也可以某些子标签flex:1,其他标签不设置啥，而是自带本身的宽度和padding，那就需要先减去这个子元素自身宽度和padding再进行平分
 4.stylus语法要求严格缩减格式，不然会报错
 5.Vue中的动画，谁需要动画，就用<transition name=“fade”></transition>包住，然后定义:
 	.fade-enter-active, .fade-leave-active {
@@ -46,6 +47,17 @@
 
 第五节课
 1.better-scroll库进行安装，研究https://zhuanlan.zhihu.com/p/27407024
-2.
+2.注意height和line-height的区别，自适应的话，考虑使用line-height即可
+3.better-scroll初始化for循环外的wrapper，意味着将wrapper的所有子元素的高度作为wrapper内容的高度，而不作为整体内容的高度，因而，可以先将整体的overflow:hidden,然后初始化各个wrapper即可在各个wrapper内部形成滚动效果,基本结构如下:
+	<div class="wrapper">
+	    <ul class="content">
+  		 <li>...</li>
+   		 <li>...</li>
+  		  ...
+ 	    </ul>
+	</div>
+4.this.$nextTick()表示DOM的更新是异步的，获取DOM的变化，需要在异步执行完毕的回调中获取，所以初始化better-scroll需要在this.$nextTick(()=>{})中执行，才能获取正确的宽高，当然，也可以换成setTimeout(fn, 20)
+
+
 
 

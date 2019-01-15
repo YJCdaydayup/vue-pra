@@ -14,7 +14,7 @@
           </div>
           <!-- v-if如果为false，里面的操作都不解析了，数据获取是异步的，没过来的时候页面直接拿第0个元素就会报错 -->
           <div v-if="seller.supports" class="support">
-            <span class="icon" :class="classMap[seller.supports[0].type]"></span>
+            <icon class="icon" :name="classMap[seller.supports[0].type]" :size="1"></icon>
             <span class="text">{{ seller.supports[0].description }}</span>
           </div>
         </div>
@@ -45,7 +45,7 @@
               </div>
               <ul v-if="seller.supports" class="supports">
                 <li class="support-item" v-for="(item, index) in seller.supports">
-                  <span class="icon" :class="classMap[seller.supports[index].type]"></span>
+                  <icon class="icon" :size="2" :name="classMap[seller.supports[index].type]"></icon>
                   <span class="text">{{seller.supports[index].description}}</span>
                 </li>
               </ul>
@@ -118,21 +118,7 @@
           .icon
             display: inline-block
             vertical-align: top
-            width: 12px
-            height: 12px
             margin-right: 4px
-            background-size: 12px 12px
-            background-repeat: no-repeat
-            &.decrease
-              bg-image('decrease_1')
-            &.discount
-              bg-image('discount_1')
-            &.guarantee
-              bg-image('guarantee_1')
-            &.invoice
-              bg-image('invoice_1')
-            &.special
-              bg-image('special_1')
           .text
             line-height: 12px
             font-size: 10px
@@ -250,23 +236,8 @@
               &:last-child
                 margin-bottom: 0
               .icon
-                display: inline-block
-                width: 16px
-                height: 16px
-                background-repeat: no-repeat
-                background-size: 16px 16px
                 vertical-align: top
                 margin-right: 6px
-                &.decrease
-                  bg-image('decrease_2')
-                &.discount
-                  bg-image('discount_2')
-                &.guarantee
-                  bg-image('guarantee_2')
-                &.invoice
-                  bg-image('invoice_2')
-                &.special
-                  bg-image('special_2')
               .text
                 line-height: 16px
                 font-size: 12px
@@ -302,6 +273,7 @@
 <script>
 
     import star from './../star/star.vue'
+    import icon from './../icon/icon.vue'
 
     export default {
         props: {
@@ -318,7 +290,8 @@
           this.classMap = ['decrease','discount','special','invoice','guarantee']
         },
         components: {
-          star
+          star,
+          icon
         },
         methods: {
           showDetail() {
