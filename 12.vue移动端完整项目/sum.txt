@@ -42,6 +42,10 @@
 6.:class=“itemClass” 如果单独使用，就是和属性联合起来使用，如果和v-for结合使用，就是动态的class就是对应的变量的值
 7.可以将icon定义成一个组件，自己完成做优化。
 8.能用class的就一定用class，不要用标签名
-9.
+
+
+第五节课
+1.better-scroll库进行安装，研究https://zhuanlan.zhihu.com/p/27407024
+2.
 
 
