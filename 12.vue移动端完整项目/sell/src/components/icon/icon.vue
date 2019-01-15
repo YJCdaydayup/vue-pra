@@ -11,21 +11,21 @@
   .icon
     display: inline-block
     &.icon_1
-    .pic
-      width: 12px
-      height: 12px
-      background-size: 12px 12px
-      background-repeat: no-repeat
-      &.decrease_1
-        bg-image('decrease_1')
-      &.discount_1
-        bg-image('discount_1')
-      &.guarantee_1
-        bg-image('guarantee_1')
-      &.invoice_1
-        bg-image('invoice_1')
-      &.special_1
-        bg-image('special_1')
+      .pic
+        width: 12px
+        height: 12px
+        background-size: 12px 12px
+        background-repeat: no-repeat
+        &.decrease_1
+          bg-image('decrease_1')
+        &.discount_1
+          bg-image('discount_1')
+        &.guarantee_1
+          bg-image('guarantee_1')
+        &.invoice_1
+          bg-image('invoice_1')
+        &.special_1
+          bg-image('special_1')
     &.icon_2
       .pic
         width: 16px
