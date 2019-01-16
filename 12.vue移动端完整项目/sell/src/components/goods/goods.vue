@@ -150,6 +150,22 @@
               let height1 = this.listHeight[i];
               let height2 = this.listHeight[i+1];
               if (!height2 || this.scrollY >= height1 && this.scrollY < height2) {
+
+                // 判断如果左侧栏选中item未滑动出来，需滑动左侧栏
+                let menuWrapper = this.$refs.menuWrapper;
+                let menuWrapperheight = menuWrapper.clientHeight;
+                let menuList = menuWrapper.getElementsByClassName('menu-item');
+                let menuItemHeight = 0;
+                if (menuList.length > 0) {
+                  menuItemHeight = menuList[0].clientHeight;
+                }
+
+                // 往上滑动时，需要将隐藏的栏显示出来
+                let el = menuList[i];
+                this.menuScroll.scrollToElement(el,500);
+
+
+
                 return i;
               }
             }
@@ -176,7 +192,8 @@
         methods: {
           _initScroll() {
             this.menuScroll = new BScroll(this.$refs.menuWrapper,{
-              click: true
+              click: true,
+              probeType: 3
             });
 
             this.foodsScroll = new BScroll(this.$refs.foodsWrapper,{
@@ -187,6 +204,10 @@
             // 2.在实现监听位置
             this.foodsScroll.on('scroll', (pos) => {
               this.scrollY = Math.abs(Math.round(pos.y));
+            })
+
+            this.menuScroll.on('scroll', (pos) => {
+              this.menuScrollY = Math.abs(Math.round(pos.y));
             })
           },
           _calculateHeight() {
@@ -200,7 +221,7 @@
             }
           },
           selectMenu(index, event) {
-            // _constructed浏览器PC是没有这个属性的
+            // better-scroll派发的这个_constructed属性值为true
             if (!event._constructed) {
               return;
             }
