@@ -51,5 +51,12 @@
 第六节课
 1.使用router-view时，可以直接:seller=“seller”传递属性值过去，便于每个激活组件使用
 2.props注意type的类型比较严格，书写上可以使用delivery-price，对应props的deliveryPrice
+3.在vue中，props属性是一个对象或数组时，default需要是一个函数:
+	selectFoods: {
+	     type: Array,
+	     default() {
+		return []
+	     }			
+	}
 
 
