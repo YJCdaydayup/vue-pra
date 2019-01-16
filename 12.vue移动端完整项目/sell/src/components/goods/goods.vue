@@ -32,6 +32,7 @@
           </li>
         </ul>
       </div>
+      <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
     </div>
 </template>
 <style lang="stylus" rel="stylesheet/stylus">
@@ -128,6 +129,7 @@
 
     import BScroll from 'better-scroll'
     import icon from './../icon/icon.vue'
+    import shopcart from './../shopcart/shopcart.vue'
 
     const ERR_OK =0;
 
@@ -231,7 +233,8 @@
           }
         },
         components: {
-          icon
+          icon,
+          shopcart
         }
     }
 </script>

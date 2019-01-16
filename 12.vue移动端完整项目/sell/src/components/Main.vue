@@ -6,13 +6,14 @@
         <router-link class="tab-link" to="/goods">商品</router-link>
       </div>
       <div class="tab-item">
-        <router-link class="tab-link" to="/ratings">评论</router-link>
+        <router-link  class="tab-link" to="/ratings">评论</router-link>
       </div>
       <div class="tab-item">
         <router-link class="tab-link" to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view></router-view>
+
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
@@ -30,7 +31,7 @@ export default {
     }
   },
   components: {
-    'v-header': Header,
+    'v-header': Header
   },
   created() {
     this.$http.get('/api/seller').then((res)=>{

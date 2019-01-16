@@ -48,5 +48,8 @@
 1.better-scroll库进行安装，研究https://zhuanlan.zhihu.com/p/27407024
 2.在任何地方写的this.shuxing,就相当于给这个变量添加了这个属性
 
+第六节课
+1.使用router-view时，可以直接:seller=“seller”传递属性值过去，便于每个激活组件使用
+2.props注意type的类型比较严格，书写上可以使用delivery-price，对应props的deliveryPrice
 
 
