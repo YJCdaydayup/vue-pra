@@ -3,12 +3,12 @@
       <div class="content">
         <div class="content-left">
           <div class="logo-wrapper">
-            <div class="logo">
+            <div class="logo" :class="{'highLight':totalCount>0}">
               <i class="icon-shopping_cart"></i>
             </div>
-            <div class="number">{{totalCount}}</div>
+            <div v-show="totalCount>0" class="num">{{totalCount}}</div>
           </div>
-          <div class="price">{{totalPrice}}元</div>
+          <div class="price" :class="{'highLight': totalCount>0}">{{totalPrice}}元</div>
           <div class="desc">另需配送费¥{{deliveryPrice}}</div>
         </div>
         <div class="content-right">
@@ -54,9 +54,29 @@
             display: flex
             align-items: center
             justify-content: center
+            &.highLight
+              background-color: rgb(0,160,220)
+              .icon-shopping_cart
+                color: #fff
             .icon-shopping_cart
               font-size: 24px
               color: #80858a
+              &.highLight
+                color: #fff
+           .num
+             position: absolute
+             top: 0
+             right: 0
+             width: 24px
+             height: 16px
+             line-height: 16px
+             text-align: center
+             border-radius: 16px
+             font-size: 9px
+             font-weight: 400
+             color: white
+             background-color:rgb(240,20,20)
+             box-shadow: 0 4px 8px rgba(0,0,0,0.4)
         .price
           display: inline-block
           vertical-align: top
@@ -67,6 +87,8 @@
           border-right: 1px solid rgba(255,255,255,0.1)
           font-size: 16px
           font-weight: 700
+          &.highLight
+            color: white
         .desc
           display: inline-block
           vertical-align: top
