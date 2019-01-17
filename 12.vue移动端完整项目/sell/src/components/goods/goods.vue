@@ -28,9 +28,9 @@
                   </div>
                 </div>
                 <div class="count-control">
-                  <div class="control icon-remove_circle_outline" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}" @click="loseFood(food)"></div>
+                  <div class="control icon-remove_circle_outline" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}" @click="loseFood(food,$event)"></div>
                   <div class="count" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}">{{food.count}}</div>
-                  <div class="control icon-add_circle" @click="addFood(food)"></div>
+                  <div class="control icon-add_circle" @click="addFood(food,$event)"></div>
                 </div>
               </li>
             </ul>
@@ -264,14 +264,18 @@
             let el = foodList[index];
             this.foodsScroll.scrollToElement(el,300);
           },
-          addFood(food) {
+          addFood(food,event) {
+            if (!event._constructed) {
+              return;
+            }
             let temp = 0;
             if (typeof food.count === 'undefined') {
               temp = 0;
             }else {
               temp = food.count;
             }
-            temp ++;
+            temp = temp + 1;
+            console.log(temp);
             this.$set(food, 'count', temp);
 //            if (this.selectFoods.includes(food)) {
 //              this.selectFoods.splice(this.selectFoods.findIndex(item => item.name === food.name), 1)
@@ -280,7 +284,10 @@
               this.selectFoods.push(food);
             }
           },
-          loseFood(food) {
+          loseFood(food,event) {
+            if (!event._constructed) {
+              return;
+            }
             food.count --;
           }
         },
