@@ -27,12 +27,17 @@
                     <span class="now">¥{{food.price}}</span><span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                   </div>
                 </div>
+                <div class="count-control">
+                  <div class="control icon-remove_circle_outline" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}" @click="loseFood(food)"></div>
+                  <div class="count" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}">{{food.count}}</div>
+                  <div class="control icon-add_circle" @click="addFood(food)"></div>
+                </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
-      <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+      <shopcart :selectFoods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
     </div>
 </template>
 <style lang="stylus" rel="stylesheet/stylus">
@@ -89,6 +94,7 @@
         border-1px(rgba(7,17,27,0.1))
         margin: 18px
         padding-bottom: 18px
+        position: relative;
         &:last-child
           border-none()
           margin-bottom: 0
@@ -123,6 +129,31 @@
               text-decoration: line-through
               font-size: 10px
               color: gray
+        .count-control
+          display: flex
+          position: absolute
+          right: 18px
+          bottom: 18px
+          .control
+            flex: 1
+            color: rgb(0,160,220)
+            font-size: 24px
+          .icon-remove_circle_outline
+            &.hide
+              display: none
+          .count
+            flex: 0 0 24px;
+            width: 24px
+            text-align: center
+            line-height: 24px
+            font-size: 10px
+            color: rgb(147,153,159)
+            &.hide
+              display: none
+
+
+
+
 </style>
 
 <script>
@@ -143,7 +174,8 @@
             return {
               goods: [],
               listHeight: [],
-              scrollY: 0
+              scrollY: 0,
+              selectFoods: []
             }
         },
       computed: {
@@ -200,7 +232,8 @@
 
             this.foodsScroll = new BScroll(this.$refs.foodsWrapper,{
               // 1.先能实时检测滚动的位置
-              probeType: 3
+              probeType: 3,
+              click: true
             });
 
             // 2.在实现监听位置
@@ -230,6 +263,25 @@
             let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
             let el = foodList[index];
             this.foodsScroll.scrollToElement(el,300);
+          },
+          addFood(food) {
+            let temp = 0;
+            if (typeof food.count === 'undefined') {
+              temp = 0;
+            }else {
+              temp = food.count;
+            }
+            temp ++;
+            this.$set(food, 'count', temp);
+//            if (this.selectFoods.includes(food)) {
+//              this.selectFoods.splice(this.selectFoods.findIndex(item => item.name === food.name), 1)
+//            }
+            if (!this.selectFoods.includes(food)) {
+              this.selectFoods.push(food);
+            }
+          },
+          loseFood(food) {
+            food.count --;
           }
         },
         components: {
