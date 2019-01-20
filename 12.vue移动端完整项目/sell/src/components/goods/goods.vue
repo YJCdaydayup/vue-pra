@@ -27,17 +27,20 @@
                     <span class="now">¥{{food.price}}</span><span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                   </div>
                 </div>
-                <div class="count-control">
-                  <div class="control icon-remove_circle_outline" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}" @click="loseFood(food,$event)"></div>
-                  <div class="count" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}">{{food.count}}</div>
-                  <div class="control icon-add_circle" @click="addFood(food,$event)"></div>
+                <!--<div class="count-control">-->
+                  <!--<div class="control icon-remove_circle_outline" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}" @click="loseFood(food,$event)"></div>-->
+                  <!--<div class="count" :class="{'hide': food.count == 0 || typeof food.count == 'undefined'}">{{food.count}}</div>-->
+                  <!--<div class="control icon-add_circle" @click="addFood(food,$event)"></div>-->
+                <!--</div>-->
+                <div class="cartcontrol-wrapper">
+                  <cartcontrol @cart-add="cartAdd" :food="food"></cartcontrol>
                 </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
-      <shopcart :selectFoods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+      <shopcart ref="shopcart" :selectFoods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
     </div>
 </template>
 <style lang="stylus" rel="stylesheet/stylus">
@@ -129,27 +132,10 @@
               text-decoration: line-through
               font-size: 10px
               color: gray
-        .count-control
-          display: flex
+        .cartcontrol-wrapper
           position: absolute
-          right: 18px
-          bottom: 18px
-          .control
-            flex: 1
-            color: rgb(0,160,220)
-            font-size: 24px
-          .icon-remove_circle_outline
-            &.hide
-              display: none
-          .count
-            flex: 0 0 24px;
-            width: 24px
-            text-align: center
-            line-height: 24px
-            font-size: 10px
-            color: rgb(147,153,159)
-            &.hide
-              display: none
+          right: 0
+          bottom: 8px
 
 
 
@@ -161,6 +147,7 @@
     import BScroll from 'better-scroll'
     import icon from './../icon/icon.vue'
     import shopcart from './../shopcart/shopcart.vue'
+    import cartcontrol from './../cartcontrol/cartcontrol.vue'
 
     const ERR_OK =0;
 
@@ -174,8 +161,7 @@
             return {
               goods: [],
               listHeight: [],
-              scrollY: 0,
-              selectFoods: []
+              scrollY: 0
             }
         },
       computed: {
@@ -193,18 +179,26 @@
                 if (menuList.length > 0) {
                   menuItemHeight = menuList[0].clientHeight;
                 }
-
                 // 往上滑动时，需要将隐藏的栏显示出来
                 let el = menuList[i];
                 this.menuScroll.scrollToElement(el,500);
-
-
-
                 return i;
               }
             }
             return 0;
-          }
+          },
+        selectFoods() {
+          let foods = [];
+          // 由于子组件改变了food，会导致父组件重新计算所有的foods，有count就加进来了
+          this.goods.forEach((good) => {
+            good.foods.forEach((food)=>{
+              if (food.count) {
+                foods.push(food);
+              }
+            })
+          })
+          return foods;
+        }
       },
         created() {
           this.classMap = ['decrease','discount','special','invoice','guarantee'];
@@ -225,12 +219,12 @@
         },
         methods: {
           _initScroll() {
-            this.menuScroll = new BScroll(this.$refs.menuWrapper,{
+            this.menuScroll = new BScroll(this.$refs.menuWrapper, {
               click: true,
               probeType: 3
             });
 
-            this.foodsScroll = new BScroll(this.$refs.foodsWrapper,{
+            this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
               // 1.先能实时检测滚动的位置
               probeType: 3,
               click: true
@@ -247,9 +241,9 @@
           },
           _calculateHeight() {
             let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
-            let height =0;
+            let height = 0;
             this.listHeight.push(height);
-            for (let i=0;i<foodList.length;i++) {
+            for (let i = 0; i < foodList.length; i++) {
               let item = foodList[i];
               height += item.clientHeight;
               this.listHeight.push(height);
@@ -262,38 +256,19 @@
             }
             let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
             let el = foodList[index];
-            this.foodsScroll.scrollToElement(el,300);
+            this.foodsScroll.scrollToElement(el, 300);
           },
-          addFood(food,event) {
-            if (!event._constructed) {
-              return;
-            }
-            let temp = 0;
-            if (typeof food.count === 'undefined') {
-              temp = 0;
-            }else {
-              temp = food.count;
-            }
-            temp = temp + 1;
-            console.log(temp);
-            this.$set(food, 'count', temp);
-//            if (this.selectFoods.includes(food)) {
-//              this.selectFoods.splice(this.selectFoods.findIndex(item => item.name === food.name), 1)
-//            }
-            if (!this.selectFoods.includes(food)) {
-              this.selectFoods.push(food);
-            }
-          },
-          loseFood(food,event) {
-            if (!event._constructed) {
-              return;
-            }
-            food.count --;
+          cartAdd(el) {
+            // 异步执行下落动画
+            this.$nextTick(()=>{
+              this.$refs.shopcart.drop(el);
+            })
           }
-        },
+      },
         components: {
           icon,
-          shopcart
+          shopcart,
+          cartcontrol
         }
     }
 </script>
