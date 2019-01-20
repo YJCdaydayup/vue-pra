@@ -13,7 +13,7 @@
           <li v-for="item in goods" class="food-list food-list-hook">
             <h1 class="title">{{item.name}}</h1>
             <ul>
-              <li v-for="food in item.foods" class="food-item border-1px">
+              <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
                 <div class="icon">
                   <img width="57px" height="57px" :src="food.icon" alt="">
                 </div>
@@ -41,6 +41,7 @@
         </ul>
       </div>
       <shopcart ref="shopcart" :selectFoods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+      <food ref="food" :food="selectedFood"></food>
     </div>
 </template>
 <style lang="stylus" rel="stylesheet/stylus">
@@ -148,6 +149,7 @@
     import icon from './../icon/icon.vue'
     import shopcart from './../shopcart/shopcart.vue'
     import cartcontrol from './../cartcontrol/cartcontrol.vue'
+    import food from './../food/food.vue'
 
     const ERR_OK =0;
 
@@ -161,7 +163,8 @@
             return {
               goods: [],
               listHeight: [],
-              scrollY: 0
+              scrollY: 0,
+              selectedFood: {}
             }
         },
       computed: {
@@ -263,12 +266,20 @@
             this.$nextTick(()=>{
               this.$refs.shopcart.drop(el);
             })
+          },
+          selectFood(food,event) {
+            if (!event._constructed) {
+              return;
+            }
+            this.selectedFood = food;
+            this.$refs.food.show();
           }
       },
         components: {
           icon,
           shopcart,
-          cartcontrol
+          cartcontrol,
+          food
         }
     }
 </script>
