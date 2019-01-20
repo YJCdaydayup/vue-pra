@@ -71,5 +71,10 @@
 2.组件里面定义的任何标签，如果写它的定位是position:absolute时，这个相对的就是这个组件
 3.使用emit派发事件时可以:this.$emit('cart-add',event.target),父组件要@cart-add=“addCart”;,但定义ref时，不要加-，摇动ref=“listContent”
 4.父组件要让子组件执行子组件的方法，可以先通过ref找到子组件，然后调用其方法:this.$refs.shopcart.drop(el);
+5.让一个标签同时执行多个动画可以用一个wrapper包裹住，wrapper执行一个动画，inner执行另一个动画
+
+
+第八节课
+1.组件最外面的div设置成display:absolute,代表相对于它的父组件，要设置成相对于屏幕就是fixed，组件里面的子div设置成display:absolute,如果上一级找不到relative，就是直接相对于当前组件(无论父组件display是什么)。
 
 

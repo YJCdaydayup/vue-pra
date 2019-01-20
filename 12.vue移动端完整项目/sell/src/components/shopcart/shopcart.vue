@@ -145,8 +145,6 @@
           &.enough
             background-color: #00b43c
             color: #fff
-
-
     .ball-container
       position: fixed
       .ball
@@ -215,6 +213,7 @@
 
 
     .list-mask
+      -webkit-backdrop-filter: blur(10px)
       position: fixed
       top: 0
       left: 0
