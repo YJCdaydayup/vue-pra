@@ -61,9 +61,9 @@
 4.当处理列表中的列表时，每个li的绑定处理就从数据对象入手，改变对象的某个属性值来改变dom的class，当对象不包含某个属性时，可以动态的添加属性，但要通过this.$set(food,'count',1)来给food对象添加属性count，并赋值为1，这样这个count就自动加入了数据绑定。
 5.定义组件的时候，先想好这个组件需要什么参数，然后再组件里面直接利用这个参数编写组件即可，后面在导入组件的时候在考虑如何把数据传递进去
 6.定义的小组件，在大组件中引用后，最好在外层包装一个wrapper用于定位
-7.定义动画，请看增加foog按钮组件里面的用法:现在外层定义一个transition，然后给最外层的class添加初始类，&.move-enter,&.move-leave-to定义初始状态，并在最外层组件里面直接写transition:all 0.4s linear,对于继续定义子组件的动画，就在各个动画class下加字组件的class，子组件的transition要自己写自己的，动画效果可以结合@keyframes动画实现更为复杂的效果
+7.定义动画，请看增加food按钮组件里面的用法:现在外层定义一个transition，然后给最外层的class添加初始类，&.move-enter,&.move-leave-to定义初始状态，并在最外层组件里面直接写transition:all 0.4s linear,对于继续定义子组件的动画，就在各个动画class下加子组件的class，子组件的transition要自己写自己的，动画效果可以结合@keyframes动画实现更为复杂的效果
 8.Vue中的动画只在v-if v-show v-for时才会触发
-9.通过ref=“inner-hook”来获取dom时的class，都用hook命名好些
+9.通过class=“inner-hook”来获取dom时的class，都用hook命名好些
 
 
 第七节课
@@ -84,5 +84,10 @@
         left: 0
         width: 100%
         height: 100%
-5.
+5.对于动画，如果通过改变父标签的v-show来控制子标签的动画时，一定要给父标签一个transition，不然会由于父标签的突兀隐藏造成子标签的突兀隐藏而看不到子标签的动画效果
+6.vue动画与@keyframes同用时，@keyframes默认动画就按照正常的原有的用法使用，但是消失时的@keyframes动画就要写在&.move-leave-to下面
+
+
+第九节课
+1.@click事件中传递dom对象可以直接传递$event过去，不能拼错
 
