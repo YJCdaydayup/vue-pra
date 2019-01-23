@@ -35,7 +35,7 @@
         <split></split>
         <div class="rating">
           <h1 class="title">商品评价</h1>
-          <ratingselect></ratingselect>
+          <ratingselect :desc="desc" :ratings="food.ratings" :only-content="onlyContent" :select-type="selectType"></ratingselect>
         </div>
       </div>
     </div>
@@ -143,9 +143,21 @@
         font-size: 12px
         color: rgb(77,85,93)
 
+    .rating
+      padding-top: 18px
+      .title
+        line-height: 14px
+        margin-left: 18px
+        font-size: 14px
+        color: rgb(7,17,27)
 </style>
 
 <script>
+
+
+    const POSITIVR = 0;
+    const NEGATIVE = 1;
+    const ALL = 2;
 
     import BScroll from 'better-scroll'
     import cartcontrol from './../cartcontrol/cartcontrol.vue'
@@ -160,7 +172,14 @@
         },
         data() {
             return {
-              showFlag: false
+              showFlag: false,
+              selectType: ALL,
+              onlyContent: true,
+              desc: {
+                all: '全部',
+                positive: '推荐',
+                negative: '吐槽'
+              }
             }
         },
         mounted() {
@@ -171,6 +190,11 @@
         methods: {
           show() {
             this.showFlag = true;
+
+            // 保持初始化
+            this.selectType = ALL;
+            this.onlyContent = true;
+
             // 在哪里出现在哪里调用，记得要用refresh
             this.$nextTick(()=>{
               if (this.scroll) {
