@@ -125,13 +125,9 @@
         this.$emit('ratingtype-select', type);
       },
       toggleContent(event) {
-        alert('123456')
         if (!event._constructed) {
           return;
         }
-
-        alert('123')
-
         this.$emit('content-toggle');
       }
     }

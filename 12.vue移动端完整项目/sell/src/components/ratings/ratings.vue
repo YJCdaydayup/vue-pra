@@ -1,5 +1,5 @@
 <template>
-  <div class="ratings">
+  <div class="ratings" ref="ratingsWrapper">
     <div class="ratings-content">
       <div class="overview">
         <div class="overview-left">
@@ -20,7 +20,7 @@
           </div>
           <div class="delivery-wrapper">
             <span class="title">送达时间</span>
-            <span class="delivery">{{seller.deliveryTime+'分钟'}}</span>
+            <span class="delivery">{{seller.deliveryTime + '分钟'}}</span>
           </div>
         </div>
       </div>
@@ -29,22 +29,25 @@
                     :only-content="onlyContent" :select-type="selectType"></ratingselect>
       <div class="rating-wrapper">
         <ul>
-          <li v-for="rating in ratings" class="rating-item">
+          <li v-show="needShow(rating.rateType,rating.text)" v-for="rating in ratings" class="rating-item">
             <div class="avatar">
-              <img :src="rating.avatar" alt="">
+              <img :src="rating.avatar" width="28" height="28">
             </div>
             <div class="content">
               <h1 class="name">{{rating.username}}</h1>
               <div class="star-wrapper">
-                <star :size="24" :score="rating.score"></star>
+                <star class="star" :size="24" :score="rating.score"></star>
                 <span class="delivery" v-show="rating.deliveryTime">
-                {{rating.deliveryTime}}
+                {{rating.deliveryTime}}分钟送达
               </span>
               </div>
               <p class="text">{{rating.text}}</p>
-              <div class="command" v-show="rating.recommend.length">
-                <span class="icon_thumb_up"></span>
-                <span v-for="item in rating.recommend"></span>
+              <div class="command">
+                <span class="icon"
+                      :class="{'icon-thumb_down': rating.rateType==1,'icon-thumb_up': rating.rateType==0}"></span>
+                <span v-for="item in rating.recommend" class="item">
+                  {{item}}
+                </span>
               </div>
             </div>
           </li>
@@ -132,6 +135,71 @@
             color: rgb(147, 153, 159)
             margin-left: 12px
 
+    .rating-wrapper
+      padding: 0 18px
+      .rating-item
+        display: flex
+        padding: 18px 0
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+        .avatar
+          padding-right: 12px
+          img
+            border-radius: 50%
+        .content
+          flex: 1
+          .name
+            font-size: 10px
+            color: rgb(7, 17, 27)
+            line-height: 12px
+            margin-bottom: 4px
+          .star-wrapper
+            margin-bottom: 6px
+            .star
+              display: inline-block
+              vertical-align: top
+            .delivery
+              display: inline-block
+              vertical-align: top
+              font-size: 10px
+              line-height: 12px
+              font-weight: 200
+              color: rgb(147, 153, 159)
+
+          .text
+            margin-bottom: 8px
+            font-size: 12px
+            color: rgb(7, 17, 27)
+            line-height: 18px
+
+          .command
+            font-size: 0
+            .icon
+              font-size: 12px
+              color: rgb(0, 160, 220)
+              display: inline-block
+              vertical-align: top
+              margin-top: 3px
+              &.icon-thumb_up
+                font-size: 12px
+              &.icon-thumb_down
+                font-size: 12px
+            .item
+              display: inline-block
+              vertical-align: top
+              margin-left: 8px
+              font-size: 9px
+              padding: 0 6px
+              line-height: 16px
+              margin-bottom: 3px
+              border: 1px solid rgba(7, 17, 27, 0.1)
+              border-radius: 2px
+              background-color: #fff
+              color: rgb(147, 153, 159)
+              text-align: center
+              width: 60px
+              white-space: nowrap
+              overflow: hidden
+              text-overflow: ellipsis
 
 
 </style>
@@ -141,8 +209,11 @@
   import star from './../star/star.vue'
   import split from './../split/split.vue'
   import ratingselect from './../ratingselect/ratingselect.vue'
+  import BScroll from 'better-scroll'
 
 
+  const POSITIVE = 0
+  const NEGATIVE = 1
   const ALL = 2;
   const ERR_OK = 0
 
@@ -162,24 +233,49 @@
       }
     },
     created() {
-      this.$http.get('/api/ratings').then((res)=>{
+      this.$http.get('/api/ratings').then((res) => {
         let data = res.data;
         if (data.errno === ERR_OK) {
           this.ratings = data.data;
-          console.log(this.ratings)
+          if (!this.scroll) {
+            this.$nextTick(() => {
+              this.scroll = new BScroll(this.$refs.ratingsWrapper, {
+                click: true
+              });
+            })
+          }
         }
       })
     },
+    computed: {},
     methods: {
       toggleContent() {
-        alert('1234')
         this.onlyContent = !this.onlyContent;
-//        this.$nextTick(()=> {
-//          this.scroll.refresh()
-//        })
+        this.$nextTick(() => {
+          this.scroll.refresh()
+        })
       },
-      ratingtypeSelect() {
-
+      ratingtypeSelect(type, event) {
+        this.selectType = type;
+        this.$nextTick(() => {
+          this.scroll.refresh()
+        })
+      },
+      needShow(type, text) {
+        if (this.onlyContent && !text) {
+          return false;
+        }else {
+          if (this.selectType === ALL) {
+            return true;
+          }
+          if (this.selectType === POSITIVE) {
+            return type === POSITIVE;
+          }
+          if (this.selectType === NEGATIVE) {
+            return type === NEGATIVE;
+          }
+        }
+        return false;
       }
     },
     components: {
