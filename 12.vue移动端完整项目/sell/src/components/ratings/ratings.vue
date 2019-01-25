@@ -24,6 +24,32 @@
           </div>
         </div>
       </div>
+      <split></split>
+      <ratingselect :ratings="ratings" @content-toggle="toggleContent" @ratingtype-select="ratingtypeSelect"
+                    :only-content="onlyContent" :select-type="selectType"></ratingselect>
+      <div class="rating-wrapper">
+        <ul>
+          <li v-for="rating in ratings" class="rating-item">
+            <div class="avatar">
+              <img :src="rating.avatar" alt="">
+            </div>
+            <div class="content">
+              <h1 class="name">{{rating.username}}</h1>
+              <div class="star-wrapper">
+                <star :size="24" :score="rating.score"></star>
+                <span class="delivery" v-show="rating.deliveryTime">
+                {{rating.deliveryTime}}
+              </span>
+              </div>
+              <p class="text">{{rating.text}}</p>
+              <div class="command" v-show="rating.recommend.length">
+                <span class="icon_thumb_up"></span>
+                <span v-for="item in rating.recommend"></span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -113,6 +139,12 @@
 <script>
 
   import star from './../star/star.vue'
+  import split from './../split/split.vue'
+  import ratingselect from './../ratingselect/ratingselect.vue'
+
+
+  const ALL = 2;
+  const ERR_OK = 0
 
   export default {
     props: {
@@ -122,11 +154,38 @@
     },
     data() {
       return {
-        msg: "hello vue"
+        msg: "hello vue",
+        showFlag: false,
+        selectType: ALL,
+        onlyContent: false,
+        ratings: []
+      }
+    },
+    created() {
+      this.$http.get('/api/ratings').then((res)=>{
+        let data = res.data;
+        if (data.errno === ERR_OK) {
+          this.ratings = data.data;
+          console.log(this.ratings)
+        }
+      })
+    },
+    methods: {
+      toggleContent() {
+        alert('1234')
+        this.onlyContent = !this.onlyContent;
+//        this.$nextTick(()=> {
+//          this.scroll.refresh()
+//        })
+      },
+      ratingtypeSelect() {
+
       }
     },
     components: {
-      star
+      star,
+      split,
+      ratingselect
     }
   }
 </script>
