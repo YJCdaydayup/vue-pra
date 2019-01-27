@@ -12,13 +12,16 @@
         <router-link class="tab-link" to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 
   import Header from './header/header.vue'
+  import {urlParse} from './../common/js/util'
 
   const ERR_OK = 0
 
@@ -26,18 +29,25 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      seller: {}
+      seller: {
+        id: (()=>{
+          let queryParam = urlParse()
+          console.log(queryParam);
+          return queryParam.id;
+        })()
+      }
     }
   },
   components: {
     'v-header': Header
   },
   created() {
-    this.$http.get('/api/seller').then((res)=>{
+    this.$http.get('/api/seller?id=' + this.seller.id).then((res)=>{
       res = res.data;
       if (res.errno === ERR_OK) {
         console.log(res.data);
-        this.seller = res.data;
+        this.seller = Object.assign({}, res.data,{id: this.seller.id});
+        console.log(this.seller);
       }
     })
   },

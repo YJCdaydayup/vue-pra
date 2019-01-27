@@ -232,6 +232,7 @@
   import split from './../split/split.vue'
   import BScroll from 'better-scroll'
   import icon from './../icon/icon.vue'
+  import {saveToLocal, loadFromLocal} from './../../common/js/store'
 
   export default {
     props: {
@@ -242,7 +243,9 @@
     data() {
       return {
         msg: "hello vue",
-        favorite: false
+        favorite: (()=>{
+          return loadFromLocal(this.seller.id,'favorite',false)
+        })()
       }
     },
     computed: {
@@ -269,6 +272,7 @@
           return;
         }
         this.favorite = !this.favorite;
+        saveToLocal(this.seller.id,'favorite',this.favorite);
       },
       _initScroll() {
         if (!this.scroll) {

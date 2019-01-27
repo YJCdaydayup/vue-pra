@@ -102,3 +102,10 @@
 1.创建better-scroll的时间很重要，一般选在数据请求回调后或者监听到属性传递过来后，watch: {seller(new,old) {this.$nextTick(()=>{new BScroll(…)})}}，如果滚动不了，检查是否在this.$nextTick里面，参考seller组件中BScroll的用法
 2.white-space:nowrap横向超过时不被折行
 3.使用better-scroll创建横向滚动的时候，需要在数据拿到后通过计算给中间那层div或ul重新赋予狂宽度，否则默认就是父标签的宽度，务必记住重新计算宽度。
+4.在data里面定义属性时，如果这个属性是对象，可以在对象里面通过立即执行匿名函数来赋予对象某个key的默认值
+5.也可以给一般属性，通过立即执行函数来赋值，如localstorage缓存收藏状态
+6.<keep-alive>route-view</keep-alive>，来保证这个组件状态不刷新
+
+
+
+
