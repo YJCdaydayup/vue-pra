@@ -96,3 +96,9 @@
 5.对于只有两种状态的切换，就在父标签中添加一个:class="{on: onlyContent}"进行绑定切换即可
 6.对于v-for中遍历时，需要从数组中拿某个属性进行判断而选择class时，就用:class="{'icon_thumb_up':rating.rateType==1,'icon_thumb_down':rating.rateType==2}"
 7.对v-for遍历生成的li进行筛选时，可以使用v-show="func(type,text)",定义的这个函数，会当这个函数实现里面的某个全局变量变化时自动调用返回bool来控制每个li的显示
+
+
+第十节课
+1.创建better-scroll的时间很重要，一般选在数据请求回调后或者监听到属性传递过来后，watch: {seller(new,old) {this.$nextTick(()=>{new BScroll(…)})}}，如果滚动不了，检查是否在this.$nextTick里面，参考seller组件中BScroll的用法
+2.white-space:nowrap横向超过时不被折行
+3.使用better-scroll创建横向滚动的时候，需要在数据拿到后通过计算给中间那层div或ul重新赋予狂宽度，否则默认就是父标签的宽度，务必记住重新计算宽度。
