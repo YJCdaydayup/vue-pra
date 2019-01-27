@@ -49,6 +49,7 @@
                   {{item}}
                 </span>
               </div>
+              <div class="time">{{rating.rateTime | formatDate}}</div>
             </div>
           </li>
         </ul>
@@ -147,6 +148,7 @@
             border-radius: 50%
         .content
           flex: 1
+          position: relative
           .name
             font-size: 10px
             color: rgb(7, 17, 27)
@@ -164,13 +166,11 @@
               line-height: 12px
               font-weight: 200
               color: rgb(147, 153, 159)
-
           .text
             margin-bottom: 8px
             font-size: 12px
             color: rgb(7, 17, 27)
             line-height: 18px
-
           .command
             font-size: 0
             .icon
@@ -201,7 +201,14 @@
               overflow: hidden
               text-overflow: ellipsis
 
-
+          .time
+            position: absolute
+            right: 0
+            top: 0
+            font-size: 10px
+            font-weight: 200
+            color: rgb(147, 153, 159)
+            line-height: 12px
 </style>
 
 <script>
@@ -210,7 +217,7 @@
   import split from './../split/split.vue'
   import ratingselect from './../ratingselect/ratingselect.vue'
   import BScroll from 'better-scroll'
-
+  import {formatDate} from './../../common/js/date'
 
   const POSITIVE = 0
   const NEGATIVE = 1
@@ -221,6 +228,12 @@
     props: {
       seller: {
         type: Object
+      }
+    },
+    filters: {
+      formatDate(time) {
+        let date = new Date(time);
+        return formatDate(date, 'yyyy-MM-dd hh:mm')
       }
     },
     data() {
@@ -264,7 +277,7 @@
       needShow(type, text) {
         if (this.onlyContent && !text) {
           return false;
-        }else {
+        } else {
           if (this.selectType === ALL) {
             return true;
           }
