@@ -1,0 +1,11 @@
+第一节课
+1.RN环境配置: 
+添加读写权限: sudo chown -R `whoami` /usr/local`
+或sudo chown 777 /usr/local
+或 macos 10.11有一个rootless防止恶意程序的最后防线，将这个权限关闭
+1)将电脑重启按住CMD+R进入恢复模式
+2）打开终端输入:$csrutil disable 关闭Rootless，$csrutil enable打开Rootless
+
+2.安卓的环境安装:安装JDK环境 下载andriod stutio并配置 下载安卓虚拟机和模拟器 安装eclipse(这个先不安装)
+  补充安装:apache服务器(先不安装)，初始化第一个RN项目
+ 
