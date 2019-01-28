@@ -1,7 +1,7 @@
 <template>
   <div class="page-box">
     <div class="anione-wrapper">
-      <anithree></anithree>
+      <anifour></anifour>
     </div>
   </div>
 </template>
@@ -12,9 +12,7 @@
 
 <script>
 
-  import anione from './anione/anione.vue'
-  import anitwo from './anione/anitwo.vue'
-  import anithree from './anione/anithree.vue'
+  import anifour from './anione/anifour.vue'
 
 export default {
 
@@ -24,9 +22,7 @@ export default {
     }
   },
   components: {
-    anione,
-    anitwo,
-    anithree
+    anifour
   }
 }
 </script>
