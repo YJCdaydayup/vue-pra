@@ -21,4 +21,12 @@
   cnpm i —-save react-native@0.XX.X
 4.安装自动设别语法的插件，在资料里面
 
- 
+
+第三节课
+1.AppRegistry注册 StyleSheet样式 Text文本组件 View视图组件 Image组件
+2.Text才能承载文字，且Text组件也是一个块级的，其他的组件不行
+3.flexDirection, 默认是column，纵向排布，row是横向排布，如果是横向排不下，就从左到右排布
+
+
+
+
