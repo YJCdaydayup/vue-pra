@@ -9,3 +9,16 @@
 2.安卓的环境安装:安装JDK环境 下载andriod stutio并配置 下载安卓虚拟机和模拟器 安装eclipse(这个先不安装)
   补充安装:apache服务器(先不安装)，初始化第一个RN项目
  
+
+第二节课
+1.启动本地的服务器: react-native start,然后打开xcode，cmd+r
+2.目录结构:
+3.管理RN版本:
+  查看版本: react-native -v
+  更新版本: cnpm update -g react-native
+  查询网上最新RN版本 cnpm info react-native
+  升级或降级RN版本
+  cnpm i —-save react-native@0.XX.X
+4.安装自动设别语法的插件，在资料里面
+
+ 
