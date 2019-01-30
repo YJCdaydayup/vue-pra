@@ -20,6 +20,8 @@
   升级或降级RN版本
   cnpm i —-save react-native@0.XX.X
 4.安装自动设别语法的插件，在资料里面
+5.安装最新版本0.45及以上版本会需要下载boost等几个第三方库编译，这些在国内很难下载成功，导致无法运行，建议下载地版本0.44.3
+  $ react-native init MyApp --version 0.44.3
 
 
 第三节课
