@@ -28,6 +28,12 @@
 1.AppRegistry注册 StyleSheet样式 Text文本组件 View视图组件 Image组件
 2.Text才能承载文字，且Text组件也是一个块级的，其他的组件不行
 3.flexDirection, 默认是column，纵向排布，row是横向排布，如果是横向排不下，就从左到右排布
+4.tab键多了就用shift+tab回来即可
+5.在RN中定义的View在原生上就是一个UIView，可以通过Xcode看层次结构
+6.超出了主轴方向的宽度，默认会超出不显示且不会换行，可以定义:flexWrap: ‘wrap’,默认是nowrap
+7.alignItems：是作用在侧轴上的，统一管理子组件，当它设定都，如果单独需要设置子组件在侧轴上的布局，就在具体子组件上使用itemSelf: ’flex-start’设置自己在侧轴方向的布局，覆盖父标签的设置，默认为auto，表示继承
+
+
 
 
 

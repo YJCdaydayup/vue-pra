@@ -4,30 +4,68 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TextInput
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    TextInput
 } from 'react-native';
 
-
-export default class Test2 extends Component {
-  render() {
-    return (
-        <View></View>
-    )
-  }
+export default class Test3 extends Component {
+    render() {
+        return (
+            <View style={styles2.container}>
+                <Text style={{backgroundColor: 'red',height: 60,flex: 5,
+                    alignSelf: 'center'
+                }}>No. one</Text>
+                <Text style={{backgroundColor: 'orange',height: 70,flex: 2}}>NO. two</Text>
+                <Text style={{backgroundColor: 'green', height: 80,flex: 2}}>NO. two</Text>
+                <Text style={{backgroundColor: 'blue',height: 90,flex: 1}}>NO. three</Text>
+            </View>
+        )
+    }
 }
 
-const styles = StyleSheet.create({
+const styles2 = StyleSheet.create({
+    container: {
+        backgroundColor: 'purple',
+        marginTop: 64,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    }
+})
 
-});
-
-// flex布局练习
-// export default class Test1 extends Component {
+// export class Test2 extends Component {
+//     render() {
+//         return (
+//             <View style={styles.container}>
+//                 <Text style={{backgroundColor: 'red', width: 200}}>No. one</Text>
+//                 <Text style={{backgroundColor: 'orange', width: 50}}>NO. two</Text>
+//                 <Text style={{backgroundColor: 'green', width: 80}}>NO. two</Text>
+//                 <Text style={{backgroundColor: 'blue', width: 50}}>NO. three</Text>
+//                 <Text style={{backgroundColor: 'yellow', width: 60}}>NO. four</Text>
+//             </View>
+//         )
+//     }
+// }
+//
+// const styles = StyleSheet.create({
+//     container: {
+//         backgroundColor: 'purple',
+//         flex: 1,
+//         marginTop: 25,
+//         flexDirection: 'row',
+//         // justifyContent: 'space-around',
+//         alignItems: 'center',
+//         flexWrap: 'wrap'
+//     }
+// });
+//
+//
+// // export default class Test1 extends Component {
 //   render() {
 //     return (
 //         <View style={myStyle.container}>
@@ -79,4 +117,4 @@ const styles = StyleSheet.create({
 // }
 
 // 输出到iOS App里面
-AppRegistry.registerComponent('MyApp', () => Test2);
+AppRegistry.registerComponent('MyApp', () => Test3);
