@@ -16,27 +16,56 @@ import {
 export default class Test3 extends Component {
     render() {
         return (
-            <View style={styles2.container}>
-                <Text style={{backgroundColor: 'red',height: 60,flex: 5,
-                    alignSelf: 'center'
-                }}>No. one</Text>
-                <Text style={{backgroundColor: 'orange',height: 70,flex: 2}}>NO. two</Text>
-                <Text style={{backgroundColor: 'green', height: 80,flex: 2}}>NO. two</Text>
-                <Text style={{backgroundColor: 'blue',height: 90,flex: 1}}>NO. three</Text>
+            <View style={styles.container}>
+                <Text numberOfLines={3} style={styles.textStyle}>我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！我是文字！</Text>
             </View>
         )
     }
 }
 
-const styles2 = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'purple',
-        marginTop: 64,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
+        flex: 1,
+        backgroundColor: '#f5fcff',
+        justifyContent: 'center',
         alignItems: 'center'
+    },
+    textStyle: {
+        backgroundColor: 'red',
+        textAlign: 'center',
+        // height: 150,
+        // lineHeight: 150
+        // textAlignVertical: 'center'  只适合安卓，不适合iOS
+        paddingTop: 75,
+        paddingBottom: 75
     }
-})
+});
+
+
+// export default class Test3 extends Component {
+//     render() {
+//         return (
+//             <View style={styles2.container}>
+//                 <Text style={{backgroundColor: 'red',height: 60,flex: 5,
+//                     alignSelf: 'center'
+//                 }}>No. one</Text>
+//                 <Text style={{backgroundColor: 'orange',height: 70,flex: 2}}>NO. two</Text>
+//                 <Text style={{backgroundColor: 'green', height: 80,flex: 2}}>NO. two</Text>
+//                 <Text style={{backgroundColor: 'blue',height: 90,flex: 1}}>NO. three</Text>
+//             </View>
+//         )
+//     }
+// }
+
+// const styles2 = StyleSheet.create({
+//     container: {
+//         backgroundColor: 'purple',
+//         marginTop: 64,
+//         flexDirection: 'row',
+//         justifyContent: 'flex-start',
+//         alignItems: 'center'
+//     }
+// })
 
 // export class Test2 extends Component {
 //     render() {
