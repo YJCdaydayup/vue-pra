@@ -60,6 +60,9 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
 
+  *
+    -webkit-text-size-adjust: none
+
   .ratings
     position: absolute
     top: 174px

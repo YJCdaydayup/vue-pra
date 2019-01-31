@@ -1,0 +1,32 @@
+.box {
+  margin: 100px auto;
+  width: 50%;
+  height: 200px;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  top: 15px;
+  left: 20px;
+}
+
+.img img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: top;
+}

@@ -1,0 +1,29 @@
+1.要启动离线缓存，应在网页上标记如下，不标记就不会缓存该网页，除非将该网页添加到清单文件中
+  <html manifest="example.appcache">
+  ...
+  </html>
+
+2.manifest里面的路径可以是绝对路径或相对路径，绝对路径必须与相应的网络应用同源
+3.简单的清单格式:
+  CACHE MANIFEST
+  index.html
+  stylesheet.css
+  images/logo.png
+  scrips/main.js
+  需要注意: 网站的缓存数据量不能超过5M，如果是Chrome网上应用店的应用，可以使用unlimitedStorage取消限制，如果清单文件或其中指定的资源无法下载，就继续使用原缓存
+4.应用缓存只在manifest清单文件发生更改时才会更新
+5.清单文件包含三个部分:
+  CACHE部分:缓存的文件
+  NETWORK部分:需要连接服务器的白名单，不实用缓存
+  FALLBACK:用于无法访问资源的时的后备网页
+6.用户在清楚了浏览器缓存或者清单文件本身经过了修改或者应用缓存通过编程方式进行了更新(前提是清单文件更改)
+7.编程方式更新缓存:
+  1)调用applicationCache.updated()，尝试更新用户缓存(前提是清单文件更改)，当applicationCache.status处于UPDATAEREADY状态时，调用applicationCache.swapCache()更新缓存
+  2）注意：此流程检查是否有更新，下载指定更新内容，填充应用缓存，还需两次加载才能提供新的内容，第一次是获取新的缓存，第二次是刷新网页内容，可以设置监听器，监听网页加载时的updateready事件
+  
+8.整体流程:
+  1)判断是否要更新manifest，如果需要更新，就更新manifest，在下一次刷新页面的时候进行资源重新请求，第三次采用本地最新缓存
+  2.更新manifest比较好的方式是更新任意一处#开头的注释即可
+  
+  
+	
