@@ -37,7 +37,10 @@
 1.跑到真机上，需要将localhost改成本机的IP地址，将bundleId改成自己需要的，单元测试的team也需要设置
 2.摇一摇就出现了调试栏目
 3.flex布局子布局内部的子组件，Text组件里面文字不属于子组件
-4.
+4.Image组件的resizeMode:’contain’ 等比例缩放，stretch拉伸，cover默认
+
+第五节课:
+1.设置Text组件的背景图片，可以将Text组件包含在Image组件里面，设置Text组件的背景颜色为透明:backgroundColor: ‘transparent’即可,相当于将Image作为一个父控件，里面包含Text子控件
 
 
 
