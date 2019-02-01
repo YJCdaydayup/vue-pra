@@ -25,31 +25,17 @@ import {
 } from 'react-native';
 
 export default class MyApp extends Component {
-
-    getMoviesFromApiAsync() {
-        return fetch("https://facebook.github.io/react-native/movies.json").then((res)=>{
-            return res.json();
-        }).then((res)=>{
-            Alert.alert(JSON.stringify(res.movies));
-        })
-    }
-
-    componentDidMount() {
-        this.getMoviesFromApiAsync();
-    }
-
     render() {
         return (
             <View style={styles.container}>
-                <SectionList
-                    sections={[
-                        {title: 'D', data: ['Devin']},
-                        {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-                    ]}
-                    renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-                    renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-                    keyExtractor={(item, index) => index}
-                />
+                <Image
+                    style={styles.imageStyle}
+                    source={{url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3478746384,2289037560&fm=27&gp=0.jpg'}}
+                >
+                    <View style={styles.contentStyle}></View>
+                </Image>
+                <View style={{width: 100,height: 100,backgroundColor: 'red'}}></View>
+                <Text numberOfLines={1} style={styles.textStyle}>我是文本，哈哈，嘿嘿，嘻嘻</Text>
             </View>
         )
     }
@@ -58,28 +44,85 @@ export default class MyApp extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 70,
-        backgroundColor: 'rgba(29,29,29,0.1)',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: 'red'
+        backgroundColor: "#f5f4f3",
+        justifyContent: 'space-between',
+        flexDirection: 'row'
     },
-    sectionHeader: {
-        paddingTop: 10,
-        paddingLeft: 30,
-        paddingRight: 10,
-        paddingBottom: 10,
-        fontSize: 14,
-        fontWeight: 'bold',
-        backgroundColor: 'rgba(247,247,247,1.0)',
+    imageStyle: {
+        flex: 1,
+        resizeMode: 'stretch',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    contentStyle: {
+        width: 200,
+        height: 200,
+        backgroundColor: 'orange',
+        borderRadius: 20
+    },
+    textStyle: {
         color: 'red',
-    },
-    item: {
-        padding: 10,
-        fontSize: 18,
-        height: 44
+        flex: 1,
+        paddingTop: 100
     }
 });
+
+// export default class MyApp extends Component {
+//
+//     getMoviesFromApiAsync() {
+//         return fetch("https://facebook.github.io/react-native/movies.json").then((res)=>{
+//             return res.json();
+//         }).then((res)=>{
+//             Alert.alert(JSON.stringify(res.movies));
+//         })
+//     }
+//
+//     componentDidMount() {
+//         this.getMoviesFromApiAsync();
+//     }
+//
+//     render() {
+//         return (
+//             <View style={styles.container}>
+//                 <SectionList
+//                     sections={[
+//                         {title: 'D', data: ['Devin']},
+//                         {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+//                     ]}
+//                     renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+//                     renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+//                     keyExtractor={(item, index) => index}
+//                 />
+//             </View>
+//         )
+//     }
+// }
+//
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         marginTop: 70,
+//         backgroundColor: 'rgba(29,29,29,0.1)',
+//         borderWidth: 1,
+//         borderStyle: 'solid',
+//         borderColor: 'red'
+//     },
+//     sectionHeader: {
+//         paddingTop: 10,
+//         paddingLeft: 30,
+//         paddingRight: 10,
+//         paddingBottom: 10,
+//         fontSize: 14,
+//         fontWeight: 'bold',
+//         backgroundColor: 'rgba(247,247,247,1.0)',
+//         color: 'red',
+//     },
+//     item: {
+//         padding: 10,
+//         fontSize: 18,
+//         height: 44
+//     }
+// });
 
 AppRegistry.registerComponent('MyApp', () => MyApp);
 

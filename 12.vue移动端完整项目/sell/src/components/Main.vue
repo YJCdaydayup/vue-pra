@@ -11,6 +11,9 @@
       <div class="tab-item">
         <router-link class="tab-link" to="/seller">商家</router-link>
       </div>
+      <div class="tab-item">
+        <router-link class="tab-link" to="/other">其他</router-link>
+      </div>
     </div>
     <keep-alive>
       <router-view :seller="seller" v-if="$route.meta.keepAlive"></router-view>

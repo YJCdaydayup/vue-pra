@@ -106,6 +106,9 @@
 5.也可以给一般属性，通过立即执行函数来赋值，如localstorage缓存收藏状态
 6.<keep-alive>route-view</keep-alive>，来保证这个组件状态不刷新
 
+第十一节课
+1.对于已知宽高的div来说，要将里面的子标签进行垂直居中，方法有两种，第一种是采用主轴和侧轴的center处理，第二种是采用父标签display:table 里面搞一个子标准将所有子标签包裹里面，设置其的display:table-cell
+
 
 
 
