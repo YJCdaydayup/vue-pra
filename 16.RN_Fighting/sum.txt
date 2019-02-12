@@ -40,7 +40,11 @@
 4.Image组件的resizeMode:’contain’ 等比例缩放，stretch拉伸，cover默认
 
 第五节课:
-1.设置Text组件的背景图片，可以将Text组件包含在Image组件里面，设置Text组件的背景颜色为透明:backgroundColor: ‘transparent’即可,相当于将Image作为一个父控件，里面包含Text子控件
+1.设置Text组件的背景图片，可以将Text组件包含在Image组件里面，设置Text组件的背景颜色为透明:backgroundColor: ‘transparent’即可,相当于将Image作为一个父控件，里面包含Text子控件,Text组件的背景颜色默认和父控件的背景颜色相同
+2.当子控件没有设置宽度时，会默认继承父控件的宽度，设了宽度就按自己的宽度来
+3.调试: CMD+d然后选择Remote Debug JS，检查即可
+4.本地的文档数据，如JSON数据，可以直接require(‘/Data.json’)就获取到了
+5.在for循环中创建的组件需要加一个key={i}属性
 
 
 

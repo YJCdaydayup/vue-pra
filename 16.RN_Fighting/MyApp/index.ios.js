@@ -13,59 +13,71 @@ import {
     Text
 } from 'react-native';
 
+var Data = require('./Data.json');
+
+// 定义全局变量
+var Dimensions = require('Dimensions');
+var width = Dimensions.get('window').width;
+var cols = 3;
+var boxW = 100;
+var vMargin = (width - cols*boxW)/(cols + 1);
+var hMargin = 50;
+
 export default class Test3 extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>加载项目中的图片</Text>
-                <Image style={styles.imageStyle}
-                    source={require('./images/danjianbao.png')}
-                />
-                <Text>加载App中的图片</Text>
-                <Image
-                    source={{uri: 'shuangjianbao'}}
-                    style={styles.imageStyle}
-                />
-                <Text>加载网络图片</Text>
-                <Image
-                    style={styles.imageStyle}
-                    source={{uri: 'https://www.baidu.com/img/bd_logo1.png'}}
-                />
-                <Image
-                    source={{uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3365018759,2226705862&fm=27&gp=0.jpg'}}
-                    style={styles.image1Style}
-                >
-                    <Text style={styles.textStyle}>设置图片为背景</Text>
-                </Image>
+                <View style={styles.viewStyle}>
+                    {this.renderAllBaobao()}
+                </View>
             </View>
         )
+    }
+
+    // 获取View中所有的包包
+    renderAllBaobao() {
+        var images = [];
+        for (var i = 0; i < Data.length; i++) {
+            // 创建组件
+            var item = Data[i];
+            images.push(
+                <View
+                    key={i}
+                    style={styles.outViewStyle}
+                >
+                    <Image
+                        style={styles.imageStyle}
+                        source={{uri: item.icon}}
+                    />
+                    <Text>{item.name}</Text>
+                </View>
+            )
+        }
+        return images;
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#f5fcff'
+    },
+    viewStyle: {
+        flexDirection: 'row',
+        flexWrap: 'wrap'
     },
     imageStyle: {
         width: 80,
-        height: 80,
-        resizeMode: 'contain' // 等比例缩放
+        height: 80
     },
-    image1Style: {
-        width: 300,
-        height: 200,
-
-    },
-    textStyle: {
-        // paddingTop: 80,
-        // backgroundColor: 'rgba(0,0,0,0)'
-        backgroundColor: 'transparent',
-        marginTop: 100,
-        color: 'white',
-        fontSize: 30,
-        fontWeight:  'bold'
+    outViewStyle: {
+        backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: boxW,
+        height: boxW,
+        marginLeft: vMargin,
+        marginTop: hMargin
     }
 });
 
