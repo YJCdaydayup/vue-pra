@@ -1,5 +1,9 @@
 <template>
-    <div @click="show" class="box">{{message}}</div>
+    <div @click.prevent.stop="show" class="box">
+        {{message}}
+        <div class="part1"></div>
+        <div class="part2"></div>
+    </div>
 </template>
 
 <style>
