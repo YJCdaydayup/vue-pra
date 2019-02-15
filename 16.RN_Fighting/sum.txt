@@ -45,6 +45,16 @@
 3.调试: CMD+d然后选择Remote Debug JS，检查即可
 4.本地的文档数据，如JSON数据，可以直接require(‘/Data.json’)就获取到了
 5.在for循环中创建的组件需要加一个key={i}属性
+6.组件的所有属性都是用{}括起来的，字符串就是{‘字符串’}形式
+7.TextInput组件设置了多行显示，password效果就没有了
+8.iOS独有的属性在安卓上只是无效，不会报错
+9.定义新的组件js文件，使用commonJS语法，导入时使用require()
+
+第六节课
+1.TouchableOpacity包裹需要点击的组件，activeOpacity点击下去的透明度，0-1之间；
+2.onPress里面是需要回调的来执行其他方法的，一般采用ES6语法进行回调
+3.状态机state，里面可以放很多全局属性，当里面的值发生变化，就会触发刷新整个页面
+
 
 
 

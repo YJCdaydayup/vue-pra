@@ -9,75 +9,59 @@ import {
     AppRegistry,
     StyleSheet,
     View,
-    Image,
-    Text
+    Text,
+    TouchableOpacity,
+    AlertIOS
 } from 'react-native';
 
-var Data = require('./Data.json');
-
-// 定义全局变量
-var Dimensions = require('Dimensions');
-var width = Dimensions.get('window').width;
-var cols = 3;
-var boxW = 100;
-var vMargin = (width - cols*boxW)/(cols + 1);
-var hMargin = 50;
-
 export default class Test3 extends Component {
+
+    // 状态机
+    state = {
+        title: '默认值'
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.viewStyle}>
-                    {this.renderAllBaobao()}
-                </View>
+                <TouchableOpacity
+                    activeOpacity={0.1}
+                    onPress={()=> {
+                        this.click('点击')
+                    }}
+                    onPressIn={()=> {
+                        this.click('按下')
+                    }}
+                    onPressOut={()=> {
+                        this.click('抬起')
+                    }}
+                    onLongPress={()=> {
+                        this.click('长按')
+                    }}
+                >
+                    <View>
+                        <Text>{this.state.title}</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
 
-    // 获取View中所有的包包
-    renderAllBaobao() {
-        var images = [];
-        for (var i = 0; i < Data.length; i++) {
-            // 创建组件
-            var item = Data[i];
-            images.push(
-                <View
-                    key={i}
-                    style={styles.outViewStyle}
-                >
-                    <Image
-                        style={styles.imageStyle}
-                        source={{uri: item.icon}}
-                    />
-                    <Text>{item.name}</Text>
-                </View>
-            )
-        }
-        return images;
+    click(event) {
+        // console.log(e)
+        // AlertIOS.alert('来了')
+        this.setState({
+            title: event
+        })
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5fcff'
-    },
-    viewStyle: {
-        flexDirection: 'row',
-        flexWrap: 'wrap'
-    },
-    imageStyle: {
-        width: 80,
-        height: 80
-    },
-    outViewStyle: {
-        backgroundColor: 'red',
-        alignItems: 'center',
         justifyContent: 'center',
-        width: boxW,
-        height: boxW,
-        marginLeft: vMargin,
-        marginTop: hMargin
+        alignItems: 'center',
+        backgroundColor: '#f3f5f7'
     }
 });
 
