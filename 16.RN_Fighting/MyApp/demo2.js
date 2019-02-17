@@ -13,7 +13,7 @@ import {
     Text
 } from 'react-native';
 
-var Data = require('./Data.json');
+var Data = require('./data.json');
 
 // 定义全局变量
 var Dimensions = require('Dimensions');

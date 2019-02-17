@@ -53,7 +53,23 @@
 第六节课
 1.TouchableOpacity包裹需要点击的组件，activeOpacity点击下去的透明度，0-1之间；
 2.onPress里面是需要回调的来执行其他方法的，一般采用ES6语法进行回调
-3.状态机state，里面可以放很多全局属性，当里面的值发生变化，就会触发刷新整个页面
+3.状态机state，里面可以放很多全局属性，当里面的值发生变化，就会触发刷新整个页面,性能已经最优，虚拟DOM
+
+
+第七节课
+1.使用ES6的语法引入自定义的组件，在组件内部本身就有export default，所以可以不用module.exports，在页面里面就不要使用require引入了，而是可以用import引入，但需要加路径import Test from ‘./dome4’路径写对
+2.Props 属性，都是只读属性，只能外面传递进来，state 状态，每个组件有一个系统的setState方法来改变状态，而且刷新界面，调用的就是render函数
+3.componentWillMount页面即将出现时,render函数刷新UI，componentDidMount页面已经出来网络请求，componentWillUpdate状态机发生改变调用，不是生命周期方法，第一次不会调用
+4.class里面的方法都是对象方法，用this来调用，onPress时，需要走回调触发，全局函数不写在class里面，const btnClick=()=>{Alert.alert(‘来了’)}，在onPress里面不需要走回调，可以直接调用
+5.拿到虚拟DOM节点的方式和Vue是一样的，采用ref=“topView”和this.$refs.topView拿到
+6.状态机的定义就在类里面state={title: ‘默认值’}，只读属性props的定义 static defaultProps={age: 18}拿取的方式是this.props.age
+
+
+第八节课
+1.scrollView只有设置高度才能工作，且里面的手势都被scrollView吃了
+2.在工程中添加images文件夹，使用require来获取时只能获取静态的图片，因为require会在运行前提前加载进来了，如果真的要动态的加载本地图片，就放到项目xcode工程imagesets里面去
+3.通过uri获取的图片必须要给宽高，不然看不到
+
 
 
 
