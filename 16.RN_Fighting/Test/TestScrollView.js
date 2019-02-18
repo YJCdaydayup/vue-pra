@@ -24,17 +24,22 @@ export default class Test extends Component {
         currentPage: 0
     }
 
+    static defaultProps = {
+        duration: 1000
+    }
+
     render() {
         return (
             <View
                 style={styles.container}
             >
                 <ScrollView
+                    ref="scollView"
                     horizontal={true}
                     pagingEnabled={true}
                     showsHorizontalScrollIndicator={false}
 
-                    onMomentumScrollEnd={(e)=>{
+                    onMomentumScrollEnd={(e)=> {
                         this.onScrollAnimationEnds(e)
                     }}
                 >
@@ -49,28 +54,52 @@ export default class Test extends Component {
         );
     }
 
+    // UI出来了开启定时器
+    componentDidMount() {
+        // 开启定时器
+        this.startTimer();
+    }
+
+    startTimer() {
+        var scrollView = this.refs.scrollView;
+        var imgCount = ImgData.data.length;
+        setInterval(()=>{
+            var currentPage = 0;
+            if (this.state.currentPage +1 >= imgCount) {
+                currentPage = 0;
+            }else {
+                currentPage = this.state.currentPage + 1;
+            }
+            this.setState({
+                currentPage: currentPage
+            })
+
+        },this.props.duration);
+    }
+
     // 滚动完毕，写了就调用
     onScrollAnimationEnds(e) {
         console.log(e);
         // 拿到偏移量
-       let offsetX = e.nativeEvent.contentOffset.x;
+        let offsetX = e.nativeEvent.contentOffset.x;
         // 当前页数
-        let currentPage = Math.floor(offsetX/width);
+        let currentPage = Math.floor(offsetX / width);
         // 更新状态机,刷新UI
         this.setState({
             currentPage: currentPage
         })
+        console.log(e.nativeEvent);
     }
 
     renderPage() {
         var pageArr = [];
         var imgArr = ImgData.data;
         for (var i = 0; i < imgArr.length; i++) {
-            var style = i === this.state.currentPage? {color: 'orange'}: {color: '#fff'}
+            var style = i === this.state.currentPage ? {color: 'orange'} : {color: '#fff'}
             pageArr.push(
                 <Text
                     key={i}
-                    style={[{fontSize: 25},style]}
+                    style={[{fontSize: 25}, style]}
                 >&bull; </Text>
             )
         }
