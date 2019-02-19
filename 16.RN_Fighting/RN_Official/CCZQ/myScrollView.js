@@ -46,9 +46,27 @@ export default class Test1 extends Component {
                 </ScrollView>
                 <View style={styles.pageViewStyle}>
                     {this.renderSpotView()}
+                    <Text
+                        style={{
+                            position: 'absolute',
+                            left: 0,
+                            color: '#fff',
+                            paddingLeft: 5,
+                            letterSpacing: 1,
+                            fontWeight: 'bold'
+                        }}
+                        numberOfLines={1}
+                    >{this.getCurrentText()}</Text>
                 </View>
             </View>
         );
+    }
+
+    getCurrentText() {
+        var currentPage = this.state.currentPage,
+            imgData = ImgData.data,
+            title = imgData[currentPage].title;
+        return title;
     }
 
     beginDrag(e) {
