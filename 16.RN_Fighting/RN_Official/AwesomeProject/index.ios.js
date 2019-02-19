@@ -4,22 +4,20 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
 } from 'react-native';
 
-let LoginView = require('./loginView')
+import CCZQScrollView from './CCZQScrollView'
 
 export default class AwesomeProject extends Component {
-  render() {
-    return (
-      <LoginView/>
-    );
-  }
+    render() {
+        return (
+            <CCZQScrollView/>
+        );
+    }
 }
+
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);

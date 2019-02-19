@@ -66,9 +66,10 @@
 
 
 第八节课
-1.scrollView只有设置高度才能工作，且里面的手势都被scrollView吃了
+1.scrollView只有设置高度才能工作，一般不直接给scrollView设置高度，而是设置它的父空间的宽高，且里面的手势都被scrollView吃了
 2.在工程中添加images文件夹，使用require来获取时只能获取静态的图片，因为require会在运行前提前加载进来了，如果真的要动态的加载本地图片，就放到项目xcode工程imagesets里面去
 3.通过uri获取的图片必须要给宽高，不然看不到
+4.给某个组件添加动态样式和静态样式，可以使用style= i===0?{color: 'red'}: {color: 'orange'}; <View style={[{fontSize: 25},style]}></View>样式的设置就是以对象为单位，多个样式可以用数组[]括起来
 
 
 第九节课
