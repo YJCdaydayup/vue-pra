@@ -12,12 +12,12 @@ import {
   View
 } from 'react-native';
 
-import TestScrollView from './TestScrollView'
+import TestListView from './TestListView'
 
 export default class Test extends Component {
   render() {
     return (
-        <TestScrollView/>
+        <TestListView/>
     );
   }
 }

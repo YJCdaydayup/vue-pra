@@ -34,13 +34,21 @@ export default class Test extends Component {
                 style={styles.container}
             >
                 <ScrollView
-                    ref="scollView"
+                    ref="scrollView"
                     horizontal={true}
                     pagingEnabled={true}
                     showsHorizontalScrollIndicator={false}
 
                     onMomentumScrollEnd={(e)=> {
                         this.onScrollAnimationEnds(e)
+                    }}
+
+                    onScrollBeginDrag={(e)=>{
+                        this.scrollBeginDrag(e);
+                    }}
+
+                    onScrollEndDrag={(e)=>{
+                        this.scrollEndDrag(e);
                     }}
                 >
                     {this.renderAllChildImage()}
@@ -60,19 +68,35 @@ export default class Test extends Component {
         this.startTimer();
     }
 
+    scrollEndDrag(e) {
+        this.startTimer();
+    }
+
+    scrollBeginDrag(e) {
+        clearInterval(this.timer);
+    }
+
     startTimer() {
+        // setInterval里面的this是window，需要将this通过变量获取到再使用
+        var obj = this;
         var scrollView = this.refs.scrollView;
         var imgCount = ImgData.data.length;
-        setInterval(()=>{
+        this.timer = setInterval(()=>{
             var currentPage = 0;
-            if (this.state.currentPage +1 >= imgCount) {
+            if (obj.state.currentPage +1 >= imgCount) {
                 currentPage = 0;
             }else {
-                currentPage = this.state.currentPage + 1;
+                currentPage = obj.state.currentPage + 1;
             }
-            this.setState({
+            obj.setState({
                 currentPage: currentPage
             })
+            var offsetX = currentPage * width;
+            scrollView.scrollTo({
+                x: offsetX,
+                y: 0,
+                animated: true
+            });
 
         },this.props.duration);
     }
