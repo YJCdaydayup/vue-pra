@@ -77,6 +77,11 @@
 3.ListView自己设置宽高是无效的,默认宽高是填满父组件的剩余的宽高，即flex:1默认的，要改变ListView的宽高，必须改ListView添加一个View包裹起来，然后设置这个View的宽高
 
 
+第十节课
+1.RN中scrollView组件可以通过scrollTo({x:100,y:100,1000})定义偏移，但在js中，要实现动画偏移，可以先设置transition: all 0.5s,然后通过改变el.style来改变位置实现偏移；
+
+
+
 
 
 
