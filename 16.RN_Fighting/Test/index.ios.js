@@ -12,12 +12,12 @@ import {
   View
 } from 'react-native';
 
-import TestListView from './TestListView'
+import ListViewTest from './TestSectionView'
 
 export default class Test extends Component {
   render() {
     return (
-        <TestListView/>
+        <ListViewTest/>
     );
   }
 }

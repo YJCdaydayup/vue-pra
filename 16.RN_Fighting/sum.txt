@@ -74,11 +74,14 @@
 第九节课
 1.出现意想不到的错误，可以关闭服务重启试试
 2.ListView中的renderRow函数是一个function回调函数，可以使用{(rowData, sectionID, rowID, highlightRow)=>this.renderRow(rowData, sectionID, rowID, highlightRow)}也可以使用{this.renderRow}这样直接就把系统分配的参数默认全部拿到了
-3.ListView自己设置宽高是无效的,默认宽高是填满父组件的剩余的宽高，即flex:1默认的，要改变ListView的宽高，必须改ListView添加一个View包裹起来，然后设置这个View的宽高
+3.如更新了dataSource数据，每次重新调用cloneWithRows，如果用到了组，就调用cloneWithRowsAndSections方法
 
 
 第十节课
-1.RN中scrollView组件可以通过scrollTo({x:100,y:100,1000})定义偏移，但在js中，要实现动画偏移，可以先设置transition: all 0.5s,然后通过改变el.style来改变位置实现偏移；
+1.cloneWithRowsAndSection(dataBlob,sectionID，rowID),dataBlob是一个对象object，是每一组数据，包含当前组所有的cell信息和组头的信息,sectionID 哪一组，rowID哪一行
+2.getRowData(sectionID,rowID)获取哪一组那一行的数据
+3.getSectionHeaderData(sectionID)获取哪一组组头信息
+
 
 
 
