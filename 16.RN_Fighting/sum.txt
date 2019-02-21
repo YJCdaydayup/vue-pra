@@ -74,7 +74,7 @@
 第九节课
 1.出现意想不到的错误，可以关闭服务重启试试
 2.ListView中的renderRow函数是一个function回调函数，可以使用{(rowData, sectionID, rowID, highlightRow)=>this.renderRow(rowData, sectionID, rowID, highlightRow)}也可以使用{this.renderRow}这样直接就把系统分配的参数默认全部拿到了
-
+3.ListView自己设置宽高是无效的,默认宽高是填满父组件的剩余的宽高，即flex:1默认的，要改变ListView的宽高，必须改ListView添加一个View包裹起来，然后设置这个View的宽高
 
 
 

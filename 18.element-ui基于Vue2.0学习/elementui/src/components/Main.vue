@@ -4,6 +4,7 @@
     <router-link class="item" to='/layout'>布局</router-link>
     <router-link class="item" to="/container">布局容器</router-link>
     <router-link class="item" to="/form">表格相关组件</router-link>
+    <router-link class="item" to="/navMenue">导航菜单</router-link>
     <router-view></router-view>
   </div>
 </template>

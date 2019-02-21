@@ -5,6 +5,7 @@ import Animation from '../components/Animation.vue'
 import Layout from '../components/Layout.vue'
 import Container from './../components/Container.vue'
 import Form from './../components/Form.vue'
+import NavMenue from './../components/NavMenu.vue'
 
 Vue.use(Router)
 
@@ -31,6 +32,10 @@ export default new Router({
         {
           path: 'form',
           component: Form
+        },
+        {
+          path: 'navMenue',
+          component: NavMenue
         }
       ]
     }

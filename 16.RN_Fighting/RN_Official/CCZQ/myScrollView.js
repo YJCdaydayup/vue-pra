@@ -159,8 +159,7 @@ export default class Test1 extends Component {
 const styles = StyleSheet.create({
     container: {
         width: width,
-        height: 150,
-        marginTop: 200
+        height: 150
     },
     pageViewStyle: {
         width: width,

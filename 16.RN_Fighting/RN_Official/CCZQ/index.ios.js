@@ -12,13 +12,18 @@ import {
   View
 } from 'react-native';
 
+let Dimensions = require('Dimensions');
+let {width} = Dimensions.get('window')
+
 import TestScrollView from './myScrollView'
+import TestListView from './myListView'
 
 export default class CCZQ extends Component {
   render() {
     return (
       <View style={styles.container}>
         <TestScrollView/>
+        <TestListView/>
       </View>
     );
   }
