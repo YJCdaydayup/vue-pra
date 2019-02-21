@@ -45,8 +45,43 @@ export default class Test extends Component {
 
     render() {
         return (
-            <View></View>
+            <View style={styles.container}>
+                <View>
+                    <Text>这是汽车品牌展示</Text>
+                </View>
+                <ListView>
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderRow}
+                    renderSectionHeader={this.renderSectionHeader}
+                </ListView>
+            </View>
         );
+    }
+
+    renderSectionHeader(sectionData,sectionID) {
+        return (
+            <View>
+                <Text>{sectionData}</Text>
+            </View>
+        )
+    }
+
+    renderRow(rowData) {
+        return (
+            <TouchableOpacity
+                activeOpacity={0.6}
+            >
+                <View style={styles.rowStyle}>
+                    <Image
+                        source={{
+                            uri: rowData.icon
+                        }}
+                        style={styles.rowImageStyle}
+                    />
+                    <Text>{rowData.name}</Text>
+                </View>
+            </TouchableOpacity>
+        )
     }
 
     componentDidMount() {
@@ -55,7 +90,7 @@ export default class Test extends Component {
     }
 
     loadJson() {
-        var jsonData = car.data;
+        var jsonData = cars.data;
         // 定义数据源需要的变量
         var dataBlob = {},
             sectionIDs = [],
@@ -86,4 +121,15 @@ export default class Test extends Component {
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+
+    },
+    rowStyle: {
+
+    },
+    rowImageStyle: {
+        width: 70,
+        height: 70
+    }
+});
