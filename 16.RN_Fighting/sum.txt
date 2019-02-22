@@ -81,6 +81,7 @@
 1.cloneWithRowsAndSection(dataBlob,sectionID，rowID),dataBlob是一个对象object，是每一组数据，包含当前组所有的cell信息和组头的信息,sectionID 哪一组，rowID哪一行
 2.getRowData(sectionID,rowID)获取哪一组那一行的数据
 3.getSectionHeaderData(sectionID)获取哪一组组头信息
+4. getRowData，getSectionHeaderData两个函数中，参数固定是三个，分别是dataBlob，sectionID，rowID，所有的数据要处理到dataBlob对象中去，即dataBlob[sectionID]是组头信息对象，dataBlob[rowID]是cell信息对象，网络请求到数据后处理时也要注意rowIDs是一个二维数组
 
 
 
