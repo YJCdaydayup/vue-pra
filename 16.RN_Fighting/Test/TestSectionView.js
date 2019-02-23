@@ -14,10 +14,11 @@ import {
     View,
     ListView,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    AlertIOS
 } from 'react-native';
 
-let cars = require('./Car.json');
+let Cars = require('./Car.json');
 
 export default class Test extends Component {
     constructor(props) {
@@ -32,9 +33,9 @@ export default class Test extends Component {
         };
 
         this.state = {
-            dataSource: new ListView.dataSource(
+            dataSource: new ListView.DataSource(
                 {
-                    getSectionData: getSectionData,
+                    getSectionHeaderData: getSectionData,
                     getRowData: getRowData,
                     rowHasChanged: (r1, r2)=>r1 !== r2,
                     sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -46,23 +47,18 @@ export default class Test extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View>
-                    <Text>这是汽车品牌展示</Text>
-                </View>
-                <ListView>
+                <ListView
                     dataSource={this.state.dataSource}
                     renderRow={this.renderRow}
                     renderSectionHeader={this.renderSectionHeader}
-                </ListView>
+                />
             </View>
         );
     }
 
-    renderSectionHeader(sectionData,sectionID) {
+    renderSectionHeader(sectionData, sectionID) {
         return (
-            <View>
-                <Text>{sectixonData}</Text>
-            </View>
+            <View></View>
         )
     }
 
@@ -70,13 +66,14 @@ export default class Test extends Component {
         return (
             <TouchableOpacity
                 activeOpacity={0.6}
+                onPress={()=>{
+                    AlertIOS.alert('购买成功')
+                }}
             >
                 <View style={styles.rowStyle}>
                     <Image
-                        source={{
-                            uri: rowData.icon
-                        }}
                         style={styles.rowImageStyle}
+                        source={{uri: rowData.icon}}
                     />
                     <Text>{rowData.name}</Text>
                 </View>
@@ -90,12 +87,11 @@ export default class Test extends Component {
     }
 
     loadJson() {
-        var jsonData = cars.data;
+        var jsonData = Cars.data;
         // 定义数据源需要的变量
         var dataBlob = {},
             sectionIDs = [],
-            rowIDs = [], // 二维数组
-            cars = [];
+            rowIDs = []; // 二维数组
         // 遍历
         for (var i = 0; i < jsonData.length; i++) {
             // 组ID
@@ -103,7 +99,7 @@ export default class Test extends Component {
             // dataBlob
             dataBlob[i] = jsonData[i].title;
             // 取出这一组的所有车
-            cars = jsonData[i].cars;
+            let cars = jsonData[i].cars;
             rowIDs[i] = [];
             for (var j = 0; j < cars.length; j++) {
                 // i组j行
@@ -115,21 +111,22 @@ export default class Test extends Component {
         // 更新状态机
         this.setState({
             dataSource: this.state.dataSource.cloneWithRowsAndSections(
-                dataBlob,sectionIDs,rowIDs
+                dataBlob, sectionIDs, rowIDs
             )
         });
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-
-    },
+    container: {},
     rowStyle: {
-
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     rowImageStyle: {
         width: 70,
-        height: 70
+        height: 70,
+        borderRadius: 35
     }
 });
