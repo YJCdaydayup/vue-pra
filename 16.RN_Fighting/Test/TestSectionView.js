@@ -58,7 +58,9 @@ export default class Test extends Component {
 
     renderSectionHeader(sectionData, sectionID) {
         return (
-            <View></View>
+            <View>
+                <Text>{sectionData}</Text>
+            </View>
         )
     }
 
