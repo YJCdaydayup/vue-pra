@@ -84,6 +84,63 @@
 
 第十一节课
 1.每个TabbarItem下都有一个selected属性来控制这个Tbbar下的View的显示，可以每个TarbarItem都有，但是以最后一个为准；
+2.Navigator在react-native中已经被废弃了，但它的使用原理还是要清楚：
+  <Navigator
+    initialRoute={{component: FirstView,name=“Sara”}} // 参数最好写在这里，好跳转的时候统一管理参数
+    renderScene={(route,navigator)=>{return (
+	<FirstView name={route.Sara} title=“我是标题” navigator={navigator}/>
+	或:由于这个参数route就是上面的initialRoute，所以可以写成:
+	<route.component title=“我是传递参数title” navigator={navigator}/>
+    )}}
+   />
+3.组件之间传递参数分两种情况，第一种是页面中添加组件时，将页面的数据传递给组件做显示，就直接<CCZQView title=“this.state.title”>，CCZQView组件内部可以通过this.props.title拿取，第二种是页面跳转时传递：先导入页面，然后this.props.navigator.push({
+   component: SecondView,
+   name: “我是任意的参数，key不一定要是name”
+}),这样push就意味着往initialRoute里面添加了一个路由，然后会再次调用renderScene，如果renderScene里面写死了某个View就会一直加载这个View陷入死循环了，所以renderScene={{route,navigator}=>{return (
+  <route.component title=“参数1” navigator={navigator}>
+)}}
+4.函数是谁调用的，那么函数里面的this就是谁，如果要在调用的函数里不管哪里都拿到的是全局this，可以在调用时进行一次动态绑定，onPress={this.viewClick.bind(this)}即可
+5.Navigator的转场动画，configureScene={()=>Navigator.SceneConfigs.FloatFromRight}写在Navigator标签里面
+6.initialRoute定义第一个根视图的时候，参数最好统一放在一个对象里面，params: {}:
+  <Navigator
+    initialRoute: {{
+       component: FirstView,
+       params: {
+ 	 title: ‘第一个视图’，
+ 	 haha: ‘哈哈’，
+ 	 hehe: ‘呵呵’
+       }
+    }}
+    renderScene={(route,navigator)=>{
+	<route.component {…route.params} nav={navigator} // 在这里结构参数，就不用写传递参数了
+    }}
+    configureScene={()=>{	
+	Navigator.SceneConfigs.FloatFromBottom
+    }}
+  />
+7.https://blog.csdn.net/theVicTory/article/details/80059632 查看最新导航和tabbar的文档
+
+第十二节课
+1.pop回去的方式是：this.props.navigation.pop();
+2.逆向传值,
+  思路1: params传值时把第一个View的this传递过去，pop时让this调用自己的某个方法改变状态机的某个值刷新界面；
+  思路2: push时传递一个方法过去，然后pop时调用这个方法：
+	viewClick() {
+	   component: SecondView,
+	   params: {
+	     title: ‘这是第二个界面’，
+	     getUserName: function(user) {
+		this.setState({
+		   userName: user
+		})
+	     }.bind(this) // 这里一定要绑定this，意味着调用这个getUserName方法里面的所有this就是原始的this
+	   }
+	}
+   pop时，if(this.props.getUserName) {this.props.getUserName} {this.props.getUserName(‘全世界最帅的男神 ’)}
+3.回调函数非0即真，这个和iOS是一样的，如上
+
+第十二节课
+1.
 
 
 

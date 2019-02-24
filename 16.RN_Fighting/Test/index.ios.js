@@ -12,12 +12,10 @@ import {
   View
 } from 'react-native';
 
-import HKTabbar from './HankTabbar'
-
 export default class Test extends Component {
   render() {
     return (
-        <HKTabbar/>
+        <View></View>
     );
   }
 }
