@@ -12,12 +12,12 @@ import {
   View
 } from 'react-native';
 
-import ListViewTest from './TestSectionView'
+import HKTabbar from './HankTabbar'
 
 export default class Test extends Component {
   render() {
     return (
-        <ListViewTest/>
+        <HKTabbar/>
     );
   }
 }
