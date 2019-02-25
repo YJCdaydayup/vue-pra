@@ -140,7 +140,8 @@
 3.回调函数非0即真，这个和iOS是一样的，如上
 
 第十二节课
-1.
+1.在RN的项目里面添加原生代码，名字要定义成带有manager的，比如CCZQViewManager，然后引入requireNativeComponent, 在引入let CCZQView = requireNativeComponent('CCZQView', null)，就可以直接使用CCZQView；
+2.在原生里面返回的View的样式必须在js文件里面写，而且原生里面的View和对应的js里面的组件的View没有布局上的联系
 
 
 
