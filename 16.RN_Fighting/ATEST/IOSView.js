@@ -15,12 +15,27 @@ import {
 } from 'react-native';
 
 let {requireNativeComponent} = require('react-native');
-let HKView = requireNativeComponent('HKView', null);
+// 第二个参数尽量就是当前类IOSView类
+let HKView = requireNativeComponent('HKViewOne', IOSView);
+
+import {NativeModules} from 'react-native'
+var HKViewOne = NativeModules.HKViewOne;
+HKViewOne.changeTitle('我来了');
 
 export default class IOSView extends Component {
     render() {
         return (
-            <HKView/>
+            <HKView style={{
+                flex: 1
+            }}>
+                <Text
+                    style={{
+                        width: 100,
+                        height: 100,
+                        backgroundColor: 'green'
+                    }}
+                >123</Text>
+            </HKView>
         );
     }
 }
@@ -28,8 +43,6 @@ export default class IOSView extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F5FCFF'
     }
 });

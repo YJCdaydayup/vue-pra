@@ -8,6 +8,6 @@
 
 #import <React/RCTViewManager.h>
 
-@interface HKViewManager : RCTViewManager
+@interface HKViewOne : RCTViewManager
 
 @end

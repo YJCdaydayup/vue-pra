@@ -142,6 +142,13 @@
 第十二节课
 1.在RN的项目里面添加原生代码，名字要定义成带有manager的，比如CCZQViewManager，然后引入requireNativeComponent, 在引入let CCZQView = requireNativeComponent('CCZQView', null)，就可以直接使用CCZQView；
 2.在原生里面返回的View的样式必须在js文件里面写，而且原生里面的View和对应的js里面的组件的View没有布局上的联系
+3.iOS项目上的原生只能在iOS上，安卓的也是要按照andriod的写
+4.定义原生的类带有Manager，如HankViewManager，在RN里面就要去掉manager，不带有manager，就可以写全名
+
+第十三节课
+1.js es6(es2015-2017) react flexbox AsynStorage本地存储 Fetch网络请求 Native Modules封装原生组件供RN调用 
+2.第三方库: react-native-check-box复选框 react-native-easy-toast react-native-splash-screen启动屏 react-native-htmlview渲染Html react-native-scrollable-tab-view标签切换 react-native-sortable-listview列表 react-native-tab-navigator底部导航 react-native-parallax-scroll-view视差滚动 自定义NavigationBar 自定义MoreMenu 自定义启动屏
+3.在已经写好的项目里面添加RN模块，最好是重新建立RN工程添加原生模块进行开发
 
 
 

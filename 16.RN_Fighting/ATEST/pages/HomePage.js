@@ -1,4 +1,7 @@
 /**
+ * Created by yangli on 2019/2/26.
+ */
+/**
  * Sample React Native App
  * https://github.com/facebook/react-native
  * @flow
@@ -6,18 +9,17 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View
 } from 'react-native';
 
-import IOSView from './IOSView'
-
-export default class ATEST extends Component {
+export default class HomePage extends Component {
     render() {
         return (
-            <IOSView/>
+            <View>
+                <Text>123</Text>
+            </View>
         );
     }
 }
@@ -40,5 +42,3 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
 });
-
-AppRegistry.registerComponent('ATEST', () => ATEST);
