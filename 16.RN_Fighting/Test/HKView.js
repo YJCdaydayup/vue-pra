@@ -28,6 +28,11 @@ export default class HKView extends React.Component {
                         />
                     )
                 }}
+                tabBarPosition="bottom"
+                // 切换效果停止滚动
+                scrollWithoutAnimation={true}
+                onChangeTab={(index)=>{}}
+
             >
 
             </ScrollableTabView>

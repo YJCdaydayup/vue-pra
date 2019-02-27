@@ -1,6 +1,9 @@
 /**
  * Created by yangli on 2019/2/27.
  */
+
+import {PixelRatio} from 'react-native'
+
 export default class HKTabBar extends Component {
     static propTypes = {
         goToPage: React.PropTypes.func, // 跳转到tab的方法
@@ -40,8 +43,9 @@ export default class HKTabBar extends Component {
                 key={i}
             >
                 <View style={styles.tabItem}>
+                    {/*拿到当前设备的缩放标准*/}
                     <Image
-                        source={{uri: this.props.tabIconNames[i]}}
+                        source={{uri: this.props.tabIconNames[i],scale: PixelRatio.get()}}
                         style={{
                             width: 30,
                             height: 30
