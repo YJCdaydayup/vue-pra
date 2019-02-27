@@ -1,7 +1,4 @@
 /**
- * Created by yangli on 2019/2/26.
- */
-/**
  * Sample React Native App
  * https://github.com/facebook/react-native
  * @flow
@@ -14,12 +11,23 @@ import {
     View
 } from 'react-native';
 
-export default class HomePage extends Component {
+
+// import
+//     ScrollableTabView,{
+//     DefaultTabBar,
+//     ScrollableTabBar
+// } from 'react-native-scrollable-tab-view'
+
+// 引入模块
+import HKHome from './HKHome'
+import HKMine from './HKMine'
+import HKFind from './HKFind'
+import HKMessage from './HKMessage'
+
+export default class HKMain extends Component {
     render() {
         return (
-            <View>
-                <Text>123</Text>
-            </View>
+           <View></View>
         );
     }
 }

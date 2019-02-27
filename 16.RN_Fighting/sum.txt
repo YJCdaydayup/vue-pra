@@ -150,6 +150,15 @@
 2.第三方库: react-native-check-box复选框 react-native-easy-toast react-native-splash-screen启动屏 react-native-htmlview渲染Html react-native-scrollable-tab-view标签切换 react-native-sortable-listview列表 react-native-tab-navigator底部导航 react-native-parallax-scroll-view视差滚动 自定义NavigationBar 自定义MoreMenu 自定义启动屏
 3.在已经写好的项目里面添加RN模块，最好是重新建立RN工程添加原生模块进行开发
 
+第十四节课
+1.进npm官网学习react-navitve-scrollable-tab-view的使用
+2.onScroll={(postion)=>{}} 触发的次数不多，精准度非常高
+3.onChangeTab回调函数 lock={true} renderScrollTabView回调函数
+4.renderTabBar={()=>{return (<CustomTabbar/>)}}进行tabbar的自定义
+5.自定义HKTabBar非item，参考文档
+6.传递的属性this.props一般是前面写好后面直接通过this.props.navigation调用，也可以提前定义好:
+  static propTypes = {goToPage: React.PropTypes.array}
+
 
 
 
