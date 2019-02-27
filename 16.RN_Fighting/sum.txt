@@ -142,13 +142,41 @@
 第十二节课
 1.在RN的项目里面添加原生代码，名字要定义成带有manager的，比如CCZQViewManager，然后引入requireNativeComponent, 在引入let CCZQView = requireNativeComponent('CCZQView', null)，就可以直接使用CCZQView；
 2.在原生里面返回的View的样式必须在js文件里面写，而且原生里面的View和对应的js里面的组件的View没有布局上的联系
+<<<<<<< Updated upstream
 3.iOS项目上的原生只能在iOS上，安卓的也是要按照andriod的写
 4.定义原生的类带有Manager，如HankViewManager，在RN里面就要去掉manager，不带有manager，就可以写全名
 
 第十三节课
 1.js es6(es2015-2017) react flexbox AsynStorage本地存储 Fetch网络请求 Native Modules封装原生组件供RN调用 
 2.第三方库: react-native-check-box复选框 react-native-easy-toast react-native-splash-screen启动屏 react-native-htmlview渲染Html react-native-scrollable-tab-view标签切换 react-native-sortable-listview列表 react-native-tab-navigator底部导航 react-native-parallax-scroll-view视差滚动 自定义NavigationBar 自定义MoreMenu 自定义启动屏
-3.在已经写好的项目里面添加RN模块，最好是重新建立RN工程添加原生模块进行开发
+4.在已经写好的项目里面添加RN模块，最好是重新建立RN工程添加原生模块进行开发
+
+5.react-navigation必须在最新的RN版本上使用，使用前要依赖yarn add react-navigation和yarn add react-native-gesture-handler，而且要react-native link一下才行
+6.每个在CreateStackNavigator中添加的页面，默认在它的props里面带有navigation属性，跳转的时候，navigate('Detail')会判断这个栈里面没有这个页面才进行跳转，有的话就没反应，push('Detail')会一直跳转新的页面，goBack()里面不带参数返回上一页面，popToTop()返回最上面的页面
+7.this.props.navigation.navigator('Home')没有这个跳转到这个页面，有，就返回到这个页面，不能返回和跳转到和自己route相同的页面，用于返回到栈里面的某个页面
+8.let {navigation} = this.props; 拿取对象某个属性的另一种办法建议使用避免太多变量名，一般在刷新UI的时候render函数里面拿取传递参数，navigation.getParam('itemID','默认值')
+9.通过打印navigation对象可以看到state里面params对象下有要传递的参数和页面的key值
+10.static navigationOptions可以是直接的字面量对象也可以是函数返回对象:
+  static navigationOptions = ((navigation)=>{
+     return  {
+	title: navigation.getParam("otherParam",'默认值')
+     }
+  })
+11.修改导航参数，this.props.navigation.setParams({     itemID: 16888888888	  }),就修改了props，也会刷新UI
+12.改变页面中导航文字为图片或者自定义的其他组件，可以在navigationOptions里面设置headerTitle: <LogoTitle title="传递过去的参数"/>
+13.也可以修改左右导航按钮: headerLeft和headerRight，
+14.可以单独在页面自己的js文件里面写导航的样式(优先级最高)，也可以在navigation.js里面统一写导航的样式:
+   createStackNavigator({
+      “Home”: {
+	screen: 'HomePage',
+	navigationOptions: {(navigation)=>{return {}}}
+      }
+   },{
+      initialRouteName: 'Home',
+      defaultNavigationOptions: ((options)=>{
+	headerLeft: <BackButton navigation={options.navigation}/>
+      })
+   })，每个页面导航的样式也可以单独在这个js文件里设置
 
 
 
