@@ -142,7 +142,6 @@
 第十二节课
 1.在RN的项目里面添加原生代码，名字要定义成带有manager的，比如CCZQViewManager，然后引入requireNativeComponent, 在引入let CCZQView = requireNativeComponent('CCZQView', null)，就可以直接使用CCZQView；
 2.在原生里面返回的View的样式必须在js文件里面写，而且原生里面的View和对应的js里面的组件的View没有布局上的联系
-<<<<<<< Updated upstream
 3.iOS项目上的原生只能在iOS上，安卓的也是要按照andriod的写
 4.定义原生的类带有Manager，如HankViewManager，在RN里面就要去掉manager，不带有manager，就可以写全名
 
@@ -157,9 +156,9 @@
 8.let {navigation} = this.props; 拿取对象某个属性的另一种办法建议使用避免太多变量名，一般在刷新UI的时候render函数里面拿取传递参数，navigation.getParam('itemID','默认值')
 9.通过打印navigation对象可以看到state里面params对象下有要传递的参数和页面的key值
 10.static navigationOptions可以是直接的字面量对象也可以是函数返回对象:
-  static navigationOptions = ((navigation)=>{
+  static navigationOptions = ((options)=>{
      return  {
-	title: navigation.getParam("otherParam",'默认值')
+	title: options.navigation.getParam("otherParam",'默认值')
      }
   })
 11.修改导航参数，this.props.navigation.setParams({     itemID: 16888888888	  }),就修改了props，也会刷新UI
@@ -177,6 +176,10 @@
 	headerLeft: <BackButton navigation={options.navigation}/>
       })
    })，每个页面导航的样式也可以单独在这个js文件里设置
+15.回调函数中需要全部参数时用((options)=>{})，需要options里面的navigation参数时，用(({navigation})=>{})即可，有{}就是获取参数对象中的某个属性值
+16.RN的模态化跳转是在StackNavigator里面嵌套一个StackNavigator，设置{mode: 'modal',headerMode: 'none'}，跳转依然是push和goBack函数
+
+
 
 第十四节课
 1.进npm官网学习react-navitve-scrollable-tab-view的使用
@@ -187,6 +190,11 @@
 6.传递的属性this.props一般是前面写好后面直接通过this.props.navigation调用，也可以提前定义好:
   static propTypes = {goToPage: React.PropTypes.array}
 
+第十五节课
+1.使用TouchableOpacity进行包装后，使用flex布局时，要考虑这个TouchableOpacity组件也是有大小的，如果不设置他的大小，而直接设置他的子组件的flex:1,那么子元素就没有大小不可见了
+2.FlatList中的renderItem方法对data中的数据做了两侧封装，数据源中的每个数据是放在rowData下的item中，{id: 1,item:{解析的数据每个具体对象}}
+3.使用系统的组件react-navigation构建整个项目框架,界面page都是定义在tab里面，通用tab样式也在tab里面，tabicon可以在页面里面再设置
+4.使用系统组件react-navigation构建项目框架，跳转的界面必须定义在nav里面，且nav包含tab，再有container包装后输出到入口文件
 
 
 

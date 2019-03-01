@@ -1,18 +1,19 @@
 import {createStackNavigator} from "react-navigation";
 import HomePage from './../page/HomePage'
 import DetailPage from './../page/DetailScreen'
+import Modal from './../page/ModalPage'
 import React from 'react'
 
 import LeftButton from './../NavHeaderComponent/LeftButton'
 
-export const AppNavigator = createStackNavigator(
+export const MainStack = createStackNavigator(
     {
         Home: {
             screen: HomePage
         },
         Detail: {
             screen: DetailPage
-        },
+        }
     },
     {
         initialRouteName: 'Home',
@@ -29,5 +30,20 @@ export const AppNavigator = createStackNavigator(
                 headerLeft: <LeftButton navigation={options.navigation}/>
             }
         })
+    }
+);
+
+export const RootStack = createStackNavigator(
+    {
+        Mains: {
+            screen: MainStack,
+        },
+        MyModal: {
+            screen: Modal,
+        },
+    },
+    {
+        mode: 'modal',
+        headerMode: 'none',
     }
 );

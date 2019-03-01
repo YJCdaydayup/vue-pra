@@ -4,24 +4,23 @@ import LeftButton from './../NavHeaderComponent/LeftButton'
 
 export default class DetailScreen extends Component {
 
-    static navigationOptions = (({navigation}) => {
-        console.log(navigation)
+    static navigationOptions = ((options) => {
         return {
-            title: navigation.getParam('otherParam', '默认值')
+            // title: options.navigation.getParam('otherParam', '默认值'),
             // title: String(navigation.state.params.itemID),
-            // headerLeft: <LeftButton navigation={navigation}/>
-            // headerStyle: {
-            //     backgroundColor: 'orange'
-            // },
-            // headerTintColor: 'red',
-            // headerTitleStyle: {
-            //     color: 'green'
-            // }
+            headerLeft: <LeftButton navigation={options.navigation}/>,
+            headerStyle: {
+                backgroundColor: 'orange'
+            },
+            headerTintColor: 'red',
+            headerTitleStyle: {
+                color: 'green'
+            }
         }
     })
 
     render() {
-        const {navigation} = this.props;
+        const navigation = this.props.navigation;
         let itemID = navigation.getParam('itemID', 168);
         let otherParam = navigation.getParam('otherParam', '默认值');
 
@@ -64,10 +63,17 @@ export default class DetailScreen extends Component {
                 <Button
                     title="修改标题"
                     onPress={() => {
-                        navigation.setParams({
+                        this.props.navigation.setParams({
                             'itemID': 16888888888
                         })
                     }}
+                />
+                <Button
+                    onPress={()=>{
+                        this.props.navigation.push('MyModal')
+                    }}
+                    title="Modal"
+                    color="purple"
                 />
             </View>
         );

@@ -7,40 +7,38 @@ import {
     AlertIOS
 } from 'react-native';
 
-import LogoTitle from './../NavHeaderComponent/LogoTitle'
-import LeftButton from './../NavHeaderComponent/LeftButton'
-
 export default class HomePage extends Component {
 
     // 有单独自己的导航样式就用自己的，没有就用通用的样式
-    static navigationOptions = {
-        title: 'Home',
-        // headerTitle: <LogoTitle title="123"/>,
-        headerLeft: null
-        // headerStyle: {
-        //     backgroundColor: 'orange'
-        // },
-        // headerTintColor: 'red',
-        // headerTitleStyle: {
-        //     color: 'green'
-        // }
-    };
+    static navigationOptions = ((options) => {
+        return {
+            title: 'Home',
+            headerLeft: (
+                <Button
+                    onPress={()=>{
+                        options.navigation.push('MyModal')
+                    }}
+                    title="Modal"
+                    color="purple"
+                />
+            )
+        }
+    });
 
     render() {
         return (
             <View style={styles.container}>
                 <Text>Home Page</Text>
                 <Button
-                    title="我是按钮"
-                    onPress={()=>{
-                        this.props.navigation.navigate('Detail',{
-                            itemID: 88,
-                            otherParam: 'anything you want here!!!'
-                        });
-                    }}
+                    title="跳转到详情"
+                    onPress={this.pushAction.bind(this)}
                 />
             </View>
         );
+    }
+
+    pushAction() {
+        this.props.navigation.push('Detail');
     }
 }
 
@@ -49,19 +47,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-    headerStyle: {
-        backgroundColor: 'orange'
+        backgroundColor: '#F5FCFF'
     }
 });

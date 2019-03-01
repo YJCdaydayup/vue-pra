@@ -1,6 +1,8 @@
 package com.nav_react_native_demo;
 
 import com.facebook.react.ReactActivity;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 
 public class MainActivity extends ReactActivity {
 
