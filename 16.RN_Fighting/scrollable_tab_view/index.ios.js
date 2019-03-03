@@ -30,10 +30,7 @@ export default class scrollable_tab_view extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderRow}
-                />
+
             </View>
         );
     }
@@ -74,10 +71,15 @@ export default class scrollable_tab_view extends Component {
 }
 
 const styles = StyleSheet.create({
-    cellStyle: {},
+    cellStyle: {
+        padding: 10
+    },
     nameStyle: {},
     textStyle: {},
-    topStyle: {}
+    topStyle: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    }
 });
 
 AppRegistry.registerComponent('scrollable_tab_view', () => scrollable_tab_view);
