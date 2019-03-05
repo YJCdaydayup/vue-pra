@@ -25,6 +25,8 @@ import {
 import Dimensions from 'Dimensions'
 const {width,height} = Dimensions.get('window');
 
+import request from './../common/request'
+
 import Icon from 'react-native-vector-icons/Ionicons'
 
 // mockjs解析随机数据
@@ -52,9 +54,22 @@ export default class list extends Component {
                 <ListView
                     dataSource={this.state.dataSource}
                     renderRow={this._renderRow}
+                    onEndReached={this._fetchMoreData}
+                    onEndReachedThrehold={20}
                 />
             </View>
         );
+    }
+
+    _fetchMoreData = () => {
+        if (!this._hasMore()) {
+            return ;
+        }
+        
+    }
+
+    _hasMore = ()=>{
+
     }
 
     _renderRow = (rowData)=> {
@@ -104,14 +119,16 @@ export default class list extends Component {
     }
 
     fetchData() {
-        let url = '';
-        fetch(url).then((respose)=>respose.json).then((res)=>{
-            let result = Mock.mock(res);
-            if (result['success']) {
+        request.get(config.api.base + config.api.list,{
+            accessToken: 'aaaaaa'
+        }).then((result)=>{
+            if (result.succuss) {
                 this.setState({
-                   dataSource: this.state.dataSource.cloneWithRows(result.data)
-                });
+                    dataSource: this.state.dataSource.cloneWithRows(result.data)
+                })
             }
+        }).catch((err)=>{
+            console.log('err' + err);
         })
     }
 

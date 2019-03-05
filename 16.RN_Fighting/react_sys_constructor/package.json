@@ -7,7 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "mockjs": "^1.0.1-beta3",
+    "query-string": "^6.3.0",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.3",
     "react-native-scrollable-tab-view": "^0.6.3",
