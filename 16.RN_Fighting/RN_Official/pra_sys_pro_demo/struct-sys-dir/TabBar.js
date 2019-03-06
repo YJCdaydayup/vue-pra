@@ -82,7 +82,13 @@ export const TabBar = createBottomTabNavigator(
                     let index = options.navigation.state.index;
                     let titles = ['列表','录制','发现','我的'];
                     return (
-                        <Text>{titles[index]}</Text>
+                        <Text
+                            style={{
+                                color: 'black',
+                                fontSize: 16,
+                                fontWeight: 'bold'
+                            }}
+                        >{titles[index]}</Text>
                     );
                 }),
             }
