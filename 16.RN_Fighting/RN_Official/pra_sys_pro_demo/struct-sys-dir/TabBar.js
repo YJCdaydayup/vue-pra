@@ -107,7 +107,7 @@ export const TabBar = createBottomTabNavigator(
             //material design中的波纹颜色(仅支持Android >= 5.0)
             pressColor: '#788493',
             //按下tab bar时的不透明度(仅支持iOS和Android < 5.0).
-            pressOpacity: 0.8,
+            pressOpacity: 0.1,
             //tab bar的样式
             style: {
                 backgroundColor: '#fff',
