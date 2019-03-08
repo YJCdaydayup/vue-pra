@@ -1,0 +1,43 @@
+Day01
+1.vuex的核心是store容器，里面包含应用的state,是一个单一的状态树，vuex的状态存储是响应式的，若store中的状态发生改变，组件会高效更新，不能直接改变store中状态，唯一途径就是显示的提交mutation, store.commit('increment')，方便状态管理
+2.项目开始的时候调用Vue.use(Vuex)
+const store = new Vuex.store({
+   state: {
+     count: 0
+   },
+   mutations: {
+     increment(state) {
+	state.count ++;
+     }
+   }
+});
+3.在单个组件中使用store中的状态，最好的方式是通过定义计算属性来拿，直接store.state.count
+4.当很多个全局状态时，可以导入{maoState} 然后在computed:{ ...mapState({count:(state)=>state.count,newCount(state){}}) }
+5.getters属性是store的计算属性，会将state中的数据计算后返回，在子组件中也是在computed属性中通过this.$store.gettters.doneTodos获取
+6.在store的getters里面互相调用计算属性时可以直接用第二个参数getter获取其他计算属性的值:
+  getters: {
+    dones(state,getters){}
+  }
+7.子组件里可以通过{mapGetters}获取store中的计算属性，在computed里面: ...mapGetters(['todoCount'])
+
+
+Day02
+1.提交mutation，只有提交mutation才能改变state，一般带参数，参数名为payload的对象作为参数,
+  mutations: {
+    increment(state,payload) {
+      state.count += payload.len
+    }
+  }
+2.mutation可以定义成常量，进行使用，export const SOME_MUTATION=‘SOME_MUTATION’,提交方式: this.$store.commit(`ADD_MUTATION`)
+3.mutation提交的都是同步事物，也可以使用mapMutations来映射，不好传递参数，最好不用吧
+
+Day03
+1.actions可以处理异步提交mutation，可以在action中写延时操作，然后在延时回调中提交mutation，提交方式:
+this.$store.dispatch('checkout',{
+          len: 6
+        })
+2.promise用法: https://www.cnblogs.com/SamWeb/p/8417940.html
+
+
+
+
