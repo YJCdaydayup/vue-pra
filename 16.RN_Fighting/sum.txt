@@ -212,6 +212,28 @@
 3.安装组件最好使用yarn，不要使用cnpm
 4.module.exports={}导入时也可以使用import from
 
+第十八节课
+1.定义listView的cell时用item命名好些，item的属性rowData传递过来后可能在item里面改变数据，就最好在item里面用状态机保存数据
+2.只要.then了，就会返回一个promise对象，就可以继续使用.then，如果要获取上一个.then的数据，就必须在上一个.then中return出去这个数据,promise.reject，就必须用.catch来获取回调了
+3.状态机改变刷新UI时，可以在属性里面做判断 name={this.state.up?’’:’’},同理改变样式
+4.学习的方法:先写代码在看看概念才知道概念的意义
+5.以后写方法最好用click = () => {}定义，然后this.click进行调用
+
+第十九节课
+1.react-native-video播放视频,在github上搜这个组件，npm i —-save react-native-video,ios需要link导入原生库，涉及界面的组件可以看demo来玩
+2.react-native link后需要重新编译，用react-native run-ios即可
+3.通过状态机控制一个组件的显示和隐藏:
+     {!this.state.videoLoaded ? <ActivityIndicatot
+                    color: 'red'
+                    size="large"
+                    style={styles.loading}
+                />:null}
+4.多个样式用数组包含起来
+5.定义样式的时候，如果宽高都是相关的，就用全局变量在外面算好再用到样式里面，避免改一个全部都改
+
+
+
+
 
 
 

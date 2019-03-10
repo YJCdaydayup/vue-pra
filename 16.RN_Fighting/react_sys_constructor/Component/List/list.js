@@ -10,6 +10,8 @@
  * @flow
  */
 
+// 服务器不会用page做分页，一般用最后一条数据的id开始拿后面的几个数据即可
+
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -19,11 +21,16 @@ import {
     Platform,
     ListView,
     TouchableOpacity,
-    Image
+    ActivityIndicator,
+    RefreshControl
 } from 'react-native';
 
+import Detail from './Detail'
+
+import Item from './item'
+
 import Dimensions from 'Dimensions'
-const {width,height} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 import request from './../common/request'
 
@@ -32,6 +39,12 @@ import Icon from 'react-native-vector-icons/Ionicons'
 // mockjs解析随机数据
 import Mock from 'mockjs'
 
+let cacheResults = {
+    nextPage: 1,
+    items: [],
+    total: 0
+}
+
 export default class list extends Component {
 
     constructor(props) {
@@ -39,7 +52,9 @@ export default class list extends Component {
         this.state = {
             dataSource: new ListView.DataSource({
                 rowHasChanged: ((r1, r2)=>(r1 !== r2))
-            })
+            }),
+            isLoadingTail: false,
+            isRefreshing: false
         }
     }
 
@@ -56,55 +71,78 @@ export default class list extends Component {
                     renderRow={this._renderRow}
                     onEndReached={this._fetchMoreData}
                     onEndReachedThrehold={20}
+                    renderFooter={this._renderFooter}
+                    // 下拉刷新
+                    refreshControl={
+                        <RefreshControl
+                            // 数据回来之前要显示loading，用isRefreshing控制
+                            refreshing={this.state.isRefreshing}
+                            onRefresh={this._onRefresh}
+                        />
+                    }
                 />
             </View>
         );
     }
 
-    _fetchMoreData = () => {
-        if (!this._hasMore()) {
-            return ;
+    _onRefresh = ()=> {
+        if (!this._hasMore() || this.state.isRefreshing) {
+            return;
         }
-        
+
+        // 加载第0页数据
+        this.fetchData(0);
+    };
+
+    // 自定义Footer视图
+    _renderFooter() {
+        if (!this._hasMore() && this.state.total !== 0) {
+            return (
+                <View style={styles.loadingMore}>
+                    <Text style={styles.loadingText}>没有更多数据</Text>
+                </View>
+            )
+        }
+
+        // 小菊花
+        return (
+            <ActivityIndicator
+                style={
+                    styles.loadingMore
+                }
+            />
+        )
+
     }
 
-    _hasMore = ()=>{
+    // 1.状态机:request = ''
+    // 2.下拉刷新 request = 'refresh'
+    // 3。加载更多 request = 'loadMore'
 
+
+    _fetchMoreData = () => {
+        // 正在laodingmore就不发送数据了
+        if (!this._hasMore() || this.state.isLoadingTail) {
+            return;
+        }
+
+        let page = cacheResults.nextPage;
+        this.fetchData(page)
+
+    }
+
+    _hasMore = ()=> {
+        return cacheResults.items.length != cacheResults.total
     }
 
     _renderRow = (rowData)=> {
         return (
-            <TouchableOpacity
-            >
-                <View style={styles.cellStyle}>
-                    <Text style={styles.title}>{rowData.title}</Text>
-                    <Image
-                        style={styles.thumb}
-                        source={{uri: rowData.thumb}}
-                    >
-                        <Icon name="ios-play"
-                              size={30}
-                              style={styles.play}
-                        />
-                    </Image>
-                    <View style={styles.cellFooter}>
-                        <View style={styles.footerBox}>
-                            <Icon name="ios-heart"
-                                  size={30}
-                                  style={styles.boxIcon}
-                            />
-                            <Text style={styles.boxText}>点赞</Text>
-                        </View>
-                        <View style={styles.footerBox}>
-                            <Icon name="ios-chatbubbles-outline"
-                                  size={30}
-                                  style={styles.boxIcon}
-                            />
-                            <Text style={styles.boxText}>评论</Text>
-                        </View>
-                    </View>
-                </View>
-            </TouchableOpacity>
+            <Item
+                rowData={rowData}
+                onSelect={()=>{
+                    this._pushPage(rowData);
+                }}
+            />
         )
     }
 
@@ -115,31 +153,90 @@ export default class list extends Component {
 
     componentDidMount() {
         // 加载网络数据
-        this.fetchData();
+        this.fetchData(1);
     }
 
-    fetchData() {
-        request.get(config.api.base + config.api.list,{
-            accessToken: 'aaaaaa'
-        }).then((result)=>{
+    fetchData(page) {
+
+        if (page !== 0) {
+            this.setState({
+                isLoadingTail: true
+            })
+        } else {
+            this.setState({
+                isRefreshing: true
+            })
+        }
+
+        this.setState({
+            isLoadingTail: true
+        })
+        request.get(config.api.base + config.api.list, {
+            accessToken: 'aaaaaa',
+            page: page
+        }).then((result)=> {
             if (result.succuss) {
+                let items = cacheResults.items.slice();
+                if (page !== 0) {
+                    items = items.concat(result.data);
+                    cacheResults.nextPage += 1;
+                } else {
+                    items = result.data.concat(items);
+                }
+
+                // 将服务器得到的数据缓存
+                cacheResults.items = items;
+                cacheResults.total = result.total;
+                if (page !== 0) {
+                    this.setState({
+                        dataSource: cacheResults.items,
+                        isLoadingTail: false
+                    })
+                } else {
+                    this.setState({
+                        dataSource: cacheResults.items,
+                        isRefreshing: false
+                    })
+                }
+            }
+        }).catch((err)=> {
+            // 网络出错
+
+            if (page !== 0) {
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(result.data)
+                    isLoadingTail: false
+                })
+            } else {
+                this.setState({
+                    isRefreshing: false
                 })
             }
-        }).catch((err)=>{
+
             console.log('err' + err);
         })
     }
 
     dsFetchData() {
-        // this.setState({
-        //     dataSource: this.state.dataSource.cloneWithRows(['haha', 'hehe', 'xixi', 'heihei', 'huhu'])
-        // })
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(['haha', 'hehe', 'xixi', 'heihei', 'huhu'])
+        })
         let resultArr = Mock.mock([]);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(resultArr.data);
-        })
+    })
+    }
+
+    _pushPage() {
+        let {navigator} = this.props;
+        if (navigator) {
+            navigator.push({
+                name: 'Detail',
+                component: Detail,
+                params: {
+
+                }
+            })
+        }
     }
 }
 
@@ -161,9 +258,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         textAlign: 'center'
     },
-    listView: {
-
-    },
+    listView: {},
     cellStyle: {
         width: width,
         marginTop: 10,
@@ -176,7 +271,7 @@ const styles = StyleSheet.create({
     },
     thumb: {
         width: width,
-        height: width * 720/1280,
+        height: width * 720 / 1280,
         resizeMode: 'cover',
     },
     play: {
@@ -191,25 +286,5 @@ const styles = StyleSheet.create({
         borderColor: '#ddd',
         borderWidth: 0.5,
         borderRadius: 22.5
-    },
-    cellFooter: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: '#ddd',
-    },
-    footerBox: {
-        padding: 10,
-        flexDirection: 'row',
-        backgroundColor: '#fff',
-        marginLeft: 1,
-    },
-    boxIcon: {
-        fontSize: 22,
-        color: '#333'
-    },
-    boxText: {
-        fontSize: 18,
-        color: '#333',
-        paddingLeft: 12
     }
 });

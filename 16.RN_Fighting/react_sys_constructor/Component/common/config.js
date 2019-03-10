@@ -8,7 +8,8 @@ const config = {
     api: {
         base: 'http://www.rg.taobao.com/mockjs/16560/',
         list: 'api/list',
-        menue: 'api/menue'
+        menue: 'api/menue',
+        up: 'api/up'
     },
     map: {
         method: 'POST',

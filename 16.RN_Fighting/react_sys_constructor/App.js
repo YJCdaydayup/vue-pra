@@ -12,7 +12,8 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View
+    View,
+    Navigator
 } from 'react-native';
 
 import List from './Component/List/list'
@@ -51,7 +52,39 @@ export default class App extends Component {
                 locked={true}
                 scrollWithoutAnimation={true}
             >
-                <List tabLabel="list"/>
+                <Navigator
+                    tabLabel="list" // 这是由于tabview需要的
+                    initailRoute={{
+                        component: List,
+                        name: 'list',
+                        params: {
+                            title: '视频列表'
+                        }
+                    }}
+                    renderScene={
+                        (route,navigator)=>{
+                            return (
+                                <route.component {...route.params} navigator={navigator}/>
+                            )
+                        }
+                    }
+
+                    // 关闭滑动返回手势
+                    configureScene={(route,routerStack)=>{
+                        return ({
+                            // 重写底层源码扩大手势可滑动范围
+                            ...Navigator.ScenceConfigs.FloatToRight,
+                            gestures: {
+                                pop: {
+                                    // 展开
+                                    ...Navigator.ScenceConfigs.floatFromRight.getstures.pop,
+                                    edgeHitWidth: 300
+
+                                }
+                            }
+                        })
+                    }}
+                />
                 <Edit tabLabel="edit"/>
                 <Picture tabLabel="picture"/>
                 <Account tabLabel="account"/>
