@@ -115,6 +115,7 @@ export const TabBar = createBottomTabNavigator(
                 borderTopWidth: 0.2,
                 paddingTop:1,
                 borderTopColor: '#ccc',
+                height: 46
             },
             //tab bar的文本样式
             labelStyle: {

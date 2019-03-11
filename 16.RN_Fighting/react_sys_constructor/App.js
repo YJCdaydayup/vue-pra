@@ -16,6 +16,9 @@ import {
     Navigator
 } from 'react-native';
 
+import Navigator from 'navigator'
+
+
 import List from './Component/List/list'
 import Account from './Component/Account/account'
 import Edit from './Component/Edit/edit'

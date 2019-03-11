@@ -92,7 +92,7 @@ export default class react_sys_constructor extends Component {
                         size={45}
                         style={styles.play}
                         onPress={this._replay}
-                    />:null;
+                    />:null
                 }
 
                 {/* 进度条 */}

@@ -32,6 +32,7 @@ export default class Discover extends Component {
                     />}
                 >
                     <CountryPage
+                        navigation={this.props.navigation}
                         tabLabel="Country"
                     />
                     <NewsPage
