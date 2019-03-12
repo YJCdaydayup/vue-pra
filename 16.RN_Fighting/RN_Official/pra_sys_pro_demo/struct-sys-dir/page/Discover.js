@@ -5,6 +5,8 @@ import {
     Text
 } from 'react-native'
 
+const font_rate = 20;
+
 import ScrollableTabView, {DefaultTabBar, ScrollableTabBar} from 'react-native-scrollable-tab-view'
 
 import CountryPage from './../list_modules/country'
@@ -16,7 +18,7 @@ export default class Discover extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tabNames: ['新闻','通知','国家']
+            tabNames: ['新闻', '通知', '国家']
         }
     }
 
@@ -26,24 +28,30 @@ export default class Discover extends Component {
 
         return (
             <View style={styles.container}>
-                <ScrollableTabView
-                    renderTabBar={()=><TabBarView
+                <ScrollableTabView ref="tab"
+                    renderTabBar={() => <TabBarView
+                        ref={(bar)=>{this.tabBar = bar}}
                         tabNames={tabNames}
                     />}
+                    onScroll={this._onScroll.bind(this)}
                 >
                     <CountryPage
                         navigation={this.props.navigation}
                         tabLabel="Country"
                     />
                     <NewsPage
-                        tabLabel="Country"
+                        tabLabel="News"
                     />
                     <NoticePage
-                        tabLabel="Country"
+                        tabLabel="Notice"
                     />
                 </ScrollableTabView>
             </View>
         )
+    }
+
+    _onScroll = (e) => {
+        this.tabBar.changeFont(e);
     }
 }
 

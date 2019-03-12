@@ -10,6 +10,8 @@ import PropTypes from 'prop-types'
 
 let {width, height} = require('Dimensions').get('window')
 
+let textArr = [];
+
 export default class tabBarComponent extends Component {
     static defaultProps = {
         goToPage: PropTypes.func,
@@ -17,14 +19,30 @@ export default class tabBarComponent extends Component {
         activeTab: PropTypes.number,
 
         tabNames: PropTypes.array,
-        tabIconNames: PropTypes.array
+        tabIconNames: PropTypes.array,
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            rate: 0,
+            textIndex: 0
+        }
+    }
+
+    changeFont(rate) {
+        this.setState({
+            rate: rate,
+            textIndex: Math.floor(rate)
+        })
     }
 
     render() {
         return (
             <View style={styles.container}>
                 {this.props.tabs.map((tab, index) => {
-                    return this.renderItem(tab, index);
+                    let temp = this.renderItem(tab, index);
+                    return temp;
                 })}
             </View>
         )
@@ -33,7 +51,6 @@ export default class tabBarComponent extends Component {
     renderItem(tab, index) {
 
         let style = this.props.activeTab === index ? {color: 'red',fontSize: 18} : {color: '#fff',fontSize: 16}
-
         return (
             <TouchableOpacity
                 style={styles.wrapperStyle}
@@ -44,7 +61,7 @@ export default class tabBarComponent extends Component {
                 key={index}
             >
                 <View style={styles.itemStyle}>
-                    <Text style={style}>{this.props.tabNames[index]}</Text>
+                    <Text style={[style, {fontSize: (((index === this.state.textIndex + 1)?this.state.rate * 10:0) + 16)}]}>{this.props.tabNames[index]}</Text>
                 </View>
             </TouchableOpacity>
         )

@@ -63,7 +63,8 @@ export default class country extends Component {
 
     _onRefresh = () => {
         this.setState({
-            isRefreshing: true
+            isRefreshing: true,
+            isActivityShowing: true
         })
 
         setTimeout(() => {
@@ -76,13 +77,38 @@ export default class country extends Component {
 
     // 请求数据
     componentDidMount() {
-        setTimeout(() => {
+        // setTimeout(() => {
+        //     this.refs.indicatorView.hide();
+        //     this.setState({
+        //         data: Data.data,
+        //         // isActivityShowing: false
+        //     })
+        // }, 2000);
+        this._loadData().then((res) => {
             this.refs.indicatorView.hide();
             this.setState({
-                data: Data.data,
-                // isActivityShowing: false
+                data: res
             })
-        }, 2000);
+        });
+    }
+
+    async _loadData() {
+        let myData = await this._parseData();
+        if (myData) {
+            return myData;
+        }
+    }
+
+    // 在promise里面做解析数据模拟
+    _parseData = () => {
+        return new Promise((resolve, reject) => {
+            setInterval(()=>{
+                resolve(Data.data);
+                if (false) {
+                    reject('解析失败')
+                }
+            },1000);
+        })
     }
 
     _renderLine = () => {

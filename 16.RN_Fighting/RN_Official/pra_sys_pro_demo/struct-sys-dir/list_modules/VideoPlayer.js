@@ -48,7 +48,7 @@ export default class VideoPlayer extends Component {
         resizeMode: 'contain',
         duration: 0.0,
         currentTime: 0.0,
-        controls: false,
+        controls: true,
         paused: true,
         skin: 'custom',
         ignoreSilentSwitch: null,
@@ -247,86 +247,88 @@ export default class VideoPlayer extends Component {
     renderNativeSkin() {
         const videoStyle = this.state.skin == 'embed' ? styles.nativeVideoControls : styles.fullScreen;
         return (
-            <View style={styles.container}>
-                <View style={styles.fullScreen}>
-                    <Video
-                        source={{uri: 'http://svideo.spriteapp.com/video/2019/0310/5c852579938a2_wpd.mp4'}}
-                        style={videoStyle}
-                        rate={this.state.rate}
-                        paused={this.state.paused}
-                        volume={this.state.volume}
-                        muted={this.state.muted}
-                        ignoreSilentSwitch={this.state.ignoreSilentSwitch}
-                        resizeMode={this.state.resizeMode}
-                        onLoad={this.onLoad}
-                        onBuffer={this.onBuffer}
-                        onProgress={this.onProgress}
-                        onEnd={() => { AlertIOS.alert('Done!') }}
-                        repeat={true}
-                        controls={this.state.controls}
-                        filter={this.state.filter}
-                        filterEnabled={this.state.filterEnabled}
-                    />
-                </View>
-                <View style={styles.controls}>
-                    <View style={styles.generalControls}>
-                        <View style={styles.skinControl}>
-                            {this.renderSkinControl('custom')}
-                            {this.renderSkinControl('native')}
-                            {this.renderSkinControl('embed')}
-                        </View>
-                        {
-                            (this.state.filterEnabled) ?
-                                <View style={styles.skinControl}>
-                                    <TouchableOpacity onPress={() => {
-                                        this.setFilter(-1)
-                                    }}>
-                                        <Text style={styles.controlOption}>Previous Filter</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => {
-                                        this.setFilter(1)
-                                    }}>
-                                        <Text style={styles.controlOption}>Next Filter</Text>
-                                    </TouchableOpacity>
-                                </View> : null
-                        }
-                    </View>
-                    <View style={styles.generalControls}>
-                        <View style={styles.rateControl}>
-                            {this.renderRateControl(0.5)}
-                            {this.renderRateControl(1.0)}
-                            {this.renderRateControl(2.0)}
-                        </View>
 
-                        <View style={styles.volumeControl}>
-                            {this.renderVolumeControl(0.5)}
-                            {this.renderVolumeControl(1)}
-                            {this.renderVolumeControl(1.5)}
-                        </View>
-
-                        <View style={styles.resizeModeControl}>
-                            {this.renderResizeModeControl('cover')}
-                            {this.renderResizeModeControl('contain')}
-                            {this.renderResizeModeControl('stretch')}
-                        </View>
-                    </View>
-                    <View style={styles.generalControls}>
-                        {
-                            (Platform.OS === 'ios') ?
-                                <View style={styles.ignoreSilentSwitchControl}>
-                                    {this.renderIgnoreSilentSwitchControl('ignore')}
-                                    {this.renderIgnoreSilentSwitchControl('obey')}
-                                </View> : null
-                        }
-                    </View>
-                </View>
-
-            </View>
+            <Video
+                source={{uri: 'http://svideo.spriteapp.com/video/2019/0310/5c852579938a2_wpd.mp4'}}
+                style={videoStyle}
+                rate={this.state.rate}
+                paused={this.state.paused}
+                volume={this.state.volume}
+                muted={this.state.muted}
+                ignoreSilentSwitch={this.state.ignoreSilentSwitch}
+                resizeMode={this.state.resizeMode}
+                onLoad={this.onLoad}
+                onBuffer={this.onBuffer}
+                onProgress={this.onProgress}
+                onEnd={() => { AlertIOS.alert('Done!') }}
+                repeat={true}
+                controls={this.state.controls}
+                filter={this.state.filter}
+                filterEnabled={this.state.filterEnabled}
+            />
         );
+
+            // <View style={styles.container}>
+            //     <View style={styles.fullScreen}>
+            //
+            //     </View>
+                {/*<View style={styles.controls}>*/}
+                    {/*<View style={styles.generalControls}>*/}
+                        {/*<View style={styles.skinControl}>*/}
+                            {/*{this.renderSkinControl('custom')}*/}
+                            {/*{this.renderSkinControl('native')}*/}
+                            {/*{this.renderSkinControl('embed')}*/}
+                        {/*</View>*/}
+                        {/*{*/}
+                            {/*(this.state.filterEnabled) ?*/}
+                                {/*<View style={styles.skinControl}>*/}
+                                    {/*<TouchableOpacity onPress={() => {*/}
+                                        {/*this.setFilter(-1)*/}
+                                    {/*}}>*/}
+                                        {/*<Text style={styles.controlOption}>Previous Filter</Text>*/}
+                                    {/*</TouchableOpacity>*/}
+                                    {/*<TouchableOpacity onPress={() => {*/}
+                                        {/*this.setFilter(1)*/}
+                                    {/*}}>*/}
+                                        {/*<Text style={styles.controlOption}>Next Filter</Text>*/}
+                                    {/*</TouchableOpacity>*/}
+                                {/*</View> : null*/}
+                        {/*}*/}
+                    {/*</View>*/}
+                    {/*<View style={styles.generalControls}>*/}
+                        {/*<View style={styles.rateControl}>*/}
+                            {/*{this.renderRateControl(0.5)}*/}
+                            {/*{this.renderRateControl(1.0)}*/}
+                            {/*{this.renderRateControl(2.0)}*/}
+                        {/*</View>*/}
+
+                        {/*<View style={styles.volumeControl}>*/}
+                            {/*{this.renderVolumeControl(0.5)}*/}
+                            {/*{this.renderVolumeControl(1)}*/}
+                            {/*{this.renderVolumeControl(1.5)}*/}
+                        {/*</View>*/}
+
+                        {/*<View style={styles.resizeModeControl}>*/}
+                            {/*{this.renderResizeModeControl('cover')}*/}
+                            {/*{this.renderResizeModeControl('contain')}*/}
+                            {/*{this.renderResizeModeControl('stretch')}*/}
+                        {/*</View>*/}
+                    {/*</View>*/}
+                    {/*<View style={styles.generalControls}>*/}
+                        {/*{*/}
+                            {/*(Platform.OS === 'ios') ?*/}
+                                {/*<View style={styles.ignoreSilentSwitchControl}>*/}
+                                    {/*{this.renderIgnoreSilentSwitchControl('ignore')}*/}
+                                    {/*{this.renderIgnoreSilentSwitchControl('obey')}*/}
+                                {/*</View> : null*/}
+                        {/*}*/}
+                    {/*</View>*/}
+                {/*</View>*/}
+            // </View>
     }
 
     render() {
-        return this.state.controls ? this.renderNativeSkin() : this.renderCustomSkin();
+        return (this.renderNativeSkin())
     }
 }
 
