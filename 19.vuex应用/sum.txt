@@ -37,6 +37,16 @@ this.$store.dispatch('checkout',{
           len: 6
         })
 2.promise用法: https://www.cnblogs.com/SamWeb/p/8417940.html
+3.actions里面有一个context参数和store具有相同的属性和方法，必须在里面要通过context来提交mutation改变state，也可以context.state和context.getters
+4.可以在action里面返回promise来处理action结束后的事情
+
+Day03 https://blog.csdn.net/qq_39523111/article/details/79638614
+1.由于store是一个单一的状态树，当状态比较大的时候就会非常臃肿，这时候可以通过添加modules管理状态
+2.默认情况下，module中的mutation，getters，action依然是全局的，可以通过this.$store.commit/this.$store.dispatch/this.$store.getters来获取
+3.module里面的状态是局部的，可以通过模块来访问:this.$store.state.a.count来访问
+4，虽然上面的getters，mutations，actions默认是全局的，但是里面的参数是局部的，最好通过解构的方式拿取：context中多了{rootState,rootGetter}两个参数来获取全局的状态
+5.也可以添加一个namespaced属性来限制命名空间,当用到了命名空间，提交mutations，actions，getters前需要加模块了，this.&store.commit('a/muA')
+
 
 
 
