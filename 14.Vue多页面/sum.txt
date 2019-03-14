@@ -1,0 +1,9 @@
+1.通过给每个vue文件指定入口文件，可以实现vue的多页面
+2. devServer: {
+        clientLogLevel: 'warning',
+        historyApiFallback: true,
+        // hot: true,
+        compress: true,
+        host: 'localhost',
+        port: 8080
+    },定义本地服务测试页面，对于多个页面一一进行测试，就在输出html的filename:'index.html',谁是index.html就热加载谁

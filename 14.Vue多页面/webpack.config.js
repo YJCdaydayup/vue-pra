@@ -1,11 +1,13 @@
 let HtmlWebpackPlugin = require('html-webpack-plugin')
 let { VueLoaderPlugin } = require('vue-loader')
-let vueLoaderConfig = require('./vue-loader.conf')
 let CleanWebpackPlugin = require('clean-webpack-plugin')
 
 
 module.exports = {
-    entry: './main.js',
+    entry: {
+        cart: './src/enties/cart.js',
+        main: './src/enties/main.js',
+    },
     output: {
         path: __dirname + '/dist',
         filename: 'js/[name].js'
@@ -46,9 +48,16 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './index.html',
-            inject: 'body'
+            filename: 'cart.html',
+            template: './src/mounts/cart.html',
+            inject: 'body',
+            chunks: ['cart']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'main.html',
+            template: './src/mounts/main.html',
+            inject: 'body',
+            chunks: ['main']
         }),
         new CleanWebpackPlugin(['./dist'], {
             root: __dirname + '',
