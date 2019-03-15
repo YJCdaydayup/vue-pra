@@ -42,6 +42,23 @@ module.exports = {
                     'postcss-loader',
                     'sass-loader'
                 ]
+            },
+
+            // 解析vue中的stylus，可以直接把里面的stylus样式作为stylus文件来解析
+            {
+                test: /\.stylus/,
+                exclude: /node_modules/,
+                loaders: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                    'postcss-loader',
+                    'stylus-loader'
+                ]
             }
         ]
     },
@@ -54,7 +71,7 @@ module.exports = {
             chunks: ['cart']
         }),
         new HtmlWebpackPlugin({
-            filename: 'main.html',
+            filename: 'index.html',
             template: './src/mounts/main.html',
             inject: 'body',
             chunks: ['main']
