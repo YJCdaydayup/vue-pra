@@ -6,12 +6,16 @@
     </div>
 </template>
 
-<style>
+<style lang="stylus" rel="stylesheet/stylus">
+
+    .box
+        width: 100px
+        height: 100px
+        background-color: red
+
 </style>
 
 <script>
-
-    import './index.scss'
 
     export default {
         data() {
