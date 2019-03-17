@@ -9,7 +9,9 @@ const config = {
         base: 'http://www.rg.taobao.com/mockjs/16560/',
         list: 'api/list',
         menue: 'api/menue',
-        up: 'api/up'
+        up: 'api/up',
+        comments: 'api/commments',
+        comment: 'api/comment'
     },
     map: {
         method: 'POST',

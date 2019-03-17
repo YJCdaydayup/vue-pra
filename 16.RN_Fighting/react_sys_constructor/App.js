@@ -20,7 +20,7 @@ import Navigator from 'navigator'
 
 
 import List from './Component/List/list'
-import Account from './Component/Account/account'
+import Login from './Component/Account/login'
 import Edit from './Component/Edit/edit'
 import Picture from './Component/Picture/picture'
 
@@ -43,6 +43,7 @@ export default class App extends Component {
         let tabIconNames = this.state.tabIconNames;
         return (
             <ScrollableTabView
+                initialPage={3}
                 renderTabBar={()=>{
                     return (
                         <HKTabBar
@@ -90,7 +91,7 @@ export default class App extends Component {
                 />
                 <Edit tabLabel="edit"/>
                 <Picture tabLabel="picture"/>
-                <Account tabLabel="account"/>
+                <Login tabLabel="account"/>
             </ScrollableTabView>
         );
     }

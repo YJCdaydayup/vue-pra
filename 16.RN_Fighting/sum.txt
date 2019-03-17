@@ -232,16 +232,29 @@
 5.定义样式的时候，如果宽高都是相关的，就用全局变量在外面算好再用到样式里面，避免改一个全部都改
 
 第二十节课
-1.cnpm i -g react-devtools 全局安装调试工具后，启动react-devtools, 可以用于调试样式
-2.获取当前组件的方式: ref={(bar)=>{this.bar = bar}}
-3.父组件传递事件给子组件就持有子组件让子组件调用其方法即可，组件的state的改变就由组件自己来改
+1.RN中上下间距： marginVertical,可以设置行高lineHeight和height
+2.对于比较复杂的组件，外面就用一层View进行包装，这点和Vue比较相似
+3.组件里面的注释就用{/*  */}
+4.TextInput获取和失去焦点: onFocus={this._focus} onBlur={this._focus} 在构造函数里绑定this指针
+5.Modal组件就是一个View，弹出模态视图,三个属性和两个回调
+6.<TextInput 
+    placeholder=‘’
+    mutiline={true}
+    defaultValue={this.state.content} // 出现时显示的文字
+    onChangeText={(text)=>{this.setState({content: text})}} 
+ /> // 可以通过状态机进行内存缓存	
+7.对于一些原生的比较底层的功能，最好就用原生的代码完成这就需要混合开发了
+8.缓存机制适配两端的话就用sqlite
 
-
-
-
-
-
-
+第二十一节课
+1.安装react-native-button按钮插件
+2.bind了就不用写箭头函数了
+3.状态机也有回调，this.setState({
+   isSending: true
+},()=>{
+   // 状态改变后调用
+})
+4.
 
 
 
