@@ -11,7 +11,9 @@ const config = {
         menue: 'api/menue',
         up: 'api/up',
         comments: 'api/commments',
-        comment: 'api/comment'
+        comment: 'api/comment',
+        signup: 'api/user/signup',
+        verity: 'api/user/verify'
     },
     map: {
         method: 'POST',
