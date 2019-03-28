@@ -46,7 +46,7 @@ module.exports = {
 
             // 解析vue中的stylus，可以直接把里面的stylus样式作为stylus文件来解析
             {
-                test: /\.stylus/,
+                test: /\.stylus$/,
                 exclude: /node_modules/,
                 loaders: [
                     'style-loader',

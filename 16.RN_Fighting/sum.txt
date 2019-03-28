@@ -254,7 +254,10 @@
 },()=>{
    // 状态改变后调用
 })
-4.
+4.数组的几种遍历方式：map:生成新的数组，filter(return yes才要 no不要，过滤作用)，reduce((title,value,index)=>{return title += value},1000) 1000是默认值，有默认值就从index=0开始遍历，没有默认值，就把第一个值给total再从index=1开始遍历
+5.配置props时，可以直接在constructor里面通过props拿到参数，1.defaultOptions={}方式，2.contructor(props){super(props);this.textStyle = typeOf this.textStyle === 'function'?this.textStyle():(this.textStyle||{color: 'red'})} 
+6.定义属性就在构造函数里面定义，可以通过属性先持有传递过来的属性: this.date = props.date
+
 
 
 

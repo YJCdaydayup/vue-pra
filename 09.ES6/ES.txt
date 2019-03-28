@@ -1,3 +1,13 @@
 1.JS引擎扫描代码的时候会把var声明的变量提升到函数或全局作用域的顶部；
 2.const和let的作用域就是{}TDZ(暂时性死区)里面，const是常量，如果是常量对象那么对象里面的属性是可以修改的;
-3.
+3.class Person {
+   constructor(name.age,sex) {
+     super(name,age)
+     this.sex = sex
+   }
+   say() {
+     
+   }
+}
+4.默认会有一个构造方法，返回this对象，age和name是实例属性定义在this上，constructor外声明的属性和方法是作用在原型上的
+5.super虽然代表了父类的构造函数，但是返回的是子类Son的实例，即super里面的this指向的是Son，这里相当于Father.constructor.call(this),如果不调用super，子类就找不到this

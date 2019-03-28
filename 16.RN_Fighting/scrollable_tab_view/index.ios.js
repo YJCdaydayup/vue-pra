@@ -30,7 +30,10 @@ export default class scrollable_tab_view extends Component {
     render() {
         return (
             <View style={styles.container}>
-
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderRow}
+                />
             </View>
         );
     }
@@ -41,7 +44,7 @@ export default class scrollable_tab_view extends Component {
                 <View style={styles.cellStyle}>
                    <View style={styles.topStyle}>
                        <Image
-                           source={{uri: rowData.profile_image}}
+                           source={{uri: rowData.profile_image.length>0?rowData.profile_image:'http://www.1012140802@qq.com'}}
                            style={{width: 40, height: 40}}
                        />
                        <Text style={styles.nameStyle}>{rowData.name}</Text>
@@ -71,14 +74,24 @@ export default class scrollable_tab_view extends Component {
 }
 
 const styles = StyleSheet.create({
-    cellStyle: {
-        padding: 10
+    container: {
+        flex: 1
     },
-    nameStyle: {},
+    cellStyle: {
+        marginHorizontal: 20,
+        marginVertical: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(29,29,29,0.2)',
+        paddingBottom: 10
+    },
+    nameStyle: {
+        marginLeft: 10
+    },
     textStyle: {},
     topStyle: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 10
     }
 });
 

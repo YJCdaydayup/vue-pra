@@ -1,33 +1,57 @@
 <template>
-    <div @click.prevent.stop="show" class="box">
-        {{message}}
-        <div class="part1">ascascsacs</div>
-        <div class="part2"></div>
+    <div class="box">
+       <div>
+           <button class="btn" @click.prevent.stop="showSdxpp">投资确认书</button>
+           <button class="btn" @click.prevent.stop="showFxjs">风险警示</button>
+       </div>
+        <SDXPP v-show="showSDXPP"></SDXPP>
+        <FXJS v-show="showFXJS"></FXJS>
     </div>
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
-
     .box
-        width: 100px
-        height: 100px
-        background-color: red
+        position: absolute;
+        background-color: #ddd
+        left: 0
+        top: 0
+        right: 0
+        bottom: 0
+        display: flex
+        justify-content: center
+        align-items: center
+        .btn
+            display: block
+            width: 100px
+            padding 5px 10px
+            background-color: antiquewhite
+            border-radius: 3px
 
 </style>
 
 <script>
 
+    import SDXPP from '../../component/sdxpp.vue'
+    import FXJS from '../../component/fxjs.vue'
+
     export default {
         data() {
             return {
-                visible: false,
-                message: "擦拭吃洒"
+                showSDXPP: false,
+                showFXJS: false
             }
         },
         methods: {
-            show() {
-                alert('showding');
+            showSdxpp() {
+                this.showSDXPP = true;
+            },
+            showFxjs() {
+                this.showFXJS = true;
             }
+        },
+        components: {
+            SDXPP,
+            FXJS
         }
     }
 

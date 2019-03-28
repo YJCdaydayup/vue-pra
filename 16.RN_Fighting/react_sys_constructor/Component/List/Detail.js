@@ -46,7 +46,7 @@ export default class react_sys_constructor extends Component {
             videoLoaded: false,
             playing: false,
             playEnd: false,
-            videoError: false
+            videoError: false,
 
             dataSource: new ListView.DataSource({
                 rowHasChanged: (r1, r2) => {
@@ -126,7 +126,7 @@ export default class react_sys_constructor extends Component {
                     onError={this._onError}
                 />
 
-                {this,state.videoError?<Text>
+                {this.state.videoError?<Text>
                     您访问的样式飞走了
                     </Text>:null}
 
@@ -538,7 +538,7 @@ const styles = StyleSheet.create({
     },
     navStyle: {
         flexDirection: 'row',
-        justifyContent:: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
         width: width,
         height: 64,

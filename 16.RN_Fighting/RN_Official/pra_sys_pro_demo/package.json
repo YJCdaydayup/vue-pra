@@ -11,9 +11,12 @@
     "react-native": "0.58.6",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-scrollable-tab-view": "^0.10.0",
+    "react-native-svg": "^9.3.5",
     "react-native-vector-icons": "^6.3.0",
     "react-native-video": "^4.4.0",
-    "react-navigation": "^3.3.2"
+    "react-navigation": "^3.3.2",
+    "victory-native": "^32.0.1",
+    "wayae": "^1.0.8"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",

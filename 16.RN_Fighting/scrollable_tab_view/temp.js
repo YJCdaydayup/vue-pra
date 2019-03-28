@@ -18,8 +18,7 @@ import {
     Image
 } from 'react-native';
 
-export default class scrollable_tab_view extends Component {
-
+export default class temp extends Component {
 
 
     render() {
@@ -54,28 +53,14 @@ export default class scrollable_tab_view extends Component {
 
     loadData() {
         // RN网络请求用Fetch
-        fetch(this.state.base_url).then((response)=>response.json()).then((res)=> {
+        fetch(this.state.base_url).then((response) => response.json()).then((res) => {
             var jsonData = res.list;
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(jsonData);
-        })
+                dataSource: this.state.dataSource.cloneWithRows(jsonData)
+            })
         })
     }
 
+}
 
-    const
-    styles = StyleSheet.create({
-        container: {
-            flex: 1
-        }
-    })
-
-    AppRegistry
-.
-    registerComponent(
-
-    'scrollable_tab_view'
-, () =>
-    scrollable_tab_view
-)
-    ;
+AppRegistry.registerComponent('scrollable_tab_view', () => scrollable_tab_view);

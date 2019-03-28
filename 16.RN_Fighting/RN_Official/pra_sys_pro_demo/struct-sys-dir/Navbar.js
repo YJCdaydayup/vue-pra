@@ -1,6 +1,7 @@
 import {createStackNavigator} from 'react-navigation'
 import VideoPlayer from './../struct-sys-dir/list_modules/VideoPlayer'
 import ModalPage from './modal/Modal'
+import ListPage from './page/List'
 
 import {TabBar} from './TabBar'
 
@@ -13,6 +14,10 @@ export const MainStack = createStackNavigator(
         // 导航跳转放在上面
         VideoPlayer: {
             screen: VideoPlayer
+        },
+
+        List: {
+            screen: ListPage
         }
     },
 )

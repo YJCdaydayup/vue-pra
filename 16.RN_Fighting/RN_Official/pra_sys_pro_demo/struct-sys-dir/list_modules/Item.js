@@ -3,6 +3,7 @@ import {
     StyleSheet,
     View,
     Text,
+    Image,
     TouchableOpacity
 } from 'react-native'
 
@@ -25,7 +26,15 @@ export default class Item extends Component {
                 }}
             >
                 <View style={styles.itemStyle}>
-                    <Text>{item.title}</Text>
+                    <Image
+                        source={{uri: item.img}}
+                        style={{
+                            width: 150,
+                            height: 80,
+                            marginHorizontal: 10
+                        }}
+                    />
+                    <Text numberOfLines={1}>{item.title}</Text>
                 </View>
             </TouchableOpacity>
         )
@@ -34,6 +43,8 @@ export default class Item extends Component {
 
 const styles =StyleSheet.create({
     itemStyle: {
-        marginVertical: 10
+        marginVertical: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })

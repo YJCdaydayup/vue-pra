@@ -21,7 +21,7 @@ export const TabBar = createBottomTabNavigator(
                         style={{
                             color: tintColor,
                             marginTop: 8
-                        }}
+                        }}x
                     />
                 ),
             }
