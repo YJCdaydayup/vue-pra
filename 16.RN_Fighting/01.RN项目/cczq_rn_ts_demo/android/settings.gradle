@@ -1,0 +1,3 @@
+rootProject.name = 'cczq_rn_ts_demo'
+
+include ':app'
