@@ -56,7 +56,9 @@ export default class NavgationBar extends Component {
         let titleView = this.props.titleView ? this.props.titleView :
             <Text style={styles.title}>{this.props.title}</Text>
         let content = <View style={styles.navBar}>
+            {this.props.leftButton}
             <View style={styles.titleViewContainer}>{titleView}</View>
+            {this.props.rightButton}
         </View>
         return (
             <View style={[styles.container,this.props.style]}>
