@@ -13,4 +13,5 @@
 7.自定义的tabBarComponent从this.props.navigationState里面拿到{routes,index},然后通过routes[index].params拿到参数，在这个页面js中通过设置setParams({theme: {}})来动态全局改变主题色
 
 第三节课
-1.
+1.ListView没有复用机制，所有item的渲染是全量的
+2.VirturlizedList是flatList和SectionList的底层，在窗口之外的元素将会从组件结构上卸载达到回收内存的目的

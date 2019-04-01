@@ -80,27 +80,27 @@ export const DrawerNav = DrawerNavigator({
         contentOptions: {
             activeTintColor: 'yellow'
         },
-        contentComponent: (props)=>{
-           return (
-               <ScrollView
-                   style={{
-                       backgroundColor: '#987666',
-                       flex: 1
-                   }}
-               >
-                   <SafeAreaView
-                       forceInset={{
-                           top: 'always',
-                           horizontal: 'never'
-                       }}
-                   >
-                       <DrawerItems
-                           {...props}
-                       />
-                   </SafeAreaView>
-               </ScrollView>
-           )
-        }
+        // contentComponent: (props)=>{
+        //    return (
+        //        <ScrollView
+        //            style={{
+        //                backgroundColor: '#987666',
+        //                flex: 1
+        //            }}
+        //        >
+        //            <SafeAreaView
+        //                forceInset={{
+        //                    top: 'always',
+        //                    horizontal: 'never'
+        //                }}
+        //            >
+        //                <DrawerItems
+        //                    {...props}
+        //                />
+        //            </SafeAreaView>
+        //        </ScrollView>
+        //    )
+        // }
     }
 )
 
