@@ -5,8 +5,14 @@ import ListPage from './page/List'
 
 import {TabBar} from './TabBar'
 
+import React from 'react'
+import {Text} from 'react-native'
+
 export const MainStack = createStackNavigator(
     {
+        List: {
+            screen: ListPage
+        },
         Main: {
             screen: TabBar
         },
@@ -15,26 +21,40 @@ export const MainStack = createStackNavigator(
         VideoPlayer: {
             screen: VideoPlayer
         },
-
-        List: {
-            screen: ListPage
-        }
-    },
+    }
 )
 
 export const ModalStack = createStackNavigator(
     {
+        // 模态放在下面
+        Modal: {
+            screen: ModalPage,
+            navigationOptions: {
+                header: null,
+                headerBackTitle: null,
+                headerBackImage: null,
+            }
+        },
         Main: {
             screen: MainStack
         },
-
-        // 模态放在下面
-        Modal: {
-            screen: ModalPage
+        TabBar: {
+            screen: TabBar,
+            navigationOptions: {
+                headerBackImage: ()=>{
+                    return (
+                        <Text
+                            onPress={()=>{
+                                alert('1234')
+                            }}
+                        />
+                    )
+                }
+            }
         }
     },
     {
         mode: 'modal',
-        headerMode: 'none'
+        // headerMode: 'none'
     }
 )

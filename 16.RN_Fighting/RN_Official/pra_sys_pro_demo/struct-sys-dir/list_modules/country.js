@@ -29,7 +29,9 @@ export default class country extends Component {
         return (
             <View style={styles.container}>
                 <FlatList
-                    ref="list"
+                    ref={(ref)=>{
+                        this.list = ref;
+                    }}
                     data={this.state.data}
                     keyExtractor={this.keyExtractor}
                     renderItem={this._renderItem}
@@ -65,7 +67,9 @@ export default class country extends Component {
         this.setState({
             isRefreshing: true,
             isActivityShowing: true
-        })
+        },()=>{
+
+        });
 
         setTimeout(() => {
             this.setState({
