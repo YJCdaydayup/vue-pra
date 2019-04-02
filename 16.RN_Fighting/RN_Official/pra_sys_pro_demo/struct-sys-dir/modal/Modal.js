@@ -23,7 +23,7 @@ export default class Modal extends Component {
                     style={{
                         paddingTop: 100
                     }}
-                    title="back"
+                    title="进入页面"
                     onPress={this.back.bind(this)}
                 />
             </View>
@@ -31,6 +31,8 @@ export default class Modal extends Component {
     }
 
     back() {
-        this.props.navigation.goBack();
+        let {navigation} = this.props;
+        let {navigate} = navigation;
+        navigate('TabBar');
     }
 }

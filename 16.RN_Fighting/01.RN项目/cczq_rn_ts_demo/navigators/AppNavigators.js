@@ -31,7 +31,6 @@ class TabBarComponent extends React.Component {
             this.theme = theme;
         }
         return (
-
             <TabBarBottom
                 {...this.props}
                 activeTintColor={this.theme.tintColor || this.props.activeTintColor}
@@ -111,7 +110,7 @@ export const AppTabNavigator = TabNavigator(
             navigationOptions: {
                 tabBarLabel: "Page1",
                 tabBarIcon: ({tintColor, focused})=> {
-                    <Icon
+                    return <Icon
                         name={"md-home"}
                         size={26}
                         style={{color: tintColor}}
@@ -124,7 +123,7 @@ export const AppTabNavigator = TabNavigator(
             navigationOptions: {
                 tabBarLabel: "Page2",
                 tabBarIcon: ({tintColor, focused})=> {
-                    <Icon
+                   return  <Icon
                         name="md-home"
                         size={26}
                         style={{color: tintColor}}
@@ -137,7 +136,7 @@ export const AppTabNavigator = TabNavigator(
             navigationOptions: {
                 tabBarLabel: "Page3",
                 tabBarIcon: ({tintColor, focused})=> {
-                    <Icon
+                    return <Icon
                         name="md-home"
                         size={26}
                         style={{color: tintColor}}
@@ -158,7 +157,7 @@ export const AppStackNavigator = StackNavigator({
         HomePage: {
             screen: HomePage,
             navigationOptions: {
-                headerBackTitle: '返回'
+                headerBackTitle: '返回',
             }
         },
         Page1: {

@@ -7,10 +7,11 @@
 1.由于电脑系统的原因，暂时使用react-navigation@1.4.0,整体用法和最新版本差不多
 2.页面的导航跳转必须在导航页面进行配置，在StackNavigator里面的第二个参数中navigationOptions可以全局设置导航样式{header: null},优先级最低,也可以在具体页面下单独设置导航样式和是否这个页面显示导航，优先级第二，也可以在具体页面的js文件里面设置:static navigationOptions = {()=>{}},优先级最高，且导航的样式如果要写成全局，最好就在导航的js文件里面设置
 3.全局的navigationOptions会在页面加载完成后就调用，具体的某个页面的导航是在页面出现时调用，所有具体某个页面的导航的处理可以在两个地方，一个是配置导航的js中，优先级第二，另一个是具体页面中，优先级第一
-4.可以先在navigationOptions里面设置导航title从navigatin.params.title里面拿，然后在navigation.setParams({title: ‘参数’})设置就会动态设置title了
+4.可以先在navigationOptions里面设置导航title从navigation.state.params.title里面拿，然后在navigation.setParams({title: ‘参数’})设置就会动态设置title了
 5.可以直接将AppTabNavgator导出到根结点，这样就显示了tabbar但没有导航,为了有导航，可以将AppTabNavigator最为AppNavigator的一个screen，跳转进去即可
 6.由于iOS和安卓使用的TabBar不一致，这个时候就需要用tabBarComponent属性自定义tabBar，tabbar之间的切换依然是this.props.navigation.navigate(‘Page2’)
 7.自定义的tabBarComponent从this.props.navigationState里面拿到{routes,index},然后通过routes[index].params拿到参数，在这个页面js中通过设置setParams({theme: {}})来动态全局改变主题色
+8.一般在TabNavigator里面设置每个Tabbar管理的每个页面的tabItem，每个页面的tab相关就写在每个页面screen下的navigationOptions里面，tab下导航条的配置就写在第二个参数的navigationOpations里面
 
 第三节课
 1.ListView没有复用机制，所有item的渲染是全量的
