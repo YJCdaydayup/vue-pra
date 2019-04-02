@@ -15,3 +15,7 @@
 第三节课
 1.ListView没有复用机制，所有item的渲染是全量的
 2.VirturlizedList是flatList和SectionList的底层，在窗口之外的元素将会从组件结构上卸载达到回收内存的目的
+3.
+
+
+

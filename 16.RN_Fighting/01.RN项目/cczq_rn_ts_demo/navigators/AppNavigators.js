@@ -13,7 +13,7 @@ import {StackNavigator, TabNavigator, TabBarBottom, DrawerNavigator,DrawerItems}
 import React from 'react'
 import {Button, Platform, View, ScrollView, SafeAreaView} from 'react-native'
 
-// import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 class TabBarComponent extends React.Component {
     constructor(props) {
@@ -165,7 +165,7 @@ export const AppStackNavigator = StackNavigator({
             screen: Page1,
             navigationOptions: ({navigation})=> {
                 return {
-                    title: `${navigation.state.params.name}页面名`
+                    // title: `${navigation.state.params.name}页面名`
                 }
             }
         },
