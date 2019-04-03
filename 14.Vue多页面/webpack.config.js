@@ -65,13 +65,13 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            filename: 'cart.html',
+            filename: 'index.html',
             template: './src/mounts/cart.html',
             inject: 'body',
             chunks: ['cart']
         }),
         new HtmlWebpackPlugin({
-            filename: 'index.html',
+            filename: 'index1.html',
             template: './src/mounts/main.html',
             inject: 'body',
             chunks: ['main']
