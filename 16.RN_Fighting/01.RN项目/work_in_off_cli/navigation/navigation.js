@@ -10,6 +10,7 @@ import Page1 from './../pages/Page1'
 import Page2 from './../pages/Page2'
 
 import {TabBar} from './../tabbar/tabbar'
+import {DrawerStack} from './../drawer/drawer'
 
 export const AppStackNavigator = createStackNavigator(
     {
@@ -53,6 +54,12 @@ export const AppStackNavigator = createStackNavigator(
             screen: TabBar,
             navigationOptions: {
                 title: 'Tabbar'
+            }
+        },
+        DrawerStack: {
+            screen: DrawerStack,
+            navigationOptions: {
+                title: 'Drawer'
             }
         }
     },

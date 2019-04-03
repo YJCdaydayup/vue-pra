@@ -75,10 +75,11 @@ export const TabBar = createBottomTabNavigator(
     },
     {
         navigationOptions: ({navigation})=>{
-            let index = navigation.state;
-            console.log(navigation.state)
+            let {state} = navigation;
+            let titles = ['home','recording','rocket'];
+            console.log(titles[state.index])
             return {
-
+                headerTitle: titles[state.index]
             }
         },
         tabBarOptions: {

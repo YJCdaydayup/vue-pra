@@ -31,6 +31,12 @@ export default class HomePage extends Component {
                         navigation.navigate('TabBar')
                     }}
                 />
+                <Button
+                    title="DrawerStack"
+                    onPress={()=>{
+                        navigation.navigate('DrawerStack')
+                    }}
+                />
             </View>
         )
     }

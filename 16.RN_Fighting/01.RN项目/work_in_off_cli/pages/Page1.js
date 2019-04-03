@@ -44,6 +44,12 @@ export default class Page1 extends Component {
                         })
                     }}
                 />
+                <Button
+                    title="打开抽屉"
+                    onPress={()=>{
+                        this.props.navigation.openDrawer();
+                    }}
+                />
             </View>
         )
     }
