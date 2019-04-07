@@ -2,19 +2,29 @@ import React, {Component} from 'react'
 import {
     StyleSheet,
     View,
-    Text
+    Text,
+    SegmentedControlIOS
 } from 'react-native'
 
 
 export default class Page3 extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            selectedIndex: 0
+        }
     }
 
     render() {
         return (
             <View style={styles.container}>
-
+                <SegmentedControlIOS
+                    values={['One', 'Two']}
+                    selectedIndex={this.state.selectedIndex}
+                    onChange={(event) => {
+                        this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
+                    }}
+                />
             </View>
         )
     }
