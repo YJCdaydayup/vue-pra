@@ -65,10 +65,8 @@ export default class Page1 extends Component {
         }else {
            setTimeout(function () {
                let arr = this.state.dataArray;
-               arr.concat(CITY_NAMES)
-               console.log(arr)
                this.setState({
-                   dataArray: arr
+                   dataArray: arr.concat(['新疆'])
                })
            },2000)
         }
@@ -78,41 +76,37 @@ export default class Page1 extends Component {
         const {navigation} = this.props;
         return (
             <View style={styles.container}>
-                <FlatList
-                    data={this.state.dataArray}
-                    renderItem={this._renderItem}
-                    // refreshing={this.state.isLoading}
-                    // onRefresh={()=>{
-                       // this.loadData()
-                    // }}
-                    refreshControl= {
-                        <RefreshControl
-                            title={'Loading'}
-                            colors={['red']}
-                            tintColor={'red'}
-                            titleColor={'red'}
-                            onRefresh={()=>{
-                                this.loadData(true)
-                            }}
-                            refreshing={this.state.isLoading}
-                        />
-                    }
-                    ListFooterComponent={()=>{
-                        return (
-                           <View style={styles.indicatorContainer}>
-                               <ActivityIndicator
-                                   size={'large'}
-                                   animating={true}
-                                   color={'red'}
-                               />
-                               <Text style={styles.indicator}>正在加载更多...</Text>
-                           </View>
-                        )
-                    }}
-                    onEndReached={()=>{
-                        this.loadData(false)
-                    }}
-                />
+                {/*<FlatList*/}
+                    {/*data={this.state.dataArray}*/}
+                    {/*renderItem={this._renderItem}*/}
+                    {/*// refreshing={this.state.isLoading}*/}
+                    {/*// onRefresh={()=>{*/}
+                       {/*// this.loadData()*/}
+                    {/*// }}*/}
+                    {/*refreshControl= {*/}
+                        {/*<RefreshControl*/}
+                            {/*title={'Loading'}*/}
+                            {/*titleColor={'red'}*/}
+                            {/*onRefresh={()=>{*/}
+                                {/*this.loadData(true)*/}
+                            {/*}}*/}
+                            {/*refreshing={this.state.isLoading}*/}
+                        {/*/>*/}
+                    {/*}*/}
+                    {/*ListFooterComponent={()=>{*/}
+                        {/*return (*/}
+                           {/*<View style={styles.indicatorContainer}>*/}
+                               {/*<ActivityIndicator*/}
+                                   {/*size={'large'}*/}
+                                   {/*animating={true}*/}
+                                   {/*color={'red'}*/}
+                               {/*/>*/}
+                               {/*<Text style={styles.indicator}>正在加载更多...</Text>*/}
+                           {/*</View>*/}
+                        {/*)*/}
+                    {/*}}*/}
+                    {/*onEndReached={this.loadData(false)}*/}
+                {/*/>*/}
             </View>
         );
     }

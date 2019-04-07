@@ -15,7 +15,8 @@ import {
     StyleSheet,
     Text,
     View,
-    Button
+    Button,
+    TextInput
 } from 'react-native';
 
 export default class Page2 extends Component {

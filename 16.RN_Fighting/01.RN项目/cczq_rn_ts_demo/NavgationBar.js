@@ -34,10 +34,10 @@ export default class NavgationBar extends Component {
     }
 
     static defaultProps = {
-       statusBar: {
-           barStyle:  'light-content',
-           hidden: false
-       }
+        statusBar: {
+            barStyle: 'light-content',
+            hidden: false
+        }
     }
 
     constructor(props) {
@@ -61,7 +61,7 @@ export default class NavgationBar extends Component {
             {this.props.rightButton}
         </View>
         return (
-            <View style={[styles.container,this.props.style]}>
+            <View style={[styles.container, this.props.style]}>
                 {status}
                 {content}
             </View>
@@ -71,7 +71,7 @@ export default class NavgationBar extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#F5FCFF'
+        backgroundColor: '#2196F3'
     },
     navBar: {
         flexDirection: 'row',
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     title: {
-        color: 'white',
+        color: '#fff',
         fontSize: 20,
     },
     statusBar: {

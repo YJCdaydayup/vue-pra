@@ -9,7 +9,9 @@
 	"dependencies": {
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.44.3",
+		"react-native-easy-toast": "^1.2.0",
 		"react-native-gesture-handler": "^1.1.0",
+		"react-native-scrollable-tab-view": "^0.10.0",
 		"react-native-vector-icons": "^6.4.2",
 		"react-navigation": "^1.4.0"
 	},
