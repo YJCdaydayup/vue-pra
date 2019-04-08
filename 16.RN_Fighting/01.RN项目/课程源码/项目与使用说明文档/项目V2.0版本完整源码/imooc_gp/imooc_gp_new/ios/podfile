@@ -1,0 +1,16 @@
+platform :ios, '7.0'
+
+target 'imooc_gp' do
+    pod 'UMengAnalytics'
+    pod 'UMengUShare/UI'
+    # 集成新浪微博
+    pod 'UMengUShare/Social/Sina'
+    # 集成微信
+    pod 'UMengUShare/Social/WeChat'
+    # 集成QQ
+    pod 'UMengUShare/Social/QQ'
+    # 集成邮件
+    pod 'UMengUShare/Social/Email'
+    # 集成短信
+    pod 'UMengUShare/Social/SMS'
+end

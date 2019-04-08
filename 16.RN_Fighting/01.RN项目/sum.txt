@@ -30,7 +30,8 @@
                     navigation.goBack()
                 })
             }
-
+4.export default class Text { static fetch() {}} 中用static定义的方法属于类方法，在外面必须要用这个类使用，不加static是对象方法，要new一下了再使用
+5.react-native-check-box安装使用
 
 
 

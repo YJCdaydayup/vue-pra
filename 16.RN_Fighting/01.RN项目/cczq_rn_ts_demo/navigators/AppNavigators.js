@@ -247,14 +247,6 @@ export const AppStackNavigator = StackNavigator({
         },
         AutoLabel: {
             screen: AutoLabel,
-            navigationOptions: ({navigation})=>{
-                return {
-                    title: '自定义标签',
-                    headerLeft:ViewUtil.getLeftButton(()=>{
-                        navigation.goBack()
-                    })
-                }
-            }
         }
         // DrawerNav: {
         //     screen: DrawerNav,
