@@ -32,6 +32,7 @@
             }
 4.export default class Text { static fetch() {}} 中用static定义的方法属于类方法，在外面必须要用这个类使用，不加static是对象方法，要new一下了再使用
 5.react-native-check-box安装使用
+6.export defualt class LanguageDao {constructor(flag) {this.flag = flag}} 在外面用对象方法时，要new一下时构造函数要传入flag，可以将flag的不同值作为一个对象export const FLAG = {flag1,flag2...}等导出，
 
 
 

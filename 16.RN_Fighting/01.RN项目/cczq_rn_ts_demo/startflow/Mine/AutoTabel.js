@@ -86,7 +86,7 @@ export default class AutoTabel extends Component {
         return (
             <Checkbox
                 onClick={this._onClick}
-                leftText={name}
+                leftText={leftText}
                 checkedImage={<Image
                     source={require('./../../res/img/ic_check_box.png')}
                 />}
@@ -95,6 +95,10 @@ export default class AutoTabel extends Component {
                 />}
             />
         )
+    }
+
+    _onClick() {
+
     }
 
     render() {
