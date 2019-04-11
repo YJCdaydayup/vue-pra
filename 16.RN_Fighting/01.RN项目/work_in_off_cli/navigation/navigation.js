@@ -12,12 +12,14 @@ import Page2 from './../pages/Page2'
 import {TabBar} from './../tabbar/tabbar'
 import {DrawerStack} from './../drawer/drawer'
 
+import ViewUtils from './../common/ViewUtils'
+
 export const AppStackNavigator = createStackNavigator(
     {
         HomePage: {
             screen: HomePage,
             navigationOptions: {
-                title: 'HOME'
+                title: 'HOME',
             }
         },
         Page1: {
@@ -26,7 +28,10 @@ export const AppStackNavigator = createStackNavigator(
                 let {state,setParams} = navigation;
                 let {params} = state;
                 return {
-                    title: params.title?`参数: ${params.title}`:"默认标题"
+                    title: params.title?`参数: ${params.title}`:"默认标题",
+                    headerStyle: {
+                        backgroundColor: '#aaa'
+                    }
                 }
             }
         },
@@ -64,10 +69,10 @@ export const AppStackNavigator = createStackNavigator(
         }
     },
     {
-        navigationOptions: ()=>{
+        navigationOptions: ({navigation}) => {
             return {
                 headerStyle: {
-                    backgroundColor: '#333'
+                    backgroundColor : 'red', // 定制所有导航栏的颜色
                 }
             }
         }

@@ -33,6 +33,9 @@
 4.export default class Text { static fetch() {}} 中用static定义的方法属于类方法，在外面必须要用这个类使用，不加static是对象方法，要new一下了再使用
 5.react-native-check-box安装使用
 6.export defualt class LanguageDao {constructor(flag) {this.flag = flag}} 在外面用对象方法时，要new一下时构造函数要传入flag，可以将flag的不同值作为一个对象export const FLAG = {flag1,flag2...}等导出，
+7.监听整个界面各个组件有没有状态变化，可以定义一个空数组，再遍历这个数组，存在item就删除，不存在就加进去，最后看数组长度是不是为0来判断这个界面有没有变化
+8.RN中的通知分iOS和安卓，通过Platform来区分，NativeAppEventEmitter.addListener("noticeName",(param)=>{})是iOS的，DeviceEventEmitter是安卓的，通过DeviceEventEmitter.emit('noticeName',param)来派发事件
+
 
 
 
