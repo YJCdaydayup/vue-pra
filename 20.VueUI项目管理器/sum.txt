@@ -1,0 +1,5 @@
+研究SPA项目源码补充知识点:
+
+1.页面跳转前可以使用router.beforeEach((to, from.next)=>{})来重定向页面跳转，特别是针对登录页面和报错页面的跳转，写在router创建的js文件里面
+2.嵌套路由的父js界面中，如果只写<router-view></router-view>就加载children里面的第一个组件，要实现多个子组件的切换，就在children里面加多个子组件，如果只有一个子组件，不必这样做，而是直接import这个组件加进来即可
+3.children里面的子组件之间是可以相互跳转的：<router-link class="register" :to="{ name: 'register' }">注册账户</router-link>

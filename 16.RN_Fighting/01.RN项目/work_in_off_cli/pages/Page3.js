@@ -101,7 +101,7 @@ const style = StyleSheet.create({
     btnWrap: {
         backgroundColor: "#fff",
         alignItems: 'flex-end',
-        width: 90,
+        width: width,
         height: 150
     },
     btn: {
