@@ -30,6 +30,7 @@ export default class MyPage extends Component {
         super(props);
         this._push = this._push.bind(this);
         this._showSortKey = this._showSortKey.bind(this);
+        this._remove = this._remove.bind(this);
     }
 
     render() {
@@ -41,12 +42,29 @@ export default class MyPage extends Component {
                 <Text
                     onPress={this._showSortKey}
                 >SortKeys</Text>
+                <Text
+                    onPress={this._remove}
+                >标签移除</Text>
             </View>
         );
     }
 
+    _remove() {
+        this.props.navigation.navigate('AutoLabel', {
+            params: {
+                ...this.props,
+                isRemoveKey: true
+            }
+        });
+    }
+
     _push() {
-        this.props.navigation.navigate('AutoLabel');
+        this.props.navigation.navigate('AutoLabel', {
+            params: {
+                ...this.props,
+                isRemoveKey: false
+            }
+        });
     }
 
     _showSortKey() {

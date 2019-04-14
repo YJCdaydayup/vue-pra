@@ -46,6 +46,7 @@
   C ...ViewPropTypes 写在属性里面 static propsType = {...ViewPropTypes}
 4.react-native-scrollable-tab-view渲染出来的时候，如果里面的tabLabel对应的界面数量很多且还不确定时就会一直闪烁，解决办法是先判断里面的界面数量计算出来没this.state.dataArray>0?<ScrollableTabView/>:null
 5.Alert组件是两个平台都可以使用的
+6.页面参数的传递通过导航也可以拿到的，
 
 
 

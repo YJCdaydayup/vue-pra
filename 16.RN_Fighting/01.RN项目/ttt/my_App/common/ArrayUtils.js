@@ -42,4 +42,16 @@ export default class ArrayUtils {
         }
         return true;
     }
+
+    /**
+     * 将数组中指定元素移除
+     **/
+    static remove(array, item) {
+        if (!array) return false;
+        for (let i = 0; len = array.length, i < len; i++) {
+            if (array[i] === item) {
+                array.splice(i, 1);
+            }
+        }
+    }
 }

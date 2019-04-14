@@ -27,13 +27,19 @@ const nav_back_notice = 'nav_back_notice';
 const nav_save_notice = 'nav_save_notice';
 
 export default class AutoTabel extends Component {
-    static navigationOptions = ()=> {
+    static navigationOptions = ({navigation})=> {
+        let {state, setParams} = navigation;
+        let {params} = state.params;
         return {
+            headerTitle: params.isRemoveKey ? '标签移除' : "标签选择",
+            headerTitleStyle: {
+                color: "#fff"
+            },
             headerLeft: ViewUtils.getLeftButton(()=> {
                 DeviceEventEmitter.emit(nav_back_notice)
             }),
             headerRight: <Text
-                onPress={()=>{
+                onPress={()=> {
                     DeviceEventEmitter.emit(nav_save_notice)
                 }}
                 style={{
@@ -41,13 +47,14 @@ export default class AutoTabel extends Component {
                     fontSize: 18,
                     marginRight: 10
                 }}
-            >保存</Text>
+            >{params.isRemoveKey ? '移除' : "保存"}</Text>
         }
     }
 
     constructor(props) {
         super(props);
         this.changeValues = [];
+        this.isRemoveKey = this.props.isRemoveKey ? true : false;
         this.state = {
             dataArray: []
         }
@@ -55,11 +62,11 @@ export default class AutoTabel extends Component {
 
     componentDidMount() {
 
-        DeviceEventEmitter.addListener(nav_back_notice, ()=>{
+        DeviceEventEmitter.addListener(nav_back_notice, ()=> {
             this._onBack();
         })
 
-        DeviceEventEmitter.addListener(nav_save_notice, ()=>{
+        DeviceEventEmitter.addListener(nav_save_notice, ()=> {
             this._onSave();
         })
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
@@ -70,7 +77,7 @@ export default class AutoTabel extends Component {
         let {navigation} = this.props;
         if (this.changeValues.length === 0) {
 
-        }else {
+        } else {
             AlertIOS.alert(
                 "Update available",
                 "Keep your app up to date to enjoy the latest features",
@@ -95,10 +102,13 @@ export default class AutoTabel extends Component {
         let {navigation} = this.props;
         if (this.changeValues.length === 0) {
             navigation.goBack();
-            return ;
+            return;
         }
-        navigation.goBack();
+        for (let i = 0; len = this.changeValues.length, i < len; i++) {
+            ArrayUtils.remove(this.state.dataArray, this.changeValues[i])
+        }
         this.languageDao.save(this.state.dataArray)
+        navigation.goBack();
     }
 
     loadData() {
@@ -112,7 +122,9 @@ export default class AutoTabel extends Component {
     }
 
     onClick(data) {
-        data.checked = !data.checked;
+        if (!this.isRemoveKey) {
+            data.checked = !data.checked;
+        }
         ArrayUtils.updataArray(this.changeValues, data)
     }
 
@@ -145,7 +157,9 @@ export default class AutoTabel extends Component {
 
     renderCheckBox(data) {
         let leftText = data.name;
-        let isChecked = data.checked;
+        let {state} = this.props.navigation;
+        let {params} = state.params;
+        let isChecked = params.isRemoveKey?false: data.checked;
         return (
             <CheckBox
                 style={{flex: 1, padding: 10}}
