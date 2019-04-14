@@ -37,5 +37,20 @@
 8.RN中的通知分iOS和安卓，通过Platform来区分，NativeAppEventEmitter.addListener("noticeName",(param)=>{})是iOS的，DeviceEventEmitter是安卓的，通过DeviceEventEmitter.emit('noticeName',param)来派发事件
 
 
+第五节课
+1.js中的对象比如数组和object，只要其地址是一样的，对象里面的元素改变了这个对象依然是这个对象，比如 tm = [];p = tm, p[0] = 1,那么 tm === p依然成立
+2.子组件通过props接受父组件传递的数据显示UI，当父组件传递的数据有变化时，子组件是无法驱动响应改变UI的，这个时候分情况处理，当父组件有多个这样的子组件时，改变UI的事情就交给子组件自己处理（将数据通过状态机持有,然后将修改的源数据丢出去，或者在父组件里面自己处理源数据），当只有一个子组件时，可以获取子组件调用子组件的方法来处理
+3.定义一个组件，让组件拥有系统的style={{}}，分三步走:
+  A ViewPropTypes as RNViewPropTypes 在react-native里面
+  B const ViewPropTypes = RNViewPropTypes || View.propTypes;
+  C ...ViewPropTypes 写在属性里面 static propsType = {...ViewPropTypes}
+4.react-native-scrollable-tab-view渲染出来的时候，如果里面的tabLabel对应的界面数量很多且还不确定时就会一直闪烁，解决办法是先判断里面的界面数量计算出来没this.state.dataArray>0?<ScrollableTabView/>:null
+5.Alert组件是两个平台都可以使用的
+
+
+
+
+
+
 
 
