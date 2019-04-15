@@ -56,9 +56,9 @@ export default class Page1 extends Component {
         } else {
             this.subscription = NativeAppEventEmitter.addListener('userNameDidChange', (userName) => {
                 if (this.changedArr.length > 0) {
-                    this.props.navigation.goBack();
                     this._onSave();
                 }
+                this.props.navigation.goBack();
             })
         }
     }
@@ -70,9 +70,9 @@ export default class Page1 extends Component {
 
     _onSave() {
         this.language.save(this.state.dataArray).then(() => {
-            alert('保存成功');
+            // alert('保存成功');
         }).catch((err) => {
-            alert('保存失败');
+            // alert('保存失败');
         })
     }
 
@@ -88,7 +88,7 @@ export default class Page1 extends Component {
             arr = this.handlerDataArray(len - 1);
             let item = this.state.dataArray[len - 1];
             arr.push(
-                <View style={styles.box}>
+                <View style={styles.box} key={item.name}>
                     <CheckBox clickEvent={this._click} item={item}/>
                 </View>
             )
@@ -102,11 +102,11 @@ export default class Page1 extends Component {
             let item1 = this.state.dataArray[i];
             let item2 = this.state.dataArray[i + 1];
             views.push(
-                <View style={styles.rowStyle}>
-                    <View style={styles.box}>
+                <View style={styles.rowStyle} key={i}>
+                    <View style={styles.box} key={item1.name}>
                         <CheckBox clickEvent={this._click} item={item1}/>
                     </View>
-                    <View style={styles.box}>
+                    <View style={styles.box} key={item2.name}>
                         <CheckBox clickEvent={this._click} item={item2}/>
                     </View>
                 </View>
@@ -117,24 +117,7 @@ export default class Page1 extends Component {
 
 
     _click(item) {
-        let data = this.state.dataArray;
         ViewUtils.updateLocalArray(this.changedArr, item);
-        if (item.name === "ALL") {
-            this.changeAllBox(item.checked);
-        }
-    }
-
-    changeAllBox(checked) {
-        for (let i = 1; i < this.state.dataArray.length - 1; i++) {
-            this.state.dataArray[i].checked = checked;
-        }
-
-        this.setState({
-            dataArray: this.state.dataArray,
-            test: '1'
-        },()=>{
-            this.forceUpdate();
-        })
     }
 
     componentDidMount() {

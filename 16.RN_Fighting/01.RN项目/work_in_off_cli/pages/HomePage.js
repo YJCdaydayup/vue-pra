@@ -37,6 +37,12 @@ export default class HomePage extends Component {
                         navigation.navigate('DrawerStack')
                     }}
                 />
+                <Button
+                    title="Page4"
+                    onPress={()=>{
+                        navigation.navigate('Page4')
+                    }}
+                />
             </View>
         )
     }
