@@ -32,13 +32,13 @@ export default class RepositoryCell extends Component {
                 }}
             >
                 <View style={styles.cell_container}>
-                    <Text style={styles.title}>{rowData.full_name}</Text>
+                    <Text style={styles.title}>{rowData.name}</Text>
                     <Text style={styles.description}>{rowData.description}</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10}}>
                             <Text>Author:</Text>
                             <Image
-                                source={{uri: rowData.owner.avatar_url}}
+                                source={{uri: rowData.avatar_url}}
                                 style={{height: 22, width: 22}}
                             />
                         </View>
