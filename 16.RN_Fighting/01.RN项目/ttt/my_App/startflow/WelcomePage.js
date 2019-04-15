@@ -13,8 +13,11 @@ import {
     TextInput,
     ListView,
     RefreshControl,
-    AsyncStorage
+    AsyncStorage,
+    DeviceEventEmitter
 } from 'react-native';
+
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view'
 
@@ -41,9 +44,18 @@ export default class WelcomePage extends Component {
         }
     }
 
-   componentDidMount() {
-       this.loadData()
-   }
+    componentDidMount() {
+
+        this.linstener = DeviceEventEmitter.addListener('showToast', (text)=> {
+            this.toast.show(text, DURATION.LENGTH_SHORT);
+        })
+        this.loadData()
+    }
+
+    componentWillUnmount() {
+        // 移除通知
+        this.linstener && this.linstener.remove();
+    }
 
     loadData() {
         this.languageDao.fetch().then((data)=> {
@@ -59,27 +71,28 @@ export default class WelcomePage extends Component {
         let {navigation} = this.props;
         let {dataArray} = this.state;
         return (
-            dataArray.length > 0?
-            <View style={styles.container}>
-                {/*<NavgationBar title="最新"/>*/}
-                <ScrollableTabView
-                    tabBarBackgroundColor="#2196F3"
-                    tabBarInactiveTextColor="mintcream"
-                    tabBarActiveTextColor="#fff"
-                    tabBarUnderlineStyle={{backgroundColor: "#fff", height: 2}}
-                    renderTabBar={()=> {
-                        return (
-                            <ScrollableTabBar/>
-                        )
-                    }}
-                >
-                    {this.state.dataArray.map((item, index)=> {
-                        return (
-                            item.checked?<PopularTab key={index} tabLabel={item.name} nav={navigation}>{item.name}</PopularTab>:null
-                        )
-                    })}
-                </ScrollableTabView>
-            </View>: null
+            dataArray.length > 0 ?
+                <View style={styles.container}>
+                    {/*<NavgationBar title="最新"/>*/}
+                    <ScrollableTabView
+                        tabBarBackgroundColor="#2196F3"
+                        tabBarInactiveTextColor="mintcream"
+                        tabBarActiveTextColor="#fff"
+                        tabBarUnderlineStyle={{backgroundColor: "#fff", height: 2}}
+                        renderTabBar={()=> {
+                            return (
+                                <ScrollableTabBar/>
+                            )
+                        }}
+                    >
+                        {this.state.dataArray.map((item, index)=> {
+                            return (
+                                item.checked ? <PopularTab key={index} tabLabel={item.name}
+                                                           nav={navigation}>{item.name}</PopularTab> : null
+                            )
+                        })}
+                    </ScrollableTabView>
+                </View> : null
         )
     }
 }
@@ -121,6 +134,9 @@ class PopularTab extends Component {
                         title='loading...'
                     />}
                 />
+                <Toast ref={(toast)=> {
+                    this.toast = toast
+                }}/>
             </View>
         )
     }
@@ -155,28 +171,29 @@ class PopularTab extends Component {
             let url = this.genUrl(this.props.tabLabel);
 
             // AsyncStorage.removeItem(url, (err) =>{
-                this.dataRepository.fetchRepository(url).then(result => {
-                    let items = result && result.items? result.items: result? result: []
-                    this.setState({
-                        isLoading: false,
-                        dataSource: this.state.dataSource.cloneWithRows(items)
-                    })
-
-                    // 判断是否数据过期
-                    if (result && result.update_date && this.dataRepository.checkedData(result.update_date)) {
-                        return this.dataRepository.fetchNetRespotory(url).then(items => {
-                            if (!items || items.length === 0) return ;
-                            this.setState({
-                                isLoading: false,
-                                dataSource: this.state.dataSource.cloneWithRows(items)
-                            })
-                        })
-                    }
-                }).catch(err=> {
-                    console.log(err);
+            this.dataRepository.fetchRepository(url).then(result => {
+                let items = result && result.items ? result.items : result ? result : []
+                this.setState({
+                    isLoading: false,
+                    dataSource: this.state.dataSource.cloneWithRows(items)
                 })
-            // })
-
+                DeviceEventEmitter.emit('showToast', '显示缓存数据')
+                // 判断是否数据过期
+                if (result && result.update_date && this.dataRepository.checkedData(result.update_date)) {
+                    DeviceEventEmitter.emit('showToast', '数据过时')
+                    {
+                        return this.dataRepository.fetchNetRespotory(url);
+                    }
+                }
+            }).then(items => {
+                if (!items || items.length === 0) return;
+                this.setState({
+                    isLoading: false,
+                    dataSource: this.state.dataSource.cloneWithRows(items)
+                })
+            }).catch(err=> {
+                console.log(err);
+            })
         })
     }
 }
