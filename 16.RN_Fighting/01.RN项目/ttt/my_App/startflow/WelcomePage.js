@@ -151,9 +151,10 @@ class PopularTab extends Component {
         )
     }
 
-    _clickEvent() {
-        alert('123')
-        // this.props.navigation.navigate('AsyncLocalStorage')
+    _clickEvent(rowData) {
+        this.props.nav.navigate('Detail', {
+            params: rowData
+        });
     }
 
     componentDidMount() {

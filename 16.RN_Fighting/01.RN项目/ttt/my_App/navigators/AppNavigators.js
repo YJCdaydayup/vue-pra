@@ -9,6 +9,7 @@ import Page3 from './../pages/Page3'
 import Page4 from './../pages/Page4'
 import Page5 from './../pages/Page5'
 import Webview from './../startflow/MyWebView'
+import RespositoryDetailPage from './../startflow/RespositoryDetail'
 import Page6 from './../components/SwipableFlatlist'
 import SectionList from './../components/SectionList'
 
@@ -267,6 +268,19 @@ export const AppStackNavigator = StackNavigator({
         },
         SortKeyPage: {
             screen: SortKeyPage
+        },
+        Detail: {
+            screen: RespositoryDetailPage,
+            navigationOptions: {
+                title: "详情",
+                // tabBarIcon: ({tintColor, focused})=> {
+                //     return <Icon
+                //         name="md-home"
+                //         size={26}
+                //         style={{color: tintColor}}
+                //     />
+                // }
+            }
         }
         // DrawerNav: {
         //     screen: DrawerNav,

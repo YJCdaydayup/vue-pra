@@ -23,12 +23,12 @@ export default class RepositoryCell extends Component {
 
     render() {
 
-        let {rowData} = this.props;
+        let {rowData,clickEvent} = this.props;
         return (
             <TouchableOpacity
                 style={styles.container}
                 onPress={()=>{
-                    this.props.navigation.navigate('AsyncLocal')
+                    clickEvent(rowData)
                 }}
             >
                 <View style={styles.cell_container}>
