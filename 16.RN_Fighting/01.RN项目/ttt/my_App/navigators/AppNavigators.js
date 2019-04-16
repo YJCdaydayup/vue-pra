@@ -8,6 +8,7 @@ import Page2 from './../pages/Page2'
 import Page3 from './../pages/Page3'
 import Page4 from './../pages/Page4'
 import Page5 from './../pages/Page5'
+import Webview from './../startflow/MyWebView'
 import Page6 from './../components/SwipableFlatlist'
 import SectionList from './../components/SectionList'
 
@@ -153,6 +154,19 @@ export const AppTabNavigator = TabNavigator(
             screen: MyPage,
             navigationOptions: {
                 tabBarLabel: "我的",
+                // tabBarIcon: ({tintColor, focused})=> {
+                //     return <Icon
+                //         name="md-home"
+                //         size={26}
+                //         style={{color: tintColor}}
+                //     />
+                // }
+            }
+        },
+        WebView: {
+            screen: Webview,
+            navigationOptions: {
+                tabBarLabel: "网页",
                 // tabBarIcon: ({tintColor, focused})=> {
                 //     return <Icon
                 //         name="md-home"
