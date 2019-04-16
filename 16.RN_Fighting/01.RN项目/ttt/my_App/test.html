@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    checkedData = function(longTime) {
+        var cDate = new Date();
+        var tDate = new Date(longTime + cDate.getTime());
+        console.log(cDate)
+        console.log(tDate)
+        if (cDate.getMonth() !== tDate.getMonth()) return false;
+        if (cDate.getDay() !== tDate.getDay()) return false;
+        if (cDate.getHours() !== tDate.getHours()) return false;
+    }
+
+    checkedData(1000 * 60 * 60 * 2)
+
+</script>
+</body>
+</html>

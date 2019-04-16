@@ -48,6 +48,8 @@
 5.Alert组件是两个平台都可以使用的
 6.页面参数的传递通过导航也可以拿到的，
 7.js的继承优化方案: 1.原型 = new Func(）性能和效率不行，2.将通用的属性和方法抽离到原型上，原型 = Base.proptype,一个改多个改了， 3.中间函数: temp = function() {} temp.proptype = Base.proptype, Child.proptype = new temp(),然后将原型的构造函数设为Child自己即可，这个方法和Child.protype = Object.create(new temp())异曲同工之效
+8. &&是遇到为false就停止并返回此项的值，如果没有就执行完毕并返回最后项的值
+9. ||是遇到为true就停止并返回此项的值，如果都是true就执行到最后并返回最后项的值
 
 
 

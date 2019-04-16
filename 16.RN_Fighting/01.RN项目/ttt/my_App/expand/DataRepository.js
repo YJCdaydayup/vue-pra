@@ -12,10 +12,8 @@ export default class DataRepository {
         return new Promise((resolve, reject)=> {
             this.fetchLocalRepository(url).then((result)=> {
                 if (result) {
-                    console.log(result)
                     resolve(result);
                 } else {
-                    console.log(111)
                     this.fetchNetRespotory(url).then((result)=> {
                         resolve(result);
                     }).catch(err=> {
@@ -72,9 +70,8 @@ export default class DataRepository {
      * @returns {Boolean}
      **/
     checkedData(longTime) {
-        let cDate = new Date();
-        let tDate = new Date();
-        tDate.setTime(longTime);
+        var cDate = new Date();
+        var tDate = new Date(longTime + cDate.getTime());
         if (cDate.getMonth() !== tDate.getMonth()) return false;
         if (cDate.getDay() !== tDate.getDay()) return false;
         if (cDate.getHours() !== tDate.getHours()) return false;

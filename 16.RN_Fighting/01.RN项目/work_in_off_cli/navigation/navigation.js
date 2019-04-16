@@ -9,6 +9,7 @@ import HomePage from './../pages/HomePage'
 import Page1 from './../pages/Page1'
 import Page2 from './../pages/Page2'
 import Page4 from './../pages/Page4'
+import Page5 from './../pages/Page5'
 
 import {TabBar} from './../tabbar/tabbar'
 import {DrawerStack} from './../drawer/drawer'
@@ -72,9 +73,26 @@ export const AppStackNavigator = createStackNavigator(
             screen: Page4,
             navigationOptions: ({navigation}) => {
                 return {
-                    headerTitle: '选择的列表',
+                    title: '选择的列表',
                     headerTitleStyle: {
-                        color: '#fff'
+                        color: 'red'
+                    },
+                    headerStyle: {
+                        backgroundColor: '#666'
+                    }
+                }
+            }
+        },
+        Page5: {
+            screen: Page5,
+            navigationOptions: ({navigation}) => {
+                return {
+                    title: '最新',
+                    headerTitleStyle: {
+                        color: 'red'
+                    },
+                    headerStyle: {
+                        backgroundColor: '#666'
                     },
                     headerLeft: ViewUtils.getLeftButton(()=>{
                         navigation.goBack();
