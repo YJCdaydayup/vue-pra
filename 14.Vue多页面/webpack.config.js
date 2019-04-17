@@ -7,6 +7,7 @@ module.exports = {
     entry: {
         cart: './src/enties/cart.js',
         main: './src/enties/main.js',
+        verify: './src/enties/veriform.js'
     },
     output: {
         path: __dirname + '/dist',
@@ -65,16 +66,22 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            filename: 'index.html',
+            filename: 'index1.html',
             template: './src/mounts/cart.html',
             inject: 'body',
             chunks: ['cart']
         }),
         new HtmlWebpackPlugin({
-            filename: 'index1.html',
+            filename: 'index2.html',
             template: './src/mounts/main.html',
             inject: 'body',
             chunks: ['main']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './src/mounts/main.html',
+            inject: 'body',
+            chunks: ['verify']
         }),
         new CleanWebpackPlugin(['./dist'], {
             root: __dirname + '',

@@ -215,7 +215,6 @@
                 app.loginBtn = true;
                 console.log(loginParams);
                 loginParams.clientid = getStore('client_id');
-                alert(loginParams.client_id)
                 Login(loginParams).then(res => {
                     if (checkResponse(res)) {
                         loginParams.token = res.token;
@@ -234,6 +233,18 @@
                     this.loginBtn = false
                 }).catch(res => {
                     this.loginBtn = false
+                    loginParams.token = "SCJWIBCWIBSJCNSKAJ";
+                    const obj = {
+                        userInfo: "QWCJNS",
+                        tokenList: []
+                    };
+//                    app.$store.dispatch('SET_LOGGED', obj);
+//                    app.$store.dispatch('setOrganizationList', res.data.organizationList);
+//                    app.$store.dispatch('setCurrentOrganization', res.data.organizationList[0]);
+                    app.$store.dispatch('GET_MENU').then(() => {
+                        app.loginBtn = false;
+                        app.loginSuccess(res);
+                    });
                 });
             },
             getCaptcha(e) {
@@ -282,6 +293,7 @@
                 })
             },
             loginSuccess(res) {
+                alert(134567)
                 setTimeout(() => {
                     const menu = getStore('menu', true);
                     if (menu) {
