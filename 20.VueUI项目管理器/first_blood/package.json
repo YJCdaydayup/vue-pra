@@ -12,10 +12,12 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
+    "v-vuerify-next": "^0.2.0",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^8.0.0",
     "vue-router": "^3.0.1",
+    "vuerify": "^0.4.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "stylus-loader": "^3.0.2",
     "ts-jest": "^23.0.0",
     "typescript": "^3.2.1",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.5.21",
+    "vuerify": "^0.4.0"
   }
 }
