@@ -22,9 +22,13 @@ const save_notice = 'save_notice'
 import SortableListview from 'react-native-sortable-listview'
 
 export default class SortKeyPage extends Component {
-
-    static navigationOptions = () => {
+    static navigationOptions = ({navigation}) => {
+        let {flag} = navigation.state.params;
         return {
+            title: flag === FLAG_LANGUAGE.flag_key ? "标签排序" : "语言排序",
+            headerTitleStyle: {
+                color: '#fff'
+            },
             headerLeft: ViewUtils.getLeftButton(()=> {
                 DeviceEventEmitter.emit(back_notice)
             }),
@@ -45,7 +49,7 @@ export default class SortKeyPage extends Component {
         this.dataArray = [];
         this.sortResultArray = [];
         this.originalCheckedArray = [];
-        this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
+        this.languageDao = new LanguageDao(this.props.navigation.state.params.flag);
         this.state = {
             checkedArray: []
         }
@@ -93,7 +97,7 @@ export default class SortKeyPage extends Component {
         console.log(this.state.checkedArray)
         if (ArrayUtils.isEqual(this.originalCheckedArray, this.state.checkedArray)) {
             navigation.goBack();
-        }else {
+        } else {
             AlertIOS.alert(
                 "Update available",
                 "Keep your app up to date to enjoy the latest features",
@@ -143,14 +147,14 @@ export default class SortKeyPage extends Component {
         return (
             <View style={styles.container}>
                 <SortableListview
-                    style={{ flex: 1 }}
+                    style={{flex: 1}}
                     data={this.state.checkedArray}
                     order={Object.keys(this.state.checkedArray)}
                     onRowMoved={e => {
                         this.state.checkedArray.splice(e.to, 0, this.state.checkedArray.splice(e.from, 1)[0])
                         this.forceUpdate()
                     }}
-                    renderRow={row => <SortCell data={row} />}
+                    renderRow={row => <SortCell data={row}/>}
                 />
             </View>
         )

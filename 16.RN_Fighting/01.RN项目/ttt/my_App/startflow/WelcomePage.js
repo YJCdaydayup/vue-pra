@@ -17,6 +17,8 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
+import ProjectModal from './../model/ProjectModal'
+
 import Toast, {DURATION} from 'react-native-easy-toast'
 
 import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view'
@@ -32,7 +34,7 @@ const QUERY_STR = '&sort=stars'
 
 import Respository from './RepositoryCell'
 
-import DataRepository from './../expand/DataRepository'
+import DataRepository, {FLAG_STORAGE} from './../expand/DataRepository'
 
 export default class WelcomePage extends Component {
 
@@ -113,7 +115,7 @@ class PopularTab extends Component {
             isLoading: false
         }
         this.baseUrl = 'https://api.github.com/search/repositories?q=ios&sort=stars';
-        this.dataRepository = new DataRepository();
+        this.dataRepository = new DataRepository(FLAG_STORAGE.flag_popular);
         this._onLoad = this._onLoad.bind(this)
         this._clickEvent = this._clickEvent.bind(this)
         this._renderRow = this._renderRow.bind(this)
@@ -141,17 +143,23 @@ class PopularTab extends Component {
         )
     }
 
-    _renderRow(rowData) {
+    _renderRow(projectModel) {
         return (
             <Respository
-                rowData={rowData}
+                key={projectModel.item.id}
+                projectModel={projectModel}
                 clickEvent={this._clickEvent}
+                onFavorate={this._onFavorate}
                 navigation={this.props.nav}
             />
         )
     }
 
-    _clickEvent(rowData) {
+    _onFavorate(model, isFavorate) {
+        alert(isFavorate)
+    }
+
+    _clickEvent(rowData, isFavorate) {
         this.props.nav.navigate('Detail', {
             params: rowData
         });
@@ -174,28 +182,49 @@ class PopularTab extends Component {
             // AsyncStorage.removeItem(url, (err) =>{
             this.dataRepository.fetchRepository(url).then(result => {
                 let items = result && result.items ? result.items : result ? result : []
-                this.setState({
-                    isLoading: false,
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                })
-                DeviceEventEmitter.emit('showToast', '显示缓存数据')
-                // 判断是否数据过期
+                // this.setState({
+                //     isLoading: false,
+                //     dataSource: this.state.dataSource.cloneWithRows(items)
+                // })
+                this.flushFavorateState(items);
                 if (result && result.update_date && this.dataRepository.checkedData(result.update_date)) {
-                    DeviceEventEmitter.emit('showToast', '数据过时')
                     {
                         return this.dataRepository.fetchNetRespotory(url);
                     }
                 }
             }).then(items => {
                 if (!items || items.length === 0) return;
-                this.setState({
-                    isLoading: false,
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                })
+                // this.setState({
+                //     isLoading: false,
+                //     dataSource: this.state.dataSource.cloneWithRows(items)
+                // })
+                this.flushFavorateState(items);
             }).catch(err=> {
                 console.log(err);
             })
         })
+    }
+
+    /**
+     * 更新modal每一项的收藏状态
+     **/
+    flushFavorateState(items) {
+        let projectModals = [];
+        for (let i = 0; len = items.length, i < len; i++) {
+            projectModals.push(new ProjectModal(items[i], true));
+        }
+        this.updateState({
+            isLoading: false,
+            dataSource: this.state.dataSource.cloneWithRows(projectModals)
+        })
+    }
+
+    /**
+     * 对setState进行封装
+     **/
+    updateState(dic) {
+        if (!this) return;
+        this.setState(dic);
     }
 }
 

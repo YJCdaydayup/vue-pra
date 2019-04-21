@@ -14,20 +14,25 @@ import {
 export default class RepositoryCell extends Component {
 
     static propTypes = {
-        clickEvent: PropTypes.func
+        clickEvent: PropTypes.func,
+        onFavorate: PropTypes.func
     }
 
     constructor(props) {
         super(props);
+        this.state = {
+            favoriate: this.props.projectModel.isFavorate
+        }
     }
 
     render() {
 
-        let {rowData,clickEvent} = this.props;
+        let {projectModel, clickEvent} = this.props;
+        let rowData = projectModel.item;
         return (
             <TouchableOpacity
                 style={styles.container}
-                onPress={()=>{
+                onPress={()=> {
                     clickEvent(rowData)
                 }}
             >
@@ -46,14 +51,37 @@ export default class RepositoryCell extends Component {
                             <Text>Stars:</Text>
                             <Text style={{color: 'red'}}>{rowData.stargazers_count}</Text>
                         </View>
-                        <Image
-                            source={require('./../res/images/ic_star.png')}
-                            style={{width: 22, height: 22, marginRight: 10}}
-                        />
+                        <TouchableOpacity
+                            onPress={()=> {
+                                this.onPressFavorite()
+                            }}
+                        >
+                            <Image
+                                source={!this.state.favoriate ? require('./../res/images/ic_unstar_transparent.png') : require('./../res/images/ic_star.png')}
+                                style={{
+                                    width: 22,
+                                    height: 22,
+                                    padding: 10
+                                }}
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </TouchableOpacity>
         )
+    }
+
+    onPressFavorite() {
+        this.setFavorateState(!this.state.favoriate)
+    }
+
+    setFavorateState(isFavorate) {
+        if (!this) return;
+        this.setState({
+            favoriate: isFavorate
+        }, () => {
+            this.props.onFavorate(this.props.projectModel,isFavorate)
+        })
     }
 }
 

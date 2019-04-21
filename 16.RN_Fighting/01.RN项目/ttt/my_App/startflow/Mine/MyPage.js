@@ -24,6 +24,8 @@ const KEY = 'text';
 
 import Toast, {DURATION} from 'react-native-easy-toast'
 
+import {FLAG_LANGUAGE} from './../../common/LanguageDao'
+
 export default class MyPage extends Component {
 
     constructor(props) {
@@ -31,6 +33,8 @@ export default class MyPage extends Component {
         this._push = this._push.bind(this);
         this._showSortKey = this._showSortKey.bind(this);
         this._remove = this._remove.bind(this);
+        this._registerLanuage = this._registerLanuage.bind(this);
+        this._showSortLanuage = this._showSortLanuage.bind(this);
     }
 
     render() {
@@ -45,6 +49,12 @@ export default class MyPage extends Component {
                 <Text
                     onPress={this._remove}
                 >标签移除</Text>
+                <Text
+                    onPress={this._registerLanuage}
+                >订阅语言</Text>
+                <Text
+                    onPress={this._showSortLanuage}
+                >SortKeys</Text>
             </View>
         );
     }
@@ -53,7 +63,8 @@ export default class MyPage extends Component {
         this.props.navigation.navigate('AutoLabel', {
             params: {
                 ...this.props,
-                isRemoveKey: true
+                isRemoveKey: true,
+                flag: FLAG_LANGUAGE.flag_key
             }
         });
     }
@@ -62,13 +73,32 @@ export default class MyPage extends Component {
         this.props.navigation.navigate('AutoLabel', {
             params: {
                 ...this.props,
-                isRemoveKey: false
+                isRemoveKey: false,
+                flag: FLAG_LANGUAGE.flag_key
             }
         });
     }
 
     _showSortKey() {
-        this.props.navigation.navigate('SortKeyPage');
+        this.props.navigation.navigate('SortKeyPage',{
+            flag: FLAG_LANGUAGE.flag_key
+        });
+    }
+
+    _registerLanuage() {
+        this.props.navigation.navigate('AutoLabel', {
+            params: {
+                ...this.props,
+                isRemoveKey: false,
+                flag: FLAG_LANGUAGE.flag_language
+            }
+        });
+    }
+
+    _showSortLanuage() {
+        this.props.navigation.navigate('SortKeyPage',{
+            flag: FLAG_LANGUAGE.flag_language
+        });
     }
 }
 

@@ -30,8 +30,12 @@ export default class AutoTabel extends Component {
     static navigationOptions = ({navigation})=> {
         let {state, setParams} = navigation;
         let {params} = state.params;
+        let title = params.isRemoveKey ? '标签移除' : "自定义标签";
+        if (!params.isRemoveKey) {
+            title = params.flag === FLAG_LANGUAGE.flag_key ? title: '自定义语言';
+        }
         return {
-            headerTitle: params.isRemoveKey ? '标签移除' : "标签选择",
+            headerTitle: title,
             headerTitleStyle: {
                 color: "#fff"
             },
@@ -69,7 +73,7 @@ export default class AutoTabel extends Component {
         DeviceEventEmitter.addListener(nav_save_notice, ()=> {
             this._onSave();
         })
-        this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
+        this.languageDao = new LanguageDao(this.props.navigation.state.params.params.flag);
         this.loadData();
     }
 

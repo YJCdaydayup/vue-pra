@@ -7,7 +7,21 @@ import {
     AsyncStorage
 } from 'react-native'
 
+import GithubTrending from 'GitHubTrending'
+
+export const FLAG_STORAGE = {
+    flag_popular: "popular",
+    flag_trending: 'trending'
+};
+
 export default class DataRepository {
+    constructor(flag) {
+        this.flag = flag;
+        if (flag === FLAG_STORAGE.flag_trending) {
+            this.trending = new GithubTrending();
+        }
+    }
+
     fetchRepository(url) {
         return new Promise((resolve, reject)=> {
             this.fetchLocalRepository(url).then((result)=> {
@@ -44,17 +58,28 @@ export default class DataRepository {
 
     fetchNetRespotory(url) {
         return new Promise((resolve, reject)=> {
-            fetch(url).then((response) => response.json()).then((result)=> {
-                if (!result) {
-                    reject(new Error('reponse is null'));
-                    return false;
-                } else {
-                    resolve(result.items);
-                    this.saveRepository(url, result.items);
-                }
-            }).catch(err=> {
-                reject(err);
-            })
+            if (this.flag === FLAG_STORAGE.flag_trending) {
+                this.trending.fetchTrending(url).then(res=>{
+                    if (!res) {
+                        reject(new Error('reponse is null'));
+                    }else {
+                        this.saveRepository(url,res)
+                        resolve(res);
+                    }
+                })
+            }else {
+                fetch(url).then((response) => response.json()).then((result)=> {
+                    if (!result) {
+                        reject(new Error('reponse is null'));
+                        return false;
+                    } else {
+                        resolve(result.items);
+                        this.saveRepository(url, result.items);
+                    }
+                }).catch(err=> {
+                    reject(err);
+                })
+            }
         })
     }
 

@@ -24,6 +24,8 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
+const TRENDING_URL = 'https://github.com/trending/';
+
 import PropTypes from 'prop-types'
 import ViewUtils from './../common/ViewUtil'
 
@@ -36,7 +38,7 @@ export default class RespositoryDetail extends Component {
         let {params} = state;
         let data = params.params;
         return {
-            headerTitle: data.full_name,
+            headerTitle: data.full_name ? data.full_name : data.fullName,
             headerTitleStyle: {
                 color: "#fff"
             },
@@ -58,7 +60,7 @@ export default class RespositoryDetail extends Component {
         DeviceEventEmitter.addListener(notice, ()=> {
             if (this.canGoBack) {
                 this.webView.goBack();
-            }else {
+            } else {
                 this.props.navigation.goBack();
             }
         })
@@ -68,10 +70,11 @@ export default class RespositoryDetail extends Component {
         let {state} = this.props.navigation;
         let {params} = state;
         let data = params.params;
+        this.url = data.html_url ? data.html_url : TRENDING_URL + data.fullName
         return (
             <View style={styles.container}>
                 <WebView
-                    source={{uri: data.html_url}}
+                    source={{uri: this.url}}
                     onNavigationStateChange={this.onNavigationStateChange}
                     ref={(webView)=>this.webView = webView}
                     startInLoadingState={true}
@@ -79,6 +82,7 @@ export default class RespositoryDetail extends Component {
             </View>
         )
     }
+
     onNavigationStateChange(e) {
         this.canGoBack = e.canGoBack;
     }

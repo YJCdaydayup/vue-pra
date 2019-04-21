@@ -46,10 +46,37 @@
   C ...ViewPropTypes 写在属性里面 static propsType = {...ViewPropTypes}
 4.react-native-scrollable-tab-view渲染出来的时候，如果里面的tabLabel对应的界面数量很多且还不确定时就会一直闪烁，解决办法是先判断里面的界面数量计算出来没this.state.dataArray>0?<ScrollableTabView/>:null
 5.Alert组件是两个平台都可以使用的
-6.页面参数的传递通过导航也可以拿到的，
-7.js的继承优化方案: 1.原型 = new Func(）性能和效率不行，2.将通用的属性和方法抽离到原型上，原型 = Base.proptype,一个改多个改了， 3.中间函数: temp = function() {} temp.proptype = Base.proptype, Child.proptype = new temp(),然后将原型的构造函数设为Child自己即可，这个方法和Child.protype = Object.create(new temp())异曲同工之效
-8. &&是遇到为false就停止并返回此项的值，如果没有就执行完毕并返回最后项的值
-9. ||是遇到为true就停止并返回此项的值，如果都是true就执行到最后并返回最后项的值
+6.页面参数的传递通过导航也可以拿到的
+
+第六节课
+1.Text组件是无法识别网址的，可以使用react-native-htmlview组件来代替Text组件显示文本, 这个文本需要用一个p标签或者其他html的标签包裹，在stylesheet属性中定义各个标签的样式，网址一般是a标签，所以要给a标签样式:stylesheet={{a: {color: ‘red’}, p: styles.description}}
+2.导入第三方组件的方式除了npm/yarn之外，还可以直接到github中找到源码拷贝到项目中来
+3.export default 可以导出一个class，如果只是静态方法，不需要写constrctor，如果是对象方法，就写constructor(flag)传入参数，里面写的对象方法默认就是放在原形上的，如果导出构造函数，根本就没有constructor，构造函数本身持有属性如下，这个和导数对象方法创建的class对象是一样的，添加方法可以写在原型上也可以直接this.say = function() {}:
+	export default function TimeSpan(showText, searchText) {
+		this.showText = showText;
+		this.searchText = searchText;
+		this.say = function() {}
+		this.proptype.eat = function() {}
+	}
+
+4.model其实就是数据模型，一般定义构造函数来承接，如上面3的定义方式
+5.获取父组件中的所有属性，比如navigation等，直接在子组件中<Child …this.props/>即可
+
+第七节课
+1.使用系统导航navigationOptions与页面组件进行事件通信，两种方式: 第一种是使用通知中心，第二种通过定义一个ViewUtils的类，如果需要定义的组件的某个元素，就使用对象方法，否则就定义静态方法static，如this.viewUtils.getPopview(callback，title),传入回调，如需要传递其他参数，如title，点击事件时，触发回调(ref)=>{params.showPopver(ref)}将定义的组件的某个元素传递过来给页面组件,在页面组件的showPopver方法中要绑定this， setParams({
+            showPopver: this._showPopver.bind(this),
+            title: this.state.timeSpan.showText
+        })，这个添加方法就在页面组件的componentDidMount生命周期函数中添加，title的改变就在页面组件的某个事件中通过setParams进行改变就能动态显示了
+2.当navigation.params.title中的title第一次使用时不存在，会报undefined，这个时候可以使用try catch检测错误重新复制操作
+3.当传递给子组件的props没有变化时一般不需要刷新组件，可以在componentWillReceiveProps(nextProps)中判断现在props和现在传递的props是否相等来做网络请求
+4.当父组件包裹的子组件要单独给点击事件时，子组件需要用TouchableOpacity包裹住，给TouchableOpacity添加onPress事件
+5.当使用listView， flatList，sectionList时，传递数据给每个renderRow时，最好将这些数据定义成模型
+
+
+
+
+
+
 
 
 
