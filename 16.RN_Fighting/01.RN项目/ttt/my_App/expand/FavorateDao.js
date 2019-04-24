@@ -9,7 +9,7 @@ import {
 
 const FAVORATE_KEY_PREFIX = "favorate_";
 
-export default class Favorate {
+export default class FavorateDao {
     constructor(flag) {
         this.flag = flag;
         this.favorateKey = FAVORATE_KEY_PREFIX + flag;
@@ -58,7 +58,7 @@ export default class Favorate {
      * 取消收藏，移除已经收藏项目
      **/
     removeFavorateItem(key) {
-        AsyncStorage.setItem(key, (err) => {
+        AsyncStorage.removeItem(key, (err) => {
             if (!err) {
                 this.updateFavorateKeys(key, false)
             }
@@ -68,7 +68,7 @@ export default class Favorate {
     /**
      *
      **/
-    getFavorateKeys() {
+    getFavorateKs() {
         return new Promise((resolve, reject) => {
             AsyncStorage.getItem(this.favorateKey, (err, result)=> {
                 if (!err) {

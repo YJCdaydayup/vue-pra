@@ -36,6 +36,14 @@ import Respository from './RepositoryCell'
 
 import DataRepository, {FLAG_STORAGE} from './../expand/DataRepository'
 
+import FavorateDao from './../expand/FavorateDao'
+import Utils from './../utils/Utils'
+
+/**
+ * 定义全局的dao，各个页面都可以使用
+ **/
+let favorateDao = new FavorateDao(FLAG_STORAGE.flag_popular)
+
 export default class WelcomePage extends Component {
 
     constructor(props) {
@@ -112,7 +120,8 @@ class PopularTab extends Component {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (r1, r2)=>r1 !== r2
             }),
-            isLoading: false
+            isLoading: false,
+            favorateKeys: []
         }
         this.baseUrl = 'https://api.github.com/search/repositories?q=ios&sort=stars';
         this.dataRepository = new DataRepository(FLAG_STORAGE.flag_popular);
@@ -156,7 +165,11 @@ class PopularTab extends Component {
     }
 
     _onFavorate(model, isFavorate) {
-        alert(isFavorate)
+        if (isFavorate) {
+            favorateDao.saveFavorateItem(model.item.id.toString(), JSON.stringify(model))
+        } else {
+            favorateDao.removeFavorateItem(model.item.id.toString())
+        }
     }
 
     _clickEvent(rowData, isFavorate) {
@@ -178,7 +191,6 @@ class PopularTab extends Component {
             isLoading: true
         }, ()=> {
             let url = this.genUrl(this.props.tabLabel);
-
             // AsyncStorage.removeItem(url, (err) =>{
             this.dataRepository.fetchRepository(url).then(result => {
                 let items = result && result.items ? result.items : result ? result : []
@@ -186,7 +198,8 @@ class PopularTab extends Component {
                 //     isLoading: false,
                 //     dataSource: this.state.dataSource.cloneWithRows(items)
                 // })
-                this.flushFavorateState(items);
+                console.log(items);
+                this.getFavorateKeys(items);
                 if (result && result.update_date && this.dataRepository.checkedData(result.update_date)) {
                     {
                         return this.dataRepository.fetchNetRespotory(url);
@@ -198,7 +211,7 @@ class PopularTab extends Component {
                 //     isLoading: false,
                 //     dataSource: this.state.dataSource.cloneWithRows(items)
                 // })
-                this.flushFavorateState(items);
+                this.getFavorateKeys(items);
             }).catch(err=> {
                 console.log(err);
             })
@@ -209,13 +222,27 @@ class PopularTab extends Component {
      * 更新modal每一项的收藏状态
      **/
     flushFavorateState(items) {
+        console.log('AVC')
         let projectModals = [];
         for (let i = 0; len = items.length, i < len; i++) {
-            projectModals.push(new ProjectModal(items[i], true));
+            projectModals.push(new ProjectModal(items[i], Utils.checkFavorate(items[i], this.state.favorateKeys)));
         }
         this.updateState({
             isLoading: false,
             dataSource: this.state.dataSource.cloneWithRows(projectModals)
+        })
+    }
+
+    getFavorateKeys(items) {
+        favorateDao.getFavorateKs().then(keys => {
+            if (keys) {
+                this.updateState({
+                    favorateKeys: keys
+                })
+            }
+            this.flushFavorateState(items)
+        }).catch(err=> {
+            this.flushFavorateState(items)
         })
     }
 
