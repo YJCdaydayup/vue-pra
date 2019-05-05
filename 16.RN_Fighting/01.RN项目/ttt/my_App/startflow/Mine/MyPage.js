@@ -17,88 +17,123 @@ import {
     View,
     Button,
     TextInput,
-    AsyncStorage
+    AsyncStorage,
+    ListView,
+    RefreshControl
 } from 'react-native';
 
-const KEY = 'text';
-
-import Toast, {DURATION} from 'react-native-easy-toast'
-
-import {FLAG_LANGUAGE} from './../../common/LanguageDao'
+import {FLAG_STORAGE} from './../../expand/DataRepository'
+import FavorateDao from './../../expand/FavorateDao'
+import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view'
+import ProjectModel from './../../model/ProjectModal'
+import RespositoryCell from './../RepositoryCell'
+import TrendingCell from './../../pages/TrendingCell'
 
 export default class MyPage extends Component {
 
     constructor(props) {
         super(props);
-        this._push = this._push.bind(this);
-        this._showSortKey = this._showSortKey.bind(this);
-        this._remove = this._remove.bind(this);
-        this._registerLanuage = this._registerLanuage.bind(this);
-        this._showSortLanuage = this._showSortLanuage.bind(this);
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text
-                    onPress={this._push}
-                >MyPage</Text>
-                <Text
-                    onPress={this._showSortKey}
-                >SortKeys</Text>
-                <Text
-                    onPress={this._remove}
-                >标签移除</Text>
-                <Text
-                    onPress={this._registerLanuage}
-                >订阅语言</Text>
-                <Text
-                    onPress={this._showSortLanuage}
-                >SortKeys</Text>
+                <ScrollableTabView
+                    tabBarBackgroundColor="#2196F3"
+                    tabBarInactiveTextColor="mintcream"
+                    tabBarActiveTextColor="#fff"
+                    tabBarUnderlineStyle={{backgroundColor: "#fff", height: 2}}
+                    renderTabBar={()=> {
+                        return (
+                            <ScrollableTabBar/>
+                        )
+                    }}
+                >
+                    <FavorateTab
+                        tabLabel="最热"
+                        flag={FLAG_STORAGE.flag_popular}
+                    />
+                    <FavorateTab
+                        tabLabel="趋势"
+                        flag={FLAG_STORAGE.flag_trending}
+                    />
+                </ScrollableTabView>
             </View>
         );
     }
+}
 
-    _remove() {
-        this.props.navigation.navigate('AutoLabel', {
-            params: {
-                ...this.props,
-                isRemoveKey: true,
-                flag: FLAG_LANGUAGE.flag_key
-            }
-        });
+class FavorateTab extends Component {
+    constructor(props) {
+        super(props);
+        this.favorateDao = new FavorateDao(this.props.flag)
+        this.state = {
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (r1, r2)=>r1 !== r2
+            }),
+            isLoading: false,
+        }
     }
 
-    _push() {
-        this.props.navigation.navigate('AutoLabel', {
-            params: {
-                ...this.props,
-                isRemoveKey: false,
-                flag: FLAG_LANGUAGE.flag_key
-            }
-        });
+    componentDidMount() {
+        this.setState({
+            isLoading: true
+        }, ()=> {
+            this.favorateDao.getAllItem().then(items => {
+                let models = [];
+                for (let i = 0; len = items.length, i < len; i++) {
+                    models.push(new ProjectModel(JSON.parse(items[i])), true);
+                }
+                this.setState({
+                    isLoading: false,
+                    dataSource: this.state.dataSource.cloneWithRows(models)
+                })
+            })
+        })
     }
 
-    _showSortKey() {
-        this.props.navigation.navigate('SortKeyPage',{
-            flag: FLAG_LANGUAGE.flag_key
-        });
+    render() {
+        return (
+            <View style={styles.container}>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this._renderRow.bind(this)}
+                    refreshControl={<RefreshControl
+                        refreshing={this.state.isLoading}
+                        onRefresh={this._onLoad}
+                        tintColor='#2196F3'
+                        colors={['#2196F3']}
+                        titleColor='#2196F3'
+                        title='loading...'
+                    />}
+                />
+            </View>
+        )
     }
 
-    _registerLanuage() {
-        this.props.navigation.navigate('AutoLabel', {
-            params: {
-                ...this.props,
-                isRemoveKey: false,
-                flag: FLAG_LANGUAGE.flag_language
-            }
-        });
+    _renderRow(projectModel) {
+        console.log(projectModel)
+        return (
+            this.props.flag === FLAG_STORAGE.flag_popular ? <RespositoryCell
+                projectModel={projectModel}
+                clickEvent={this._clickEvent.bind(this)}
+                onFavorate={this._onFavorate.bind(this)}
+                navigation={this.props.nav}
+            /> : <TrendingCell
+                model={projectModal}
+                clickEvent={this._clickEvent.bind(this)}
+                navigation={this.props.nav}
+                onFavorate={this._onFavorate.bind(this)}
+            />
+        )
     }
 
-    _showSortLanuage() {
-        this.props.navigation.navigate('SortKeyPage',{
-            flag: FLAG_LANGUAGE.flag_language
-        });
+    _clickEvent() {
+
+    }
+
+    _onFavorate() {
+
     }
 }
 

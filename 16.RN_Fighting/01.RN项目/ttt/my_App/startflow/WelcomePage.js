@@ -98,7 +98,7 @@ export default class WelcomePage extends Component {
                         {this.state.dataArray.map((item, index)=> {
                             return (
                                 item.checked ? <PopularTab key={index} tabLabel={item.name}
-                                                           nav={navigation}>{item.name}</PopularTab> : null
+                                                           nav={navigation}/> : null
                             )
                         })}
                     </ScrollableTabView>
@@ -174,7 +174,9 @@ class PopularTab extends Component {
 
     _clickEvent(rowData, isFavorate) {
         this.props.nav.navigate('Detail', {
-            params: rowData
+            params: rowData,
+            isFavorate: isFavorate,
+            flag: FLAG_STORAGE.flag_popular
         });
     }
 
@@ -222,7 +224,6 @@ class PopularTab extends Component {
      * 更新modal每一项的收藏状态
      **/
     flushFavorateState(items) {
-        console.log('AVC')
         let projectModals = [];
         for (let i = 0; len = items.length, i < len; i++) {
             projectModals.push(new ProjectModal(items[i], Utils.checkFavorate(items[i], this.state.favorateKeys)));

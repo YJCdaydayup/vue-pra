@@ -71,6 +71,8 @@
 3.当传递给子组件的props没有变化时一般不需要刷新组件，可以在componentWillReceiveProps(nextProps)中判断现在props和现在传递的props是否相等来做网络请求
 4.当父组件包裹的子组件要单独给点击事件时，子组件需要用TouchableOpacity包裹住，给TouchableOpacity添加onPress事件
 5.当使用listView， flatList，sectionList时，传递数据给每个renderRow时，最好将这些数据定义成模型
+6.导航和页面组件进行通信时，可以使用通知或者页面组件即将显示的时候传递setParams进去，传递方法进去，导航组件自己调用方法改变自己的UI时，由于页面无法通过状态机刷新，这个时候可以通过setParams，改变参数进行UI刷新；
+
 
 
 

@@ -8,7 +8,13 @@ export default class Utils {
      **/
     static checkFavorate(item, items) {
         for (let i = 0; len = items.length, i < len; i++) {
-            if (item.id.toString() === items[i]) {
+            let temp;
+            try {
+                temp = item.id.toString()
+            }catch (err) {
+                temp = item.fullName
+            }
+            if (temp === items[i]) {
                 return true;
             }
         }

@@ -20,33 +20,38 @@ export default class TrendingCell extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            isFavorate: this.props.model.isFavorate
+        }
     }
 
     render() {
-        let {rowData, clickEvent} = this.props;
-        let description = '<p>'+ rowData.description +'</p>';
+        let {model, clickEvent, onFavorate} = this.props;
+        let {item} = model;
+        let description = '<p>' + item.description + '</p>';
         return (
             <TouchableOpacity
                 style={styles.container}
                 onPress={()=> {
-                    clickEvent(rowData)
+                    clickEvent(model, this.state.isFavorate)
                 }}
             >
                 <View style={styles.cell_container}>
-                    <Text style={styles.title}>{rowData.fullName}</Text>
+                    <Text style={styles.title}>{item.fullName}</Text>
                     <HtmlView
                         value={description}
-                        onLinkPress={(url)=>{}}
+                        onLinkPress={(url)=> {
+                        }}
                         stylesheet={{
                             p: styles.description,
                             a: {color: 'red'}
                         }}
                     />
-                    <Text style={styles.description}>{rowData.meta}</Text>
+                    <Text style={styles.description}>{item.meta}</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10}}>
                             <Text style={[styles.description, {marginRight: 10}]}>Build by:</Text>
-                            {rowData.contributors.map((item, index, arr)=> {
+                            {item.contributors.map((item, index, arr)=> {
                                 return <Image
                                     key={index}
                                     source={{uri: item}}
@@ -54,10 +59,20 @@ export default class TrendingCell extends Component {
                                 />
                             })}
                         </View>
-                        <Image
-                            source={require('./../res/images/ic_star.png')}
-                            style={{width: 22, height: 22, marginRight: 10}}
-                        />
+                        <TouchableOpacity
+                            onPress={()=> {
+                                this.setState({
+                                    isFavorate: !this.state.isFavorate
+                                }, () => {
+                                    onFavorate(model, this.state.isFavorate)
+                                })
+                            }}
+                        >
+                            <Image
+                                source={this.state.isFavorate? require('./../res/images/ic_star.png'): require('./../res/images/ic_unstar_transparent.png')}
+                                style={{width: 22, height: 22, marginRight: 10}}
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </TouchableOpacity>

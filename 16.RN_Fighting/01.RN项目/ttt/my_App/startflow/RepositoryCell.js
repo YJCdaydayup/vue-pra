@@ -33,7 +33,7 @@ export default class RepositoryCell extends Component {
             <TouchableOpacity
                 style={styles.container}
                 onPress={()=> {
-                    clickEvent(rowData)
+                    clickEvent(rowData, this.state.favoriate)
                 }}
             >
                 <View style={styles.cell_container}>

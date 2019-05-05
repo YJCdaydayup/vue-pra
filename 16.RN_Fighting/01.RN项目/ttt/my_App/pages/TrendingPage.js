@@ -14,7 +14,8 @@ import {
     ListView,
     RefreshControl,
     AsyncStorage,
-    TouchableOpacity
+    TouchableOpacity,
+    DeviceEventEmitter
 } from 'react-native';
 
 import Toast, {DURATION} from 'react-native-easy-toast'
@@ -28,6 +29,9 @@ import HttpUtil from './../common/HttpUtil'
 import ViewUtils from './../common/ViewUtil'
 
 import LanguageDao, {FLAG_LANGUAGE} from './../common/LanguageDao'
+import ProjectModal from './../model/ProjectModal'
+import FavorateDao from './../expand/FavorateDao'
+import Utils from './../utils/Utils'
 
 import TimeSpan from './../model/TimeSpan'
 
@@ -44,6 +48,9 @@ import TrendingCell from './TrendingCell'
 import DataRepository, {FLAG_STORAGE} from './../expand/DataRepository'
 
 import Popver from './../parties/Popoview'
+
+dataRepository = new DataRepository(FLAG_STORAGE.flag_trending);
+favorateDao = new FavorateDao(FLAG_STORAGE.flag_trending)
 
 export default class TrendingPage extends Component {
 
@@ -119,7 +126,7 @@ export default class TrendingPage extends Component {
                             return (
                                 item.checked ? <TrendingTab key={index} tabLabel={item.name}
                                                             timeSpan={this.state.timeSpan}
-                                                            nav={navigation}>{item.name}</TrendingTab> : null
+                                                            nav={navigation}/> : null
                             )
                         })}
                     </ScrollableTabView>
@@ -198,9 +205,9 @@ class TrendingTab extends Component {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (r1, r2)=>r1 !== r2
             }),
-            isLoading: false
+            isLoading: false,
+            favorateKeys: []
         }
-        this.dataRepository = new DataRepository(FLAG_STORAGE.flag_trending);
         this._onLoad = this._onLoad.bind(this)
         this._clickEvent = this._clickEvent.bind(this)
         this._renderRow = this._renderRow.bind(this)
@@ -241,20 +248,36 @@ class TrendingTab extends Component {
         this._onLoad(this.props.timeSpan)
     }
 
-    _renderRow(rowData) {
+    _renderRow(projectModal) {
         return (
             <TrendingCell
-                rowData={rowData}
+                model={projectModal}
                 clickEvent={this._clickEvent}
                 navigation={this.props.nav}
+                onFavorate={this._onFavorate.bind(this)}
             />
         )
     }
 
-    _clickEvent(rowData) {
+    _onFavorate(model, isFavorate) {
+        if (isFavorate) {
+            favorateDao.saveFavorateItem(model.item.fullName, JSON.stringify(model))
+        } else {
+            favorateDao.removeFavorateItem(model.item.fullName)
+        }
+    }
+
+    _clickEvent(rowData, isFavorate) {
         this.props.nav.navigate('Detail', {
-            params: rowData
+            params: rowData,
+            isFavorate: isFavorate,
+            flag: FLAG_STORAGE.flag_trending,
+            updatePage: this._updatePage.bind(this)
         });
+    }
+
+    _updatePage() {
+        this._onLoad(this.props.timeSpan,);
     }
 
     componentDidMount() {
@@ -270,28 +293,56 @@ class TrendingTab extends Component {
             isLoading: true
         }, ()=> {
             let url = this.genUrl(timeSpan, this.props.tabLabel);
-            this.dataRepository.fetchRepository(url).then(result => {
+            dataRepository.fetchRepository(url).then(result => {
                 let items = result && result.items ? result.items : result ? result : []
-                this.setState({
-                    isLoading: false,
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                })
-
-                if (result && result.update_date && this.dataRepository.checkedData(result.update_date)) {
+                this.getFavorateKeys(items);
+                if (result && result.update_date && dataRepository.checkedData(result.update_date)) {
                     {
-                        return this.dataRepository.fetchNetRespotory(url);
+                        return dataRepository.fetchNetRespotory(url);
                     }
                 }
             }).then(items => {
                 if (!items || items.length === 0) return;
-                this.setState({
-                    isLoading: false,
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                })
+                this.getFavorateKeys(items);
             }).catch(err=> {
 
             })
         })
+    }
+
+    /**
+     * 更新modal每一项的收藏状态
+     **/
+    flushFavorateState(items) {
+        let projectModals = [];
+        for (let i = 0; len = items.length, i < len; i++) {
+            projectModals.push(new ProjectModal(items[i], Utils.checkFavorate(items[i], this.state.favorateKeys)));
+        }
+        this.updateState({
+            isLoading: false,
+            dataSource: this.state.dataSource.cloneWithRows(projectModals)
+        })
+    }
+
+    getFavorateKeys(items) {
+        favorateDao.getFavorateKs().then(keys => {
+            if (keys) {
+                this.updateState({
+                    favorateKeys: keys
+                })
+            }
+            this.flushFavorateState(items)
+        }).catch(err=> {
+            this.flushFavorateState(items)
+        })
+    }
+
+    /**
+     * 对setState进行封装
+     **/
+    updateState(dic) {
+        if (!this) return;
+        this.setState(dic);
     }
 }
 

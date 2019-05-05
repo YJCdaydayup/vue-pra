@@ -154,7 +154,7 @@ export const AppTabNavigator = TabNavigator(
         MyPage: {
             screen: MyPage,
             navigationOptions: {
-                tabBarLabel: "我的",
+                tabBarLabel: "收藏",
                 // tabBarIcon: ({tintColor, focused})=> {
                 //     return <Icon
                 //         name="md-home"

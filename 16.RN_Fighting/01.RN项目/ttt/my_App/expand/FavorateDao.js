@@ -74,12 +74,39 @@ export default class FavorateDao {
                 if (!err) {
                     try {
                         resolve(JSON.parse(result));
-                    }catch (err) {
+                    } catch (err) {
                         reject(err)
                     }
-                }else {
+                } else {
                     reject(err);
                 }
+            })
+        })
+    }
+
+    /**
+     * 获取用户所有收藏项目
+     **/
+    getAllItem() {
+        return new Promise((resolve, reject)=> {
+            this.getFavorateKs().then(keys => {
+                let items = [];
+                if (keys) {
+                    try {
+                        AsyncStorage.multiGet(keys).then(results=> {
+                            results.map((item) => {
+                                items.push(item[1]);
+                            })
+                            resolve(items);
+                        })
+                    } catch (err) {
+                        reject(err);
+                    }
+                }else {
+                    resolve(items);
+                }
+            }).catch(err => {
+                reject(err);
             })
         })
     }
