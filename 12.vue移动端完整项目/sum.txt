@@ -108,6 +108,13 @@
 
 第十一节课
 1.对于已知宽高的div来说，要将里面的子标签进行垂直居中，方法有两种，第一种是采用主轴和侧轴的center处理，第二种是采用父标签display:table 里面搞一个子标准将所有子标签包裹里面，设置其的display:table-cell
+2.SPA单页面应用使用vue-router，初始化router，然后存放在Vue实例中，设置路由显示的位置即可，路由分为四种：动态路由，编程路由，命名路由和嵌套路由，嵌套路由中的子路由path不需要斜杠，不需要name，路由跳转可以使用编程路由跳转也可以使用router-link，命名路由采用:to;
+3.ElementUI时饿了么提供的一套UI框架，还有iview，ant-design-vue可以全量导入也可以按需导入(一般按需导入)，Swiper也提供了Vue的支持走马灯，常用组件可以在Vue社区下面的资源里面找到各种各样的社区维护的Vue组件；
+4.h5开发中，文件的命名可以相同，只要保证处在不同的文件夹就行；
+5.router-link可以通过tag渲染成具体的标签，如li标签，然后可以直接当成li标签使用；
+6.页面路由时通过{path：’/‘,redirect: ‘/home’}指向home页面，当在home页面有嵌套路由时，可以通过{path: ‘/home’,name: ‘Home’, redirect: ‘/home/hot’, children: [{path: ‘hot’,component: Hot}],component: Home}
+7.没有设置的路由统一跳转到{path: "*",component: NotFound},页面飞走了
+
 
 
 
