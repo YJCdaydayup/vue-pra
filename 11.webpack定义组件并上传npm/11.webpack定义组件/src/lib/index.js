@@ -56,8 +56,12 @@ Toast.install = function (Vue, options) {
 };
 
 
-  if (window.Vue) {
-    Vue.use(Toast);
-  }
+
+window.Toast = Toast;
+
+
+  // if (window.Vue) {
+  //   Vue.use(Toast);
+  // }
 
 export default Toast;

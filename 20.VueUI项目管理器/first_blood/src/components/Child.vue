@@ -1,21 +1,15 @@
 <template>
-    <div class="login">
-        {{msg}}
+    <div>
+        CHILD
     </div>
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
-
-</style>
-
 <script>
-
     export default {
         data() {
             return {
-                msg: "login component"
+
             }
         }
     }
-
 </script>

@@ -31,6 +31,14 @@ module.exports = {
                     "style-loader",
                     "css-loader"
                 ]
+            },
+            {
+                test: /\.stylus/,
+                loaders: [
+                    "style-loader",
+                    "css-loader",
+                    "stylus-loader"
+                ]
             }
         ]		
     },

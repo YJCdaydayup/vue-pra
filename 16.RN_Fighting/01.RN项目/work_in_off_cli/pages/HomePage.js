@@ -10,6 +10,9 @@ import {
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            msg: 'this is a message!'
+        }
     }
 
     render() {
@@ -49,8 +52,18 @@ export default class HomePage extends Component {
                         navigation.navigate('Page5')
                     }}
                 />
+
+                <Button
+                    title="显示弹框"
+                    onPress={this._showMsg.bind(this)}
+                />
+
             </View>
         )
+    }
+
+    _showMsg() {
+        alert(this.state.msg)
     }
 }
 

@@ -93,10 +93,7 @@ export const AppStackNavigator = createStackNavigator(
                     },
                     headerStyle: {
                         backgroundColor: '#666'
-                    },
-                    headerLeft: ViewUtils.getLeftButton(()=>{
-                        navigation.goBack();
-                    })
+                    }
                 }
             }
         }

@@ -44,6 +44,7 @@
   A ViewPropTypes as RNViewPropTypes 在react-native里面
   B const ViewPropTypes = RNViewPropTypes || View.propTypes;
   C ...ViewPropTypes 写在属性里面 static propsType = {...ViewPropTypes}
+  D 组件里面style={[this.props.style, styles.container]}
 4.react-native-scrollable-tab-view渲染出来的时候，如果里面的tabLabel对应的界面数量很多且还不确定时就会一直闪烁，解决办法是先判断里面的界面数量计算出来没this.state.dataArray>0?<ScrollableTabView/>:null
 5.Alert组件是两个平台都可以使用的
 6.页面参数的传递通过导航也可以拿到的
@@ -68,12 +69,11 @@
             title: this.state.timeSpan.showText
         })，这个添加方法就在页面组件的componentDidMount生命周期函数中添加，title的改变就在页面组件的某个事件中通过setParams进行改变就能动态显示了
 2.当navigation.params.title中的title第一次使用时不存在，会报undefined，这个时候可以使用try catch检测错误重新复制操作
-3.当传递给子组件的props没有变化时一般不需要刷新组件，可以在componentWillReceiveProps(nextProps)中判断现在props和现在传递的props是否相等来做网络请求
+3.当传递给子组件的props没有变化时一般不需要刷新组件，可以在componentWillReceiveProps(nextProps)中判断现在props和现在传递的props是否相等来做网络请求，或者让子组件做其他的事情
 4.当父组件包裹的子组件要单独给点击事件时，子组件需要用TouchableOpacity包裹住，给TouchableOpacity添加onPress事件
 5.当使用listView， flatList，sectionList时，传递数据给每个renderRow时，最好将这些数据定义成模型
 6.导航和页面组件进行通信时，可以使用通知或者页面组件即将显示的时候传递setParams进去，传递方法进去，导航组件自己调用方法改变自己的UI时，由于页面无法通过状态机刷新，这个时候可以通过setParams，改变参数进行UI刷新；
-
-
+7.做事件绑定时，可以直接在事件上进行绑定，前提是不是执行这个事件：onPress={this._showMsg.bind(this)}
 
 
 

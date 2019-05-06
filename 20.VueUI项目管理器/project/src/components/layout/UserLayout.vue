@@ -39,7 +39,7 @@
         name: 'UserLayout',
         props: {
             desc: {
-                type: [String],
+                type: String,
                 default() {
                     return '欢迎登录CCZQ项目管理系统';
                 }
@@ -59,6 +59,7 @@
     .userLayout {
         height: 100%;
         overflow: auto;
+        background-color: red;
 
         &.mobile {
             .container {
