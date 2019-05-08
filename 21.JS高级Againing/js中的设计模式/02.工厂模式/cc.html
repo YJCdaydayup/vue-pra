@@ -1,0 +1,44 @@
+<script>
+
+
+  /**
+   * 用于构建复杂的对象
+   * 需要依赖不同的环境，创建不同的对象
+   * 处理具有大量相同属性的小对象
+   * 优点：防止代码的重复 重复性的代码可以写在父类， 子类可以专注于业务逻辑的处理
+   **/
+  var XMLHttpFactory = function () {}
+  XMLHttpFactory.prototype = {
+    createFactory: function () {
+      throw new Error('This is an abstract class')
+    },
+    eat: function () {
+      console.log("say hello")
+    }
+  }
+
+  var XHRHandle = function () {}
+
+  // 子类继承父类原型
+//  extend(XHRHandle, XMLHttpFactory);
+
+//  var temp = function () {}
+//  temp.prototype = XMLHttpFactory.prototype;
+
+  XHRHandle.prototype = new XMLHttpFactory();
+  XHRHandle.prototype.constructor = XHRHandle;
+
+  XHRHandle.prototype.createFactory = function () {
+    var XMLHttp = null;
+    if (window.XMLHttpRequest) {
+      XMLHttp = new XMLHttpRequest();
+    }else if (window.ActiveXObject) {
+      XMLHttp = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    return XMLHttp;
+  }
+
+  var xhrHandle = new XHRHandle();
+  xhrHandle.eat();
+
+</script>

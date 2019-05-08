@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>代理模式</title>
+</head>
+<body>
+
+<script>
+
+  // 代理模式一般使用闭包实现，如图片的懒加载
+
+  /**
+   * 代理模式结合闭包的用法:
+   * 1.现在闭包里面初始化一些对象，或创建一个对象，比如img节点
+   * 2.把这个对象或者节点的赋值方法通过函数返回出来，在外面接受这个函数
+   **/
+
+  var myImage = (function () {
+    var imgNode = document.createElement("img");
+    document.body.appendChild(imgNode);
+    return function (src) {
+      imgNode.src = src;
+    }
+  })()
+
+  /**
+   * 3.再通过另一个闭包里面的回调函数来调用第一个闭包函数，进行赋值
+   * 4.接收另一个闭包返回的函数(且这个函数里面有默认值)，且会触发闭包里面的那个回调，调用这个函数传递新值来触发那个回调
+   */
+
+    // 代理
+  var PloxyImage = (function () {
+      // 用于做临时图片缓存
+      var img = new Image();
+      img.onload = function () {
+        var that = this;
+        // setTimeOut是window的方法，里面的this就是window对象，而不是img对象了
+        setTimeout(function () {
+          myImage(that.src);
+        }, 2000)
+      }
+
+      return function (src) {
+        // 占位图
+        myImage('http://img.lanrentuku.com/img/allimg/1212/5-121204193Q9-50.gif');
+        img.src = src;
+      }
+    })()
+
+//  PloxyImage("https://img.alicdn.com/tps/i4/TB1b_neLXXXXXcoXFXXc8PZ9XXX-130-200.png");
+
+</script>
+
+<script>
+
+  /**
+   * 使用立即执行函数，就会永远只有一个
+   * 使用函数返回多个
+   */
+
+  var oriImg = (function () {
+    var img = document.createElement('img');
+    document.body.appendChild(img);
+    return function (src) {
+      img.src = src;
+    }
+  })()
+
+
+  var delegate = (function () {
+    var image = new Image();
+    image.onload = function () {
+      var that = this;
+      setTimeout(function () {
+        oriImg(that.src);
+      }, 1000)
+    }
+    return function (src) {
+      oriImg('http://img.lanrentuku.com/img/allimg/1212/5-121204193Q9-50.gif')
+      image.src = src;
+    }
+  })()
+
+//  delegate("https://img.alicdn.com/tps/i4/TB1b_neLXXXXXcoXFXXc8PZ9XXX-130-200.png")
+
+
+</script>
+
+<script>
+
+  console.log('start')
+  var mulImg = function () {
+    var img = document.createElement('img');
+    document.body.appendChild(img);
+    return function (src) {
+      img.src = src;
+    }
+  }
+
+  var proxyImg = function () {
+    var oriImage = mulImg();
+    var image = new Image();
+    image.onload = function () {
+      oriImage(this.src);
+    }
+    return function (src) {
+      oriImage("http://img.lanrentuku.com/img/allimg/1212/5-121204193Q9-50.gif")
+      image.src = src;
+    }
+  }
+
+//  (function () {
+
+    /**
+     * 1.闭包里面不可以写循环
+     * 2.替代块级作用域的方法是使用自调用函数
+     */
+  var div = document.createElement('div');
+  document.body.appendChild(div);
+    for (var i = 0; i < 100; i++) {
+      (function (i) {
+        setTimeout(function () {
+//        proxyImg()("https://img.alicdn.com/tps/i4/TB1b_neLXXXXXcoXFXXc8PZ9XXX-130-200.png")
+          div.innerHTML = i
+        }, 1000 * i)
+      })(i)
+    }
+//  })()
+
+//  (function () {
+//    console.log(x)
+//
+//  })()
+
+</script>
+
+</body>
+</html>

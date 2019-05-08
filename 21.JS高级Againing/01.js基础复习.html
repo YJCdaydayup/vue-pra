@@ -5,26 +5,124 @@
   <title>js基础复习</title>
 </head>
 <body>
-  JavaScript 包含三大元素:
-    ECMAScript: 规定js的语法规范
-    DOM：给我们操作DOM的api
-    BOM：navigator history screen location iframe
-    基本类型： bool string number
-    复合类型(引用类型)：Array Object Date RegExp Number String Boolean function(大写的是构造函数，小写的是类型)
-    空类型: undefined定义之后未赋值， null也是object变量不可能是null，除非手动设置，要考虑资源释放时使用
-    核心类型: object function
+JavaScript 包含三大元素:
+ECMAScript: 规定js的语法规范
+DOM：给我们操作DOM的api
+BOM：navigator history screen location iframe
+基本类型： bool string number
+复合类型(引用类型)：Array Object Date RegExp Number String Boolean function(大写的是构造函数，小写的是类型)
+空类型: undefined定义之后未赋值， null也是object变量不可能是null，除非手动设置，要考虑资源释放时使用
+核心类型: object function
 
-  判断数组中是否有: 1.for循环， 2.indexOf
+判断数组中是否有: 1.for循环， 2.indexOf
 
-  值类型: bool number string,赋值时是直接把值复制一份,两份在内存中是完全独立的
-  var str1 = '123'
-  var str2 = str1
+值类型: bool number string,赋值时是直接把值复制一份,两份在内存中是完全独立的
+var str1 = '123'
+var str2 = str1
 
-  对象类型，指向的是同一个对象，指向的是地址
+对象类型，指向的是同一个对象，指向的是地址
 
-  在函数里面声明变量 用var就是局部变量 不用var就是全局变量
+在函数里面声明变量 用var就是局部变量 不用var就是全局变量
 
-  delete: 删除对象属性 删除没有用var声明的变量 返回bool 删除失败返回true
+delete: 删除对象属性 删除没有用var声明的变量 返回bool 删除失败返回true
+
+<script>
+
+  // 浅拷贝
+  function extendCopy(p, c) {
+    var c = c || {};
+    for (var i in p) {
+      c[i] = p[i];
+    }
+    return c;
+  }
+
+
+  // 深拷贝，会保留原来的基本类型的值，对象类型由于会创建一个空对象来接收，所以不会有原来的值
+  function deepCopy(p, c) {
+    var c = c || {};
+    for (var i in p) {
+      if (typeof p[i] === 'object') {
+        // 如果父对象的属性是数组，就创建一个数组，然后再将元素属性拷贝进来
+        c[i] = (p[i].constructor === Array) ? [] : {};
+        deepCopy(p[i], c[i]);
+      } else {
+        c[i] = p[i];
+      }
+    }
+    return c;
+  }
+
+
+  function deepCopyContainOriginalPropertyInObject(p, c) {
+    var c = c || {};
+    for (var i in p) {
+      if (typeof p[i] === 'object') {
+        // 如果父对象的属性是数组，就创建一个数组，然后再将元素属性拷贝进来
+        var temp;
+        if (p[i].constructor === Array && c[i].constructor === Array) {
+          // 先包含原来c里面的值
+          if (c[i] && c[i].length > 0) {
+            temp = [];
+            // 当一层处理
+            for (var n = 0; len = c[i].length, n < len; n++) {
+              temp[n] = c[n];
+            }
+            c[i] = temp;
+          }
+        } else {
+          if (c[i].constructor === Object) {
+            temp = {};
+            // 当一层处理
+            for (var property in c[i]) {
+              temp[property] = c[i][property];
+            }
+            c[i] = temp;
+          }
+        }
+        deepCopyContainOriginalPropertyInObject(p[i], c[i]);
+      } else {
+        c[i] = p[i];
+      }
+    }
+    return c;
+  }
+
+  var module1 = (function () {
+    var defaultOptions = {
+      count: 10,
+      duration: 1000,
+      params: {
+        name: 'Sara',
+        age: 18,
+        sex: 'female',
+        p: 'aa',
+        params: [
+          1,
+          2
+        ]
+      }
+    };
+    return function (options) {
+      var newOptions = deepCopyContainOriginalPropertyInObject(options, defaultOptions);
+      console.log(newOptions);
+    }
+  })()
+
+  module1({
+    duration: 8888,
+    params: {
+      name: 'Jeff',
+      age: 30,
+      p: 'bb',
+      params: [
+        2,3,4
+      ]
+    }
+  })
+
+
+</script>
 
 
 </body>

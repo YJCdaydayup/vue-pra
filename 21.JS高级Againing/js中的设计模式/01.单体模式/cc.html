@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>单体模式(字面量对象)</title>
+</head>
+<body>
+<script>
+    var Singleton = {
+      val: true,
+      method1: function () {
+
+      },
+      method2: function () {
+
+      }
+    }
+
+
+    function SingleTON() {
+      var val = true;
+      return {
+        val: val,
+        method1: function () {
+
+        },
+        method2: function () {
+
+        }
+      }
+    }
+
+    var operator = SingleTON()
+    operator.method1()
+
+</script>
+</body>
+</html>
