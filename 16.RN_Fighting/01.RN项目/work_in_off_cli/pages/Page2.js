@@ -5,7 +5,9 @@ import {
     Text,
     FlatList,
     RefreshControl,
-    ActivityIndicator
+    ActivityIndicator,
+    TouchableOpacity,
+    Button
 } from 'react-native'
 
 
@@ -19,6 +21,9 @@ export default class Page2 extends Component {
             onLoading: false,
             loadingMore: false
         }
+
+        this._navigateToDetailPage = this._navigateToDetailPage.bind(this)
+        this._renderItem = this._renderItem.bind(this);
     }
 
     _keyExtractor = (item, index) => index.toString();
@@ -92,11 +97,27 @@ export default class Page2 extends Component {
     }
 
     _renderItem(rowData) {
+        let that = this;
         return (
-            <View style={styles.itemStyle}>
-                <Text style={styles.textStyle}>{rowData.item}</Text>
-            </View>
+            <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={this. _navigateToDetailPage}
+            >
+                <View style={styles.itemStyle}>
+                    <Text style={styles.textStyle}>{rowData.item}</Text>
+                </View>
+            </TouchableOpacity>
         )
+    }
+
+    _navigateToDetailPage() {
+        this.props.navigation.navigate("DetailPage", {
+            fatherRefreshEvent: this._refreshPage.bind(this)
+        })
+    }
+
+    _refreshPage(data) {
+        this._loadData();
     }
 }
 

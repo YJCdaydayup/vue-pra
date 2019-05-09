@@ -11,6 +11,8 @@ import Page2 from './../pages/Page2'
 import Page4 from './../pages/Page4'
 import Page5 from './../pages/Page5'
 
+import DetailPage from './../pages/subpages/DetailPage'
+
 import {TabBar} from './../tabbar/tabbar'
 import {DrawerStack} from './../drawer/drawer'
 
@@ -95,6 +97,12 @@ export const AppStackNavigator = createStackNavigator(
                         backgroundColor: '#666'
                     }
                 }
+            }
+        },
+        DetailPage: {
+            screen: DetailPage,
+            navigationOptions: {
+                title: '详情'
             }
         }
     },

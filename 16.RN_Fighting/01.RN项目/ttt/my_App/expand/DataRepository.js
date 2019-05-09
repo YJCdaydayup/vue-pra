@@ -71,7 +71,6 @@ export default class DataRepository {
                 fetch(url).then((response) => response.json()).then((result)=> {
                     if (!result) {
                         reject(new Error('reponse is null'));
-                        return false;
                     } else {
                         resolve(result.items);
                         this.saveRepository(url, result.items);

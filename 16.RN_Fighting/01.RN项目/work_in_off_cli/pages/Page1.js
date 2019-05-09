@@ -7,8 +7,7 @@ import {
     Button,
     NativeAppEventEmitter,
     DeviceEventEmitter,
-    Platform,
-    AlertIOS
+    Platform
 } from 'react-native'
 
 import Language, {Lanuage_Flag} from './../common/AgainLanuageDao'
