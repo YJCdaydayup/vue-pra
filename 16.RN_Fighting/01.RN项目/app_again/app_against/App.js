@@ -1,4 +1,4 @@
 import {createAppContainer} from 'react-navigation'
-import {AppStachNavigator} from './src/RootScene/LSCNavigation'
+import {AppStackNavigator} from './src/RootScene/LSCNavigation'
 
-export default App = createAppContainer(AppStachNavigator)
+export default App = createAppContainer(AppStackNavigator)

@@ -59,7 +59,7 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
             return {
                 title: titles[index],
                 headerStyle: {
-                    backgroundColor: '#f3f4f5'
+                    backgroundColor: '#91e9f7'
                 }
             }
         },
