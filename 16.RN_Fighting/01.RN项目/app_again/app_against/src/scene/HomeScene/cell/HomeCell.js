@@ -13,22 +13,23 @@ export default class HomeCell extends Component {
 
     static propTypes = {
         homeModel: PropTypes.object.isRequired,
-        callback: PropTypes.func
+        callback: PropTypes.func,
+        onFavorite: PropTypes.func
     }
 
     constructor(props) {
         super(props)
         this.state = {
-            isFavorate: this.props.homeModel.isFavorate
+            isFavorate: this.props.homeModel.isFavorite
         }
     }
 
     render() {
-        let {callback, homeModel} = this.props;
+        let {callback, homeModel,onFavorite} = this.props;
         let {item} = homeModel;
         let {owner} = item;
         let {avatar_url} = owner;
-        let favoImgSource = this.state.isFavorate? require('./../../../img/ic_star.png'): require('./../../../img/ic_star.png');
+        let favoImgSource = this.state.isFavorate? require('./../../../img/ic_star.png'): require('./../../../img/ic_unstar_transparent.png');
         return (
             <TouchableOpacity
                 onPress={() => {
@@ -50,7 +51,11 @@ export default class HomeCell extends Component {
                     </View>
                     <TouchableOpacity
                         onPress={() => {
-
+                            this.updateState({
+                                isFavorate: !this.state.isFavorate
+                            },()=>{
+                                onFavorite(this.state.isFavorate, item);
+                            })
                         }}
                     >
                         <Image
@@ -61,6 +66,11 @@ export default class HomeCell extends Component {
                 </View>
             </TouchableOpacity>
         )
+    }
+
+    updateState(dic, callback) {
+        if (!this) return;
+        this.setState(dic, callback);
     }
 }
 

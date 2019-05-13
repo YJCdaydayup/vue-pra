@@ -1,5 +1,5 @@
 export default class CommonLogical {
-    static handlerCommonErrorLogical() {
-        alert('error');
+    static handlerCommonErrorLogical(err) {
+        alert(err);
     }
 }

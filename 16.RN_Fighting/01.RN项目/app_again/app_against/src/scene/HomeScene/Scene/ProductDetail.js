@@ -6,15 +6,35 @@ import {
 } from 'react-native'
 
 import {WebView} from 'react-native-webview'
+import NavigationBar from './../../../widget/NavigationBar'
+import FavorateHelper, {FAVORITE_SCHEME} from './../../../utils/FavorateHelper'
 
 export default class ProductDetail extends Component {
-
     static navigationOptions = ({navigation}) => {
+        let favorateHelper = new FavorateHelper(FAVORITE_SCHEME.MAIN)
+        let {setParams} = navigation;
         let {params} = navigation.state;
-        let {model} = params;
-        let {item} = model;
+        let {model,backEvent} = params;
+        let {item, isFavorite} = model;
         return {
-            title: item.name
+            title: item.name,
+            headerLeft: NavigationBar.getBackButton(() => {
+                backEvent();
+                navigation.goBack();
+            }),
+            headerRight: NavigationBar.getRightFavoriteButton(NavigationBar.getImgSource(isFavorite), () => {
+                let temp = model;
+                temp.isFavorite = !temp.isFavorite;
+                setParams({
+                    model: temp
+                })
+                // 改变本地存储情况
+                if (temp.isFavorite) {
+                    favorateHelper.saveMainListItem(item.id.toString(), item)
+                } else {
+                    favorateHelper.removeMainListItem(item.id.toString())
+                }
+            })
         }
     }
 

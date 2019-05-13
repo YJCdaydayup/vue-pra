@@ -10,14 +10,7 @@ export const AppStackNavigator = createStackNavigator(
             screen: AppBottomTabNavigator,
         },
         ProductDetail: {
-            screen: ProductDetail,
-            navigationOptions: ({navigation}) => {
-               return {
-                   headerLeft: NavigationBar.getBackButton(() => {
-                       navigation.goBack();
-                   })
-               }
-            }
+            screen: ProductDetail
         }
     },
     {
