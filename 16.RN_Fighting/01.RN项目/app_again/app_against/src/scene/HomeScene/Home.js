@@ -35,8 +35,6 @@ export default class Home extends Component {
                 this.updateState({
                     isLoading: false,
                     dataArray: items
-                }, ()=>{
-                    this.forceUpdate()
                 })
             })
         })
@@ -51,15 +49,17 @@ export default class Home extends Component {
         return MAIN_LIST_API + 'iOS' + MAIN_TAIL;
     }
 
-    _keyExtractor = (item, index) => index.toString();
+    _keyExtractor = (model, index) => model.item.id.toString() + model.isFavorite.toString();
 
     render() {
         return (
             <View style={styles.container}>
                 <FlatList
+                    // extraData={this.state}
                     data={this.state.dataArray}
                     renderItem={this._renderItemView}
                     keyExtractor={this._keyExtractor}
+                    // keyExtractor={ () => Math.random(2).toString()}
                     ListFooterComponent={this._getFooterComponent}
                 />
             </View>
@@ -88,7 +88,9 @@ export default class Home extends Component {
     _clickCellEvent(model) {
         this.props.navigation.navigate('ProductDetail', {
             model: model,
-            backEvent: this._refreshPage.bind(this)
+            backEvent: this._refreshPage.bind(this),
+            // 可以把初始状态传递过去用于判断返回时是否需要刷新
+            originalFavorite: model.isFavorite
         })
     }
 
@@ -97,11 +99,9 @@ export default class Home extends Component {
             isLoading: true
         },()=>{
             HomeHandler.LSCGetMainListData(this.genUrl()).then(items => {
-                this.forceUpdate()
                 this.updateState({
                     isLoading: false,
                     dataArray: items
-                }, ()=>{
                 })
             })
         })

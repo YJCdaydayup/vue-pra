@@ -14,13 +14,13 @@ export default class ProductDetail extends Component {
         let favorateHelper = new FavorateHelper(FAVORITE_SCHEME.MAIN)
         let {setParams} = navigation;
         let {params} = navigation.state;
-        let {model,backEvent} = params;
+        let {model,backEvent, originalFavorite} = params;
         let {item, isFavorite} = model;
         return {
             title: item.name,
             headerLeft: NavigationBar.getBackButton(() => {
-                backEvent();
                 navigation.goBack();
+                originalFavorite === isFavorite? false : backEvent();
             }),
             headerRight: NavigationBar.getRightFavoriteButton(NavigationBar.getImgSource(isFavorite), () => {
                 let temp = model;
