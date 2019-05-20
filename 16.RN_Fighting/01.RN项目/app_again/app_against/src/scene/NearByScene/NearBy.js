@@ -7,6 +7,7 @@ import {
 
 
 export default class NearBy extends Component {
+
     constructor(props) {
         super(props);
     }

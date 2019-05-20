@@ -3,6 +3,7 @@ import {AppBottomTabNavigator} from './LSCTabNavigator'
 
 import ProductDetail from './../scene/HomeScene/Scene/ProductDetail'
 import NavigationBar from './../widget/NavigationBar'
+import MyFavorite from './../scene/MineScene/subscene/MyFavoritePage'
 
 export const AppStackNavigator = createStackNavigator(
     {
@@ -11,6 +12,16 @@ export const AppStackNavigator = createStackNavigator(
         },
         ProductDetail: {
             screen: ProductDetail
+        },
+        MyFavorite: {
+            screen: MyFavorite,
+            navigationOptions: ({navigation})=>{
+                return {
+                    headerLeft: NavigationBar.getBackButton(() => {
+                        navigation.goBack();
+                    }),
+                }
+            }
         }
     },
     {

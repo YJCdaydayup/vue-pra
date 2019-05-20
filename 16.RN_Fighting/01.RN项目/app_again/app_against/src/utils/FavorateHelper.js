@@ -13,7 +13,7 @@ export default class FavorateHelper {
     }
 
     saveMainListItem(key, data) {
-        AsyncStorage.setItem(key, data, err => {
+        AsyncStorage.setItem(key, JSON.stringify(data), err => {
             if (!err) {
                 this.updateLocalKeysMap(key, true)
             }
@@ -50,18 +50,38 @@ export default class FavorateHelper {
     }
 
     getAllLocalKeys() {
-       return new Promise((resolve, reject) => {
-           AsyncStorage.getItem(this.scheme, (err, keys) => {
-               if (!err) {
-                   if (!keys) {
-                       resolve([])
-                   }else {
+        return new Promise((resolve, reject) => {
+            AsyncStorage.getItem(this.scheme, (err, keys) => {
+                if (!err) {
+                    if (!keys) {
+                        resolve([])
+                    } else {
                         resolve(JSON.parse(keys))
-                   }
-               }else {
-                   reject(err);
-               }
-           })
-       })
+                    }
+                } else {
+                    reject(err);
+                }
+            })
+        })
+    }
+
+    getAllLocalFavoriteModels() {
+        return new Promise((resolve, reject) => {
+            this.getAllLocalKeys().then(keys => {
+                let models = [];
+                try {
+                    AsyncStorage.multiGet(keys).then(results => {
+                        results.map((item) => {
+                            models.push(item[1]);
+                        })
+                        resolve(models);
+                    })
+                }catch (err) {
+                    reject(err);
+                }
+            }).catch(err => {
+                reject(err);
+            });
+        })
     }
 }

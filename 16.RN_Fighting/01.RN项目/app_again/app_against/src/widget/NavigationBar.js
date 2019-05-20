@@ -9,15 +9,19 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class NavigationBar {
 
-    static getBackButton(callback) {
+    static getBackButton(callback, color = 'black') {
         return (
             <TouchableOpacity
-                onPress={callback}
+                onPress={() => {
+                    if (callback) {
+                        callback();
+                    }
+                }}
             >
                 <View style={{
                     marginLeft: 20
                 }}>
-                    <Icon name="arrow-circle-o-left" size={25} color="black"/>
+                    <Icon name="arrow-circle-o-left" size={25} color={color}/>
                 </View>
             </TouchableOpacity>
         )
@@ -26,7 +30,11 @@ export default class NavigationBar {
     static getRightFavoriteButton(source, callback) {
         return (
             <TouchableOpacity
-                onPress={callback}
+                onPress={() => {
+                    if (callback) {
+                        callback();
+                    }
+                }}
             >
                 <Image
                     style={{
@@ -42,6 +50,6 @@ export default class NavigationBar {
     }
 
     static getImgSource(isFavorite) {
-        return isFavorite ? require('./../img/ic_star.png'): require('./../img/ic_unstar_transparent.png');
+        return isFavorite ? require('./../img/ic_star.png') : require('./../img/ic_unstar_transparent.png');
     }
 }

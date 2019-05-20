@@ -20,7 +20,7 @@ export default class ProductDetail extends Component {
             title: item.name,
             headerLeft: NavigationBar.getBackButton(() => {
                 navigation.goBack();
-                originalFavorite === isFavorite? false : backEvent();
+                originalFavorite === isFavorite? null : backEvent();
             }),
             headerRight: NavigationBar.getRightFavoriteButton(NavigationBar.getImgSource(isFavorite), () => {
                 let temp = model;

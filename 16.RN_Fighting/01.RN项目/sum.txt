@@ -75,6 +75,8 @@
 6.导航和页面组件进行通信时，可以使用通知或者页面组件即将显示的时候传递setParams进去，传递方法进去，导航组件自己调用方法改变自己的UI时，由于页面无法通过状态机刷新，这个时候可以通过setParams，改变参数进行UI刷新；
 7.做事件绑定时,如果作为参数传递的func，就直接在传递的时候做bind绑定即可,如果报错找不到bind，就在这个函数的最外层函数上做bind绑定
 8.触发FlatList页面刷新的办法有1.获取数据赋值this.setState({dataArray: items})keyExtractor={()=>Math.random(2)}保证每个cell不一样,为提高渲染效率也可以使用设置keyExtractor={(model, index)=>model.item.id.toString() + model.isFavorite.toString()}将复用标记与变化的属性绑定起来
+9.AsycStorage可以存储对象，不同于LocalStorage只能存储字符串，但是使用AsyncStorage时最好存储时转化成字符串，当存储对象时，取出来的就无法转JSON了
+10.当一个组件里面的属性比较多时，可以定义一个方法，返回一个config对象，然后在这个组件中解构这个config对象；
 
 
 

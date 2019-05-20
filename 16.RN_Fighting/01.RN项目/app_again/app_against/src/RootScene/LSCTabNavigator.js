@@ -46,6 +46,9 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
                 tabBarLabel: "我的",
                 tabBarIcon: ({tintColor, focused}) => {
                     return <TabBarItem name="fonticons" tintColor={tintColor}/>
+                },
+                headerStyle: {
+                    backgroundColor: 'red',
                 }
             }
         }
@@ -54,12 +57,21 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
         navigationOptions: ({navigation}) => {
             let {state} = navigation;
             let {routes,index} = state;
-            let titles = ['首页', '附近', '订单', '我的'];
+            let titles = ['首页', '我的收藏', '订单', '我的'];
             initStatusBarStyle(navigation);
-            return {
-                title: titles[index],
-                headerStyle: {
-                    backgroundColor: '#91e9f7'
+            if (index === 3) {
+                return {
+                    header: null
+                }
+            }else {
+                return {
+                    title: titles[index],
+                    headerTitleStyle: {
+                        color: 'gray'
+                    },
+                    headerStyle: {
+                        backgroundColor: '#91e9f7',
+                    }
                 }
             }
         },
