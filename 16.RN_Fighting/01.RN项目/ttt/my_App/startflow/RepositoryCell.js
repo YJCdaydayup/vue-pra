@@ -26,9 +26,14 @@ export default class RepositoryCell extends Component {
     }
 
     render() {
-
         let {projectModel, clickEvent} = this.props;
-        let rowData = projectModel.item;
+        let rowData;
+        try {
+            rowData = projectModel.item;
+        }catch (err) {
+            rowData = projectModel
+        }
+
         return (
             <TouchableOpacity
                 style={styles.container}
@@ -37,7 +42,7 @@ export default class RepositoryCell extends Component {
                 }}
             >
                 <View style={styles.cell_container}>
-                    <Text style={styles.title}>{rowData.name}</Text>
+                    <Text style={styles.title}>{rowData.fullName}</Text>
                     <Text style={styles.description}>{rowData.description}</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10}}>

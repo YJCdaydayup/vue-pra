@@ -1,10 +1,4 @@
 /**
- * Created by yangli on 2019/3/31.
- */
-/**
- * Created by yangli on 2019/3/31.
- */
-/**
  * Sample React Native App
  * https://github.com/facebook/react-native
  * @flow
@@ -73,6 +67,7 @@ class FavorateTab extends Component {
             }),
             isLoading: false,
         }
+        this._renderRow = this._renderRow.bind(this)
     }
 
     componentDidMount() {
@@ -97,7 +92,7 @@ class FavorateTab extends Component {
             <View style={styles.container}>
                 <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={this._renderRow.bind(this)}
+                    renderRow={this._renderRow}
                     refreshControl={<RefreshControl
                         refreshing={this.state.isLoading}
                         onRefresh={this._onLoad}
@@ -112,7 +107,6 @@ class FavorateTab extends Component {
     }
 
     _renderRow(projectModel) {
-        console.log(projectModel)
         return (
             this.props.flag === FLAG_STORAGE.flag_popular ? <RespositoryCell
                 projectModel={projectModel}

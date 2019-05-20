@@ -12,6 +12,7 @@ import Webview from './../startflow/MyWebView'
 import RespositoryDetailPage from './../startflow/RespositoryDetail'
 import Page6 from './../components/SwipableFlatlist'
 import SectionList from './../components/SectionList'
+import ParerelComponent from './../pages/ParerelComponent'
 
 import AsyncLocalStorage from '../startflow/AsyncStoragePage'
 import MyPage from './../startflow/Mine/MyPage'
@@ -152,7 +153,7 @@ export const AppTabNavigator = TabNavigator(
             }
         },
         MyPage: {
-            screen: MyPage,
+            screen: ParerelComponent,
             navigationOptions: {
                 tabBarLabel: "收藏",
                 // tabBarIcon: ({tintColor, focused})=> {

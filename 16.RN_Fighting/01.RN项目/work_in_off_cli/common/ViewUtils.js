@@ -14,7 +14,11 @@ export default class ViewUtils {
                     source={require('./../res/images/ic_arrow_back_white_36pt.png')}
                     style={{
                         width: 26,
+<<<<<<< Updated upstream:16.RN_Fighting/01.RN项目/work_in_off_cli/common/ViewUtils.js
                         height: 26
+=======
+                        height: 26,
+>>>>>>> Stashed changes:16.RN_Fighting/01.RN项目/cczq_rn_ts_demo/common/ViewUtil.js
                     }}
                 />
             </TouchableOpacity>
