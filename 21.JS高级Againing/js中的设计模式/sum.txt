@@ -1,0 +1,2 @@
+1.OC中的面向协议编程，java中的向上转型都是由于静态语言类型造成的，但是javascript是动态语言类型，不会检查对象的类型，只会看他运行的时候有没有这个方法，那么设计模式上可以抽象一个类或者方法：makeSound(animal) {animal.sounding()} function Dog(){} Dog.prototype.sounding = function() {} function Pig(){} Pig.prototype.sounding = function() {},不用谁去执行，只需要将对应的对象在原型上添加对应方法即可
+2.

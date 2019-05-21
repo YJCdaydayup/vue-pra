@@ -85,6 +85,14 @@
 4.当一个组件的参数比较多时，可以用一个方法来返回这个config对象，最后在组件里面结构这个参数即可
 5.研究视频中的AboutComom组件中的组装者模式
 
+第九节课
+1.ES5的继承方式：bind是绑定了调用的对象，方法可以在后面的某个时期调用，apply是方法立即调用了，可以在第一个参数指定是谁来调用，参数是数组形式；call也是方法立即执行，参数散列形式；method.call(null, param),apply和call如果是自己调用自己的方法第一个参数就传递null，别人调用就传别人，一般是方法来调用apply或call，如果是构造函数调用了，就形成了继承，但是继承的是对象方法，而非原型上的方法；
+function Animal(name,age) {}. function Dog(Animal.call(this, name,age)){}就形成了继承，还可以原型继承，ES中的extends继承
+2.不管是props还是state的改变，都会引发render的重新渲染；
+3.组件之间传递数据可以通过props，父组件的每一次render都会触发子组件的shouldComponentUpdate(newVal)，可以在这个方法里面判断是否需要调用子组件的render方法刷新子组件；
+
+
+
 
 
 

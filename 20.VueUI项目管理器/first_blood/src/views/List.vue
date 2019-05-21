@@ -7,6 +7,8 @@
                 <a-breadcrumb-item>Application List</a-breadcrumb-item>
             </a-breadcrumb>
         </div>
+        <div class="food-box">{{food.num}}</div>
+        <Child :food="food" :show="show"></Child>
     </div>
 </template>
 
@@ -14,14 +16,29 @@
     .list
         .nav-bread
             text-align left
+        .food-box
+            width 50px
+            height 30px
+            background-color lightcoral
+            line-height 30px
+            text-align center
 </style>
 
 <script>
+
+    import Child from './../components/Child.vue'
+
     export default {
         data() {
             return {
-
+                food: {
+                    count: 1
+                },
+                show: true
             }
+        },
+        components: {
+            Child
         }
     }
 </script>

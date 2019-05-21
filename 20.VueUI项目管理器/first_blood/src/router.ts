@@ -8,6 +8,10 @@ let router = new Router({
     mode: 'history',
     routes: [
         {
+            path: '/',
+            redirect: '/home/center/list'
+        },
+        {
             path: '/home',
             name: 'index',
             component: Home

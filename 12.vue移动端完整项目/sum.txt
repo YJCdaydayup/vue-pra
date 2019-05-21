@@ -115,6 +115,9 @@
 6.页面路由时通过{path：’/‘,redirect: ‘/home’}指向home页面，当在home页面有嵌套路由时，可以通过{path: ‘/home’,name: ‘Home’, redirect: ‘/home/hot’, children: [{path: ‘hot’,component: Hot}],component: Home}
 7.没有设置的路由统一跳转到{path: "*",component: NotFound},页面飞走了
 
+第十二节课
+1.父子组件的数据传递通过props，对于基本数据类型比如：Number， String，Boolean时，子组件无权更改属性值，但是对象Object类型的属性值传递过来后，子组件可以改变对象里面的值，同时父组件也会跟着发生相应的改变；
+
 
 
 
