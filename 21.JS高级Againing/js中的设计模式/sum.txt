@@ -1,2 +1,55 @@
 1.OC中的面向协议编程，java中的向上转型都是由于静态语言类型造成的，但是javascript是动态语言类型，不会检查对象的类型，只会看他运行的时候有没有这个方法，那么设计模式上可以抽象一个类或者方法：makeSound(animal) {animal.sounding()} function Dog(){} Dog.prototype.sounding = function() {} function Pig(){} Pig.prototype.sounding = function() {},不用谁去执行，只需要将对应的对象在原型上添加对应方法即可
-2.
+
+2.在函数的调用中经常会造成this的丢失，可以通过立即执行函数和apply进行修正：
+document.getElemenetById = (function(func) {
+	return func.apply(document, arguments)
+})(document.getElementById)
+
+3.通过call进行this的修正:
+document.getElementById('div1').onclick=function() {
+	var func = function() {
+		alert(this.id)
+	}
+	func.call(this);
+}
+函数内部定义了函数，然后直接调用这个函数，这个函数的默认this就是window，需要通过call或者apply来修正
+
+4.自定义bind函数
+Function.prototype.bind = function(context) {
+	var self = this;
+	return function () {
+		return self.apply(context,arguments)
+	}
+},先把函数用self持有，然后返回一个函数替代原有函数，在新函数调用时其实就是原来函数的调用给context了
+
+5.当一个伪数组需要调用数组的方法时，可以通过call来接用Array.prototype.slice.call(arguments)来接用方法；
+
+6.call/apply可以用于构造函数继承对象本身的属性和方法，可以修正this，可以让伪数组调用数组的方法；
+
+7.使用面向对象的方法能实现的一般使用闭包也可以实现，一个功能管理一个变量时可以返回一个函数：
+(function() {
+   // 要管理的变量
+	var val = true;
+  return function() {
+	val ++;
+	console.log(val);
+  }
+})(),当有多个功能管理维护多个变量时：
+(function() {
+	var val1 = 1;
+	var val2 = 2;
+   return {
+	add: function() {},
+	lose: function() {}
+   }
+})()，每一次调用都要维护一份变量时，就不要使用立即执行函数，比如要维护多份计时器时；
+
+8.使用闭包将变量存放在闭包中和放在全局作用域对内存的影响是一致的，相反还不会造成变量的污染，如果在将来需要将这些变量回收，可以手动的设为null；
+
+9.闭包可能存在内存泄漏的地方是闭包的作用域中保存着一些DOM节点，这是由于IE中BOM和DOM中的对象是使用C++以COM对象方式实现的，采用的是引用计数器策略，在引用计数器策略中产出了循环引用就会内存泄漏，只需要将其中一个设为null即可；
+
+10.callback将函数作为参数传递实现数据的回调，比如网络请求，比如做完数据的操作，将DOM的操作放到回调里面执行
+
+11.
+
+

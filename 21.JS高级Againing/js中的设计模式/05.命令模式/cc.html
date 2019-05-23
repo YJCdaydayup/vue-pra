@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>命令模式</title>
+</head>
+<body>
+    <button id="execute">执行</button>
+    <button id="undo">重做</button>
+
+    <script>
+    // 命令真正的执行者
+    var TV = {
+        open: function () {
+            console.log('打开电视机')
+        },
+        close: function () {
+            console.log('关闭电视机')
+        }
+    }
+
+    // 将命令封装成对象，持有真正的执行者
+    var OpenTVCommand = function (receiver) {
+        this.receiver = receiver;
+    }
+
+    OpenTVCommand.prototype.execute = function () {
+        this.receiver.open();
+    }
+
+    OpenTVCommand.prototype.undo = function () {
+        this.receiver.close();
+    }
+
+    // 将命令的发起者和命令结合起来
+    var setCommand = function (command) {
+        document.getElementById('execute').onclick = function () {
+            command.execute();
+        }
+
+        document.getElementById('undo').onclick = function () {
+            command.undo();
+        }
+    }
+
+//    setCommand(new OpenTVCommand(TV));
+
+</script>
+
+    <script>
+        var TV = {
+            open: function () {
+                console.log('打开')
+            },
+            close: function () {
+                console.log('关闭')
+            }
+        }
+
+        var createCommand = function (receiver) {
+            var execute = function () {
+                return receiver.open();
+            }
+
+            var undo = function () {
+                return receiver.close();
+            }
+
+            return {
+                execute: execute,
+                undo: undo
+            }
+        }
+
+        var setCommand = function (command) {
+            document.getElementById('execute').onclick = function () {
+                command.execute();
+            }
+
+            document.getElementById('undo').onclick = function () {
+                command.undo();
+            }
+        }
+
+    </script>
+
+</body>
+</html>

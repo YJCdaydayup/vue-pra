@@ -30,6 +30,19 @@
       }
     }
 
+    var addFunc = (function () {
+        var val = true;
+        return function () {
+            val ++;
+            console.log(val);
+        }
+    })()
+
+    addFunc();
+    addFunc();
+    addFunc();
+
+
     var operator = SingleTON()
     operator.method1()
 

@@ -1,7 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="div1">click</div>
 <script>
 
-    function lsc() {
-
+    Function.prototype.bind = function (context) {
+        var self = this;
+        return function () {
+            self.call(context);
+        }
     }
 
+    document.getElementById('div1').onclick = function () {
+        function show() {
+            alert(this);
+        }
+
+//            show.call(this);
+//            var show = (function (p) {
+//                return function () {
+//                    alert(p);
+//                }
+//            })(this)
+
+        show.bind(this)();
+    }
+
+    function test() {
+        var child = Array.prototype.slice.call(arguments, 0, 2);
+        console.log(child)
+    }
+
+    function Animal(name, age) {
+        this.name = name;
+        this.age = age;
+        this.say = function () {
+            console.log('my name is' + this.name + ',And my age is ' + this.age);
+        }
+    }
+
+    Animal.prototype.eat = function() {
+        console.log('吃');
+    }
+
+    function Dog(name, age) {
+        Animal.call(this, name, age);
+    }
+
+    var dog = new Dog('旺财', 18);
+    dog.say();
+
 </script>
+</body>
+</html>

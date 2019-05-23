@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    // 其实就是一种装饰者模式
+
+    Function.prototype.before = function (beforefn) {
+        var __self = this; // 保存原函数的引用
+        return function () { // 返回包含了原函数和新函数的"代理"函数
+            beforefn.apply(this, arguments);
+            __self.apply(this, arguments);
+        }
+    }
+    Function.prototype.after = function (afterfn) {
+        var __self = this;
+        return function () {
+            __self.apply(this, arguments);
+            afterfn.apply(this, arguments);
+        }
+    }
+
+    var func = function () {
+        console.log(2);
+    };
+
+    newFunc= func.before(function () {
+        console.log(1);
+    }).after(function () {
+        console.log(3);
+    });
+
+//    newFunc();
+
+</script>
+<script>
+    // 利用AOP，封装网络请求框架
+    Function.prototype.startRequest = function (makeParamsFunc,callback) {
+        var __self = this;
+        return function () {
+           var params = makeParamsFunc.call(this,arguments);
+            __self.call(this,params,callback);
+        }
+    }
+
+    var requestNetWork = function (params,callback) {
+        console.log(params)
+        setTimeout(function () {
+            callback('返回值')
+        },2000)
+    }
+
+//    requestNetWork.startRequest(function () {
+//        return '这是参数'
+//    }, function (result) {
+//        console.log(result)
+//    })()
+
+</script>
+
+<script>
+
+    window.onresize = function () {
+        log.limit(2000)()
+    }
+
+    function log() {
+        console.log(Math.random(10));
+    }
+
+    Function.prototype.limit = function (callback,limit) {
+        var __self = this;
+        return function () {
+            setTimeout(function () {
+                __self.call(this,arguments);
+            },limit);
+        }
+    }
+
+
+
+</script>
+
+</body>
+</html>

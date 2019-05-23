@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 判断数据类型
+    var isType = function (type) {
+        console.log(this)
+        return function (obj) {
+            console.log(this);
+            return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+        }
+    }
+
+    var isType2 = {};
+    for (var i = 0; types = ['String', 'Object', 'Array'], i < types.length; i++) {
+        isType2['is' + types[i]] = (function (type) {
+            return function (obj) {
+                return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+            }
+        })(types[i])
+    }
+
+    console.log(isType2.isString('123'))
+    console.log(isType2.isObject([]));
+
+</script>
+</body>
+</html>
