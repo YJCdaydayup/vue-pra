@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./config.js"></script>
+</head>
+<body>
+<a href="./next.html">push</a>
+<script>
+    // 每次执行都生成一份计时器和计时器多久后执行一个fn
+    var throttle = function (fn, interval) {
+        var timer;
+        var __self = fn;
+        var firstTime = true;
+        var me = this;
+        return function () {
+            if (firstTime) {
+                __self.apply(me, arguments);
+                return firstTime = false;
+            }
+
+            if (timer) {
+                return false;
+            }
+
+            timer = setTimeout(function () {
+                clearTimeout(timer);
+                timer = null;
+                __self.apply(me, arguments);
+            }, interval || 500)
+        }
+    }
+
+    //    window.onresize = throttle(function () {
+    //        console.log(Math.random(10) * 1000)
+    //    }, 500);
+
+</script>
+
+<script>
+
+    // 分时节流:分批创建多个DOM对象
+    var timeChunk = function (ary, fn, count) {
+        var obj, t;
+        var start = function () {
+            for (var i = 0; i < count; i++) {
+                var obj = ary.shift();
+                fn(obj);
+            }
+        }
+
+        return function () {
+            t = setInterval(function () {
+                if (ary.length === 0) {
+                    return clearInterval(t);
+                }
+                start()
+            },2000);
+        }
+    }
+
+    var ary = [];
+    for (var i=1;i<100;i++) {
+        ary.push(i);
+    }
+
+    var renderNode = timeChunk(ary,function (e) {
+        var div = document.createElement('div');
+        div.innerText = e
+        document.body.appendChild(div);
+    },10);
+//    renderNode()
+
+</script>
+
+<script>
+//    var ins1 = getInstance('旺财', 18);
+//    console.log(ins1)
+//    var ins2 = getInstance('wangcai', 36);
+//    console.log(ins2)
+//    ins2.name = '张三'
+//    console.log(ins1)
+//    var ins3 = getInstance();
+//    console.log(ins3)
+    window.instace.name = 10;
+    console.log(window.instace)
+
+</script>
+
+</body>
+</html>

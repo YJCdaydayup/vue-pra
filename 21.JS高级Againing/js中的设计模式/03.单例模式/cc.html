@@ -1,47 +1,49 @@
 <script>
 
-  var single = (function () {
-    var unique;
+    // 不通h5页面初始化单例产生的对象是不一样的
+    var single = (function () {
+        var unique;
 
-    function getInstance() {
-      if (unique === undefined) {
-        unique = new Construct();
-      }
-      return unique;
-    }
+        function getInstance() {
+            if (unique === undefined) {
+                unique = new Construct();
+            }
+            return unique;
+        }
 
-    // 具体实例类
-    function Construct() {
+        // 具体实例类
+        function Construct() {
 
-    }
+        }
 
-    return {
-      getInstace: getInstance
-    }
-  })()
+        return {
+            getInstace: getInstance
+        }
+    })()
 
-  console.log(single.getInstace() === single.getInstace());
+    console.log(single.getInstace() === single.getInstace());
 
 
-  var again = (function() {
-    var unique
-    function getInstace() {
-      if (unique === undefined) {
-        unique = new Dog('旺财')
-      }
-      return unique;
-    }
+    var again = (function () {
+        var unique
 
-    function Dog(name) {
-      this.name = name;
-    }
+        function getInstace() {
+            if (unique === undefined) {
+                unique = new Dog('旺财')
+            }
+            return unique;
+        }
 
-    return {
-      getInstance: getInstace
-    }
+        function Dog(name) {
+            this.name = name;
+        }
 
-  })()
+        return {
+            getInstance: getInstace
+        }
 
-  console.log(again.getInstance())
+    })()
+
+    console.log(again.getInstance())
 
 </script>

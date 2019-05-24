@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+<button onclick="show()">弹框</button>
+<script>
+
+
+
+    function show() {
+        var div = createSingleDiv();
+        div.style.display = 'block';
+    }
+
+    var getSingle = function (fn) {
+        var result;
+        return function () {
+            return result || (result = fn.call(this,arguments));
+        }
+    }
+
+    var createLoginLayer = function() {
+        var div = document.createElement('div');
+        div.innerText = '我是弹框';
+        div.className = 'box';
+        div.style.display = 'none';
+        document.body.appendChild(div);
+        return div;
+    }
+
+    var createSingleDiv = getSingle(createLoginLayer);
+
+</script>
+<script>
+
+    var getInstance = function () {
+        var __div;
+
+        var createDiv = function (name) {
+            var div = document.createElement('div');
+        }
+
+        return function () {
+            if (!__div) {
+                __div = createDiv('wangcai');
+            }
+            return __div;
+        }
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

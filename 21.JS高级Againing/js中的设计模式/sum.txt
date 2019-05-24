@@ -50,6 +50,24 @@ Function.prototype.bind = function(context) {
 
 10.callback将函数作为参数传递实现数据的回调，比如网络请求，比如做完数据的操作，将DOM的操作放到回调里面执行
 
-11.
+11.闭包里面的私有变量最好用双下划线方式来写: var __name = '';
+
+12.不用ES6的语法来写js中类的静态方法，可以这样:
+  function Animal(name, age) {this.name = name; this.age = age;}
+  静态方法: Animal.fight = function() {console.log(‘Just beat it ！！！’)} Animal.fight();
+  维护一个变量的方式优先考虑闭包，静态方法要维护自己的变量，就可以使用闭包了：
+  Animal.getInstance = (function() {
+    var __instance;
+    return function() {
+	if (!__instance) {
+	   __instance = new Animal();
+        }
+	return __instance;
+    }
+  })()
+
+13.
+
+
 
 
