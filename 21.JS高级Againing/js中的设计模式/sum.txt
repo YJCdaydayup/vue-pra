@@ -66,7 +66,28 @@ Function.prototype.bind = function(context) {
     }
   })()
 
-13.
+13.通过返回函数的闭包可以让一个函数变成任何新的函数且拥有自己的维护变量：Function.prototype.limit = function () { var timer, isOpen; return function() {}}
+
+14.策略模式:将一个一个的算法定义成不同的策略对象，每个策略互不影响且可相互替代；
+
+15.OC中的策略模式一般是每个策略定义为一个对象，JS中的策略如下：
+var strategies = {
+	"S": function( salary ){
+	return salary * 4;
+	 },
+	"A": function( salary ){
+	 return salary * 3;
+	},
+	"B": function( salary ){
+	return salary * 2;
+	};
+	var calculateBonus = function( level, salary ){ return strategies[ level ]	( salary );
+	};
+
+16.for循环得到将来执行的函数并保存在数组中，这个时候for循环产生的入参必须通过立即执行函数的闭包传递进去；
+
+
+
 
 
 

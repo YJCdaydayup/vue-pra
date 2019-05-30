@@ -25,20 +25,7 @@ export default class LSCLoading extends Component {
         console.log('oldVal: ',oldVal)
         return true;
     }
-
-    componentWillUpdate(newVal, oldVal) {
-        console.log('componentWillUpdate')
-        console.log('newVal: ',newVal)
-        console.log('oldVal: ',oldVal)
-        return true;
-    }
-
-    componentDidUpdate(newVal, oldVal) {
-        console.log('componentDidUpdate')
-        console.log('newVal: ',newVal)
-        console.log('oldVal: ',oldVal)
-        return true;
-    }
+sacascsacasvdsdsvdvs sssssss
 
     render() {
         return (

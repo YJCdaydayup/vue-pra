@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <!--
+        二次贝塞尔曲线: https://codepen.io/hanyanjun/pen/dppbmj
+        三次贝塞尔曲线: https://codepen.io/hanyanjun/pen/qaaWYo
+    -->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        .box {
+            position: relative;
+            margin-top: 100px;
+            width: 200px;
+            height: 200px;
+            background-color: gray;
+        }
+    </style>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        var guijipoints = [];
+        var index = 0;
+        $(document).ready(function () {
+            var ps = [{ x: 10, y: 10 }, { x: 167, y: 11 }, { x: 200, y: 200 }];
+
+            guijipoints = CreateBezierPoints(ps, 100);
+            var moveobj = $("#move_div");
+            var timer = setInterval(function () {
+                var p = guijipoints[index];
+                moveobj.css({ left: p.x, top: p.y });
+                index++;
+                if (index >= guijipoints.length) {
+                    index = 0;
+                    clearInterval(timer)
+
+                }
+            }, 10);
+            guijipoints.forEach(function (obj, i) {
+                createDiv(obj.x, obj.y);
+            });
+        });
+
+        function createDiv(x, y) {
+            $(".box").append('<div style="position: absolute; width: 1px; height: 1px; left:' + x + 'px;top:' + y + 'px; overflow: hidden; background-color: black;border-radius: 3px;"></div>');
+        }
+
+        //anchorpoints：贝塞尔基点
+        //pointsAmount：生成的点数
+        function CreateBezierPoints(anchorpoints, pointsAmount) {
+            var points = [];
+            for (var i = 0; i < pointsAmount; i++) {
+                var point = MultiPointBezier(anchorpoints, i / pointsAmount);
+                points.push(point);
+            }
+            return points;
+        }
+
+        function MultiPointBezier(points, t) {
+            var len = points.length;
+            var x = 0, y = 0;
+            var erxiangshi = function (start, end) {
+                var cs = 1, bcs = 1;
+                while (end > 0) {
+                    cs *= start;
+                    bcs *= end;
+                    start--;
+                    end--;
+                }
+                return (cs / bcs);
+            };
+            for (var i = 0; i < len; i++) {
+                var point = points[i];
+                x += point.x * Math.pow((1 - t), (len - 1 - i)) * Math.pow(t, i) * (erxiangshi(len - 1, i));
+                y += point.y * Math.pow((1 - t), (len - 1 - i)) * Math.pow(t, i) * (erxiangshi(len - 1, i));
+            }
+            return { x: x, y: y };
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div class="box">
+        <div id="move_div" style=" position: absolute; left: 10px; top: 10px; height: 10px; width: 10px;border-radius: 5px; background-color: red; "></div>
+    </div>
+</body>
+</html>

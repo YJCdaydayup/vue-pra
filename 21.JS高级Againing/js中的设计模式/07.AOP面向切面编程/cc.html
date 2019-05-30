@@ -29,59 +29,111 @@
         console.log(2);
     };
 
-    newFunc= func.before(function () {
+    newFunc = func.before(function () {
         console.log(1);
     }).after(function () {
         console.log(3);
     });
 
-//    newFunc();
+    //    newFunc();
 
 </script>
 <script>
     // 利用AOP，封装网络请求框架
-    Function.prototype.startRequest = function (makeParamsFunc,callback) {
+    Function.prototype.startRequest = function (makeParamsFunc, callback) {
         var __self = this;
         return function () {
-           var params = makeParamsFunc.call(this,arguments);
-            __self.call(this,params,callback);
+            var params = makeParamsFunc.call(this, arguments);
+            __self.call(this, params, callback);
         }
     }
 
-    var requestNetWork = function (params,callback) {
+    var requestNetWork = function (params, callback) {
         console.log(params)
         setTimeout(function () {
             callback('返回值')
-        },2000)
+        }, 2000)
     }
 
-//    requestNetWork.startRequest(function () {
-//        return '这是参数'
-//    }, function (result) {
-//        console.log(result)
-//    })()
+    //    requestNetWork.startRequest(function () {
+    //        return '这是参数'
+    //    }, function (result) {
+    //        console.log(result)
+    //    })()
 
 </script>
 
 <script>
 
-    window.onresize = function () {
-        log.limit(2000)()
-    }
-
-    function log() {
-        console.log(Math.random(10));
-    }
-
-    Function.prototype.limit = function (callback,limit) {
-        var __self = this;
+    Function.prototype.limit = function () {
+        var timer, isOpen;
+        var self = this;
         return function () {
-            setTimeout(function () {
-                __self.call(this,arguments);
-            },limit);
+            if (isOpen) {
+                return isOpen = false;
+            }
+
+            if (timer) {
+                return ;
+            }
+
+            timer = setTimeout(function () {
+                clearTimeout(timer);
+                timer = null;
+                self.apply(this,arguments);
+            }, 1000)
         }
     }
 
+    var originFn = function () {
+        console.log(Math.random(2))
+    }
+
+    window.onresize = originFn.limit();
+
+//        window.onresize = function (fn) {
+//            var timer;
+//            var isOpen = true;
+//            return function () {
+//                if (isOpen) {
+//                    return isOpen = false;
+//                }
+//
+//                if (timer) {
+//                    return ;
+//                }
+//
+//                timer = setTimeout(function () {
+//                    clearTimeout(timer);
+//                    timer = null;
+//                    fn();
+//                }, 1000)
+//            }
+//        }(function () {
+//            console.log(Math.random(10))
+//        })
+
+//    var test = function (fn) {
+//        var timer, isOpen = true;
+//        return function () {
+//            if (isOpen) {
+//                return isOpen = false;
+//            }
+//            if (timer) {
+//                return false;
+//            }
+//
+//            timer = setTimeout(function () {
+//                clearTimeout(timer);
+//                timer = null;
+//                fn();
+//            }, 500);
+//        }
+//    }
+//
+//    window.onresize = test(function () {
+//        console.log(Math.random(100) * 1000)
+//    });
 
 
 </script>
