@@ -91,11 +91,6 @@
 function Animal(name,age) {}. function Dog(Animal.call(this, name,age)){}就形成了继承，还可以原型继承，ES中的extends继承
 2.不管是props还是state的改变，都会引发render的重新渲染；
 3.组件之间传递数据可以通过props，父组件的每一次render都会触发子组件的shouldComponentUpdate(newVal)，可以在这个方法里面判断是否需要调用子组件的render方法刷新子组件；
-4.当一个任务中包含多个异步请求时，可以通过async/await将多个异步请求按顺序同步执行，await后面跟的函数必须返回一个Promise，且Promise里面必须return resolve或reject，那么await拿到的是resolve(val)或者reject(val), 所以最后async的函数要通过.then或者.catch拿到值；
-5.await下每一个异步函数都reject自己的错误，但可以在调用async函数后的catch中拿到，到哪个await报错，后面的异步函数将都不执行了；
-5.async必须跟在function的后面，形成async function
-
-
 
 
 第十节课
@@ -113,6 +108,9 @@ function Animal(name,age) {}. function Dog(Animal.call(this, name,age)){}就形�
 let ACTION_HOME = {‘flag1’: ‘flag1’, flag2:’flag2’}
 DeviceEventEmitter.addListener(‘ACTION_HOME’, (action,params)=>{})
 DeviceEventEmitter.emit(‘ACTION_HOME’, ACTION_HOME.flag1,params)
+9.记住export default function test() {return {
+
+}}，在外面通过import拿到的就是return的对象，通过传入一个promise，进行包装后再丢出去，来控制promise的继续请求还是取消；
 
 
 
