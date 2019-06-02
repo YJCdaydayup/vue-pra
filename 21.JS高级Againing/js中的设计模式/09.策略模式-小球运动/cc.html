@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<body>
+<div style="position:absolute;background:blue" id="div">我是 div</div>
+</body>
+
+<script>
+    var tween = {
+        linear: function (t, b, c, d) {
+            return c * t / d + b;
+        },
+        easeIn: function (t, b, c, d) {
+            return c * ( t /= d )* t* t + b;
+        },
+        strongEaseIn: function (t, b, c, d) {
+            return c * ( t /= d ) * t * t * t
+        },
+        strongEaseOut: function (t, b, c, d) {
+            return c * ( ( t = t / d - 1) * t)
+        },
+        sineaseIn: function (t, b, c, d) {
+            return c * ( t /= d) * t * t + b;
+        },
+        sineaseOut: function (t, b, c, d) {
+            return c * ( ( t = t / d - 1) * t)
+        },
+        quad: function (t, b, c, d) {
+            return (t /= d) * t * c + b;
+        }
+    };
+
+
+    var Animate = function (dom) {
+        this.dom = dom;
+        this.startTime = 0;
+        this.startPos1 = 0;
+        this.startPos2 = 0;
+        this.endPos1 = 0;
+        this.endPos2 = 0;
+        this.propertyName1 = null;
+        this.propertyName2 = null;
+        this.easing = null;
+        this.duration = null;
+    }
+
+    Animate.prototype.start = function (propertyName1, propertyName2, endPos1, endPos2, duration, easing) {
+        this.startTime = +new Date;
+        this.startPos1 = this.dom.getBoundingClientRect()[propertyName1]; // dom 节点初始位置
+        this.startPos2 = this.dom.getBoundingClientRect()[propertyName2]; // dom 节点初始位置
+        console.log(this.startPos1, this.startPos2)
+        this.propertyName1 = propertyName1; // dom 节点需要被改变的 CSS 属性名
+        this.propertyName2 = propertyName2; // dom 节点需要被改变的 CSS 属性名
+        this.endPos1 = endPos1; // dom 节点目标位置
+        this.endPos2 = endPos2; // dom 节点目标位置
+        this.duration = duration; // 动画持续事件
+        this.easing = tween[easing];
+        var self = this;
+        var timeId = setInterval(function () { // 启动定时器，开始执行动画
+            if (self.step() === false) { // 如果动画已结束，则清除定时器 clearInterval( timeId );
+                clearInterval(timeId);
+            }
+        }, 19);
+    };
+
+
+    Animate.prototype.step = function () {
+        var t = new Date; // 取得当前时间
+        if (t >= this.startTime + this.duration) {
+            this.update(this.endPos1, this.endPos2); // 更新小球的 CSS 属性值
+            return false;
+        }
+        // pos 为小球当前位置
+        var pos1 = this.easing(t - this.startTime, this.startPos1, this.endPos1 - this.startPos1, this.duration);
+        var pos2 = this.easing(t - this.startTime, this.startPos2, this.endPos2 - this.startPos2, this.duration);
+        this.update(pos1, pos2); // 更新小球的 CSS 属性值
+    };
+
+    Animate.prototype.update = function (pos1, pos2) {
+        this.dom.style[this.propertyName1] = pos1 + 'px';
+        this.dom.style[this.propertyName2] = pos2 + 'px';
+    };
+
+    var div = document.getElementById('div');
+    var animate = new Animate(div);
+    animate.start('top', 'left', 500, 800, 2000, 'easeIn');
+
+</script>
+</body>
+</html>

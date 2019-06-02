@@ -7,8 +7,13 @@ import {
 } from 'react-native'
 
 import LSCLoading from './subScene/LSCLoading'
+import NearByHandler from './NearByHandler/NearByHandler'
 
 export default class NearBy extends Component {
+
+    static defaultProps = {
+        name: 'Sara'
+    }
 
     constructor(props) {
         super(props);
@@ -18,10 +23,15 @@ export default class NearBy extends Component {
         }
     }
 
+    componentDidMount() {
+        NearByHandler.asyncNetworkEvent();
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Text>NearBy</Text>
+                <Text>{this.props.name}</Text>
                 <Button
                     onPress={()=>{
                         this.setState({

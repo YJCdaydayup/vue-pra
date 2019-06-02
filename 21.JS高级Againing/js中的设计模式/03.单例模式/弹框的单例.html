@@ -13,9 +13,8 @@
 </head>
 <body>
 <button onclick="show()">弹框</button>
+<button onclick="shows()">弹框</button>
 <script>
-
-
 
     function show() {
         var div = createSingleDiv();
@@ -48,6 +47,11 @@
 
         var createDiv = function (name) {
             var div = document.createElement('div');
+            div.innerText = '我是弹框1';
+            div.className = 'box';
+            div.style.display = 'none';
+            document.body.appendChild(div);
+            return div;
         }
 
         return function () {
@@ -56,6 +60,13 @@
             }
             return __div;
         }
+    }
+
+    var instance = getInstance();
+
+    function shows() {
+        var div = instance();
+        div.style.display = 'block';
     }
 
 

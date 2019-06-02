@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            /*border: 1px solid black;*/
+        }
+        body{
+            position: relative;
+        }
+        #text{
+            list-style: none;
+            width: 400px;
+            display: inline-block;
+        }
+        #text li{
+            margin: 10px 15px;
+        }
+        .topic{
+            width: 800px;
+            height: 80px;
+            text-align: center;
+            line-height: 80px;
+            font-size: 30px;
+        }
+        #btn, #result{
+            vertical-align:top;
+        }
+        p{
+            text-align: center;
+            position: absolute;
+            width: 400px;
+            left: 400px;
+            color: red;
+            bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="800" height="400" style="border:1px solid black"></canvas>
+<div class="topic">
+    二次贝塞尔曲线demo
+</div>
+<ul id="text">
+    <li>起始点x坐标：<input type="text" name="name" value=""></li>
+    <li>起始点y坐标：<input type="text" name="name" value=""></li>
+    <li>锚点x坐标：<input type="text" name="name" value=""></li>
+    <li>锚点y坐标：<input type="text" name="name" value=""></li>
+</ul>
+<input type="button" name="name" value="生成起点锚点" id="btn">
+<textarea name="name" rows="2" cols="50" id="result"></textarea>
+<p>
+    使用说明:输入框输入对应起始坐标，锚点坐标，鼠标在框内移动进行曲线的变化，鼠标左击获得各个点的坐标;宽度范围:0~800;高度范围:0~400;
+</p>
+<script>
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var text = document.querySelectorAll('input[type=text]');
+    // var btn = document.querySelector('input[type=button]');
+    var btn = document.getElementById('btn');
+    var result = document.getElementById('result');
+    var controlX ;
+    var controlY ;
+    var Event = false;
+    var startX;
+    var startY;
+    var endX;
+    var endY
+    btn.onclick = function(){
+        startX = text[0].value;
+        startY = text[1].value;
+        endX = text[2].value;
+        endY = text[3].value;
+        Event = true;
+        console.log(startX);
+    }
+    // 生成点的函数
+    function  point(){
+        // 获取起点锚点坐标
+        context.clearRect(0,0,800,400);
+        canvas.onmousemove = function(event){
+            event = event || window.event;
+            controlX = event.clientX;
+            controlY = event.clientY;
+        }
+        console.log(controlX,controlY)
+        context.beginPath();
+        context.strokeStyle = 'red';
+        context.moveTo(startX,startY);
+        context.lineTo(controlX,controlY);
+        context.lineTo(endX,endY);
+        context.stroke();
+        context.beginPath();
+        context.strokeStyle = 'blue';
+        context.moveTo(startX,startY);
+        context.quadraticCurveTo(controlX,controlY,endX,endY);
+        context.stroke();
+    }
+
+    setInterval(function(){
+        if(Event){
+            point();
+        }
+    },1);
+    canvas.onclick = function(){
+        result.innerHTML = '起始点坐标:('+startX+','+startY+');控制点坐标:('+controlX+','+controlY+');锚点坐标:('+endX+','+endY+');'
+    }
+</script>
+</body>
+</html>
