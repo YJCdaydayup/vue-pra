@@ -84,12 +84,30 @@
 3.研究新的第三方组件react-native-parallax-scroll-view，页面滑动隐藏导航,研究视频里面的这个页面的编写和写法
 4.当一个组件的参数比较多时，可以用一个方法来返回这个config对象，最后在组件里面结构这个参数即可
 5.研究视频中的AboutComom组件中的组装者模式
+6.
 
 第九节课
 1.ES5的继承方式：bind是绑定了调用的对象，方法可以在后面的某个时期调用，apply是方法立即调用了，可以在第一个参数指定是谁来调用，参数是数组形式；call也是方法立即执行，参数散列形式；method.call(null, param),apply和call如果是自己调用自己的方法第一个参数就传递null，别人调用就传别人，一般是方法来调用apply或call，如果是构造函数调用了，就形成了继承，但是继承的是对象方法，而非原型上的方法；
 function Animal(name,age) {}. function Dog(Animal.call(this, name,age)){}就形成了继承，还可以原型继承，ES中的extends继承
 2.不管是props还是state的改变，都会引发render的重新渲染；
 3.组件之间传递数据可以通过props，父组件的每一次render都会触发子组件的shouldComponentUpdate(newVal)，可以在这个方法里面判断是否需要调用子组件的render方法刷新子组件；
+
+
+第十节课
+1.异步的方式进行同步操作，async updateItems() {
+      this.keys = await this.getData();
+      if (this.keys) {}
+},前提是await后面的方法返回的是一个promise，this.keys获取的是resolve里面的值
+2.定义一个页面或者组件的handler工具类时，可以沿用页面的生命周期的函数的方法名，比如componentDidMount方法，在里面做网络请求了
+3.伸缩列表，有几组就有几个bool值的状态机值来控制，然后在render函数中{this.state.showBlog?{this.getBlogs:null}}
+4.Clipborad剪切板,Clipboard.setString(tab.account)，this.toast.show(‘已复制到剪切板’);
+5.react-native-easy-toast弹框
+6.请求回来后，可以判断this是否存在，这个页面还存不存在，来做一些逻辑，OC里面也一样；
+7.看一些navigation有没有resetTo方法来重新加载Tabbar下面的页面；
+8.通知:DeviceEventEmitter的进一步用法:
+let ACTION_HOME = {‘flag1’: ‘flag1’, flag2:’flag2’}
+DeviceEventEmitter.addListener(‘ACTION_HOME’, (action,params)=>{})
+DeviceEventEmitter.emit(‘ACTION_HOME’, ACTION_HOME.flag1,params)
 
 
 
