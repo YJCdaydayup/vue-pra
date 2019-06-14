@@ -30,7 +30,7 @@ import {
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
-  Autocomplete
+  Autocomplete,
 } from 'element-ui'
 
 

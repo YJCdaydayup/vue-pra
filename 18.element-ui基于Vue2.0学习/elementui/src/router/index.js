@@ -16,6 +16,7 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: Main,
+      redirect: 'animation',
       children: [
         {
           path: 'animation',

@@ -57,9 +57,9 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
         navigationOptions: ({navigation}) => {
             let {state} = navigation;
             let {routes,index} = state;
-            let titles = ['首页', '我的收藏', '订单', '我的'];
+            let titles = ['首页', '附近', '订单', '我的'];
             initStatusBarStyle(navigation);
-            if (index === 3) {
+            if (index === 3 || index === 1) {
                 return {
                     header: null
                 }

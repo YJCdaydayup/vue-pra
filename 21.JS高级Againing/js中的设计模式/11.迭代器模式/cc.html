@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    var getActiveUploadObject = function () {
+        try {
+            return new ActiveXObject("TXFTNActiveX.FTNUpload");
+        } catch (error) {
+            return false;
+        }
+    }
+
+    var getFlashUploadObj = function () {
+        if (supportFlash()) {
+            var str = '<object type="application/x-shockwave-flash"></object>'
+            return str;
+        }
+        return false;
+    }
+
+    var getFormUploadObj = function () {
+        var str = '<input name="file" type="file" class="ui-file" />';
+        return str;
+    }
+
+    var iteratorUploadObj = function () {
+        for (var i = 0; len = arguments.length, i < len; i++) {
+            var uploadObj = arguments[i]();
+            if (uploadObj !== false) {
+                return uploadObj;
+            }
+        }
+    }
+
+
+    var uploadObj = iteratorUploadObj(getActiveUploadObject, getFlashUploadObj, getFormUploadObj);
+
+
+</script>
+
+</body>
+</html>

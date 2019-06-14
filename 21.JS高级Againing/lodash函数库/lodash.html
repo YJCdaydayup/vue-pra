@@ -7,6 +7,32 @@
 <body>
 <script>
 
+    Type = {};
+    //    var strategy = {
+    //        isString: function (x) {
+    //            return Object.prototype.toString.call(x) === '[object String]';
+    //        }
+    //    };
+
+    //  var checkTypeFn = function(type) {
+    //      return function (x) {
+    //          return strategy[type].call(this,x)
+    //      };
+    //  }
+
+    //  var isStr = checkTypeFn('isString');
+    //  console.log(isStr('12'))
+
+    for (var i = 0, type; type = ['String', 'Array', 'Number'][i++];) {
+        Type['is' + type] = (function (type) {
+            return function (x) {
+                return Object.prototype.toString.call(x) === '[object ' + type + ']';
+            }
+        })(type)
+    }
+
+    console.log(Type.isString(123));
+
 </script>
 </body>
 </html>

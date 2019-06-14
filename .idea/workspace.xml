@@ -3,19 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="70e02ca3-7ba1-41d6-8e40-3947d014c3f1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/.idea/misc.xml" afterPath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/.idea/workspace.xml" afterPath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/index.html" afterPath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/package.json" afterPath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/src/lib/index.js" afterPath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/src/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/src/lib/vue-toast.vue" afterPath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/src/lib/vue-toast.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/webpack.config.js" afterPath="$PROJECT_DIR$/11.webpack定义组件并上传npm/11.webpack定义组件/webpack.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/13.多页面webpack工程/mul-webpack-demo/.idea/workspace.xml" afterPath="$PROJECT_DIR$/13.多页面webpack工程/mul-webpack-demo/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/13.多页面webpack工程/mul-webpack-demo/package.json" afterPath="$PROJECT_DIR$/13.多页面webpack工程/mul-webpack-demo/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/13.多页面webpack工程/mul-webpack-demo/webpack.config.js" afterPath="$PROJECT_DIR$/13.多页面webpack工程/mul-webpack-demo/webpack.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/14.Vue多页面/sum.txt" afterPath="$PROJECT_DIR$/14.Vue多页面/sum.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/课程源码/.idea/workspace.xml" afterPath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/课程源码/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/21.JS高级Againing/01.js基础复习.html" afterPath="$PROJECT_DIR$/21.JS高级Againing/01.js基础复习.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/app_again/app_against/src/RootScene/LSCTabNavigator.js" afterPath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/app_again/app_against/src/RootScene/LSCTabNavigator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/app_again/app_against/src/scene/NearByScene/NearBy.js" afterPath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/app_again/app_against/src/scene/NearByScene/NearBy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/app_again/app_against/src/scene/NearByScene/NearByHandler/NearByHandler.js" afterPath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/app_again/app_against/src/scene/NearByScene/NearByHandler/NearByHandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/app_again/app_against/src/scene/NearByScene/subScene/LSCLoading.js" afterPath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/app_again/app_against/src/scene/NearByScene/subScene/LSCLoading.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/sum.txt" afterPath="$PROJECT_DIR$/16.RN_Fighting/01.RN项目/sum.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/21.JS高级Againing/js中的设计模式/.idea/workspace.xml" afterPath="$PROJECT_DIR$/21.JS高级Againing/js中的设计模式/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/21.JS高级Againing/js中的设计模式/09.策略模式-小球运动/表单校验-策略模式.html" afterPath="$PROJECT_DIR$/21.JS高级Againing/js中的设计模式/09.策略模式-小球运动/表单校验-策略模式.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/21.JS高级Againing/lodash函数库/lodash.html" afterPath="$PROJECT_DIR$/21.JS高级Againing/lodash函数库/lodash.html" />
     </list>
     <ignored path="ImoocMall.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,14 +42,24 @@
       <file leaf-file-name="01.js基础复习.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/21.JS高级Againing/01.js基础复习.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="693">
+              <caret line="60" column="8" lean-forward="true" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="56.闭包.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lodash.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/21.JS高级Againing/lodash函数库/lodash.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="56.闭包.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../H5/Pra_01/56.闭包.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
@@ -81,7 +86,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/server/User.js" />
         <option value="$PROJECT_DIR$/server/Demo.js" />
         <option value="$PROJECT_DIR$/server/index.html" />
         <option value="$PROJECT_DIR$/server/Server.js" />
@@ -132,6 +136,7 @@
         <option value="$PROJECT_DIR$/resource/db" />
         <option value="$PROJECT_DIR$/21.JS高级Againing/01.js基础复习.html" />
         <option value="$PROJECT_DIR$/../H5/Pra_01/56.闭包.html" />
+        <option value="$PROJECT_DIR$/21.JS高级Againing/lodash函数库/lodash.html" />
       </list>
     </option>
   </component>
@@ -162,38 +167,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="ImoocMall" type="b2602c69:ProjectViewProjectNode" />
               <item name="vue-pra" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ImoocMall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-pra" type="462c0819:PsiDirectoryNode" />
-              <item name="12.vue移动端完整项目" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ImoocMall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-pra" type="462c0819:PsiDirectoryNode" />
-              <item name="12.vue移动端完整项目" type="462c0819:PsiDirectoryNode" />
-              <item name="sell" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ImoocMall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-pra" type="462c0819:PsiDirectoryNode" />
-              <item name="12.vue移动端完整项目" type="462c0819:PsiDirectoryNode" />
-              <item name="sell" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ImoocMall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-pra" type="462c0819:PsiDirectoryNode" />
-              <item name="12.vue移动端完整项目" type="462c0819:PsiDirectoryNode" />
-              <item name="sell" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ImoocMall" type="b2602c69:ProjectViewProjectNode" />
@@ -206,12 +187,21 @@
               <item name="13.多页面webpack工程" type="462c0819:PsiDirectoryNode" />
               <item name="mul-webpack-demo" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ImoocMall" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-pra" type="462c0819:PsiDirectoryNode" />
+              <item name="21.JS高级Againing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ImoocMall" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-pra" type="462c0819:PsiDirectoryNode" />
+              <item name="21.JS高级Againing" type="462c0819:PsiDirectoryNode" />
+              <item name="lodash函数库" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -339,25 +329,27 @@
       <workItem from="1555556421134" duration="22000" />
       <workItem from="1556089855267" duration="292000" />
       <workItem from="1556091352043" duration="162000" />
+      <workItem from="1560230611387" duration="167000" />
+      <workItem from="1560230819262" duration="165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="522000" />
+    <option name="totallyTimeSpent" value="854000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="435" y="108" width="1490" height="1206" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1520109" sideWeight="0.49487555" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15180396" sideWeight="0.49487555" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2804699" sideWeight="0.50277996" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17729394" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27086383" sideWeight="0.49722" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39941263" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39941263" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970452" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -416,6 +408,14 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../H5/Pra_01/56.闭包.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/04.项目/imoocMall/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -512,18 +512,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/21.JS高级Againing/01.js基础复习.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../H5/Pra_01/56.闭包.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/21.JS高级Againing/01.js基础复习.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="60" column="8" lean-forward="true" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/21.JS高级Againing/lodash函数库/lodash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
           <folding />
         </state>
       </provider>

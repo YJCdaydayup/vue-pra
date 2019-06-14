@@ -13,7 +13,6 @@
         </transition>
       </div>
     -->
-
       <div v-show="show" class="fade1"></div>
       <transition name="el-zoom-in-bottom">
         <div class="fade2" v-show="show"></div>

@@ -110,7 +110,7 @@ DeviceEventEmitter.addListener(‘ACTION_HOME’, (action,params)=>{})
 DeviceEventEmitter.emit(‘ACTION_HOME’, ACTION_HOME.flag1,params)
 9.记住export default function test() {return {
 
-}}，在外面通过import拿到的就是return的对象，通过传入一个promise，进行包装后再丢出去，来控制promise的继续请求还是取消；
+}}，通过传入一个promise，进行包装后再丢出去，来控制promise的继续请求还是取消；
 
 
 
