@@ -35,6 +35,7 @@ import React from 'react'
 import {Button, Platform, View, ScrollView, SafeAreaView} from 'react-native'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import CustomeThemePage from './../pages/CustomeThemePage'
 
 class TabBarComponent extends React.Component {
     constructor(props) {
@@ -165,10 +166,10 @@ export const AppTabNavigator = TabNavigator(
                 // }
             }
         },
-        WebView: {
-            screen: Webview,
+        Theme: {
+            screen: CustomeThemePage,
             navigationOptions: {
-                tabBarLabel: "网页",
+                tabBarLabel: "主题",
                 // tabBarIcon: ({tintColor, focused})=> {
                 //     return <Icon
                 //         name="md-home"

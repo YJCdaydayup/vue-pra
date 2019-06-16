@@ -110,7 +110,17 @@ DeviceEventEmitter.addListener(‘ACTION_HOME’, (action,params)=>{})
 DeviceEventEmitter.emit(‘ACTION_HOME’, ACTION_HOME.flag1,params)
 9.记住export default function test() {return {
 
+<<<<<<< Updated upstream
 }}，通过传入一个promise，进行包装后再丢出去，来控制promise的继续请求还是取消；
+=======
+}}，在外面通过import拿到的就是return的对象，通过传入一个promise，进行包装后再丢出去，来控制promise的继续请求还是取消；
+10.研究自定义弹框组件和视频源码中的通知；
+
+第十一节课
+1.RN版本升级，先全局安装react-native-git-upgrade，在执行这个更新命令，再解决冲突；
+2.由于RN中没有float属性，所有想要横向排列每排3个就只能每三个View放到一个View里面，再将最外层的这个View的flexDirection：‘row’即可
+3.明天研究以下这个主题设置时为什么一直直接使用this.props.theme？
+>>>>>>> Stashed changes
 
 
 
