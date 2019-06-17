@@ -109,10 +109,7 @@ let ACTION_HOME = {‘flag1’: ‘flag1’, flag2:’flag2’}
 DeviceEventEmitter.addListener(‘ACTION_HOME’, (action,params)=>{})
 DeviceEventEmitter.emit(‘ACTION_HOME’, ACTION_HOME.flag1,params)
 9.记住export default function test() {return {
-
-<<<<<<< Updated upstream
 }}，通过传入一个promise，进行包装后再丢出去，来控制promise的继续请求还是取消；
-=======
 }}，在外面通过import拿到的就是return的对象，通过传入一个promise，进行包装后再丢出去，来控制promise的继续请求还是取消；
 10.研究自定义弹框组件和视频源码中的通知；
 
@@ -120,7 +117,8 @@ DeviceEventEmitter.emit(‘ACTION_HOME’, ACTION_HOME.flag1,params)
 1.RN版本升级，先全局安装react-native-git-upgrade，在执行这个更新命令，再解决冲突；
 2.由于RN中没有float属性，所有想要横向排列每排3个就只能每三个View放到一个View里面，再将最外层的这个View的flexDirection：‘row’即可
 3.明天研究以下这个主题设置时为什么一直直接使用this.props.theme？
->>>>>>> Stashed changes
+4.各个页面定义主题可以采用继承的方式来封装接收通知，要实现super.componentDidMount()方法，根页面中state={theme:this.props.theme}，最初进来的时候要重本地去取theme，可以用一个静态方法取到主题就换算成一个主题对象，要做好...this.props的传递工作；
+5.
 
 
 
