@@ -4,6 +4,7 @@ import {AppBottomTabNavigator} from './LSCTabNavigator'
 import ProductDetail from './../scene/HomeScene/Scene/ProductDetail'
 import NavigationBar from './../widget/NavigationBar'
 import MyFavorite from './../scene/MineScene/subscene/MyFavoritePage'
+import ThemePage from './../scene/MineScene/subscene/ThemePage'
 
 export const AppStackNavigator = createStackNavigator(
     {
@@ -22,6 +23,16 @@ export const AppStackNavigator = createStackNavigator(
                     }),
                 }
             }
+        },
+        ThemePage: {
+            screen: ThemePage,
+            navigationOptions: ({navigation})=>{
+                return {
+                    headerLeft: NavigationBar.getBackButton(() => {
+                        navigation.goBack();
+                    }),
+                }
+            }
         }
     },
     {
@@ -31,6 +42,7 @@ export const AppStackNavigator = createStackNavigator(
                     backgroundColor: 'red', // 定制所有导航栏的颜色
                 }
             }
-        }
+        },
+        initialRouteParams: {title: 'Net'},
     }
 )

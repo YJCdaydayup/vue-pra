@@ -5,11 +5,15 @@ import {
     Text,
     TouchableOpacity,
     Image,
-    SectionList
+    SectionList,
+    DeviceEventEmitter
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/AntDesign'
+import {ACTION_HOME} from './../HomeScene/handler/HomeHandler'
 import QRCode from 'react-native-qrcode-svg'
+import ThemePage from './subscene/ThemePage'
+
 let MINE_DATA = require('./data/MineData')
 
 const icons = ['questioncircleo', 'pause', 'pausecircle', 'pausecircleo', 'clockcircle', 'customerservice'];
@@ -20,10 +24,12 @@ export default class Mine extends Component {
         super(props);
         this.state = {
             dataSource: [],
-            showQRCode: false
+            showQRCode: false,
+            visible: false
         }
         this._createListItem = this._createListItem.bind(this);
         this._scanCoder = this._scanCoder.bind(this);
+        this._onClose = this._onClose.bind(this);
     }
 
     render() {
@@ -63,11 +69,12 @@ export default class Mine extends Component {
                     ListHeaderComponent={headerView}
                     keyExtractor={() => Math.random(2).toString()}
                 />
-                {this.state.showQRCode?<View>
+                {this.state.showQRCode ? <View>
                     <QRCode
                         value="http://awesome.link.qr"
                     />
-                </View>:null}
+                </View> : null}
+                <ThemePage visible={this.state.visible} onClose={this._onClose}/>
             </View>
         )
     }
@@ -80,7 +87,7 @@ export default class Mine extends Component {
         let {item, index} = rowData
         return (
             <TouchableOpacity
-                onPress={()=>{
+                onPress={() => {
                     this._clickItem(rowData)
                 }}
             >
@@ -93,9 +100,8 @@ export default class Mine extends Component {
                     />
                     <View
                         style={styles.cell}
-                        onPress={()=>{
-                            alert(12323)
-                            this._scanCoder()
+                        onPress={() => {
+
                         }}
                     >
                         <Icon name={icons[index]} size={18} color={this._getRandomColor()}/>
@@ -111,18 +117,27 @@ export default class Mine extends Component {
     }
 
     _clickItem(rowData) {
-        let {index,section} = rowData;
-        let {sectionIndex,data} = section;
-        console.log(rowData)
-        if (sectionIndex === 1 && index === 0) {
-            // 跳转收藏页面
-            this.props.navigation.navigate('MyFavorite')
+        let {index, section} = rowData;
+        let {sectionIndex, data} = section;
+        DeviceEventEmitter.emit('ACTION_HOME', ACTION_HOME.ACT_ONE, {
+            params: '这是params'
+        });
+        if (sectionIndex === 2 && index === 1) {
+            this.setState({
+                visible: true
+            })
         }
+    }
+
+    _onClose() {
+        this.setState({
+            visible: false
+        })
     }
 
     _getRandomColor() {
         return '#' +
-            (function(color) {
+            (function (color) {
                 return (color += '0123456789abcdef' [Math.floor(Math.random() * 16)]) && (color.length == 6) ? color : arguments.callee(color);
             })('');
     }

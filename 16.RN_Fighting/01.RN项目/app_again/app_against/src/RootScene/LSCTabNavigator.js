@@ -1,6 +1,10 @@
 import React from 'react'
-import {StatusBar} from 'react-native'
+import {
+    StatusBar,
+} from 'react-native'
 
+
+import ThemeFactory from './../common/ThemeFactory'
 import {createBottomTabNavigator} from 'react-navigation'
 
 import Home from './../scene/HomeScene/Home'
@@ -15,10 +19,17 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
     {
         Home: {
             screen: Home,
-            navigationOptions: {
-                tabBarLabel: "首页",
-                tabBarIcon: ({tintColor, focused}) => {
-                    return <TabBarItem name="home" tintColor={tintColor}/>
+            navigationOptions: ({navigation}) => {
+                return {
+                    tabBarLabel: "首页",
+                    tabBarIcon: ({tintColor, focused}) => {
+                        if (focused) {
+                            ThemeFactory.getLocalTheme().then((res)=>{
+                                return <TabBarItem name="home" tintColor={res.themeColor}/>
+                            });
+                        }
+                        return <TabBarItem name="home" tintColor={tintColor}/>
+                    }
                 }
             }
         },
@@ -56,14 +67,14 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
     {
         navigationOptions: ({navigation}) => {
             let {state} = navigation;
-            let {routes,index} = state;
+            let {routes, index} = state;
             let titles = ['首页', '附近', '订单', '我的'];
             initStatusBarStyle(navigation);
             if (index === 3 || index === 1) {
                 return {
                     header: null
                 }
-            }else {
+            } else {
                 return {
                     title: titles[index],
                     headerTitleStyle: {
@@ -80,8 +91,8 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
         animationEnabled: true,
         lazy: true,
         tabBarOptions: {
-            activeTintColor: Color.theme,
-            inactiveTintColor: '#979797',
+            activeTintColor: 'purple',
+            inactiveTintColor: 'black',
             style: {backgroundColor: '#ffffff'},
         }
     }
@@ -89,8 +100,8 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
 
 function initStatusBarStyle(navigation) {
     let {state} = navigation;
-    let {routes,index} = state;
+    let {routes, index} = state;
     let lightContentScenes = ['Home', 'Mine']
     let currentRouteName = routes[index].routeName;
-    StatusBar.setBarStyle(lightContentScenes.indexOf(currentRouteName) > -1 ? 'light-content': 'dark-content')
+    StatusBar.setBarStyle(lightContentScenes.indexOf(currentRouteName) > -1 ? 'light-content' : 'dark-content')
 }

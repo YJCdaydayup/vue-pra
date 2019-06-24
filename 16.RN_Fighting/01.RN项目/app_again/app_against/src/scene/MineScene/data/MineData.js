@@ -14,7 +14,10 @@ const MINE_DATA = [
     },
     {
         sectionIndex: 2,
-        data: [{name: "设置"}]
+        data: [
+            {name: "设置"},
+            {name: '主题设置'}
+            ]
 
     }
 ];

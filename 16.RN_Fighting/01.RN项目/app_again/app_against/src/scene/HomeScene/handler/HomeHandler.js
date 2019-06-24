@@ -6,6 +6,11 @@ import FavorateHelper, {FAVORITE_SCHEME} from './../../../utils/FavorateHelper'
 let lscDataRespository = new LSCDataRespository();
 let favorateHelper = new FavorateHelper(FAVORITE_SCHEME.MAIN);
 
+export const ACTION_HOME= {
+    'ACT_ONE': 'action_one',
+    'ACT_TWO': 'act-two'
+}
+
 export default class HomeHandler {
     static LSCGetMainListData(url) {
         return new Promise((resolve, reject) => {

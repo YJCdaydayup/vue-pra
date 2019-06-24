@@ -4,10 +4,11 @@ import {
     View,
     FlatList,
     RefreshControl,
-    Text
+    Text,
+    DeviceEventEmitter
 } from 'react-native'
 
-import HomeHandler from './handler/HomeHandler'
+import HomeHandler, {ACTION_HOME} from './handler/HomeHandler'
 import HomeCell from './cell/HomeCell'
 import {MAIN_LIST_API, MAIN_TAIL} from './../../api/mainApi'
 import FlatListFooterComponent from './../../widget/FlatListFooterComponent'
@@ -24,13 +25,18 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-      this._loadData();
+        DeviceEventEmitter.addListener('ACTION_HOME', (action, params) => {
+            console.log(action);
+            console.log(params);
+        })
+
+        this._loadData();
     }
 
     _loadData() {
         this.updateState({
             isLoading: true
-        },()=>{
+        }, () => {
             HomeHandler.LSCGetMainListData(this.genUrl()).then(items => {
                 this.updateState({
                     isLoading: false,
@@ -42,7 +48,7 @@ export default class Home extends Component {
 
     updateState(dic, callback) {
         if (!(this && dic)) return;
-        this.setState(dic,callback);
+        this.setState(dic, callback);
     }
 
     genUrl() {
@@ -67,20 +73,21 @@ export default class Home extends Component {
     }
 
     _getFooterComponent() {
-        return this.state.isLoading? <FlatListFooterComponent/>: null
+        return this.state.isLoading ? <FlatListFooterComponent/> : null
     }
 
     _renderItemView(rowData) {
         let {item} = rowData;
         return (
-            <HomeCell homeModel={item} onFavorite={this._onFavorite.bind(this)} callback={this._clickCellEvent.bind(this)}/>
+            <HomeCell homeModel={item} onFavorite={this._onFavorite.bind(this)}
+                      callback={this._clickCellEvent.bind(this)}/>
         )
     }
 
     _onFavorite(isFavorite, item) {
         if (isFavorite) {
             HomeHandler.addFavoriteItem(item.id.toString(), item)
-        }else {
+        } else {
             HomeHandler.removeFavoriteItem(item.id.toString())
         }
     }
@@ -97,7 +104,7 @@ export default class Home extends Component {
     _refreshPage() {
         this.updateState({
             isLoading: true
-        },()=>{
+        }, () => {
             HomeHandler.LSCGetMainListData(this.genUrl()).then(items => {
                 this.updateState({
                     isLoading: false,
