@@ -17,6 +17,11 @@
 17.在nodejs中不可能在最外层定义，因为所有的代码都是当前模块的，而模块本身不是最外层上下文；
 18.永远不要使用var定义变量以避免引入全局变量，污染命名空间；
 19.__filename获取的是当前模块文件的绝对路径；__dirname获取的是当前模块文件的绝对目录路径；
+20.Web服务器就是提供Web信息浏览服务，只需支持HTTP协议，HTML文档格式和URL，与客户端的网络浏览器配合；
+21.目前主流的三个Web服务器是Apache Niginx IIS
+22.Web应用架构: Client => Server（Web服务器）=> Business Layer（业务层，业务bus,数据交互 逻辑运算 调用外部程序）=> Data Layer（数据库）
+23.Web服务器通过脚本从数据库获取数据(php，python，ruby)
+24.
 
 
 
