@@ -1,0 +1,8 @@
+第一节课
+1.模块化，解决命名冲突和文件依赖和无法私有性，如日志模块,最早常采用命名空间法来做的，var caculator = {}, caculator.add=function() {}
+2.驼峰命名法+匈牙利命名法(加上了类型)如numA，fnCaculator=function(){}
+3.还可以使用(function(){})()来定义模块
+4. Sea.js是CMD的规范，阿里巴巴的玉伯开发的
+5.开发环境用原版的jquery.js的话，生产环境要用jquery.min.js文件，请求的文件更小
+6.Sea.js开始解决了依靠html来加载各个js文件了，JS中可以加载其他的JS了，
+
