@@ -21,7 +21,15 @@
 21.目前主流的三个Web服务器是Apache Niginx IIS
 22.Web应用架构: Client => Server（Web服务器）=> Business Layer（业务层，业务bus,数据交互 逻辑运算 调用外部程序）=> Data Layer（数据库）
 23.Web服务器通过脚本从数据库获取数据(php，python，ruby)
-24.
+24.文件上传必须设置enctype编码类型，默认有三种:application/x-www-form-urlencoded不能用于文件上传，mutipart/form-data才能完整的传递文件数据，text/plain纯文本上传，不对特殊字符编码，空格转+
+25.如果返回乱码，可以res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'});如果是express框架就res.setHeader('Content-Type', 'text/html; charset=utf8');
+26.app.listen(8081, '必须是本地的IP才行', function() {})
+27.readFile读取的data就是字符串数据；
+28.通过res返回出去的数据必须是string类型或者是Buffer对象类型，readFile拿到的就是Buffer对象这个buffer对象可以调用toString()转字符串，或者JSON.parser()转JSON对象
+29.express框架下get请求获取?a=b&c=d就用req.query下拿，动态路由参数要用params下拿，但动态路由要配合定义一个接口app.get("/:id", function(req, res) {})参数就从req.params.id下拿，请求的发送方式就是localhost:8081/2
+
+
+
 
 
 

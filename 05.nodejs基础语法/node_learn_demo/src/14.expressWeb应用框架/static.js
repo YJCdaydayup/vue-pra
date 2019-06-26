@@ -7,9 +7,8 @@ app.use('/public', express.static('public'))
 
 app.get('/', function (req, res) {
 
-    console.log(JSON.stringify(req));
-
-    res('Hello World');
+    console.log(req.query);
+    res.send('Hello World');
 })
 
 var server = app.listen(8081, function () {
