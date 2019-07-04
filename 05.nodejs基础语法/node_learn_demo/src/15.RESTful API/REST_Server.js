@@ -51,7 +51,11 @@ app.get('/deleteUser', function (req, res) {
     fs.readFile('users.json', 'utf8', function (err, data) {
         var result = JSON.parse(data);
         delete result[ 'user' + req.query.index];
-        res.send(JSON.stringify(result));
+        fs.writeFile(__dirname + '/users.json', JSON.stringify(result), function (err) {
+            if (!err) {
+                res.send(JSON.stringify(result));
+            }
+        })
     });
 });
 

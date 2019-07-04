@@ -4,23 +4,33 @@
         <meta charset="UTF-8">
         <title>Vue多页面应用</title>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+      <style>
+
+      </style>
     </head>
     <body>
 
-        <hr color="red"/>
-        <ul style="margin-top: 5rem">
+
+        <div id="box">{{message}}
+          <hr color="red"/>
+          <ul style="margin-top: 5rem">
             <li class="lis">{{msg}}</li>
             <li class="lis">{{message}}</li>
-            <li class="lis">{{message}}</li>
-        </ul>
-        <div id="box">{{message}}</div>
+            <li @click="click($event)" class="lis">{{message}}</li>
+          </ul></div>
         <script>
             new Vue({
-//                el: '#box',
-                el: ".lis, #box",
+                el: '#box',
                 data: {
                     "message": "Hello World",
                     'msg': "哈哈"
+                },
+                methods: {
+                  click(e) {
+                    let li = e.target;
+                    li.style.backgroundColor = 'red';
+                    li.style.cursor = 'pointer'
+                  }
                 }
             });
         </script>

@@ -18,7 +18,7 @@
 18.永远不要使用var定义变量以避免引入全局变量，污染命名空间；
 19.__filename获取的是当前模块文件的绝对路径；__dirname获取的是当前模块文件的绝对目录路径；
 20.Web服务器就是提供Web信息浏览服务，只需支持HTTP协议，HTML文档格式和URL，与客户端的网络浏览器配合；
-21.目前主流的三个Web服务器是Apache Niginx IIS
+21.目前主流的三个Web服务器是Apache Nginx IIS
 22.Web应用架构: Client => Server（Web服务器）=> Business Layer（业务层，业务bus,数据交互 逻辑运算 调用外部程序）=> Data Layer（数据库）
 23.Web服务器通过脚本从数据库获取数据(php，python，ruby)
 24.文件上传必须设置enctype编码类型，默认有三种:application/x-www-form-urlencoded不能用于文件上传，mutipart/form-data才能完整的传递文件数据，text/plain纯文本上传，不对特殊字符编码，空格转+
