@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    var singleTon = {
+        val: true,
+        changeVal: function () {
+            this.val = !this.val;
+        }
+    }
+
+    function single() {
+        var val = true;
+        return {
+            val: val,
+            changeVal: function () {
+                this.val = !this.val
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

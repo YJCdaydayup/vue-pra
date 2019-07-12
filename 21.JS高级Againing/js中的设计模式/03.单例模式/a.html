@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 50px;
+            height: 50px;
+            background-color: silver;
+            border-radius: 6px;
+            opacity: 0;
+            -webkit-transition: all 1s;
+            transition: all 1s;
+        }
+    </style>
+</head>
+<body>
+<button onclick="addDiv();">Add</button>
+<script>
+
+    // Dog single
+    //    var singleWc = (function () {
+    //        var wc;
+    //        function createWCFn() {
+    //            if (typeof wc === 'undefined') {
+    //                wc = new Dog('wc');
+    //            }
+    //            return wc;
+    //        }
+    //
+    //        function Dog(name) {
+    //            this.name = name;
+    //        }
+    //        return function () {
+    //            return createWCFn();
+    //        }
+    //    })()
+    //
+    //
+    //    var wc1 = singleWc()
+    //    var wc2 = singleWc();
+
+    var singleTon = (function () {
+        var div__;
+//        function makeSingle(fn) {
+//            if (typeof div__ === 'undefined') {
+//                div__ = fn();
+//            }
+//            return div__;
+//        }
+
+        return function (fn) {
+            return div__ || (div__ = fn.call(this, arguments))
+        }
+    })()
+
+    var createDiv = function () {
+        var div = document.createElement('div');
+        div.className = 'box'
+        document.body.appendChild(div);
+        return div;
+    }
+
+    function addDiv() {
+        var div = singleTon(createDiv);
+        div.style.opacity = 1;
+        var timer = setTimeout(function () {
+            div.style.opacity = 0;
+            clearTimeout(timer);
+        },2000)
+    }
+
+</script>
+</body>
+</html>

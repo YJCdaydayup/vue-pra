@@ -1,0 +1,9 @@
+1.之前我使用的webpack打包html页面用的是AMD，define('common',function(){ return 出去模块}) require(['./common'],function(common) {})，通过webpack加到指定html上
+2.seajs采用的AMD的写法，首先cnpm安装seajs到本地，引入seajs，再use('./main',function(main){}),也可以use(['./main','./helper'],function(main,helper){}),这是在html中
+3.定义模块:define(function(require, exports,module){}),其中需要别的模块直接require即可,导出使用exports.add=add，或者module.exports=Dog;
+4.加载模块，require('main.js')
+5.define('name',[],function(require, exports,module){}),三个参数时，第一个为模块名称，第二个为模块依赖的模块，最后一个为回调(里面的形参不能写错)，最好直接使用回调来定义模块，依赖模块就用require引入吧
+6.伪数组调用数组的方法:前提是数组的这个方法是可以让伪数组调的
+可以把数组的原型上的方法直接给到伪数组tags.constructor.prototype.forEach = Array.prototype.forEach;
+或者让伪数组调用数组的这个方法
+Array.prototype.forEach.call(tags,function(child,i) {})

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .imgClass {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<body>
+    <button onclick="showImg();">Show Image</button>
+</body>
+
+<script>
+
+    var createImage = function (className) {
+        var img = document.createElement('img');
+        document.body.appendChild(img);
+        img.src = 'http://img.lanrentuku.com/img/images/fdl.jpg';
+        img.className = className;
+        return function (src) {
+            img.src = src;
+        }
+    }
+
+    var delegateImage = function (createImage,className) {
+        var img = new Image();
+        var image = createImage(className);
+        img.onload = function () {
+            var that = this;
+            setTimeout(function () {
+                image.call(that,that.src)
+            },2000)
+        }
+        return function (src) {
+            img.src = src;
+        }
+    }
+
+    function showImg () {
+        delegateImage(createImage, 'imgClass')('https://img.alicdn.com/tps/i4/TB1b_neLXXXXXcoXFXXc8PZ9XXX-130-200.png')
+    }
+
+//    delegateImage('https://img.alicdn.com/tps/i4/TB1b_neLXXXXXcoXFXXc8PZ9XXX-130-200.png')
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list li {
+    flex: 1;
+    margin: 10px;
+    font-size: 12px;
+    background-color: gray;
+    padding: 10px 3px;
+    text-align: center;
+    color: white;
+    border-radius: 3px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.list li.selected {
+    background-color: navajowhite;
+    color: green;
+    font-size: 20px;
+}

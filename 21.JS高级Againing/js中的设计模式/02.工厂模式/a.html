@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    var XMLFactory = function () {
+    }
+    XMLFactory.prototype.createFactory = function () {
+        console.log('')
+    }
+    XMLFactory.prototype.eat = function () {
+        console.log('eat');
+    }
+
+    var ChildFactory = function () {
+    }
+    ChildFactory.prototype = new XMLFactory();
+    ChildFactory.prototype.constructor = ChildFactory;
+
+    ChildFactory.prototype.createFactory = function () {
+        var XMLObject = null;
+        try {
+            XMLObject = new XMLHttpRequest();
+        } catch (err) {
+            XMLObject = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        return XMLObject;
+    }
+
+    var child = new ChildFactory();
+    child.eat()
+
+</script>
+</body>
+</html>

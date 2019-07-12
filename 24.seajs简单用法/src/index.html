@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>seajs</title>
+    <script src="./../node_modules/seajs/dist/sea.js"></script>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div class="box">
+    <ul class="list" id="lis">
+        <li class="selected">ABC</li>
+        <li>acakjcn
+            <span >acsacasc</span>
+        </li>
+        <li>svcnac</li>
+        <li>sacascacsaca</li>
+        <li>scascmaskcmas</li>
+    </ul>
+</div>
+<script>
+    seajs.use('./main', function (main) {
+        // 给每个li添加点击事件
+        main.changeSelected(main.$("lis"), 'li', function (tags, target, index) {
+            for (var i = 0; i < tags.length; i++) {
+                    tags[i].className = '';
+            }
+            target.className = 'selected';
+        })
+    })
+</script>
+</body>
+</html>

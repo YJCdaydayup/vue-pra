@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "seajs": "^3.0.3"
+  }
+}
