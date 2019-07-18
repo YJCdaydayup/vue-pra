@@ -96,7 +96,7 @@
         }
 
         if (me.index + me.labelWidth + 2 === me.max && me.isOK && me.max > 0) {
-            me.elem.find("#labelTip").text(me.successLabelTip).css({
+            me.elem.find("#label").unbind().next("#labelTip").text(me.opts.successLabelTip).css({
                 color: '#fff'
             })
             me.success();
@@ -144,7 +144,7 @@ $(function () {
     var sliderlock = new SliderUnlock("#slider", {
         successLabelTip: '验证成功'
     }, function () {
-        alert('验证完成')
+
     });
     sliderlock.init();
 })
