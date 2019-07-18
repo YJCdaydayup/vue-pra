@@ -5,11 +5,10 @@ import Home from './views/Home.vue';
 Vue.use(Router);
 
 let router = new Router({
-    mode: 'history',
     routes: [
         {
             path: '/',
-            redirect: '/home/center/list'
+            redirect: '/home/center'
         },
         {
             path: '/home',

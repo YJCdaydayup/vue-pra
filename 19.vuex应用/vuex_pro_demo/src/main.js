@@ -44,10 +44,10 @@ const store = new Vuex.Store({
   },
   actions: {
     async action1(context,payload) {
-     await context.dispatch('checkout',{
+     let x = await context.dispatch('checkout',{
         len: 1
       })
-      console.log('提交完毕')
+      return x;
     },
     checkout({commit,state},payload) {
       return new Promise((resolve,reject) => {
@@ -55,8 +55,8 @@ const store = new Vuex.Store({
           commit('increment',{
             len: payload.len
           })
-          resolve();
-        },1000)
+          resolve('提交完毕');
+        },3000)
       })
     }
   }

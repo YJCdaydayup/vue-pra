@@ -11,6 +11,10 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/pro'
+    },
+    {
+      path: '/',
       name: 'Counter',
       component: Counter
     },

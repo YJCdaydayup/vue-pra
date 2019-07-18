@@ -13,9 +13,7 @@
 
   export default {
     data() {
-      return {
-
-      }
+      return {}
     },
     computed: {
       countA() {
@@ -30,16 +28,18 @@
         this.$store.commit('A/mutA');
       },
       dispatch() {
-        return this.$store.dispatch('A/actionA').then(()=>{
-          return '完ascjkascakjsncjaksncsa';
-        }).catch(()=>{
-          return 'failed'
+        return new Promise((resolve, reject) => {
+          this.$store.dispatch('A/actionA').then(()=>{
+            resolve('完ascjkascakjsncjaksncsa');
+          }).catch(()=>{
+            reject('failed');
+          })
         })
       },
       getPatch() {
-        this.dispatch().then((res)=>{
+        this.dispatch().then((res) => {
           alert(res)
-        }).catch((res)=>{
+        }).catch((res) => {
           alert(res)
         })
       }

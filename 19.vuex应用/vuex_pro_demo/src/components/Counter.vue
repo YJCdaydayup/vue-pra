@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <span>{{count}}</span>
+    <span class="count">{{count}}</span>
     <span>{{countPlusLocalState}}</span>
     <div>{{mapCount}}</div>
     <button class="btn" :class="addBtnClass" @click="addCount">Add</button>
@@ -84,6 +84,15 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  .count {
+    background-color: orange;
+    font-size: 20px;
+    display: inline-block;
+    height: 60px;
+    width: 200px;
+    line-height: 60px;
+  }
 
   .hello {
     position: absolute;

@@ -5,47 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Vuerify</title>
     <script src="node_modules/vue/dist/vue.min.js"></script>
+
 </head>
 <body>
-    <div id="app">
-        <h1>{{ msg }}</h1>
-        <form>
-            <input type="text" v-model="username" placeholder="输入用户名">
-            <input type="password" v-model="password" placeholder="请输入密码">
-            <input type="password" v-model="rePass" placeholder="请确认密码">
-            <input type="email" v-model="email" placeholder="输入邮箱">
-            <input type="tel" v-model="phone" placeholder="输入电话">
-            <input type="button" @click="handleSubmit" value="提交">
-            <ul>
-                <li v-for="(err, index) in errors" :key="index" v-text="err"></li>
-            </ul>
-        </form>
-    </div>
-    <script>
-       new Vue({
-            el: '#app',
-            data() {
-                return {
-                    msg: 'Welcome to Your Vue.js App',
-                    username: '',
-                    password: '',
-                    rePass: '',
-                    email: '',
-                    phone: ''
-                }
-            },
-           computed: {
-               errors() {
-                   console.log(this.$vuerify);
-                   return this.$vuerify.$errors // 错误信息会在 $vuerify.$errors 内体现
-               }
-           },
-           methods: {
-               handleSubmit() {
-
-               }
-           }
-        })
-    </script>
+<div id="app">
+    <style style="display:block" contentEditable>
+        h1 { color: blue }
+    </style>
+    <h1>{{ msg }}</h1>
+</div>
 </body>
 </html>

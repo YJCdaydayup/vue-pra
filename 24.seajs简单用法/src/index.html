@@ -5,6 +5,7 @@
     <title>seajs</title>
     <script src="./../node_modules/seajs/dist/sea.js"></script>
     <link rel="stylesheet" href="./style/index.css">
+    <script src="./index.js"></script>
 </head>
 <body>
 <div class="box">
@@ -17,17 +18,7 @@
         <li>sacascacsaca</li>
         <li>scascmaskcmas</li>
     </ul>
+    <button style="position: relative;transition: all 2s linear;top: 0" id="click">CLICK</button>
 </div>
-<script>
-    seajs.use('./main', function (main) {
-        // 给每个li添加点击事件
-        main.changeSelected(main.$("lis"), 'li', function (tags, target, index) {
-            for (var i = 0; i < tags.length; i++) {
-                    tags[i].className = '';
-            }
-            target.className = 'selected';
-        })
-    })
-</script>
 </body>
 </html>

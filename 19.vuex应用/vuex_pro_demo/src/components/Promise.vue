@@ -27,12 +27,12 @@
     },
     methods: {
       test1(e) {
-        console.log(e)
+        console.log('发起事件');
         e.target.setAttribute("disabled", true);
         this.$store.dispatch('action1', {
           len: 1
-        }).then(()=>{
-          console.log('成功提交actions');
+        }).then((x)=>{
+          console.log(x);
         })
       }
     }

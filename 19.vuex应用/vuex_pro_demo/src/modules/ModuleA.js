@@ -23,7 +23,7 @@ export default {
           context.commit('mutAA',{
             len: 888
           })
-          reject();
+          resolve();
         }, 1000)
       })
     }

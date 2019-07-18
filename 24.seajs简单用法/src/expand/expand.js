@@ -11,7 +11,7 @@ define(function (require, exports, module) {
         // tags.forEach(function (child, i) {
         //
         // })
-
+        console.log(tags);
         Array.prototype.forEach.call(tags,function (child,i) {
             // if (child.parentNode === parent) {
                 child.onclick = function () {

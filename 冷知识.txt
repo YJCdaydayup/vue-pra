@@ -1,0 +1,46 @@
+1.利用a标签自动解析URL
+myURL.file;     // = 'index.html'
+myURL.hash;     // = 'top'
+myURL.host;     // = 'abc.com'
+myURL.query;    // = '?id=255&m=hello'
+myURL.params;   // = Object = { id: 255, m: hello }
+myURL.path;     // = '/dir/index.html'
+myURL.segments; // = Array = ['dir', 'index.html']
+myURL.port;     // = '8080'
+myURL.protocol; // = 'http'
+myURL.source;   // = 'http://abc.com:8080/dir/index.html?id=255&m=hello#top'
+
+2.页面拥有ID的元素会创建自动全局变量
+<div id="sample"></div>
+<script type="text/javascript">
+        console.log(sample);
+</script>
+
+3.加载CDN文件时，可以省掉HTTP标识
+<script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+4.利用script标签保存任意信息
+<script type="text" id="template">
+    <h1>This won't display</h1>
+</script>
+
+var text = document.getElementById('template').innerHTML
+
+5.把浏览器当编辑器 data:text/html,<html contenteditable>
+
+6.将以下代码放到console执行后，整个页面将变得可编辑！document.body.contentEditable='true';
+
+7.contentEditable可以让标签进入可编辑状态
+
+8.调试样式的时候可以实时的：
+<body>
+<div id="app">
+    // 在body中添加这个:
+    <style style="display:block" contentEditable>
+        h1 { color: blue }
+    </style>
+    <h1>{{ msg }}</h1>
+</div>
+</body>
+
+
