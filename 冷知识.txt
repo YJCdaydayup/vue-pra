@@ -43,4 +43,7 @@ var text = document.getElementById('template').innerHTML
 </div>
 </body>
 
+9.pageX是点击处移动端的相对整个视图X值，e = event || window.event; e.orginalEvent.touches[0].pageX;
+screenX是点击处网页端相对于整个视图的X值，offsetLeft相对于父视图的X值只读的，jquery对象本身就是一个伪数组，第0个元素是这个标签本身，
+
 

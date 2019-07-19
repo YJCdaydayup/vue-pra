@@ -5,7 +5,7 @@
         <title>验证</title>
         <link rel="stylesheet" href="./index.css">
         <script src="./node_modules/jquery/dist/jquery.js"></script>
-        <script src="./amain.js"></script>
+        <script src="./node_modules/seajs/dist/sea.js"></script>
     </head>
     <body>
         <div id="demo">
@@ -15,5 +15,10 @@
                 <span id="labelTip">滑动滑块验证</span>
             </div>
         </div>
+        <script>
+            seajs.use('./entry',function (entry) {
+                entry.init();
+            })
+        </script>
     </body>
 </html>

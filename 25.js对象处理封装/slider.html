@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 60px;
+            height: 60px;
+            background-color: #dae2d0;
+            border-radius: 18px;
+            position: relative;
+            font-size: 14px;
+        }
+    </style>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/seajs/dist/sea.js"></script>
+</head>
+<body>
+    <div id="box" class="box"></div>
+    <script>
+        seajs.use('./app.js', function (app) {
+            app.start();
+        })
+    </script>
+</body>
+</html>

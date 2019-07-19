@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "seajs": "^3.0.3"
   }
 }
