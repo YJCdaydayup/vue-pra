@@ -70,7 +70,7 @@
             if (!event._constructed) {
               return ;
             }
-            if (!this.food.count) {
+            if (!!this.food.count) {
 //              this.$set(this.food,'count',1)
               Vue.set(this.food,'count', 1);
             }else {

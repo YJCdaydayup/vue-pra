@@ -42,3 +42,8 @@ console.log('当前版本: ' + process.version);
 
 // 输出内存使用情况
 console.log(process.memoryUsage());
+
+var a = 123
+b = 234
+console.log(global.b);
+console.log(global.a);

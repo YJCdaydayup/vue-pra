@@ -44,6 +44,12 @@ var text = document.getElementById('template').innerHTML
 </body>
 
 9.pageX是点击处移动端的相对整个视图X值，e = event || window.event; e.orginalEvent.touches[0].pageX;
-screenX是点击处网页端相对于整个视图的X值，offsetLeft相对于父视图的X值只读的，jquery对象本身就是一个伪数组，第0个元素是这个标签本身，
+screenX是点击处网页端相对于整个视图的X值，offsetLeft相对于父视图的X值只读的，jquery对象本身就是一个伪数组，第0个元素是这个标签本身；
 
+10.兼容性问题
+A.li标签下不要嵌套多个div，最合理的结构是ul li a span，可能会造成IE低版本浏览器兼容问题；
+
+11.浮点数快速取整: (12.4 / 4.13) | 0 或 ～～(12.3)
+
+12.快速转化为bool值 ~~a
 
