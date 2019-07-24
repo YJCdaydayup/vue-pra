@@ -12,7 +12,7 @@
 
 <script>
 
-  import anifour from './anione/anifour.vue'
+  import anifour fromx './anione/anifour.vue'
 
 export default {
 
