@@ -4,5 +4,21 @@
 3.还可以使用(function(){})()来定义模块
 4. Sea.js是CMD的规范，阿里巴巴的玉伯开发的
 5.开发环境用原版的jquery.js的话，生产环境要用jquery.min.js文件，请求的文件更小
-6.Sea.js开始解决了依靠html来加载各个js文件了，JS中可以加载其他的JS了，
+6.Sea.js开始解决了依靠html来加载各个js文件了，JS中可以加载其他的JS了
+
+第二节课
+1.nodejs中每个文件都是一个模块，通过module.exports输入，通过require打破封装性进行引入；
+2.require的原理，通过module.exports输入后，require本身是一个函数，引入路径参数后，读取js模块文件内容进行拼接字符串，然后eval执行获取函数，执行和这个函数的到js模块里面exports或者module.exports输入的函数或数据；
+3.module就是一个全局属性，通过require后，第一次会执行js里面所有的代码，然后将module对象缓存起来，下次require直接从缓存中module对象中取，js模块中无关代码不会再执行；
+4.module对象包含id(最外层的是.)，export对象 parents children
+5.require本身是同步读取js模块文件的
+6.nodejs中require的读取先后顺序
+7.在模块加载机制中nodejs采用延时加载的策略，只有在用到的时候才会加载，加载完成后会放到binding_cache中，缓存的是module对象；
+8.模块分为，核心模块(直接通过模块名引入) 文件模块(路径引入) 包(模块名引入)
+9.文件模块分三种，默认会自动给模块添加后缀进行加载 js json node，加载过程中是以同步阻塞模式判断文件是否存在，从性能优化的角度，.json .node文件最好加上扩展名
+10.require可以引入核心二进制模块，文件模块(js文件模块 json文件模块 node文件模块)
+11.require加载模块的机制，首先加载核心模块，因为核心模块已经被编译成二进制加载到系统内存中了，速度快，效率高，其次按照相对路径和绝对路径查找，没有扩展名就自动按照js json node添加扩展名，最后会搜索node_modules目录，首次加载这类模块最慢，找不到会去父级node_modules目录查找，找到后会缓存起来，以后加载会很快；
+
+
+
 
