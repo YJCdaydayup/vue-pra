@@ -1,11 +1,47 @@
-import './index.css'
-import Validation from './model/Validation'
+// import CEPromise from './src/CEPromise'
 
-(() => {
-    let validation = new Validation("#slider", {
-        successLabelTip: '验证完成'
-    }, () => {
-        alert('验证完成')
-    })
-    validation.init();
-})()
+var Cancelable = require('./src/CEPromise');
+
+window.onload = function () {
+
+    // var cePromise = new CEPromise();
+
+    function start() {
+        $("start").onclick = function () {
+            // cePromise.createCancelablePromise(event());
+            // cePromise.promise.then((res) => {
+            //     console.log(res)
+            // }).catch(err => {
+            //     console.log(JSON.stringify(err))
+            // });
+
+            Cancelable.getOuterPromise(event()).then(res=>{
+                console.log(res);
+            }).catch(err=>{
+                console.log(err);
+            })
+
+        }
+
+        $("cancel").onclick = function () {
+           Cancelable.cancel()
+        }
+    }
+
+    function event() {
+        return new Promise((resolve, reject) => {
+            resolve('我就是要处理的事件');
+        })
+    }
+
+    function $(id) {
+        let el = document.getElementById(id);
+        if (!!el) {
+            return el;
+        } else {
+            throw "this element does not exist."
+        }
+    }
+
+    start();
+}
