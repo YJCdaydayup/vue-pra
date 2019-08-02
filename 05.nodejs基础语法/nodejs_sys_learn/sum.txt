@@ -26,4 +26,24 @@
 2.nodejs中读取JSON文件，可以直接使用require即可，无需通过fs读取
 3.var a = require('./a') var b = require('./b');这里如果a和b文件模块相互引用了，第一次引入a时，b的module就已经放到内存缓存中了，下次引用文件模块b时就直接去b的module中取方法和属性，而不会执行b里面的无关代码了
 4.npm i -g 属于全局安装命令行，放在npm安装时就创建的一个全局目录里面，npm i 只是安装依赖包文件
+6.Sea.js开始解决了依靠html来加载各个js文件了，JS中可以加载其他的JS了，解决了文件依赖的问题了
+7.module.exports本身就是一个对象，用于打破封装性
+8.require的原理，创建了script标签，引入js
+9.exports是module.exports的别名
+var module = {} module.exports = {} var exports = module.exports,这个时候exports=123，module.exports还是{}，所以别名只能用于添加属性；
+
+第二节课
+1.内核->js引擎(转化，移植性)，js引擎套一个壳子，写js代码传递给js引擎操作硬件就是nodejs
+2.nodejs V8引擎去解析js，没有浏览器兼容性问题；
+3.理解：nodejs是js的运行平台
+4.事件驱动，无阻塞
+5.js->v8->中间层libuv(C++编写)->操作硬件就是nodejs
+6.云服务器就是一台电脑，需要外网ip，我们自己只有内网ip
+7.node+回车进入repl交互式运行环境，用于试验api
+8.Zeal离线文档查找工具
+
+
+
+
+
 
