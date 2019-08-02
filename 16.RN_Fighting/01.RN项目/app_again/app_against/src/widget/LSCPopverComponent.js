@@ -54,7 +54,6 @@ export default class LSCPopverComponent extends Component {
 
     _showPopver() {
         let anchor = this.props.getAnchorView();
-        console.log(anchor);
         anchor.measure((ox, oy, width, height, px, py) => {
             this.setState({
                 isVisible: true

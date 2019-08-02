@@ -1,3 +1,4 @@
+
 第一节课
 1.模块化，解决命名冲突和文件依赖和无法私有性，如日志模块,最早常采用命名空间法来做的，var caculator = {}, caculator.add=function() {}
 2.驼峰命名法+匈牙利命名法(加上了类型)如numA，fnCaculator=function(){}
@@ -36,7 +37,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 1.内核->js引擎(转化，移植性)，js引擎套一个壳子，写js代码传递给js引擎操作硬件就是nodejs
 2.nodejs V8引擎去解析js，没有浏览器兼容性问题；
 3.理解：nodejs是js的运行平台
-4.事件驱动，无阻塞，单线程
+4.事件驱动，无阻塞，看似单线程，其实是看到的是主线程一个人在忙，主线程看到异步任务会安排子线程来处理，底层还是多线程的
 5.js->v8->中间层libuv(C++编写)->操作硬件就是nodejs
 6.云服务器就是一台电脑，需要外网ip，我们自己只有内网ip
 7.node+回车进入repl交互式运行环境，用于试验api
@@ -52,7 +53,9 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 7.有个线程池，有几个备用子线程在里面休息，我们来写异步，系统自己安排子线程，所以我们写的是异步，没写过开启子线程
 8.node不擅长做大量运算的东西，比如加密解密涉及大量运算，这叫做CPU密集型操作
 9.复习以下GCD对线程，对比区别
-
+10.nvm npm nrm(改变npm的数据源)
+11.nodejs里面处理回调的时候约定使用这种(err,data)=>{},if (err) {callback(err)} if (data) {callback(null,data)}，以后我也这样用
+12.文件模块中使用了module.exports={},那么相当于把默认空对象指向了其他的对象并将其返回了，再用exports输出是无效的
 
 
 

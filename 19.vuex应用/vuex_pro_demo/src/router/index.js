@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Counter from '@/components/Counter'
 import Promise from './../components/Promise'
 import Module from './../components/Module.vue'
+import Watcher from './../components/Watcher.vue'
 
 Vue.use(Router)
 
@@ -11,7 +12,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/pro'
+      redirect: '/watcher'
     },
     {
       path: '/',
@@ -27,6 +28,11 @@ export default new Router({
       path: '/mod',
       name: 'Module',
       component: Module
+    },
+    {
+      path: '/watcher',
+      name: 'Watcher',
+      component: Watcher
     }
   ]
 })

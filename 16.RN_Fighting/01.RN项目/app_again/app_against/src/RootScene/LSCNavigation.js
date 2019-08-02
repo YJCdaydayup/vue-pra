@@ -8,9 +8,9 @@ import ThemePage from './../scene/MineScene/subscene/ThemePage'
 
 export const AppStackNavigator = createStackNavigator(
     {
-        AppTabbarNavigator: {
-            screen: AppBottomTabNavigator,
-        },
+        // AppTabbarNavigator: {
+        //     screen: AppBottomTabNavigator,
+        // },
         ProductDetail: {
             screen: ProductDetail
         },

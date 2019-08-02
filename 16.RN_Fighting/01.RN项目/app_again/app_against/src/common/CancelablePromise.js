@@ -19,3 +19,15 @@ export default function CancelablePromise(promise) {
         }
     }
 }
+
+
+(function() {
+    return {
+        cancel: function() {
+            cancel = false;
+        },
+        cancelPromise: function() {
+
+        }
+    }
+})()

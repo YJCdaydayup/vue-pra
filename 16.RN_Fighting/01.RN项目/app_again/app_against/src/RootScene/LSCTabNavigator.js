@@ -1,6 +1,8 @@
 import React from 'react'
 import {
     StatusBar,
+    Text,
+    TouchableOpacity
 } from 'react-native'
 
 
@@ -19,17 +21,15 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
     {
         Home: {
             screen: Home,
-            navigationOptions: ({navigation}) => {
-                return {
-                    tabBarLabel: "首页",
-                    tabBarIcon: ({tintColor, focused}) => {
-                        if (focused) {
-                            ThemeFactory.getLocalTheme().then((res)=>{
-                                return <TabBarItem name="home" tintColor={res.themeColor}/>
-                            });
-                        }
-                        return <TabBarItem name="home" tintColor={tintColor}/>
+            navigationOptions: {
+                tabBarLabel: "首页",
+                tabBarIcon: ({tintColor, focused}) => {
+                    if (focused) {
+                        ThemeFactory.getLocalTheme().then((res) => {
+                            return <TabBarItem name="home" tintColor={res.themeColor}/>
+                        });
                     }
+                    return <TabBarItem name="home" tintColor={tintColor}/>
                 }
             }
         },
@@ -69,21 +69,21 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
             let {state} = navigation;
             let {routes, index} = state;
             let titles = ['首页', '附近', '订单', '我的'];
+            let {setParams} = navigation;
+            setParams({param1: true})
+            console.log(state.params)
             initStatusBarStyle(navigation);
             if (index === 3 || index === 1) {
                 return {
                     header: null
                 }
-            } else {
+            } else if (index === 0) {
                 return {
-                    title: titles[index],
-                    headerTitleStyle: {
-                        color: 'gray'
-                    },
-                    headerStyle: {
-                        backgroundColor: '#91e9f7',
-                    }
+                    ...getNavCommonStyle(titles[index]),
+                    headerRight: getPoperButton(setParams)
                 }
+            } else {
+                return getNavCommonStyle(titles[index])
             }
         },
         tabBarPosition: 'bottom',
@@ -98,7 +98,30 @@ export const AppBottomTabNavigator = createBottomTabNavigator(
     }
 )
 
-function initStatusBarStyle(navigation) {
+getPoperButton = (setParams) => {
+
+    return <TouchableOpacity
+    >
+        <Text style={{
+            marginRight: 20,
+            fontSize: 16,
+        }}>列表</Text>
+    </TouchableOpacity>
+}
+
+getNavCommonStyle = (title) => {
+    return {
+        title: title,
+        headerTitleStyle: {
+            color: 'gray'
+        },
+        headerStyle: {
+            backgroundColor: '#91e9f7',
+        }
+    }
+}
+
+initStatusBarStyle = (navigation) => {
     let {state} = navigation;
     let {routes, index} = state;
     let lightContentScenes = ['Home', 'Mine']
