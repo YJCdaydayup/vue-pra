@@ -57,6 +57,21 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 11.nodejs里面处理回调的时候约定使用这种(err,data)=>{},if (err) {callback(err)} if (data) {callback(null,data)}，以后我也这样用
 12.文件模块中使用了module.exports={},那么相当于把默认空对象指向了其他的对象并将其返回了，再用exports输出是无效的
 
+第四节课
+1.fs模块中readFile有三个参数，如果‘utf8’不传，就会返回Buffer对象，存储的是二进制01编码；
+2.同步一般使用return进行返回，异步使用callback，同步中不要使用callback处理，没有意义；
+3.require引入模块进来后，执行代码的时候，如果调用了require模块的代码，相当于是把module.exports的代码拿到这个文件地方执行，引用路径是相对于执行的当前文件的，如果读取路径要是当前本文件的路径，就加__dirname + ‘/config.json’;
+4.__dirname会在require出去的时候已经换算出来了路径传递过去了
+5.throw出去，代码就不执行了，抛出错误了
+6.同步代码里面要大量使用try catch，try catch是同步代码，不能捕获异步里面的代码，如果要捕获异步里面的代码，那么需要把try catch放到回调里面进行捕获，回调里面又到了主线程；
+7.异步里面的err其实和里面放trycatch捕获的异常是一样的
+8.var err = new Error; err.code = 100,用于判断系统的error在返回自己的error；
+9.readFile(‘./’,’utf8’,callback) writeFile(‘’,内容，‘utf8’,callback)
+10.appendFile追加文件 mkdir(‘./a’,(err)=>{})创建目录 
+11.fs.readdir(‘./’, (err, files是数组)=>{}) 读文件夹没有编码格式,只读当前文件夹中的内容，返回所有文件名数组，不带路径
+12.fs.access(‘./a’,()=>{})判断文件夹或者文件是否存在
+13.
+
 
 
 
