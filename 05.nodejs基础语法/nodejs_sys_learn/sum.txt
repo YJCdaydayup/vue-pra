@@ -70,8 +70,12 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 11.fs.readdir(‘./’, (err, files是数组)=>{}) 读文件夹没有编码格式,只读当前文件夹中的内容，返回所有文件名数组，不带路径
 12.fs.access(‘./a’,()=>{})判断文件夹或者文件是否存在
 13.nodejs中有多个异步时，由于异步处理完成后都会回到js主线程，如果在回调中处理CPU密集型任务，如解压，压缩等，就会造成主线程阻塞，后面的异步的回调阻塞起来；
-
-
+13.fs.stats(‘./a’,(err, stats)=>{})判断文件是否是文件或者目录 大小等属性
+14.path模块会帮我们处理好路径，使用__dirname拼接时，处理好路径提高了代码的容错性path.join(__dirname, ‘./a’)
+15.path.basename(‘./a.js’)通过路径取带后缀的文件名,同步方法
+16.path.basename(‘./a.js’,’.js’)通过路径取不带后缀的文件名,同步方法
+17.path.dirname(‘/foo/bar/baz/test.js’)获取所在文件夹路径
+18.path.extname(‘/ac/sc/js.js’)
 
 
 
