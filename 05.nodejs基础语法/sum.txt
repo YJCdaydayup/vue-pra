@@ -29,6 +29,23 @@
 29.express框架下get请求获取?a=b&c=d就用req.query下拿，动态路由参数要用params下拿，但动态路由要配合定义一个接口app.get("/:id", function(req, res) {})参数就从req.params.id下拿，请求的发送方式就是localhost:8081/2
 
 
+补充，nodejs内部揭秘
+1.js线程就是主线程；
+2.nodejs结构分三层，JS层，这部分有js编写，包括nodejs的标准库，在源码lib中可以看到，Node bindings层，处理js与C++底层通信的，第三层是支撑nodejs运行关键，V8引擎，libuv提供跨平台，线程池，事件池，异步I/O， C-ares异步处理DNS能力，http_parser,Openssl,zlib等提供http解析，SSL，数据压缩能力
+3.js线程是单线程，主线程，当有异步操作时，就交给libuv由libuv开启子线程通过事件循环event loop来执行，自己返回做主线程的事情，默认子线程4个，线程池里面的子线程可以通过修改环境变量来修改
+4.浏览器中的event loop模型时浏览器厂商完成，nodejs中的时event loop内部维持多个事件队列或者叫watcher，如时间队列，网络队列等，libuv会执行一个while true的无限循环，不断检查各个watcher中是否有pendding状态的事件，有则按顺序去触发，顺序是：
+timers，执行setIntervel setTimeout
+callbacks 上一轮循环中少数的callback
+等等
+每个阶段都有自己的callback，会取出来执行
+
+5，nodejs是异步 非阻塞，事件驱动，能响应大量的并发请求，适合高并发，IO密集，少量业务逻辑的场景，对于CPU密集任务时，如数据压缩，解压，nodejs都会自己亲自处理，后面的程序只能等着
+6.由于现在大部分服务器是多CPU或多核的，而nodejs只有一个event loop，只占用一个CPU内核，当处理CPU密集型任务时，导致其他任务被阻塞，而还有CPU内核处于闲置，造成浪费；
+7.
+
+
+
+
 
 
 
