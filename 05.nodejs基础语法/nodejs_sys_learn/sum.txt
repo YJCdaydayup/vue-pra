@@ -77,5 +77,11 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 17.path.dirname(‘/foo/bar/baz/test.js’)获取所在文件夹路径
 18.path.extname(‘/ac/sc/js.js’)
 
+第五节课
+1.js的调试，如果是浏览器上调试可以再资源中找到js文件加断点 debugger console.log
+2.如果是nodejs的调试，可以使用node debug test.js，n跳过方法 s进入方法 o出方法
+3.也可以使用webstorm中的Run下的debug继续调试，运行debug就会停留在断点处，里面有刷新，进入下一个断点，取消全部断点的功能；
+
+
 
 

@@ -1,6 +1,5 @@
 var fs = require('fs')
 var path = require('path')
-<<<<<<< Updated upstream
 //
 // fs.mkdir('./test', (err) => {
 //   fs.writeFile('./test/test.txt', '测试文件', 'utf8', (err) => {
@@ -18,7 +17,6 @@ var path = require('path')
 // })
 // })
 // })
-=======
 
 fs.mkdir('./test', (err) => {
   fs.writeFile('./test/test.txt', '测试文件', 'utf8', (err) => {
@@ -36,7 +34,6 @@ fs.mkdir('./test', (err) => {
 })
 })
 })
->>>>>>> Stashed changes
 
 
 // fs.stat('./a', (err, stats)=>{
