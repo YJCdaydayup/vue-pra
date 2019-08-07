@@ -8,6 +8,21 @@
         me.start()
     }
 
+    var output = function () {
+        var timer;
+        return function (fn) {
+            var me = this;
+            if (timer) {
+                return false;
+            }
+            timer = setTimeout(function () {
+                clearTimeout(timer);
+                timer = null;
+                fn.call(me,arguments);
+            }, 500);
+        }
+    }
+
     Topper.prototype.start = function () {
         var me = this;
         me.elm.addEventListener('mousewheel', function (e) {
@@ -17,7 +32,9 @@
             } else if (document.body) {// all other Explorers
                 me.offsetTop = document.body.scrollTop;
             }
-            me.closureOutput.bind(me)();
+            me.closureOutput(function () {
+                me.callback(me.offsetTop);
+            });
         })
     }
 
@@ -28,24 +45,26 @@
         }
     }
 
-    Topper.output = function (fn) {
-        var timer;
-        return function () {
-            var me = this;
-            if (timer) {
-                return false;
-            }
-            timer = setTimeout(function () {
-                clearTimeout(timer);
-                timer = null;
-                fn.apply(me, arguments)
-            }, 500);
-        }
-    }
+    // Topper.output = function (fn) {
+    //     var timer;
+    //     return function () {
+    //         var me = this;
+    //         if (timer) {
+    //             return false;
+    //         }
+    //         timer = setTimeout(function () {
+    //             clearTimeout(timer);
+    //             timer = null;
+    //             fn.apply(me, arguments)
+    //         }, 500);
+    //     }
+    // }
 
-    Topper.prototype.closureOutput = Topper.output(function () {
-        this.callback(this.offsetTop);
-    })
+    // Topper.prototype.closureOutput = Topper.output(function () {
+    //     this.callback(this.offsetTop);
+    // })
+
+    Topper.prototype.closureOutput = output();
 
     Topper.prototype.checkFn = function (fn) {
         if (typeof fn === 'function') {

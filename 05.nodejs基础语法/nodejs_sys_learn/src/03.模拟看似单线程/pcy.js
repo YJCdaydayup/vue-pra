@@ -3,6 +3,7 @@ function doSomething(callback) {
         callback();
     }, 2000);
     console.log('配餐')
+    newFunction();
     console.log('配餐')
     console.log('配餐')
 }
@@ -10,3 +11,7 @@ function doSomething(callback) {
 doSomething(function () {
     console.log('吃薯条吧');
 });
+
+function newFunction() {
+    console.log('配餐');
+}
