@@ -1,4 +1,4 @@
-第一节课
+S第一节课
 1.模块化，解决命名冲突和文件依赖和无法私有性，如日志模块,最早常采用命名空间法来做的，var caculator = {}, caculator.add=function() {}
 2.驼峰命名法+匈牙利命名法(加上了类型)如numA，fnCaculator=function(){}
 3.还可以使用(function(){})()来定义模块
@@ -79,8 +79,11 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 
 第五节课
 1.js的调试，如果是浏览器上调试可以再资源中找到js文件加断点 debugger console.log
-2.如果是nodejs的调试，可以使用node debug test.js，n跳过方法 s进入方法 o出方法
-3.也可以使用webstorm中的Run下的debug继续调试，运行debug就会停留在断点处，里面有刷新，进入下一个断点，取消全部断点的功能；
+2.如果是nodejs的调试，可以使用node debug test.js，n跳过方法 s进入方法 o出方法 node-inspector也可以
+3.也可以使用webstorm中的Run下的debug继续调试，运行debug就会停留在断点处，里面有刷新，进入下一个断点，取消全部断点的功能；VS Code IDE开发软件
+4.'use strict'严格模式，防止出现怪异现象 ，严格模式a=1就报错，let作用域方括号里面，如for循环里的使用的每一个{}中的i都是唯一的，比较类似于闭包里面维系变量
+
+
 
 
 

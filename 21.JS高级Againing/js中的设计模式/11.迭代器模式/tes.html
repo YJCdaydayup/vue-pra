@@ -10,8 +10,8 @@
     Function.prototype.AOP = function (fn) {
         var self = this;
         return function () {
-           var arr = fn()
-           return self.apply(this,arr);
+            var arr = fn()
+            return self.apply(this, arr);
         }
     }
 
@@ -24,9 +24,28 @@
     }
 
     var x = func.AOP(function () {
-        return [1,2,3,4,5,6];
+        return [1, 2, 3, 4, 5, 6];
     })();
     console.log(x)
+
+
+    Function.prototype.addParams = function (fn) {
+        var self = this;
+        return function () {
+            var params = fn()
+            self.call(this, params);
+        }
+    }
+
+    function request(params) {
+        setTimeout(function () {
+            console.log(params);
+        }, 1000);
+    }
+
+    request.addParams(function () {
+        return '1234'
+    })();
 
 
 </script>

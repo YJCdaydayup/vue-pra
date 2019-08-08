@@ -1,6 +1,6 @@
 <template>
     <div class="mine">
-        mine
+        mine擦撒擦
       <Nav></Nav>
     </div>
 </template>

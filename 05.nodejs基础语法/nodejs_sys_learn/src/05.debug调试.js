@@ -1,17 +1,12 @@
-function calc() {
-	var a = 10
-	var b = a * 100;
-	return a + b;
-}
-
-
-calc();
-
+'use strict'
 
 var arr = [];
-for (var i = 0;i<20;i++) {
-	var x = i * i;
-	arr.push(x);
+for (let i = 0; i < 10; i++) {
+  arr[i] = function () {
+    return i;
+  }
 }
 
-console.log(arr);
+console.log(arr[8]())
+
+
