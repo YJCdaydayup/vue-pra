@@ -81,8 +81,9 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 1.js的调试，如果是浏览器上调试可以再资源中找到js文件加断点 debugger console.log
 2.如果是nodejs的调试，可以使用node debug test.js，n跳过方法 s进入方法 o出方法 node-inspector也可以
 3.也可以使用webstorm中的Run下的debug继续调试，运行debug就会停留在断点处，里面有刷新，进入下一个断点，取消全部断点的功能；VS Code IDE开发软件
-4.'use strict'严格模式，防止出现怪异现象 ，严格模式a=1就报错，let作用域方括号里面，如for循环里的使用的每一个{}中的i都是唯一的，比较类似于闭包里面维系变量
-
+4.'use strict'严格模式，防止出现怪异现象 ，严格模式a=1就报错，let作用域方括号里面，如for循环里的使用的每一个{}中的i都是唯一的,每个{}中的i是一个新的变量，作用于{}中，比较类似于闭包里面维系变量
+5.以后node使用中就使用let const,引入模块使用const声明
+6.如果模块中使用多个exports.进行导出，可以使用const {test} = require('/test')来导入其中模块某些属性方法
 
 
 
