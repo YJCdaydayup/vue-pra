@@ -84,6 +84,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 4.'use strict'严格模式，防止出现怪异现象 ，严格模式a=1就报错，let作用域方括号里面，如for循环里的使用的每一个{}中的i都是唯一的,每个{}中的i是一个新的变量，作用于{}中，比较类似于闭包里面维系变量
 5.以后node使用中就使用let const,引入模块使用const声明
 6.如果模块中使用多个exports.进行导出，可以使用const {test} = require('/test')来导入其中模块某些属性方法
+7.写css的时候，&.seleted是stylus里面的，如果是style里面的话，cls.selected是一样的，previousElementSibling获取下一个兄弟标签
 
 
 
