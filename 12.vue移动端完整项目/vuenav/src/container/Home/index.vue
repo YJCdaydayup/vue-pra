@@ -29,7 +29,7 @@
 
   ul {
     padding: 0;
-    margin: 20px auto;
+    height: 50px;
     list-style-type: none;
     display: flex;
   }

@@ -8,13 +8,13 @@ for (var i = 0; i < 10; i++) {
   }
 }
 
-console.log(arr[8]())
+// console.log(arr[8]())
 
 var a = 123
 if (true) {
   var a = 234
 }
-console.log(a);
+// console.log(a);
 
 var b = 'abc'
 function test() {
@@ -23,6 +23,11 @@ function test() {
 
 test();
 
-console.log(b);
+// console.log(b);
 
+
+const fs = require('fs');
+
+let {size} = fs.statSync('./01.hello.js');
+console.log(size);
 

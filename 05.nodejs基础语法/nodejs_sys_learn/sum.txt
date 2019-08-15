@@ -93,6 +93,20 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 13.0-255的值每个值对应一个字母，中文，符号，ASCLL编码其实有一个字典对照表，但表中无支持中文，在ASCLL码基础上扩展了一个新的字符集编码gb2012，字典是utf8
 14.当读取的文件过大时，比如下载，通过文件流的形式传输文件createReadStream createWriteStream pipe,如果要进度的话，使用rs.on(‘data’,()=>{}), 文件读取的时候就是buffer
 
+第六节课
+1.读取文件属性采用fs.statSync('./test.txt')，同步读取
+2.服务器要从三个方面去阐述，硬件(塔式/刀片 硬盘容量 内存容量 支持CPU个数 单个cpu支持的计算引擎个数(多核)) 操作系统(一般用linux系统有centos ubantu)
+  服务器的类型:Web服务器 FTP服务器 SMTP服务器 数据库服务器
+  提供服务的应用程序(安装在操作系统中的):提供Web服务的(网页，接口)采用的应用程序:Apache IIS Tomcat Nginx
+  nginx 反向代理，本身不执行，桥梁作用，把请求转给web服务器，再把响应转给用户，将多个web服务器整合成一个虚拟的更强大的服务器
+  iis 微软开发的web服务器 收费 主要跑.net php 只能在window上
+  apache apache基金会的web服务器 免费 只支持静态页面 html容器 广泛
+  tomcat apache基金会的java服务器 跑jsp php python
+3.node本身就是一个web服务器，提供web服务，不需要依赖上面的应用程序提供服务
+
+
+
+
 
 
 
