@@ -94,13 +94,50 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 14.当读取的文件过大时，比如下载，通过文件流的形式传输文件createReadStream createWriteStream pipe,如果要进度的话，使用rs.on(‘data’,()=>{}), 文件读取的时候就是buffer
 
 第六节课
-1.CDN节点，是将资源存放在就近的服务器上，便于快速访问，只存放静态资源，不提供接口；
+1.CDN节点，是将静态资源存放在就近的服务器上，便于快速访问，只存放静态资源，不能提供接口；
 2.可以使用JSONP请求来处理跨域，了解，尽量不用JSONP，如京东618打折活动
 3.可以添加一个服务器来封装接口并提供web服务来解决跨域问题；
-4.图片，css，html，js支持跨域，只有ajax才不支持跨域(我的页面是从那个服务器拿出来的，对应的js文件里面的ajax请求必须要也从这个服务器拿才叫不跨域)
+4.图片，css，js，iframe，link支持跨域，只有ajax才不支持跨域(我的页面是从那个服务器拿出来的，对应的js文件里面的ajax请求必须要也从这个服务器拿才叫不跨域)
 5.从CDN拿到静态资源调用ajax请求时，必须跨域从主服务器获取了，叫动静分离，可以使用JSONP
 6.服务器之间可以做数据请求不涉及跨域只有浏览器才有跨域
 7.页面->（核心数据，评论数据）node服务器->评论系统+核心系统（当压力过大就降权，将评论系统断掉）
 8.DNS域名解析，计算机与计算机通信，必须通过ip地址来定位该机器位置，浏览器默认添加80端口，万维网提供域名便于好记，输入域名后，浏览器会自动去找DNS域名解析服务器去解析获取ip地址
+9.读取文件属性采用fs.statSync('./test.txt')，同步读取
+10.服务器要从三个方面去阐述，硬件(塔式/刀片 硬盘容量 内存容量 支持CPU个数 单个cpu支持的计算引擎个数(多核)) 操作系统(一般用linux系统有centos ubantu)
+  服务器的类型:Web服务器 FTP服务器 SMTP服务器 数据库服务器
+  提供服务的应用程序(安装在操作系统中的):提供Web服务的(网页，接口)采用的应用程序:Apache IIS Tomcat Nginx
+  nginx 反向代理，本身不执行，桥梁作用，把请求转给web服务器，再把响应转给用户，将多个web服务器整合成一个虚拟的更强大的服务器
+  iis 微软开发的web服务器 收费 主要跑.net php 只能在window上
+  apache apache基金会的web服务器 免费 只支持静态页面 html容器 广泛
+  tomcat apache基金会的java服务器 跑jsp php python
+11.node本身就是一个web服务器，提供web服务，不需要依赖上面的应用程序提供服务
+12.ip唯一标识一台机器，端口代表不同的应用程序或者说服务，只要是协议，域名，端口，ip有一个不同的url都是不同的域；
+13.拒绝跨域请求是浏览器保护用户信息安全的一种策略，不经过浏览器是可以请求的，比如服务端测试接口postman curl;
+14.Cookie中的同源只关注域名，忽略协议和端口。所以https://localhost:8080/和http://localhost:8081/的Cookie是共享的。前提是要给cookie设置SameSize属性，这样跨站请求cookie就不会被发送出去；
+15.在浏览器中，script img iframe link等标签可以加载跨域资源，且加载的资源被认为是同源的，所以浏览器限制了js读写文件权限，对html是做了同源限制的，对js里面的ajax也是做了同源限制的；
+16.JSONP和ajax没有关系，只支持get请求，采用的是script的src可以加载跨域的动态js脚本，并且加载到的脚本被浏览器执行
+第一种
+<script src="http://localhost:8081/test_data.js"> 
+  <script> 
+    function test_handler(data) { 
+      console.log(data); 
+    } 
+</script>
+第二种
+<script type="text/javascript"> 
+    // this shows dynamic script insertion 
+    var script = document.createElement('script'); 
+    script.setAttribute('src', url); 
+    // load the script 
+    document.getElementsByTagName('head')[0].appendChild(script);  
+</script>
+17.解决跨域的另一种办法，采用代理方式跨域，通过Ajax从http://localhost:8080访问http://localhost:8081/api，可以将请求发往http://localhost:8080/api，然后利用Apache Web服务器的Reverse Proxy功能做如下配置（还可以在同源服务器上重新开发接口）
+18.客户端请求两种行为：(其实跨域是浏览器和服务端一起控制的)
+   1. 直接发送请求，然后检查服务器返回的response的Access-Control信息，如果自己的域名在允许的访问列表中，则读取response body，否则放弃。 response.set_header("Access-Control-Allow-Origin", "http://localhost:8080")
+   2. 发送OPTIONS请求，向服务器请求Access-Control信息。如果自己的域名在允许的访问列表中，则发送真正的请求，否则放弃请求发送。 需要支持CORS的服务器在响应头中设置  response.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
+       response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+       response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type'
+   CORS协议提升了ajax的跨域能力，但一旦网站被注入脚本或XSS攻击，将非常方便的获取用户信息并悄悄传递出去。只需要注入js后，诱使用户 点击一个恶意链接，或者 提交一个表单, 能悄悄的将用户的数据传出去；
 
+19.XSS与CSRF的对比总结；XSS是利用用户对指定网站的信任，如对评论内容进行编码和解码防止恶意注入，CSRF是利用网站对用户的信任
 
