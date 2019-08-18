@@ -96,7 +96,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 第六节课
 1.CDN节点，是将静态资源存放在就近的服务器上，便于快速访问，只存放静态资源，不能提供接口；
 2.可以使用JSONP请求来处理跨域，了解，尽量不用JSONP，如京东618打折活动
-3.可以添加一个服务器来封装接口并提供web服务来解决跨域问题；
+3.可以添加一个服务器来封装接口并提供web服务来解决跨域问题；可以使用Nginx做代理转发请求
 4.图片，css，js，iframe，link支持跨域，只有ajax才不支持跨域(我的页面是从那个服务器拿出来的，对应的js文件里面的ajax请求必须要也从这个服务器拿才叫不跨域)
 5.从CDN拿到静态资源调用ajax请求时，必须跨域从主服务器获取了，叫动静分离，可以使用JSONP
 6.服务器之间可以做数据请求不涉及跨域只有浏览器才有跨域
@@ -131,7 +131,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
     // load the script 
     document.getElementsByTagName('head')[0].appendChild(script);  
 </script>
-17.解决跨域的另一种办法，采用代理方式跨域，通过Ajax从http://localhost:8080访问http://localhost:8081/api，可以将请求发往http://localhost:8080/api，然后利用Apache Web服务器的Reverse Proxy功能做如下配置（还可以在同源服务器上重新开发接口）
+17.解决跨域的另一种办法，采用代理方式跨域就是Nginx，通过Ajax从http://localhost:8080访问http://localhost:8081/api，可以将请求发往http://localhost:8080/api，然后利用Apache Web服务器的Reverse Proxy功能做如下配置（还可以在同源服务器上重新开发接口）
 18.客户端请求两种行为：(其实跨域是浏览器和服务端一起控制的)
    1. 直接发送请求，然后检查服务器返回的response的Access-Control信息，如果自己的域名在允许的访问列表中，则读取response body，否则放弃。 response.set_header("Access-Control-Allow-Origin", "http://localhost:8080")
    2. 发送OPTIONS请求，向服务器请求Access-Control信息。如果自己的域名在允许的访问列表中，则发送真正的请求，否则放弃请求发送。 需要支持CORS的服务器在响应头中设置  response.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
@@ -146,5 +146,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 24.请求头，get user-agent 协议版本http1.0 host Accept(接收的数据格式)
 25.http协议是无状态，要服务器管理每次请求的客户消耗资源，有登录需求时，这个时候使用cookie保存在浏览器，每次请求自己携带，cookie上存放登录令牌Token，对应的服务器存放一个session来保存用户信息，响应的时候服务器反馈一个setCookie保存在服务器本地，cookie有过期时间，session没有设置过期但保存了过期时间；
 26.iframe嵌套页面
-27.
+27.get请求后面传递参数可以是?，也可以是/以路径方式做传参，如 http://www.baidu.com/list?a=1 或者http://www.shsh.com/list/1
+28.正向代理是一台服务器访问国外的服务器VPN代理用户，反向代理是在多台服务器上相同的服务通过Nginx代理服务器进行转发，平均分配叫负载均衡提高性能，nginx里面做一个跳转，可以设置权重；正向代理是用的Nginx吗？
+
 
