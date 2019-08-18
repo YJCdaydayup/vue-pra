@@ -138,6 +138,13 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
        response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type'
    CORS协议提升了ajax的跨域能力，但一旦网站被注入脚本或XSS攻击，将非常方便的获取用户信息并悄悄传递出去。只需要注入js后，诱使用户 点击一个恶意链接，或者 提交一个表单, 能悄悄的将用户的数据传出去；
-
 19.XSS与CSRF的对比总结；XSS是利用用户对指定网站的信任，如对评论内容进行编码和解码防止恶意注入，CSRF是利用网站对用户的信任
+20.同一个源或者同一个服务器出来的ajax请求，可以不写协议域名端口，如https://www.,baidu.com/api只写/api
+21.node没有web容器，本身就是web服务器
+22.网络协议就是双方约定好的数据格式，七层，物理层，链路层(局域网) 网络层(ip协议，通过ip定位唯一设备) 传输层(TCP三次握手,UDP) 应用层(http协议)
+23.http协议通过报文传输，分两部分，请求头+请求体(post才有) 响应头+响应体 请求工具: curl -v www.baidu.com
+24.请求头，get user-agent 协议版本http1.0 host Accept(接收的数据格式)
+25.http协议是无状态，要服务器管理每次请求的客户消耗资源，有登录需求时，这个时候使用cookie保存在浏览器，每次请求自己携带，cookie上存放登录令牌Token，对应的服务器存放一个session来保存用户信息，响应的时候服务器反馈一个setCookie保存在服务器本地，cookie有过期时间，session没有设置过期但保存了过期时间；
+26.iframe嵌套页面
+27.
 
