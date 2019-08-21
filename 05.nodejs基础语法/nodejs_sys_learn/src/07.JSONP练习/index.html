@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JSONP</title>
+    </head>
+    <body>
+        <button onclick="getData();">getData</button>
+        <script>
+            function getData() {
+                var script = document.createElement('script');
+                script.setAttribute('src', 'http://localhost:8081/');
+                document.getElementsByTagName('head')[0].appendChild(script);
+            }
+
+            function showData(data) {
+                console.log(data);
+            }
+        </script>
+    </body>
+</html>

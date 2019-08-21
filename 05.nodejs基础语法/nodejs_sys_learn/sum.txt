@@ -133,7 +133,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 </script>
 17.解决跨域的另一种办法，采用代理方式跨域就是Nginx，通过Ajax从http://localhost:8080访问http://localhost:8081/api，可以将请求发往http://localhost:8080/api，然后利用Apache Web服务器的Reverse Proxy功能做如下配置（还可以在同源服务器上重新开发接口）
 18.客户端请求两种行为：(其实跨域是浏览器和服务端一起控制的)
-   1. 直接发送请求，然后检查服务器返回的response的Access-Control信息，如果自己的域名在允许的访问列表中，则读取response body，否则放弃。 response.set_header("Access-Control-Allow-Origin", "http://localhost:8080")
+   1. 直接发送请求，然后检查服务器返回的response的Accxess-Control信息，如果自己的域名在允许的访问列表中，则读取response body，否则放弃。 response.set_header("Access-Control-Allow-Origin", "http://localhost:8080")
    2. 发送OPTIONS请求，向服务器请求Access-Control信息。如果自己的域名在允许的访问列表中，则发送真正的请求，否则放弃请求发送。 需要支持CORS的服务器在响应头中设置  response.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
        response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type'
@@ -147,7 +147,8 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 25.http协议是无状态，要服务器管理每次请求的客户消耗资源，有登录需求时，这个时候使用cookie保存在浏览器，每次请求自己携带，cookie上存放登录令牌Token，对应的服务器存放一个session来保存用户信息，响应的时候服务器反馈一个setCookie保存在服务器本地，cookie有过期时间，session没有设置过期但保存了过期时间；
 26.iframe嵌套页面
 27.get请求后面传递参数可以是?，也可以是/以路径方式做传参，如 http://www.baidu.com/list?a=1 或者http://www.shsh.com/list/1
-28.正向代理是一台服务器访问国外的服务器VPN代理用户，反向代理是在多台服务器上相同的服务通过Nginx代理服务器进行转发，平均分配叫负载均衡提高性能，nginx里面做一个跳转，可以设置权重；正向代理是用的Nginx吗？
+28.正向代理是一台服务器访问国外的服务器VPN代理用户，反向代理是在多台服务器上相同的服务通过Nginx代理服务器进行转发，平均分配叫负载均衡提高性能，nginx里面做一个跳转，可以设置权重；正向代理用的Nginx；
+29.正向代理代理的是客户端，反向代理代理的是服务器；
 
 第七节课
 1.三次握手，四次挥手；
