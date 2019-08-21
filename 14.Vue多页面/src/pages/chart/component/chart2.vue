@@ -1,24 +1,41 @@
 <template>
-    <ve-line :data="chartData" :settings="chartSettings"></ve-line>
+    <ve-histogram :data="chartData" :loading="loading"></ve-histogram>
 </template>
+
 <script>
+
+    const data = {
+        columns: ['日期', '访问用户', '下单用户', '下单率'],
+        rows: [
+            {'日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32},
+            {'日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26},
+            {'日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76},
+            {'日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49},
+            {'日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323},
+            {'日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78}
+        ]
+    }
+
     export default {
-        data () {
-            this.chartSettings = {
-                labelMap: {
-                    PV: '访问用户',
-                    Order: '下单用户'
+        data() {
+            return {
+                loading: false,
+                chartData: {
+                    columns: [],
+                    rows: []
                 }
             }
-            return {
-                chartData: {
-                    columns: ['date', 'PV', 'Order'],
-                    rows: [
-                        { 'date': '2018-05-22', 'PV': 32371, 'Order': 19810 },
-                        { 'date': '2018-05-23', 'PV': 12328, 'Order': 4398 },
-                        { 'date': '2018-05-24', 'PV': 92381, 'Order': 52910 }
-                    ]
-                }
+        },
+        mounted() {
+            this.getData();
+        },
+        methods: {
+            getData() {
+                this.loading = true;
+                setTimeout(() => {
+                    this.chartData = data;
+                    this.loading = false;
+                }, 3000);
             }
         }
     }

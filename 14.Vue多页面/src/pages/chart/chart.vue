@@ -7,10 +7,10 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <chart1></chart1>
+                    <chart1 ref="chart1"></chart1>
                 </div>
                 <div class="swiper-slide">
-                    <example01></example01>
+                    <chart2 ref="chart2"></chart2>
                 </div>
             </div>
         </div>
@@ -49,16 +49,43 @@
 
     export default {
         data() {
-            return {}
+            return {
+                currentIndex: 0
+            }
         },
         mounted() {
-            var mySwiper = new Swiper('.swiper-container');
+            var self = this;
+            this.mySwiper = new Swiper('.swiper-container',{
+                on: {
+                    slideChangeTransitionEnd: function(){
+//                        alert(this.activeIndex);//切换结束时，告诉我现在是第几个slide
+                        if (this.activeIndex === 0) {
+                            self.$refs.chart1.getData();
+                        }else {
+                            self.$refs.chart2.getData();
+                        }
+                    },
+                },
+            });
             Tool.$('month').onclick = () => {
-                mySwiper.slideTo(0);
+                this.mySwiper.slideTo(0);
+                let {activeIndex} = this.mySwiper;
+                if (activeIndex !== this.currentIndex) {
+                    this.$refs.chart1.getData();
+                }
+                this.currentIndex = 0;
             }
             Tool.$('year').onclick = () => {
-                mySwiper.slideTo(1);
+                this.mySwiper.slideTo(1);
+                let {activeIndex} = this.mySwiper;
+                if (activeIndex !== this.currentIndex) {
+                    this.$refs.chart2.getData();
+                }
+                this.currentIndex = 1;
             }
+        },
+        computed: {
+
         },
         components: {
             chart1,
