@@ -104,7 +104,7 @@
                     if (this.rePass !== this.password) {
                         return false;
                     } else {
-                        return ture;
+                        return true;
                     }
                 },
                 message: '两次密码输入不一致'
@@ -112,14 +112,13 @@
             email: [ // 支持传入数组
                 'required',
                 'email',
-                {test: /@gmail/, message: '只能是谷歌邮箱'}
             ],
             phone: 'phone' // 使用全局自定义规则
         },
         methods: {
             handleSubmit() {
                 if (this.$vuerify.check()) { // 手动触发校验所有数据
-                    // do something
+                    alert('提交成功');
                 } else {
                     this.showError = true;
                 }

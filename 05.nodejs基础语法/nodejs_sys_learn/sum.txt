@@ -113,7 +113,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 11.node本身就是一个web服务器，提供web服务，不需要依赖上面的应用程序提供服务
 12.ip唯一标识一台机器，端口代表不同的应用程序或者说服务，只要是协议，域名，端口，ip有一个不同的url都是不同的域；
 13.拒绝跨域请求是浏览器保护用户信息安全的一种策略，不经过浏览器是可以请求的，比如服务端测试接口postman curl;
-14.Cookie中的同源只关注域名，忽略协议和端口。所以https://localhost:8080/和http://localhost:8081/的Cookie是共享的。前提是要给cookie设置SameSize属性，这样跨站请求cookie就不会被发送出去；
+14.Cookie中的同源只关注域名，忽略协议和端口。所以https://localhost:8080/和http://localhost:8081/的Cookie是共享的,对于跨域的cookie要实现可以传递共享，一方面要服务器同意,指定Access-Control-Allow-Credentials字段，另一方面开发者要打开withCredentials=true
 15.在浏览器中，script img iframe link等标签可以加载跨域资源，且加载的资源被认为是同源的，所以浏览器限制了js读写文件权限，对html是做了同源限制的，对js里面的ajax也是做了同源限制的；
 16.JSONP和ajax没有关系，只支持get请求，采用的是script的src可以加载跨域的动态js脚本，并且加载到的脚本被浏览器执行
 第一种
@@ -132,8 +132,8 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
     document.getElementsByTagName('head')[0].appendChild(script);  
 </script>
 17.解决跨域的另一种办法，采用代理方式跨域就是Nginx，通过Ajax从http://localhost:8080访问http://localhost:8081/api，可以将请求发往http://localhost:8080/api，然后利用Apache Web服务器的Reverse Proxy功能做如下配置（还可以在同源服务器上重新开发接口）
-18.客户端请求两种行为：(其实跨域是浏览器和服务端一起控制的)
-   1. 直接发送请求，然后检查服务器返回的response的Access-Control信息，如果自己的域名在允许的访问列表中，则读取response body，否则放弃。 response.set_header("Access-Control-Allow-Origin", "http://localhost:8080")
+18.客户端请求两种行为：(其实跨域是浏览器和服务端一起控制的,叫做CORS跨域资源共享)
+   1. 直接发送请求，然后检查服务器返回的response的Accxess-Control信息，如果自己的域名在允许的访问列表中，则读取response body，否则放弃。 response.set_header("Access-Control-Allow-Origin", "http://localhost:8080")
    2. 发送OPTIONS请求，向服务器请求Access-Control信息。如果自己的域名在允许的访问列表中，则发送真正的请求，否则放弃请求发送。 需要支持CORS的服务器在响应头中设置  response.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
        response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type'
@@ -147,7 +147,8 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 25.http协议是无状态，要服务器管理每次请求的客户消耗资源，有登录需求时，这个时候使用cookie保存在浏览器，每次请求自己携带，cookie上存放登录令牌Token，对应的服务器存放一个session来保存用户信息，响应的时候服务器反馈一个setCookie保存在服务器本地，cookie有过期时间，session没有设置过期但保存了过期时间；
 26.iframe嵌套页面
 27.get请求后面传递参数可以是?，也可以是/以路径方式做传参，如 http://www.baidu.com/list?a=1 或者http://www.shsh.com/list/1
-28.正向代理是一台服务器访问国外的服务器VPN代理用户，反向代理是在多台服务器上相同的服务通过Nginx代理服务器进行转发，平均分配叫负载均衡提高性能，nginx里面做一个跳转，可以设置权重；正向代理是用的Nginx吗？
+28.正向代理是一台服务器访问国外的服务器VPN代理用户，反向代理是在多台服务器上相同的服务通过Nginx代理服务器进行转发，平均分配叫负载均衡提高性能，nginx里面做一个跳转，可以设置权重；正向代理用的Nginx；
+29.正向代理代理的是客户端，反向代理代理的是服务器；
 
 第七节课
 1.三次握手，四次挥手；
@@ -158,8 +159,13 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
   cdn
   响应式图片，根据手机屏幕像素选择不同大小的图片
 3.svg图片是用xml做的矢量图，可以无限拉伸
+<<<<<<< HEAD
 4.localhost:3000不走网卡，127.0.0.1：3000 浏览器走网卡请求 192.168.141.24：3000浏览器走网卡请求发给交换机，交换机请求电脑
 5.localstorage做离线缓存的购物车时，可以使用时间戳来判断上传物品数据；
 6.
+=======
+4.localhost:3000不走网卡，127.0.0.1：3000 浏览器走网卡请求 192.168.141.24：3000浏览器走网卡请求发给交换机，交换机请求电脑,IP是交换机产生的地址
+5.
+>>>>>>> 3dd64888fee63e43e7b86473711dacc11d8f0cea
 
 

@@ -1,16 +1,17 @@
 let HtmlWebpackPlugin = require('html-webpack-plugin')
 let { VueLoaderPlugin } = require('vue-loader')
 let CleanWebpackPlugin = require('clean-webpack-plugin')
-
+const path = require('path');
 
 module.exports = {
     entry: {
         cart: './src/enties/cart.js',
         main: './src/enties/main.js',
-        verify: './src/enties/veriform.js'
+        verify: './src/enties/veriform.js',
+        chart: './src/enties/chart.js'
     },
     output: {
-        path: __dirname + '/dist',
+        path: path.join(__dirname, '/dist'),
         filename: 'js/[name].js'
     },
     devServer: {
@@ -44,7 +45,6 @@ module.exports = {
                     'sass-loader'
                 ]
             },
-
             // 解析vue中的stylus，可以直接把里面的stylus样式作为stylus文件来解析
             {
                 test: /\.stylus$/,
@@ -59,6 +59,28 @@ module.exports = {
                     },
                     'postcss-loader',
                     'stylus-loader'
+                ]
+            },
+            {
+                test: /\.styl$/,
+                exclude: /node_modules/,
+                loaders: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                    'postcss-loader',
+                    'stylus-loader'
+                ]
+            },
+            {
+                test: /\.css$/,
+                loaders: [
+                    'vue-loader',
+                    'css-loader'
                 ]
             }
         ]
@@ -78,10 +100,16 @@ module.exports = {
             chunks: ['main']
         }),
         new HtmlWebpackPlugin({
-            filename: 'index.html',
+            filename: 'index3.html',
             template: './src/mounts/main.html',
             inject: 'body',
             chunks: ['verify']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './src/mounts/chart.html',
+            inject: 'body',
+            chunks: ['chart']
         }),
         new CleanWebpackPlugin(['./dist'], {
             root: __dirname + '',
