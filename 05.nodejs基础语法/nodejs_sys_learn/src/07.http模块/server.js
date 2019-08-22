@@ -1,6 +1,7 @@
 'use strict'
 
 const http = require('http');
+const Router = require('./router')
 
 // 创建服务器的实例,创建的是http.Server这个对象
 const server = http.createServer();
@@ -14,16 +15,16 @@ const server = http.createServer();
 server.on('request', function (request, response) {
     // 1./favicon.ico会多出一个请求来请求小图标，所以请求是两个,postman请求就没有，只有浏览器请求才有
     // console.log(request.headers)
-    console.log(request.httpVersion);
-    console.log(request.method);
-    console.log(request.url)
-
+    // console.log(request.httpVersion);
+    // console.log(request.method);
+    // console.log(request.url)
+    let router = new Router(request,response);
     // 2.什么参数都没有默认路径就是/,真正的路由就在这里这样写
-    if (request.url === '/login' && request.method === 'GET') {
-        response.end('<div>news</div>')
-    }else {
-        response.end('<div>login</div>')
-    }
+    // if (request.url === '/login' && request.method === 'GET') {
+    //     response.end('<div>news</div>')
+    // }else {
+    //     response.end('<div>login</div>')
+    // }
 
 
     // 写报文头

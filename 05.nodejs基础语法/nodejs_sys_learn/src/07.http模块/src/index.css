@@ -1,0 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.box {
+    width: 100%;
+}
+
+.box ul {
+    display: flex;
+}
+
+.box ul li {
+    flex: 1;
+    height: 30px;
+    background-color: navajowhite;
+    margin-left: 10px;
+}
