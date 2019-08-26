@@ -12,7 +12,7 @@
 process.on('exit', function (code) {
     setTimeout(function () {
         console.log('never excute');
-    })
+    },2000)
     console.log('退出码: ', code);
 })
 
