@@ -134,9 +134,10 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 17.解决跨域的另一种办法，采用代理方式跨域就是Nginx，通过Ajax从http://localhost:8080访问http://localhost:8081/api，可以将请求发往http://localhost:8080/api，然后利用Apache Web服务器的Reverse Proxy功能做如下配置（还可以在同源服务器上重新开发接口）
 18.客户端请求两种行为：(其实跨域是浏览器和服务端一起控制的,叫做CORS跨域资源共享)
    1. 直接发送请求，然后检查服务器返回的response的Accxess-Control信息，如果自己的域名在允许的访问列表中，则读取response body，否则放弃。 response.set_header("Access-Control-Allow-Origin", "http://localhost:8080")
-   2. 发送OPTIONS请求，向服务器请求Access-Control信息。如果自己的域名在允许的访问列表中，则发送真正的请求，否则放弃请求发送。 需要支持CORS的服务器在响应头中设置  response.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
-       response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
-       response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type'
+   2. 发送OPTIONS请求，向服务器请求Access-Control信息。如果自己的域名在允许的访问列表中，则发送真正的请求，否则放弃请求发送。 需要支持CORS的服务器在响应头中设置
+     this.response.setHeader('Access-Control-Allow-Origin','*')
+     this.response.setHeader('Access-Control-Allow-Methods','GET, OPTIONS')
+     this.response.setHeader('Access-Control-Allow-Headers','Origin, Accept, Content-Type')
    CORS协议提升了ajax的跨域能力，但一旦网站被注入脚本或XSS攻击，将非常方便的获取用户信息并悄悄传递出去。只需要注入js后，诱使用户 点击一个恶意链接，或者 提交一个表单, 能悄悄的将用户的数据传出去；
 19.XSS与CSRF的对比总结；XSS是利用用户对指定网站的信任，如对评论内容进行编码和解码防止恶意注入，CSRF是利用网站对用户的信任
 20.同一个源或者同一个服务器出来的ajax请求，可以不写协议域名端口，如https://www.,baidu.com/api只写/api
@@ -181,8 +182,8 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
    3.AES对称加密，加解密同一个密钥,AES192 AES-128-ecb AES-256-cbc,确认双方是否遵循同样的AES算法，字符.  串密钥和IV是否相同，加密后的数据是否统一为hex或base64格式。
    4.DH算法，密钥交换协议，双方协商计算出一个密钥，并没有明文的传递密钥；质数，底数，秘密整数，由于第三方无法知道两方的秘密整数，无法计算密钥
    5.RSA非对称加密，私玥保存，公钥可以公开。服务器传给客户端，私玥加密公钥解密，客户端传递给服务器，公钥加密私玥解密
-   
-
-
-
+19.Buffer对象就是一个类数组，要操作它最好可以定义一个数组进行push拼接chunk，最后toString获取出来；
+20.request当是POST请求的时候就是一个读文件流，on('data')和on('end')来读取请求体里面的数据
+21.h5页面和nodejs不是一个主服务器，ajax请求要写协议域名端口加路径和参数，而且是跨域的，如果是一个主服务器就ajax请求直接写路径也不跨域了；
+22.命令转移和定义全局命令: 可以在package.json手动添加script:{“start”: ‘node 1.js’}，可以在当前目录下用npm start执行这个js文件；命令转移，转移到package.json里面去，左右还可以用于执行脚本来做一些事情封装成全局命令；添加“bin”: {“hehe”: “my.js”},然后编写my.js脚本，然后npm link 全局化即可,就可以使用hehe命令了；
 

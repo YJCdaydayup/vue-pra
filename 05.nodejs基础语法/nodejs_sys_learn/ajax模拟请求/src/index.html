@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax客户端</title>
+    <script src="./../node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body>
+<button onclick="GETRequest()">GET请求</button>
+<button onclick="POSTRequest()">POST请求</button>
+
+<script>
+    function GETRequest() {
+        $.ajax({
+            type: "GET",
+            url: 'http://127.0.0.1:3000/getData?page=1&size=8',
+            success: function (data,status) {
+                console.log(data,status)
+            },
+        });
+    }
+
+    function POSTRequest() {
+        $.ajax({
+            type: "POST",
+            url: 'http://127.0.0.1:3000/',
+            data: {
+                name: 'Sara',
+                age: 18
+            },
+            success: function (data,status) {
+                console.log(data,status)
+            },
+        });
+    }
+</script>
+</body>
+</html>
