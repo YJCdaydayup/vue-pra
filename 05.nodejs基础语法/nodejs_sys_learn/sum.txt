@@ -187,3 +187,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 21.h5页面和nodejs不是一个主服务器，ajax请求要写协议域名端口加路径和参数，而且是跨域的，如果是一个主服务器就ajax请求直接写路径也不跨域了；
 22.命令转移和定义全局命令: 可以在package.json手动添加script:{“start”: ‘node 1.js’}，可以在当前目录下用npm start执行这个js文件；命令转移，转移到package.json里面去，左右还可以用于执行脚本来做一些事情封装成全局命令；添加“bin”: {“hehe”: “my.js”},然后编写my.js脚本，然后npm link 全局化即可,就可以使用hehe命令了；
 
+第八节课
+1.fs读取文件等操作是可以写相对于被执行文件的相对路径的，fs.readdir('./../', (err, files)=> {}，迭代器强行将异步变成同步；
+2.
+

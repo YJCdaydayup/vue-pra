@@ -19,20 +19,20 @@ var path = require('path')
 // })
 
 fs.mkdir('./test', (err) => {
-  fs.writeFile('./test/test.txt', '测试文件', 'utf8', (err) => {
-  fs.readFile('./test/test.txt', 'utf8', (err, data) => {
-  fs.readdir('./test', (err, files) => {
-  console.log(Object.prototype.toString.call(files))
-  files.forEach((file)=>{
-    fs.stat('./test/' + file, (err, stats) => {
-      if (stats.isFile()) {
-       console.log(path.basename('...../test/' + file,'.txt'))
-}
-  })
-  })
-})
-})
-})
+    fs.writeFile('./test/test.txt', '测试文件', 'utf8', (err) => {
+        fs.readFile('./test/test.txt', 'utf8', (err, data) => {
+            fs.readdir('./test', (err, files) => {
+                console.log(Object.prototype.toString.call(files))
+                files.forEach((file)=> {
+                    fs.stat('./test/' + file, (err, stats) => {
+                        if (stats.isFile()) {
+                            console.log(path.basename('...../test/' + file, '.txt'))
+                        }
+                    })
+                })
+            })
+        })
+    })
 })
 
 
@@ -66,12 +66,12 @@ function oparation(fs, content) {
                                 if (!err) {
                                     files.forEach(function (file) {
                                         var path1 = path.join(__dirname, './new/' + file);
-                                        fs.stat(path1, function (err,stats) {
+                                        fs.stat(path1, function (err, stats) {
                                             if (stats.isFile()) {
                                                 var ext = path.extname(path1);
                                                 var filePath = path.dirname(path1)
                                                 var filenameWithExt = path.basename(path1);
-                                                var filenameNotExt = path.basename(path1,ext);
+                                                var filenameNotExt = path.basename(path1, ext);
                                                 console.log(filenameNotExt)
                                             }
                                         })
