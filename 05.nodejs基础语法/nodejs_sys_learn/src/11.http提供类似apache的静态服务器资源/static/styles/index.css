@@ -1,0 +1,16 @@
+div {
+    background-color: lavender;
+    font-size: 24px;
+    padding: 10px 20px;
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+}
+
+ul li {
+    flex: 1;
+    margin-left: 10px;
+    background-color: navajowhite;
+}

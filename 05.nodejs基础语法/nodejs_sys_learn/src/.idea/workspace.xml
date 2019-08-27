@@ -84,21 +84,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="04.DH算法.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="04.DH算法.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/09.crypto加密模块/04.DH算法.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
+            <state relative-caret-position="360">
+              <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RSA加密.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RSA加密.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/09.crypto加密模块/05.RSA非对称加密/RSA加密.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="18" column="71" lean-forward="false" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
+            <state relative-caret-position="264">
+              <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -168,8 +168,8 @@
     <handled-path value="$PROJECT_DIR$/07.JSONP练习/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1003" />
-    <option name="y" value="102" />
+    <option name="x" value="386" />
+    <option name="y" value="83" />
     <option name="width" value="2219" />
     <option name="height" value="1417" />
   </component>
@@ -217,32 +217,6 @@
             <path>
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="03.模拟看似单线程" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="04.fs文件处理" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="04.fs文件处理" type="462c0819:PsiDirectoryNode" />
-              <item name=".vscode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="06.ES6的补充" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="08.http模块" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -303,15 +277,15 @@
       <workItem from="1566442615084" duration="511000" />
       <workItem from="1566459939763" duration="4150000" />
       <workItem from="1566782786815" duration="1054000" />
-      <workItem from="1566804436919" duration="4805000" />
+      <workItem from="1566804436919" duration="5334000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16591000" />
+    <option name="totallyTimeSpent" value="17120000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1003" y="102" width="2219" height="1417" extended-state="0" />
+    <frame x="386" y="83" width="2219" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16025642" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -690,10 +664,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/09.crypto加密模块/02.HMAC算法.js">
+    <entry file="file://$PROJECT_DIR$/08.http模块/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="57" lean-forward="false" selection-start-line="2" selection-start-column="57" selection-end-line="2" selection-end-column="57" />
+        <state relative-caret-position="144">
+          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/09.crypto加密模块/05.RSA非对称加密/RSA加密.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -706,10 +688,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/08.http模块/src/index.html">
+    <entry file="file://$PROJECT_DIR$/09.crypto加密模块/02.HMAC算法.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        <state relative-caret-position="48">
+          <caret line="2" column="57" lean-forward="false" selection-start-line="2" selection-start-column="57" selection-end-line="2" selection-end-column="57" />
           <folding />
         </state>
       </provider>
@@ -724,16 +706,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/09.crypto加密模块/04.DH算法.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/09.crypto加密模块/05.RSA非对称加密/RSA加密.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="18" column="71" lean-forward="false" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
+        <state relative-caret-position="360">
+          <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
           <folding />
         </state>
       </provider>

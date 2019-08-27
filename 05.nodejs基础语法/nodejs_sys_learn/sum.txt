@@ -138,7 +138,8 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
      this.response.setHeader('Access-Control-Allow-Origin','*')
      this.response.setHeader('Access-Control-Allow-Methods','GET, OPTIONS')
      this.response.setHeader('Access-Control-Allow-Headers','Origin, Accept, Content-Type')
-   CORS协议提升了ajax的跨域能力，但一旦网站被注入脚本或XSS攻击，将非常方便的获取用户信息并悄悄传递出去。只需要注入js后，诱使用户 点击一个恶意链接，或者 提交一个表单, 能悄悄的将用户的数据传出去；
+     后台可以配置Access-Control-Max-Age来缓存预检测结果，这样在一定时间内，就是第一次发送请求的时候预检测
+   CORS协议提升了ajax的跨域能力，但一旦网站被注入脚本或XSS攻击，将非常方便的获取用户信息并悄悄传递出去。只需要注入js后，诱使用户 点击一个恶意链接，或者 提交一个表单, 能悄悄的将用户的数据传出去；、
 19.XSS与CSRF的对比总结；XSS是利用用户对指定网站的信任，如对评论内容进行编码和解码防止恶意注入，CSRF是利用网站对用户的信任
 20.同一个源或者同一个服务器出来的ajax请求，可以不写协议域名端口，如https://www.,baidu.com/api只写/api
 21.node没有web容器，本身就是web服务器
@@ -189,5 +190,6 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 
 第八节课
 1.fs读取文件等操作是可以写相对于被执行文件的相对路径的，fs.readdir('./../', (err, files)=> {}，迭代器强行将异步变成同步；
-2.
+2.for循环里面执行异步，不好控制，可以使用迭代器，先立即执行(function iterator(i){异步里面(iterator(i+1))})(0)即可；
+3.http制作静态文件服务器，类似于apache的自带功能，注意几点，1，404错误单独写一个页面读取；2./路径转为读取index.html文件；3.不同的文件要根据extname设置content-type，不然浏览器无法识别，比如css样式；
 

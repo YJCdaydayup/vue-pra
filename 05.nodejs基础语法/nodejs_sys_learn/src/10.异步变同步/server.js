@@ -9,30 +9,44 @@ const path = require('path')
 //   if (response.url == '/favicon.ico') {
 //     return;
 //   }
-fs.readdir('./../', (err, files)=> {
-  // files是一个存放文件名和文件夹名的数组
-  let wjj1 = [];
-  let wjj = [];
+fs.readdir('./../', (err, files) => {
+    // files是一个存放文件名和文件夹名的数组
+    let wjj1 = [];
+    let wjj = [];
+    //
+    // Array.prototype.forEach.call(files, (file, index) => {
+    //     fs.stat('./../' + file, (err, stats) => {
+    //         if (stats.isDirectory()) {
+    //             wjj1.push(file);
+    //             console.log(file)
+    //         }
+    //     })
+    // })
 
-  Array.prototype.forEach.call(files,(file)=>{
-      fs.stat('./../' + file,(err,stats)=>{
-        if (stats.isDirectory()) {
-          console.log(file);
+    // (function iterator(i) {
+    //   if (i == files.length) {
+    //     console.log(wjj)
+    //     return;
+    //   }
+    //   fs.stat('./../' + files[i], (err, stats)=> {
+    //     if (stats.isDirectory()) {
+    //       wjj.push(files[i]);
+    //     }
+    //     iterator(i + 1);
+    //   })
+    // })(0)
+
+    (function iterator(i) {
+        if (i == files.length) {
+            console.log(wjj)
+            return ;
         }
-      })
-  })
-
-  (function iterator(i) {
-    if (i == files.length) {
-      console.log(wjj)
-      return;
-    }
-    fs.stat('./../' + files[i], (err, stats)=> {
-      if (stats.isDirectory()) {
-        wjj.push(files[i]);
-      }
-      iterator(i + 1);
-    })
-  })(0)
+        fs.stat('./../' + files[i], (err, stats) => {
+            if (stats.isDirectory()) {
+                wjj.push(files[i]);
+            }
+            iterator(i+1)
+        })
+    })(0)
 })
 // })
