@@ -194,4 +194,10 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 1.文件上传插件，商用了，formidable,http请求POST请求体本身就把文件一块一块上传了； 
 2.fs.rename(path1,path2,(err)=>{}) 对文件进行重新命名，或者更换文件路径也换名(./newpath/newname.txt);
 3.util.inspect方法研究；
-4.
+4.jade模版引擎采用的是缩进的办法来表示的，类似python；
+5.完成练习作业
+
+第十节课
+1.Express是node框架，在后台受欢迎的程度和jQuery一样；
+2.原生的路由判断很多，不能集中精力写业务，要考虑很多其他东西；
+3.get请求有两种，分别如何去参数，post请求的请求参数怎么取
