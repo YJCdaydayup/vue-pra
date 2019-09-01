@@ -201,3 +201,15 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 1.Express是node框架，在后台受欢迎的程度和jQuery一样；
 2.原生的路由判断很多，不能集中精力写业务，要考虑很多其他东西；
 3.get请求有两种，分别如何去参数，post请求的请求参数怎么取
+4.app.all(‘/’,(requires)=>{})处理这个网站的人和请求；
+5.使用express时，实际网络请求中路由的大小写是不区分的，但http原生是区分的；
+6.使用app.get(‘/student/:id’,()=>{})时，这里id位数判断，可以使用正则直接在路由里面判断这个请求能不能进来，或者可以这种都进来，然后在回调里面处理id的数字位数，推荐使用后者，正则麻烦一些
+7.express框架中回调app.get(‘/:username/:oid’),(req,res)=>{})上的req，res和原生的http模块的req，res不一样的；一般在express框架中返回用res.send()（只能send一次）,但也可以使用req.write()+req.end()
+8.在express中可以使用模版引擎ejs，两种方式，第一种是直接写ejs语法和ejs文件做绑定，render或rednerFile之后由res做返回，第二种是app.set(‘view engine’, ‘ejs’)导入ejs模块就可以了，用的时候ejs文件必须要在子目录views里面，app.get('/', function (req, res) {    res.render('form’,{name: “Sara”});})这个form就是ejs文件名，返回这个文件名
+9.ejs文件里面提交表单如果用’/‘，那么就可以使用#代理；
+10.Restful路由设计， 所见即所得的路由，一个路径，但是http method不同，对这个页面的使用也不同；
+11.定义的server.js文件，若使用http原生，每次响应都只执行回调里面的代码，在这个请求回调外声明的变量a=100的话，以后这个变量在服务的生命周期里都存在的，可以改变，下次请求依然在,这点在express框架下依然可以；
+12.Express下，所有的路由就是中间件，第一个路由匹配上后，如果参数里面(req,res,next)=>{}没有next()就不会继续往下找匹配的路由了，如果遇到冲突第一种办法是绝对匹配的路由放倒上面(具体的往上写)，第二种办法:
+let username = res.params.username;   if(username数据库存在) {res.send(‘用户信息’)}else {next()};
+
+
