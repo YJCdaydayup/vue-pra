@@ -193,32 +193,28 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 第九节课
 1.文件上传插件，商用了，formidable,http请求POST请求体本身就把文件一块一块上传了； 
 2.fs.rename(path1,path2,(err)=>{}) 对文件进行重新命名，或者更换文件路径也换名(./newpath/newname.txt);
-3.util.inspect方法是将对象转化成字符串的形式进行输出，true是深度转化；
+3.util.inspect方法研究；
 4.jade模版引擎采用的是缩进的办法来表示的，类似python；
-5.ejs是后端模版引擎，先安装ejs模块，然后再views里面编写ejs代码，语法一般有:
-  1.<% js语句 %>，正常的js预计，一行必须是封闭的<%%>；或者是<div><%= name %></div>
-  2.获取变量的值用<%=name%>这个是转义了，不转义使用 <%-str %>
-  3.导入文件内容<%  include 文件的地址 %>
-  然后后端可以ejs.renderFile(path,{name: 'Sara'},(err,data)=>{})将data绑定后的data，通过res.end输出到前端；
+5.完成练习作业
 
 第十节课
 1.Express是node框架，在后台受欢迎的程度和jQuery一样；
 2.原生的路由判断很多，不能集中精力写业务，要考虑很多其他东西；
-3.get请求分一下四种:
-  1.app.get('/getData',(req,res)=>{}),一般的请求，参数从req.query里面取，路由是req.path里面是/getData；
-  2.app.get('/student/:username',()=>{})，参数从params.username去取，params是对象，此时的key是username路由是req.path里面是/student/Sara,推荐使用
-  3.正则表达式路由app.get(/^\/teacher\/([\d]{10}$),()=>{}),这里要获取参数params[0]，params是对象，要使用()包住，此时的key是0，1...，直接从params[0]
-  4.通配符法，app.get('/*'),匹配所有的请求路由；也可以使用app.get(/./,()=>{});
-4.app.all(‘/’,(requires)=>{})处理这个网站的所有请求；
+3.get请求有两种，分别如何去参数，post请求的请求参数怎么取
+4.app.all(‘/’,(requires)=>{})处理这个网站的人和请求；
 5.使用express时，实际网络请求中路由的大小写是不区分的，但http原生是区分的；
 6.使用app.get(‘/student/:id’,()=>{})时，这里id位数判断，可以使用正则直接在路由里面判断这个请求能不能进来，或者可以这种都进来，然后在回调里面处理id的数字位数，推荐使用后者，正则麻烦一些
 7.express框架中回调app.get(‘/:username/:oid’),(req,res)=>{})上的req，res和原生的http模块的req，res不一样的；一般在express框架中返回用res.send()（只能send一次）,但也可以使用req.write()+req.end()
-8.在express中可以使用模版引擎ejs，两种方式，第一种是直接写ejs语法和ejs文件做绑定，render或renderFile之后由res做返回，第二种是app.set(‘view engine’, ‘ejs’)导入ejs模块就可以了，用的时候ejs文件必须要在子目录views里面，app.get('/', function (req, res) {    res.render('form’,{name: “Sara”});})这个form就是ejs文件名，返回这个文件名
+8.在express中可以使用模版引擎ejs，两种方式，第一种是直接写ejs语法和ejs文件做绑定，render或rednerFile之后由res做返回，第二种是app.set(‘view engine’, ‘ejs’)导入ejs模块就可以了，用的时候ejs文件必须要在子目录views里面，app.get('/', function (req, res) {    res.render('form’,{name: “Sara”});})这个form就是ejs文件名，返回这个文件名
 9.ejs文件里面提交表单如果用’/‘，那么就可以使用#代理；
 10.Restful路由设计， 所见即所得的路由，一个路径，但是http method不同，对这个页面的使用也不同；
 11.定义的server.js文件，若使用http原生，每次响应都只执行回调里面的代码，在这个请求回调外声明的变量a=100的话，以后这个变量在服务的生命周期里都存在的，可以改变，下次请求依然在,这点在express框架下依然可以；
 12.Express下，所有的路由就是中间件，第一个路由匹配上后，如果参数里面(req,res,next)=>{}没有next()就不会继续往下找匹配的路由了，如果遇到冲突第一种办法是绝对匹配的路由放倒上面(具体的往上写)，第二种办法:
-let username = res.params.username;   if(username数据库存在) {res.send(‘用户信息’)}else {next()};但要记住，send完后再next()的话，很可能下一个匹配的路由也有send函数，这样会报错；
-13.在入口文件及其同级文件下写路径时，可以直接使用相对路径，其他文件必须用path.join()来拼接路径；
-14.加载服务器资源的html文件后，这个文件引用的js，css,img等资源，如果是相对路径，不管前面是./checkimage还是./../../checkImage（中间不拼接文件夹）,产生的路由都是/checkimage；一般直接使用文件的文件夹名/文件名
+let username = res.params.username;   if(username数据库存在) {res.send(‘用户信息’)}else {next()};
+13.app.use(‘/admin’,(req，res)=>{})特殊的中间件，能匹配admin下的子路由，req.originalUrl req.baseUrl req.path,如果是带有参数，则参数子存在于/admin/a=1&b=2的originalUrl里面；
+14.app.use(‘/‘,(res, req)=>{})会匹配所有的请求了，但会拦截调所有的请求，后面的路由都不走了，这时是可以省略‘／’的成为app.use((req,res，next)=>{next()})；就都会走但不会拦截了；
+15.set(‘view engine’,’ejs’)，如果要使用自己的文件夹，就用set(‘views’,’my file’);
+16.Express框架使用send函数，会自动根据内容帮我们设置content-type和200状态码，和end()一样只能一次；
+17.
+
 
