@@ -10,6 +10,7 @@ const formidable = require('formidable');
 const fs = require('fs');
 const sd = require('silly-datetime');
 const path = require('path');
+const util = require('util')
 
 let server = http.createServer(function (req, res) {
     if (req.url === '/doPost' && req.method.toLowerCase() === 'post') {
@@ -23,6 +24,7 @@ let server = http.createServer(function (req, res) {
                 throw err;
             }
 
+            // 文件数据存储在files里面，对象的key值就是上传的文件的key值，这里form里面就是img
             let extname = path.extname(files.img.name);
             let oldPath = path.join(__dirname, files.img.path);
             let newPath = path.join(__dirname, 'uploads', sd.format(new Date(), 'YYYYMMDDHHmm') + ''+ parseInt(Math.random() * 89999 + 10000) + extname);
@@ -32,8 +34,8 @@ let server = http.createServer(function (req, res) {
 
             fs.rename(oldPath, newPath, (err)=> {
               if (!err) {
-                  console.log(files)
-                  console.log(fields);
+                  console.log(util.inspect(fields));
+                  console.log(util.inspect(files))
                   // 所有文本域，单选框都在fields里面
                   // 所有文件都在files里面
                   res.writeHead(200, {

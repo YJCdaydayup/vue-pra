@@ -211,5 +211,3 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 11.定义的server.js文件，若使用http原生，每次响应都只执行回调里面的代码，在这个请求回调外声明的变量a=100的话，以后这个变量在服务的生命周期里都存在的，可以改变，下次请求依然在,这点在express框架下依然可以；
 12.Express下，所有的路由就是中间件，第一个路由匹配上后，如果参数里面(req,res,next)=>{}没有next()就不会继续往下找匹配的路由了，如果遇到冲突第一种办法是绝对匹配的路由放倒上面(具体的往上写)，第二种办法:
 let username = res.params.username;   if(username数据库存在) {res.send(‘用户信息’)}else {next()};
-
-

@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-  <html>
-<head>
-  <meta charset="utf-8">
-  <title>index</title>
-  <link rel="stylesheet" href="./styles/index.css">
-</head>
-  <body>
-    <div id="app">
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <img src="./images/1.jpg" alt="">
-    </div>
-    <script src="./js/index.js"></script>
-  </body>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>表单上传</title>
+    </head>
+    <body>
+    <form action="http://localhost:3000/doPost" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="请输入姓名">
+        <br>
+        <input type="text" name="age" placeholder="请输入年龄">
+        <br>
+        <select name="sex">
+            <option value="M">男</option>
+            <option value="F">女</option>
+        </select>
+        <br>
+        <input type="file" name="file">
+        <input type="submit">
+    </form>
+    </body>
 </html>
