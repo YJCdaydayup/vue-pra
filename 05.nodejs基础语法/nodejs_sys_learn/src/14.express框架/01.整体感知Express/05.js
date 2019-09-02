@@ -9,9 +9,10 @@ let app = express();
 
 let a = 100;
 
-app.get('/', function (req, res) {
+app.get('/', function (req, res,next) {
     a ++;
     console.log(1)
+    // res.send('123')
     next();
     // res.send(a.toString());
 })

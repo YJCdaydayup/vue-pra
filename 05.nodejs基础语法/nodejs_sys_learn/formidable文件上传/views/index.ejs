@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <script src="./index.js"></script>
+</head>
+<body>
+<form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="text" name="name" placeholder=<%= name %>>
+    <input type="text" name="age" placeholder=<%= age %>>
+           <input type="submit">
+</form>
+</body>
+</html>
