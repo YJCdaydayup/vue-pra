@@ -213,8 +213,8 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
 let username = res.params.username;   if(username数据库存在) {res.send(‘用户信息’)}else {next()};
 13.app.use(‘/admin’,(req，res)=>{})特殊的中间件，能匹配admin下的子路由，req.originalUrl req.baseUrl req.path,如果是带有参数，则参数子存在于/admin/a=1&b=2的originalUrl里面；
 14.app.use(‘/‘,(res, req)=>{})会匹配所有的请求了，但会拦截调所有的请求，后面的路由都不走了，这时是可以省略‘／’的成为app.use((req,res，next)=>{next()})；就都会走但不会拦截了；
-15.set(‘view engine’,’ejs’)，如果要使用自己的文件夹，就用set(‘views’,’my file’);
+15.set(‘view engine’,’ejs’)，默认着views文件夹，如果要使用自己的文件夹，就在后面加set(‘views’,__dirname + ’my file’),使用res.render('index');
 16.Express框架使用send函数，会自动根据内容帮我们设置content-type和200状态码，和end()一样只能一次；
-17.
+17.app.use(express.static('./public'))；相当于把回调函数的实现给到express.static方法了，里面的逻辑是先从public目录下找文件，找不到就next下面的路由中间件；扩展，就是/jingtai路由就找public下的资源，app.use('/jingtai',express.static('./public'));
 
 
