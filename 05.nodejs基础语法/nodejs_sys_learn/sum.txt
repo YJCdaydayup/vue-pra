@@ -137,7 +137,7 @@ var module = {} module.exports = {} var exports = module.exports,这个时候exp
    2. 发送OPTIONS请求，向服务器请求Access-Control信息。如果自己的域名在允许的访问列表中，则发送真正的请求，否则放弃请求发送。 需要支持CORS的服务器在响应头中设置
      this.response.setHeader('Access-Control-Allow-Origin','*')
      this.response.setHeader('Access-Control-Allow-Methods','GET, OPTIONS')
-     this.response.setHeader('Access-Control-Allow-Headers','Origin, Accept, Content-Type')
+     this.response.setHeader('Access-Control-Allow-Headers','Origin, Accept, Content-Type’),这个既适用于http模块也适用于express框架
    CORS协议提升了ajax的跨域能力，但一旦网站被注入脚本或XSS攻击，将非常方便的获取用户信息并悄悄传递出去。只需要注入js后，诱使用户 点击一个恶意链接，或者 提交一个表单, 能悄悄的将用户的数据传出去；
 19.XSS与CSRF的对比总结；XSS是利用用户对指定网站的信任，如对评论内容进行编码和解码防止恶意注入，CSRF是利用网站对用户的信任
 20.同一个源或者同一个服务器出来的ajax请求，可以不写协议域名端口，如https://www.,baidu.com/api只写/api
@@ -216,5 +216,11 @@ let username = res.params.username;   if(username数据库存在) {res.send(‘�
 15.set(‘view engine’,’ejs’)，默认着views文件夹，如果要使用自己的文件夹，就在后面加set(‘views’,__dirname + ’my file’),使用res.render('index');
 16.Express框架使用send函数，会自动根据内容帮我们设置content-type和200状态码，和end()一样只能一次；
 17.app.use(express.static('./public'))；相当于把回调函数的实现给到express.static方法了，里面的逻辑是先从public目录下找文件，找不到就next下面的路由中间件；扩展，就是/jingtai路由就找public下的资源，app.use('/jingtai',express.static('./public'));
+18.设置不同的状态码res.status(404).send(‘send’)；设置不同的content-type；res.set(‘content-type’:’text/html’);
+19.Express框架中一般的get请求的参数在req.query里面，请求的参数一般是api?a=1&b=2或者api?a=1&b=2&b=3就产生了{a=1;b:[2,3]}b为数组了；
+20.post请求必须使用body-parser模块，使用后，可以用req.body得到参数，但是如果时表单中含有文件上传，还是需要formidable模块,body-parser不能进行文本，图片等资源的上传；
+21.res.json({})，相当于直接send一个json数据；res.send()可以是string buffer object array；
+
+22.
 
 
