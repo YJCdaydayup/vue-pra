@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4873083c-091b-42e3-afab-aef46017b363" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../ajax模拟请求/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../ajax模拟请求/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/01.整体感知Express/.idea/workspace.xml" afterPath="$PROJECT_DIR$/01.整体感知Express/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../sum.txt" afterPath="$PROJECT_DIR$/../../sum.txt" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../sum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../sum.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <ignored path="$PROJECT_DIR$/01.整体感知Express/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -32,68 +38,120 @@
         <entry file="file://$PROJECT_DIR$/01.整体感知Express/views/form.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="247">
+<<<<<<< Updated upstream
               <caret line="13" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="7" />
               <folding />
+=======
+              <caret line="13" column="7" selection-end-line="13" selection-end-column="7" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="01.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/01.整体感知Express/01.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="551">
               <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
               <folding />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/01.整体感知Express/05.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="494">
+              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="02.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/01.整体感知Express/02.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
               <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/02.use.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="47" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="04.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/01.整体感知Express/04.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
               <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
               <folding />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/04.ejs自定义文件夹.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="05.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/01.整体感知Express/05.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="494">
               <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
               <folding />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/05.use静态文件服务器/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="02.use.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/02.use.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="532">
               <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="47" />
               <folding />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/05.use静态文件服务器/public/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="04.ejs自定义文件夹.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/04.ejs自定义文件夹.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
               <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
               <folding />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/05.use静态文件服务器/public/style/index.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -120,6 +178,15 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
   </component>
@@ -129,7 +196,13 @@
         <option value="$PROJECT_DIR$/01.整体感知Express/05.js" />
         <option value="$PROJECT_DIR$/01.整体感知Express/a/index.ejs" />
         <option value="$PROJECT_DIR$/04.ejs自定义文件夹.js" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/06.post请求.js" />
+=======
+        <option value="$PROJECT_DIR$/05.use静态文件服务器/public/index.html" />
+        <option value="$PROJECT_DIR$/05.use静态文件服务器/public/style/index.css" />
+        <option value="$PROJECT_DIR$/05.use静态文件服务器/server.js" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -143,6 +216,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< Updated upstream
     <option name="x" value="134" />
     <option name="y" value="23" />
     <option name="width" value="1436" />
@@ -157,6 +231,12 @@
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
+=======
+    <option name="x" value="1778" />
+    <option name="y" value="205" />
+    <option name="width" value="2021" />
+    <option name="height" value="1311" />
+>>>>>>> Stashed changes
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -175,6 +255,7 @@
     <panes>
       <pane id="ProjectPane">
         <subPane>
+<<<<<<< Updated upstream
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="14.express框架" />
@@ -191,6 +272,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+=======
+          <expand>
+            <path>
+              <item name="14.express框架" type="b2602c69:ProjectViewProjectNode" />
+              <item name="14.express框架" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+>>>>>>> Stashed changes
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -198,8 +288,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -242,17 +334,28 @@
       <option name="presentableId" value="Default" />
       <updated>1567393026488</updated>
       <workItem from="1567393029718" duration="1006000" />
+<<<<<<< Updated upstream
       <workItem from="1567504540801" duration="936000" />
       <workItem from="1567608360906" duration="884000" />
+=======
+      <workItem from="1567504540801" duration="5174000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="2826000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="134" y="23" width="1436" height="877" extended-state="0" />
     <editor active="true" />
+=======
+    <option name="totallyTimeSpent" value="6180000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1778" y="205" width="2021" height="1311" extended-state="0" />
+>>>>>>> Stashed changes
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -397,8 +500,12 @@
     <entry file="file://$PROJECT_DIR$/01.整体感知Express/views/form.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
+<<<<<<< Updated upstream
           <caret line="13" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="7" />
           <folding />
+=======
+          <caret line="13" column="7" selection-end-line="13" selection-end-column="7" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
@@ -410,10 +517,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/03.render和send.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/02.use.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/04.ejs自定义文件夹.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+<<<<<<< Updated upstream
           <folding />
         </state>
       </provider>
@@ -431,6 +549,29 @@
         <state relative-caret-position="152">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
+=======
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/05.use静态文件服务器/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/05.use静态文件服务器/public/style/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/05.use静态文件服务器/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
