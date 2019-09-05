@@ -220,5 +220,16 @@ let username = res.params.username;   if(username数据库存在) {res.send(‘�
 19.Express框架中一般的get请求的参数在req.query里面，请求的参数一般是api?a=1&b=2或者api?a=1&b=2&b=3就产生了{a=1;b:[2,3]}b为数组了；
 20.post请求必须使用body-parser模块，use使用后，可以用req.body得到参数，但是如果时表单中含有文件上传，还是需要formidable模块,body-parser不能进行文本，图片等资源的上传；
 21.res.json({})，相当于直接send一个json数据；res.send()可以是string buffer object array；
+22.app.use(bodyParser.urlencoded({extended: false}))用于处理application/x-www-form-urlendcoded常见的form表单的提交；
+23.处理文件的提交，multipart/form-data 文件提交
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+app.post('/formdata',multipartMiddleware, function (req, res) {
+  console.log(req.body);
+  res.send("post successfully!");
+});
+24.app.use(bodyParser.json())处理application/json提交的json格式的post请求
+25.处理text/xml数据的提交，bodyParser不支持xml数据格式，通过最原始的on（‘data’）监听到数据后使用xml2json模块进行转化即可；https://www.cnblogs.com/shj-com/p/9590335.html看这个文档 
+26.Express框架中的res.send()可以是string，buffer，object，array，客户端得到的是字符串，res.json()，放入json数据客户端得到的是对象；原生的end()只能是buffer或者字符串；
 
 
