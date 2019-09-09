@@ -231,5 +231,12 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 24.app.use(bodyParser.json())处理application/json提交的json格式的post请求
 25.处理text/xml数据的提交，bodyParser不支持xml数据格式，通过最原始的on（‘data’）监听到数据后使用xml2json模块进行转化即可；https://www.cnblogs.com/shj-com/p/9590335.html看这个文档 
 26.Express框架中的res.send()可以是string，buffer，object，array，客户端得到的是字符串，res.json()，放入json数据客户端得到的是对象；原生的end()只能是buffer或者字符串；
+27.小项目sum：
+1.后台MVC框架：controller层是路由层，控制中心，app.js是入口层，监听事件；model层是干具体的业务逻辑，最脏最累的活；
+2.使用render就是从fs读取文件，所以改变资源文件，不用重启服务器；
+3.部署的h5静态页面文件或者后台写的ejs文件，引用文件时如img，css，js可以直接写路由如/js/index.js，这样会默认加上所在页面的协议域名端口，里面的网络请求也是；
+4.回调处必须加上return，防止进入下面的模版引擎代码；
+5.不一定只会将public资源静态化，还可以将要访问的文件的资源，图片静态化；
+
 
 
