@@ -238,5 +238,10 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 4.回调处必须加上return，防止进入下面的模版引擎代码；
 5.不一定只会将public资源静态化，还可以将要访问的文件的资源，图片静态化；
 
+第十一节课
+1.如果使用node提供html静态服务，就将html文件放到public文件夹里面；
+2.除了Vue模版引擎，node的ejs模版引起，还可以使用underscroe前端模版引擎，明天写出它的demo；
+3.ejs模版引擎查看页面源码时页面已经渲染好了，如果使用underscore和Vue，查看源码时div里面时空的；
+4.
 
 
