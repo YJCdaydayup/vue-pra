@@ -9,6 +9,7 @@
     "bootstrap": "^3.3.7",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "formidable": "^1.2.1",
     "jquery": "^3.4.1"
   },
   "scripts": {

@@ -242,6 +242,13 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 1.如果使用node提供html静态服务，就将html文件放到public文件夹里面；
 2.除了Vue模版引擎，node的ejs模版引起，还可以使用underscroe前端模版引擎，明天写出它的demo；
 3.ejs模版引擎查看页面源码时页面已经渲染好了，如果使用underscore和Vue，查看源码时div里面时空的；
-4.
+4.可以通过path.join(__dirname,’./../‘,’upload’)来处理相对于所在文件的路径问题；
+5.通过fs.rename进行文件重命名或者转移时，oldPath和newPath必须都是具体到文件的后缀名；
+6.fs.unlink(path,(err)=>{})删除文件
+7.一般h5页面部署时，都是将html,js,css,img等等静态资源放在静态资源服务器里面；
+8.除了ajax请求外，其他的页面请求，如form表单提交，a标签等，都会产生一个新的页面来展示提交的后台返回的结果；
+9.简单总结以下bootstrap以及其他类似的UI框架的用法，先在官网找到页面需要的基本js，css等引入，然后根据需要寻找组件，把代码复制粘贴进来即可；
+10.formidable的用法在原生的http模块和Express框架下是一摸一样的；
+11.
 
 
