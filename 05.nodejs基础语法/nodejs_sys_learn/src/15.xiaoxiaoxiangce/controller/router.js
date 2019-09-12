@@ -8,6 +8,7 @@ const file = require('./../models/file');
 const formidable = require('formidable');
 const path = require('path');
 const fs = require('fs');
+const images = require('images');
 
 // 从这里可以看出数据回来都是异步的，这个时候可以使用promise或者callback来回调到数据再执行
 exports.showIndex = function (req, res, next) {
@@ -62,19 +63,27 @@ exports.doPost = function (req, res, next) {
         // console.log(fields);
         // console.log(files);
         let {size} = files.img;
+        let extname = path.extname(files.img.name);
+        let newPath = path.join(__dirname, '../uploads', fields.wenjianjia, parseInt(Math.random() * 100000) + extname);
         if (parseInt(size) > 1024) {
-            fs.unlink(files.img.path, (err) => {
-                if (err) {
-                    next();
-                    return;
-                }
-                res.send('图片尺寸要小于1M');
-            })
+            // 压缩图片
+            console.log('正在压缩');
+            images(files.img.path).save(newPath, {
+                quality: 60
+            });
+            res.send('压缩完毕');
+
+            // 移除文件
+            // fs.unlink(files.img.path, (err) => {
+            //     if (err) {
+            //         next();
+            //         return;
+            //     }
+            //     res.send('图片尺寸要小于1M');
+            // })
             return;
         }
-        let extname = path.extname(files.img.name);
         let oldPath = files.img.path;
-        let newPath = path.join(__dirname, '../uploads', fields.wenjianjia, parseInt(Math.random() * 100000) + extname);
         fs.rename(oldPath, newPath, (err) => {
             if (err) {
                 next();
