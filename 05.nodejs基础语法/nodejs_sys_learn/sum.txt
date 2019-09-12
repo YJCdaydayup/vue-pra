@@ -1,4 +1,4 @@
-O第一节课
+第一节课
 1.模块化，解决命名冲突和文件依赖和无法私有性，如日志模块,最早常采用命名空间法来做的，var caculator = {}, caculator.add=function() {}
 2.驼峰命名法+匈牙利命名法(加上了类型)如numA，fnCaculator=function(){}
 3.还可以使用(function(){})()来定义模块
@@ -249,6 +249,7 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 8.除了ajax请求外，其他的页面请求，如form表单提交，a标签等，都会产生一个新的页面来展示提交的后台返回的结果；
 9.简单总结以下bootstrap以及其他类似的UI框架的用法，先在官网找到页面需要的基本js，css等引入，然后根据需要寻找组件，把代码复制粘贴进来即可；
 10.formidable的用法在原生的http模块和Express框架下是一摸一样的；
-11.
+12.express框架下，如果设置了静态资源服务器，当访问的路径是/test这种文件夹时，回默认从public下的/test/目录下找index.html文件，找不到就next();
+
 
 

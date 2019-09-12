@@ -10,7 +10,8 @@
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "formidable": "^1.2.1",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "underscore": "^1.9.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

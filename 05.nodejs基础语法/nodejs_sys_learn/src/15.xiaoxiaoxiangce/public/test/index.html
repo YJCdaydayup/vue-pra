@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>underscore框架的使用，前端模版引擎</title>
+    <script src="/js/underscore.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            width: 30%;
+            padding: 10px;
+            border: 1px solid lawngreen;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul id="lis"></ul>
+</div>
+<script type="text/template" id="tpl">
+    <% for (var i = 0;i< data.length;i++) { %>
+    <li>
+        <h4><%= data[i].name %></h4>
+        <p><%= data[i].time %></p>
+    </li>
+    <%}%>
+</script>
+<script>
+    $(function () {
+        $.get("/underscore", function (result) {
+            var tplstring = $("#tpl").html();
+            // 解析模板, 返回解析后的内容
+            var render = _.template(tplstring);
+            // 模版引擎里面的data要对应result={status: 0,data: []}中的data，所以这里传递的是对象
+            var html = render(result);
+            // 将解析后的内容填充到渲染元素
+            $("#lis").html(html);
+        });
+    })
+</script>
+</body>
+</html>

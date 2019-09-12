@@ -23,13 +23,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">首页</a>
+            <a class="navbar-brand" href="#">首页</a>
         </div>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">全部相册列表 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">上传</a></li>
+                <li><a href="/upload">上传</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Link</a></li>
@@ -48,20 +49,27 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<ol class="breadcrumb">
-    <li><a href="/">全部相册</a></li>
-    <li><a href="#"><%= albumname %></a></li>
-</ol>
-<div class="row">
-    <% for(var i = 0;i < albums.length;i++) { %>
-    <div class="col-xs-6 col-md-3">
-        <a href="#" class="thumbnail">
-            <img src=<%= '/'  + albumname + '/' + albums[i]  %> alt="">
-        </a>
-        <h4><%= albums[i] %></h4>
+<form style="padding: 20px; width: 50%" method="post" enctype="multipart/form-data" action="/doPost">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
     </div>
-    <% } %>
-</div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <select class="form-control">
+        <% for(var i = 0;i < albums.length;i++) { %>
+            <option><%=albums[i]%></option>
+        <% } %>
+    </select>
+    <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input type="file" id="exampleInputFile">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
 
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <script src="/js/jquery.min.js"></script>

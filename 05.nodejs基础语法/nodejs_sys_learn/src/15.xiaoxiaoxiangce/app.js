@@ -15,13 +15,15 @@ app.get('/', router.showIndex);
 
 app.get("/:albumName", router.showAlbum);
 
-app.get('/upload',router.uploader);
-
 app.post('/doPost',router.doPost);
+
+app.get('/upload',router.upload)
+
+app.get("/underscore",router.getJsonData)
 
 // 最后的中间件 404
 app.use((req, res)=> {
     res.render('err');
-})
+});
 
 app.listen(3000);

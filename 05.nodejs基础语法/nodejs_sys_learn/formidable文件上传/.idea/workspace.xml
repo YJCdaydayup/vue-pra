@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="635bf472-5676-43e5-998f-dd9289d5b2ec" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../src/14.express框架/01.整体感知Express/05.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/14.express框架/01.整体感知Express/05.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../sum.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../28.冷知识/冷知识.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../28.冷知识/冷知识.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1121">
-              <caret line="59" column="31" lean-forward="true" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
+            <state relative-caret-position="689">
+              <caret line="59" column="31" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -30,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/views/image.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1026">
-              <caret line="54" column="7" lean-forward="true" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
+              <caret line="54" column="7" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -61,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/file.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" selection-start-line="7" selection-end-line="12" selection-end-column="7" />
+            <state relative-caret-position="247">
+              <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -103,8 +102,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="858" />
-    <option name="y" value="23" />
+    <option name="x" value="82" />
+    <option name="y" value="80" />
     <option name="width" value="2021" />
     <option name="height" value="1303" />
   </component>
@@ -121,21 +120,6 @@
               <item name="formidable文件上传" type="b2602c69:ProjectViewProjectNode" />
               <item name="formidable文件上传" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="formidable文件上传" type="b2602c69:ProjectViewProjectNode" />
-              <item name="formidable文件上传" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="formidable文件上传" type="b2602c69:ProjectViewProjectNode" />
-              <item name="formidable文件上传" type="462c0819:PsiDirectoryNode" />
-              <item name="uploads" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="formidable文件上传" type="b2602c69:ProjectViewProjectNode" />
-              <item name="formidable文件上传" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -145,6 +129,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -174,14 +159,16 @@
       <updated>1567393505220</updated>
       <workItem from="1567393506616" duration="4667000" />
       <workItem from="1567404231976" duration="809000" />
+      <workItem from="1567762965272" duration="67000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5476000" />
+    <option name="totallyTimeSpent" value="5543000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="858" y="23" width="2021" height="1303" extended-state="0" />
+    <frame x="82" y="80" width="2021" height="1303" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -210,6 +197,23 @@
     <entry file="file://$PROJECT_DIR$/uploads/20190902111920100265.jpg" />
     <entry file="file://$PROJECT_DIR$/uploads/20190902131238102123.jpg" />
     <entry file="file://$PROJECT_DIR$/views/img.ejs" />
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/file.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/image.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="54" column="7" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -224,27 +228,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/file.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" selection-start-line="7" selection-end-line="12" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/image.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="54" column="7" lean-forward="true" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1121">
-          <caret line="59" column="31" lean-forward="true" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
+        <state relative-caret-position="689">
+          <caret line="59" column="31" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
         </state>
       </provider>
     </entry>
