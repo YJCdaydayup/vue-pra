@@ -63,26 +63,28 @@ exports.doPost = function (req, res, next) {
         // console.log(files);
         let {size} = files.img;
         if (parseInt(size) > 1024) {
-            fs.unlink(files.img.path,(err) => {
+            fs.unlink(files.img.path, (err) => {
                 if (err) {
                     next();
-                    return ;
+                    return;
                 }
                 res.send('图片尺寸要小于1M');
             })
-            return ;
+            return;
         }
         let extname = path.extname(files.img.name);
         let oldPath = files.img.path;
-        let newPath = path.join(__dirname, '../uploads', fields.wenjianjia,parseInt(Math.random()*100000)+extname);
-        // console.log(newPath);
-        fs.rename(oldPath, newPath, (err)=> {
+        let newPath = path.join(__dirname, '../uploads', fields.wenjianjia, parseInt(Math.random() * 100000) + extname);
+        fs.rename(oldPath, newPath, (err) => {
             if (err) {
                 next();
                 return;
             }
             res.send('success')
         })
+    })
+}
+
 exports.upload = function (req, res, next) {
     file.getAllAlbums((err, albums)=>{
         if (err) {
