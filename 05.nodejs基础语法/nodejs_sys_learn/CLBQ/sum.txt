@@ -1,0 +1,8 @@
+1.app.set(k,v)和app.get(k)来设置app级别的变量,对于变量名系统预置了一些：
+case sensitive routing， env， etag，jsonp callback name，json escape，json replacer，json spaces，query parser，strict routing，subdomain offset，trust proxy，views，view cache，view engine，x-powered-by
+
+2.app.listen([port[, host[, backlog]]][, callback])， host 是第二个参数，backlog 是一个数字，配置可等待的最大连接数。这个值同时受操作系统的配置影响。默认是 512 。
+
+3.对于文件上传还可以使用插件multer来实现；
+
+4.Cookie的获取，和POST请求类似，需要cookie-parser
