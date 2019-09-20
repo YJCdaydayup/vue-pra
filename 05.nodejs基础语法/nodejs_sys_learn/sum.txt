@@ -250,6 +250,19 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 9.简单总结以下bootstrap以及其他类似的UI框架的用法，先在官网找到页面需要的基本js，css等引入，然后根据需要寻找组件，把代码复制粘贴进来即可；
 10.formidable的用法在原生的http模块和Express框架下是一摸一样的；
 12.express框架下，如果设置了静态资源服务器，当访问的路径是/test这种文件夹时，回默认从public下的/test/目录下找index.html文件，找不到就next();
+13.MongoDB下的文档之前是独立的，{文档1} {文档2} {文档3}，可以存在一个集合里面，一般情况下只有一个文档{},然后这个文档里面嵌套了多个文档或数组文档，每一个单独的文档之前不用逗号隔开，且每个文档就是JSON数据；
+14.获取文档个数db.aaa.count()或者db.aaa.find().count();
+15.update中直接更新(有则更新，无则添加，其他字段不保留)，以及配合$set(更新字段),$unset(删除字段)的使用；
+16.update下的$push(总是添加)，$addToSet(有则不添加),如果是添加，就必定添加到数组上，不存在就新增数组再加进去；
+17.文档最外层必定是{}，find找到的是数组，findOne()找到的是单个对象{};
+18.updateMany({sal: {$lte: 1000}},{$inc:{sal: 400}}) 查找到所有薪水<=1000的，再加钱400；
+19.查到时，第二个参数用于排除不需要的字段，需要就写1，不需要就不写；
+20.findOne find() find({}) find({name: /s/gi}) find({age: {$lt:20}}) find({age: {$in: [10,20,30]}}) find({ages: {$in: [10,20,30]}})，$in后面必须是数组，前面可以是字符串或者数组
+21.update下的$push是加后面的元素，$pushAll:[12,34]加后面的元素逐个加到数组中；
+22.插入数据直接用insert就行了，包括了insertOne和insertMany；
+23.replaceOne和save一样；
+24.deleteOne({}) deleteMany({})删除全部。deleteMany({a: 'sara'})删除全部这个条件的数据
+25.
 
 
 

@@ -5,4 +5,33 @@ case sensitive routing， env， etag，jsonp callback name，json escape，json
 
 3.对于文件上传还可以使用插件multer来实现；
 
-4.Cookie的获取，和POST请求类似，需要cookie-parser
+4.中台是前台和后台的桥梁，将后台资源顺滑的流向用户，响应用户，将业务抽离出来配置好供前端调用；后台是最底层的，把后台业务具体化抽离出来供前台调用；
+
+5.nodejs站在开发的角度是单线程的，内存占用少，线程是安全的，不用考虑多线程的内存共享和同步问题，缺点是无法利用CPU的多核，对于CPU密集型任务无法处理，会造成主线程阻塞，但是这些是可以避免，复杂的计算留给后台来做，nodejs关注高并发和快速响应前端；
+
+6.将CPU的多核利用起来，可以在一台服务器上开多个nodejs服务，监听不同的端口，在用一个Nginx负载均衡将请求轮询分发到这些端口上，要保证每份nodejs服务都是一样的且无状态的；
+
+7.session是存储在服务器上的，保存这用户信息，保存着token的过期时间，可以采用一个redis来存储；
+
+8.Cookie的操作就必须先引入cookie-parser插件，然后use一下，Cookie的获取，和POST请求类似，需要cookie-parser插件，app.use(cookieParser());然后直接从req.cookies中获取；
+
+9.Cookie的设置，res.cookie('a','123');res.cookie('b':'234');res.clearCookie('b');// 删除原理是改变了cookie的过期时间
+
+10.对于签名的cookie，获取就必须用signedCookies，设置就必须res.cookie('a': '123',{signed: true}),而且use的时候必须加一个key；app.use(cookieParser('key'));
+
+11.nodejs的默认模版引擎是jade，可以使用ejs，也可以使用html，如果使用html，就要设置：
+   app.set('views','./template');
+   app.set('view engine','html');
+   app.engine('html',ejs.__express);// ejs.__express 其实就是ejs的renderFile方法
+   res.render('index',{name: 'Sara'});// 在html页面里面使用和ejs一样的模版语法
+
+12.res的set方法: res.set('X-ME','yjc');// 可以自定义响应头里面的字段；
+
+13.res.redirect(301,'https://www.baidu.com');res.end();进行重定向
+
+14.单位分为网页单位和印刷单位，网页单位：
+  px 绝对单位，代表屏幕中的每个点
+  em 相对父元素的px * 倍数
+  rem 相对根元素的px * 倍数
+  % 相对父元素的px * 百分比
+  网页有个预设置：medium 等于16px相当于h4的字体大小，
