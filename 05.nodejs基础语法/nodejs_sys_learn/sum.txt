@@ -1,4 +1,4 @@
-第一节课
+O第一节课
 1.模块化，解决命名冲突和文件依赖和无法私有性，如日志模块,最早常采用命名空间法来做的，var caculator = {}, caculator.add=function() {}
 2.驼峰命名法+匈牙利命名法(加上了类型)如numA，fnCaculator=function(){}
 3.还可以使用(function(){})()来定义模块
@@ -249,6 +249,7 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 8.除了ajax请求外，其他的页面请求，如form表单提交，a标签等，都会产生一个新的页面来展示提交的后台返回的结果；
 9.简单总结以下bootstrap以及其他类似的UI框架的用法，先在官网找到页面需要的基本js，css等引入，然后根据需要寻找组件，把代码复制粘贴进来即可；
 10.formidable的用法在原生的http模块和Express框架下是一摸一样的；
+<<<<<<< Updated upstream
 12.express框架下，如果设置了静态资源服务器，当访问的路径是/test这种文件夹时，回默认从public下的/test/目录下找index.html文件，找不到就next();
 13.MongoDB下的文档之前是独立的，{文档1} {文档2} {文档3}，可以存在一个集合里面，一般情况下只有一个文档{},然后这个文档里面嵌套了多个文档或数组文档，每一个单独的文档之前不用逗号隔开，且每个文档就是JSON数据；
 14.获取文档个数db.aaa.count()或者db.aaa.find().count();
@@ -262,7 +263,15 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 22.插入数据直接用insert就行了，包括了insertOne和insertMany；
 23.replaceOne和save一样；
 24.deleteOne({}) deleteMany({})删除全部。deleteMany({a: 'sara'})删除全部这个条件的数据
-25.
-
-
+25.mysql sql server oracle access都属于结构型数据库，表里面都是行和列，每一行拥有相同的字段，但是字段的操作比较耗时，不灵活，非结构形式数据库NoSQL应运而生，Nosql无法挑战老牌数据库，但是在大数据时代有自己的意义；
+26.NoSQL，非结构型数据库，数据库-集合-文档(JSON数据)，每一个文档毫无关系，可以放在一个collection里面；不擅长删选的作业，擅长灵活性强的IT系统，不需要高度的数据一致性；
+27.mongo 使用数据库 mongod 开机 mongoimport 导入数据
+28.mongoimport —db test —collection it cast —-drop(先把集合清空) —file data.json 导入的文件（可以是.json可以是txt）；
+29.每一个集合collection里面有多个文档，一般是一个，每个文档都是外层是{}的JSON数据，且文档不用符号隔开；
+30.find下面的多条件db.itcast.find({条件1，条件2})
+31.find下面同一字段的且db.itcast.find({shuxue: {$gt:50,$lte:80}}) 
+32.or用数组来做，db.itcast.find({$or:[{name:/T/},{name:/K/}]})
+33.find().sort({yuewen:1,shuxue:-1})，1是升序，-1是降序
+34.update下的$set，修改值db.itcast.update({name:/s/gi},{$set:{age:33}},{multi:true})默认更改一项，为true就多项；
+35.
 
