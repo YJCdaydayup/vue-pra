@@ -273,5 +273,10 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 32.or用数组来做，db.itcast.find({$or:[{name:/T/},{name:/K/}]})
 33.find().sort({yuewen:1,shuxue:-1})，1是升序，-1是降序
 34.update下的$set，修改值db.itcast.update({name:/s/gi},{$set:{age:33}},{multi:true})默认更改一项，为true就多项；
-35.
 
+第十二节课
+1.数据库没有一种长连接的状态，每次访问都要重新连接一次，拿到client，通过db=client.db(dbName)拿到数据库，通过db.colletion(‘表’)锦绣操作；
+2.DAO层，数据访问对象，是一种应用程序的编程接口，面向对象的数据库操作接口，把底层的数据访问逻辑和高层的业务逻辑分开，实现DAO模式能够更加专注编写数据访问代码,放在model里面专门用于处理业务逻辑和数据库的操作；
+3.可以直接通过run来运行指定的js代码；
+4.mongodb中find查找后产生的游标对象cursor，这个对象是一个可迭代对象，可通过each，toArray((err, item
+)=>{})进行遍历。还有count计算其中对象的个数，close(()=>{})释放cursor对象，isClosed()判断是否关闭
