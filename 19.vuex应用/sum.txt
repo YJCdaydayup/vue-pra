@@ -12,7 +12,7 @@ const store = new Vuex.store({
    }
 });
 3.在单个组件中使用store中的状态，最好的方式是通过定义计算属性来拿，直接store.state.count
-4.当很多个全局状态时，可以导入{maoState} 然后在computed:{ ...mapState({count:(state)=>state.count,newCount(state){}}) }
+4.当很多个全局状态时，可以导入{mapState} 然后在computed:{ ...mapState({count:(state)=>state.count,newCount(state){}}) }
 5.getters属性是store的计算属性，会将state中的数据计算后返回，在子组件中也是在computed属性中通过this.$store.gettters.doneTodos获取
 6.在store的getters里面互相调用计算属性时可以直接用第二个参数getter获取其他计算属性的值:
   getters: {

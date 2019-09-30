@@ -249,7 +249,6 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 8.除了ajax请求外，其他的页面请求，如form表单提交，a标签等，都会产生一个新的页面来展示提交的后台返回的结果；
 9.简单总结以下bootstrap以及其他类似的UI框架的用法，先在官网找到页面需要的基本js，css等引入，然后根据需要寻找组件，把代码复制粘贴进来即可；
 10.formidable的用法在原生的http模块和Express框架下是一摸一样的；
-<<<<<<< Updated upstream
 12.express框架下，如果设置了静态资源服务器，当访问的路径是/test这种文件夹时，回默认从public下的/test/目录下找index.html文件，找不到就next();
 13.MongoDB下的文档之前是独立的，{文档1} {文档2} {文档3}，可以存在一个集合里面，一般情况下只有一个文档{},然后这个文档里面嵌套了多个文档或数组文档，每一个单独的文档之前不用逗号隔开，且每个文档就是JSON数据；
 14.获取文档个数db.aaa.count()或者db.aaa.find().count();
@@ -266,7 +265,7 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 25.mysql sql server oracle access都属于结构型数据库，表里面都是行和列，每一行拥有相同的字段，但是字段的操作比较耗时，不灵活，非结构形式数据库NoSQL应运而生，Nosql无法挑战老牌数据库，但是在大数据时代有自己的意义；
 26.NoSQL，非结构型数据库，数据库-集合-文档(JSON数据)，每一个文档毫无关系，可以放在一个collection里面；不擅长删选的作业，擅长灵活性强的IT系统，不需要高度的数据一致性；
 27.mongo 使用数据库 mongod 开机 mongoimport 导入数据
-28.mongoimport —db test —collection it cast —-drop(先把集合清空) —file data.json 导入的文件（可以是.json可以是txt）；
+28.mongoimport —db test —collection itcast —-drop(先把集合清空) —file data.json 导入的文件（可以是.json可以是txt）；
 29.每一个集合collection里面有多个文档，一般是一个，每个文档都是外层是{}的JSON数据，且文档不用符号隔开；
 30.find下面的多条件db.itcast.find({条件1，条件2})
 31.find下面同一字段的且db.itcast.find({shuxue: {$gt:50,$lte:80}}) 
@@ -275,8 +274,14 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 34.update下的$set，修改值db.itcast.update({name:/s/gi},{$set:{age:33}},{multi:true})默认更改一项，为true就多项；
 
 第十二节课
-1.数据库没有一种长连接的状态，每次访问都要重新连接一次，拿到client，通过db=client.db(dbName)拿到数据库，通过db.colletion(‘表’)锦绣操作；
+1.数据库没有一种长连接的状态，每次访问都要重新连接一次，拿到client，通过db=client.db(dbName)拿到数据库，通过db.colletion(‘表’)进行操作；
 2.DAO层，数据访问对象，是一种应用程序的编程接口，面向对象的数据库操作接口，把底层的数据访问逻辑和高层的业务逻辑分开，实现DAO模式能够更加专注编写数据访问代码,放在model里面专门用于处理业务逻辑和数据库的操作；
 3.可以直接通过run来运行指定的js代码；
-4.mongodb中find查找后产生的游标对象cursor，这个对象是一个可迭代对象，可通过each，toArray((err, item
-)=>{})进行遍历。还有count计算其中对象的个数，close(()=>{})释放cursor对象，isClosed()判断是否关闭
+4.collection.insertOne(json,(err,res)=>{})进行插入数据,. Use insertOne, insertMany来插入，不要用insert了；
+5.mongodb中find查找后产生的游标对象cursor，这个对象是一个可迭代对象，可通过toArray((err, items
+)=>{})将游标转数组，在进行遍历items；
+6.findOne(json)获取游标，此时的游标不是Cursor对象了，而是一个Promise对象，通过.then来直接获取查到的文档；
+7.用法和mongodb的用法相同，只是增加了回调，获取数据增加了游标或Promise；
+8.mongodb的js操作中，insert和update必须要有insertOne/insertMany,updateOne/updateMany来代替，关键字是写在{$set:{}}规则的最前面的；
+9.
+

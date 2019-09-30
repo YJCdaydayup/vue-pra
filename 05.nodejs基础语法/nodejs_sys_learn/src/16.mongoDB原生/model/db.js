@@ -8,7 +8,7 @@ const MongoClient = require('mongodb').MongoClient;
 // 加下划线表示内部函数
 function _connectDB(callback) {
     let url = 'mongodb://127.0.0.1:27017/';
-    MongoClient.connect(url, (err, client)=> {
+    MongoClient.connect(url, (err, client) => {
         // if (err) {
         // throw err;
         // }
@@ -26,10 +26,26 @@ exports.insertOne = function (collectionName, json, callback) {
         // 原先的回调要写出来
         collection.insertOne(json, function (err, result) {
             callback(err, result);
-            MongoClient.close();
         });
     });
 };
+
+exports.insertMany = function (collectionName, arr, callback) {
+    _connectDB((err, db) => {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        collection.insertMany(arr, (err, res) => {
+            if (err) {
+                callback(err);
+                return;
+            }
+            callback(null, res);
+        });
+    })
+}
 
 // 查找数据
 exports.find = function (collectionName, json, callback) {
@@ -42,18 +58,108 @@ exports.find = function (collectionName, json, callback) {
     _connectDB(function (err, db) {
         let collection = db.collection(collectionName);
         let cursor = collection.find(json);
-        console.log(cursor.count);
-        cursor.toArray((err, item)=> {
+        cursor.toArray((err, item) => {
             if (err) {
                 callback(err);
-                return ;
+                return;
             }
-            console.log(item);
-        })
-        // console.log(cursor.constructor);
-        // cursor.forEach(function (err, doc) {
-        //
-        // })
+            item.forEach((itm) => {
+                result.push(itm);
+                if (result.length === item.length) {
+                    callback(null, result);
+                }
+            })
+        });
     })
+};
+
+exports.findOne = function (collectionName, json, callback) {
+    if (arguments.length != 3) {
+        callback('find函数接受3个参数，参数错误');
+        return;
+    }
+    json = json || {};
+    _connectDB((err, db) => {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        let cursor = collection.findOne(json);
+        cursor.then((res) => {
+            callback(null, res);
+        })
+    })
+};
+
+exports.deleteOne = function (collectionName, json, callback) {
+    _connectDB((err, db) => {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        collection.deleteOne(json, (err, result) => {
+            if (err) {
+                callback(err);
+                return;
+            }
+            callback(null, result);
+        })
+    });
+}
+
+
+exports.deleteMany = function (collectionName, json, callback) {
+    _connectDB((err, db) => {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        collection.deleteMany(json, (err, result) => {
+            if (err) {
+                callback(err);
+                return;
+            }
+            callback(null, result);
+        })
+    });
+};
+
+exports.set = function (collectionName, json, rule, callback) {
+    _connectDB((err, db) => {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        collection.updateMany(json, rule, (err, result) => {
+            if (err) {
+                callback(err);
+                return;
+            }
+            callback(null, result);
+        })
+    })
+};
+
+exports.push = function (collectionName, json, rule, callback) {
+    console.log(rule)
+    _connectDB((err, db) => {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        collection.updateOne(json, rule, (err, result) => {
+            if (err) {
+                throw err
+                callback(err);
+                return;
+            }
+            callback(null, result);
+        })
+    });
 };
 
