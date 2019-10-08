@@ -283,5 +283,8 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 6.findOne(json)获取游标，此时的游标不是Cursor对象了，而是一个Promise对象，通过.then来直接获取查到的文档；
 7.用法和mongodb的用法相同，只是增加了回调，获取数据增加了游标或Promise；
 8.mongodb的js操作中，insert和update必须要有insertOne/insertMany,updateOne/updateMany来代替，关键字是写在{$set:{}}规则的最前面的；
-9.
+9.获取集合的属性，比如大小，文档个数，db.teacher.stats().count或者db.teacher.count()；
+10.分页 limit skip配合使用进行分页,此时的查找规则一般为{}即可；
+11.js中获取集合文档个数:collection.estimatedDocumentCount().then((res)=>{console.log(res)});
+12.
 

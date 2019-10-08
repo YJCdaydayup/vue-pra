@@ -3,12 +3,12 @@
  */
 
 const MongoClient = require('mongodb').MongoClient;
+const settings = require('./../setting');
 
 // 不管数据库的什么操作都要先连接数据库，可以把这个封装
 // 加下划线表示内部函数
 function _connectDB(callback) {
-    let url = 'mongodb://127.0.0.1:27017/';
-    MongoClient.connect(url, (err, client) => {
+    MongoClient.connect(settings.dburl, (err, client) => {
         // if (err) {
         // throw err;
         // }
@@ -155,10 +155,52 @@ exports.push = function (collectionName, json, rule, callback) {
         collection.updateOne(json, rule, (err, result) => {
             if (err) {
                 throw err
-                callback(err);
                 return;
             }
             callback(null, result);
+        })
+    });
+};
+
+exports.du = function (collectionName, json, args, cb) {
+    console.log(arguments.length)
+    let skipNumber, limit, callback;
+    if (arguments.length === 3) {
+        callback = args;
+        skipNumber = 0;
+        limit = 0;
+    } else if (arguments.length === 4) {
+        skipNumber = args.pageSize * args.page;
+        limit = args.pageSize;
+        callback = cb;
+    }else {
+        throw '参数错误';
+    }
+    _connectDB((err, db)=> {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        collection.estimatedDocumentCount().then((res)=>{
+            console.log(res)
+        });
+        let cursor = collection.find(json).limit(limit).skip(skipNumber);
+        let arr = [];
+        cursor.toArray((err, items)=> {
+            if (err) {
+                callback(err);
+                db.close();
+                return;
+            }
+            (function iterator(i) {
+                if (arr.length === items.length) {
+                    callback(null, arr);
+                    return;
+                }
+                arr.push(items[i]);
+                iterator(i + 1);
+            })(0)
         })
     });
 };

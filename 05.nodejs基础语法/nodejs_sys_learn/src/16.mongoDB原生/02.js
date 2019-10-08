@@ -64,7 +64,10 @@ app.get('/find', (req, res, next) => {
                 data.push(result[i]);
             }
         }
-        res.send(data);
+        // res.send(data);
+        res.json({
+            result: data
+        })
     })
 });
 
@@ -119,6 +122,25 @@ app.get('/update/push', (req, res, next) => {
         }
         res.send(result);
     });
+});
+
+// 分页 limit skip配合使用进行分页
+app.get('/du', (req, res, next)=> {
+    let page = parseInt(req.query.page);
+    let pageSize = parseInt(req.query.pageSize);
+    console.log(pageSize,page);
+    db.du('teacher', {}, {
+        page: page,
+        pageSize: pageSize
+    }, function (err, data) {
+        if (err) {
+            next();
+            return ;
+        }
+        res.json({
+            result: data
+        })
+    })
 });
 
 app.use((req, res, next) => {
