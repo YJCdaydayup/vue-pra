@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+        .container {
+            margin: 20px auto;
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>我的留言本</h1>
+<form style="width: 60%;margin-left: 30px;">
+    <div class="form-group">
+        <label for="exampleInputEmail1">姓名</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="xingming" placeholder="姓名" name="name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="liuyan">留言</label>
+        <div class="col-sm-10">
+            <textarea placeholder="留言" id="liuyan" name="liuyan"></textarea>
+        </div>
+    </div>
+    <button id="tijiao" type="button" class="btn btn-succuss">提交</button>
+</form>
+
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="/js/jquery.slim.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="/js/bootstrap.js"></script>
+<script>
+    $("#tijiao").click(function () {
+        jQuery.ajax({
+            type: 'POST',
+            url: '/tijiao',
+            data: {
+                name: '123'
+            },
+            success: function () {
+                
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "formidable": "^1.2.1",
     "mongodb": "^3.3.2"
   }
 }
