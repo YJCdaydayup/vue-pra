@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
+    <title>我的留言本</title>
 
     <!-- Bootstrap -->
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -14,46 +14,160 @@
         .container {
             margin: 20px auto;
         }
+
+        .liuyan {
+            margin: 20px;
+        }
+
+        .alert {
+            display: none;
+        }
+
+        .list-group {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .list-group {
+            margin: 40px 50% auto 40px;
+        }
+
+        .delete {
+            cursor: pointer;
+            color: darkred;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 3px;
+            box-shadow: 3px 3px 5px 3px #ccc;
+            background-color: #9acfea;
+        }
+
+        .delete:active {
+            box-shadow: 3px 3px 5px 3px #bbb;
+        }
+
+
     </style>
 
 </head>
 <body>
-
 <h1>我的留言本</h1>
-<form style="width: 60%;margin-left: 30px;">
+<form class="form-inline" style="margin-left: 20px;width: 60%;">
     <div class="form-group">
-        <label for="exampleInputEmail1">姓名</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="xingming" placeholder="姓名" name="name">
-        </div>
+        <label for="exampleInputName2">姓名</label>
+        <input type="text" class="form-control" id="name" placeholder="姓名">
     </div>
-    <div class="form-group">
-        <label for="liuyan">留言</label>
-        <div class="col-sm-10">
-            <textarea placeholder="留言" id="liuyan" name="liuyan"></textarea>
-        </div>
+    <div class="form-group liuyan" style="margin-top: -1px">
+        <label for="exampleInputEmail2">留言</label>
+        <input type="email" class="form-control" id="liuyan" placeholder="留言">
     </div>
     <button id="tijiao" type="button" class="btn btn-succuss">提交</button>
 </form>
+<nav style="margin-left: 40px;" aria-label="...">
+    <ul class="pagination">
+        <li class="disabled">
+      <span>
+        <span aria-hidden="true">&laquo;</span>
+      </span>
+        </li>
 
+        <% for (var i = 1;i < count + 1;i++) { %>
+        <li class='pabutton' data-count=<%= i %>
+        %>
+        >
+            <a href="#"> <%= i %> <span class="sr-only">(current)</span></a>
+        </li>
+        <% } %>
 
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<div id="chenggong" class="alert alert-success" role="alert">提交成功</div>
+<div id="shibai" class="alert alert-danger" role="alert">提交失败</div>
+
+<div class="quanbuliuyan" id="quanbuliuyan"></div>
+
+<sciript src="/js/underscore.js"></sciript>
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-<script src="/js/jquery.slim.js"></script>
+<!--<script src="/js/jquery.slim.js"></script>-->
+<script src="/js/jquery.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="/js/bootstrap.js"></script>
-<script>
-    $("#tijiao").click(function () {
-        jQuery.ajax({
-            type: 'POST',
-            url: '/tijiao',
-            data: {
-                name: '123'
-            },
-            success: function () {
-                
-            }
-        });
-    });
+
+<!-- 通过underscore定义模版 -->
+<script type="text/template" id="moban">
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            <h4 class="list-group-item-heading">{{= xingming }}</h4>
+            <p class="list-group-item-text">{{= liuyan }}</p>
+            <p>{{= shijian }}</p>
+        </a>
+    </div>
 </script>
+
+<script>
+
+    $(function () {
+        loadData(1);
+
+        $('.pabutton:first').addClass('active');
+
+        $('.pabutton').click(function () {
+            var index = $(this).attr('data-count');
+            console.log(index, this);
+            $(this).addClass('active pabutton').siblings().removeClass('active').addClass('pabutton');
+            loadData(index);
+        })
+
+        function loadData(page) {
+            // 读取数据
+            $.get('/du?page=' + (page - 1) + '&pageSize=10', function (result) {
+                let res = result.result;
+                if (result.status == 0) {
+                    var html = '';
+                    for (var i = 0; i < res.length; i++) {
+                        var shijian = res[i].shijian ? '<p>' + res[i].shijian + '</p>' : '<p></p>'
+                        html += '<div class="list-group">' +
+                                        '<h3>[id: ]' + res[i]._id + '</h3>' + '<h4 class="list-group-item-heading">' + res[i].xingming + '</h4><p class="list-group-item-text">' + res[i].liuyan + '</p>' + shijian + '<div class="delete" data-id=' +  res[i]._id+'>删除</div></div>';
+                    };
+                    $('#quanbuliuyan').html('').append($(html));
+
+                    $('.delete').click(function () {
+                        var id = $(this).attr('data-id');
+                        $.get('/delete?id=' + id ,function (result) {
+                            alert(JSON.stringify(result));
+                        })
+                    })
+                }
+            });
+        }
+
+
+        $('#tijiao').click(function () {
+            $.post('/tijiao', {
+                name: $("#name").val(),
+                liuyan: $("#liuyan").val(),
+                shijian: new Date()
+            }, function (result) {
+                if (result.constructor.name === 'Object') {
+                    var status = result.status;
+                    if (status === 0) {
+                        $('#chenggong').fadeIn();
+
+                        var html = '<div class="list-group"><h4 class="list-group-item-heading">' + $("#name").val() + '</h4><p class="list-group-item-text">' + $('#liuyan').val() + '</p>' + new Date + '</div>';
+                        $(html).insertBefore($('#quanbuliuyan'));
+                    } else {
+                        $('#shibai').fadeIn();
+                    }
+                }
+            })
+        })
+    })
+</script>
+
 </body>
 </html>

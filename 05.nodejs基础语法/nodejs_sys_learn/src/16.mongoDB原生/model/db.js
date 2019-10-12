@@ -163,29 +163,32 @@ exports.push = function (collectionName, json, rule, callback) {
 };
 
 exports.du = function (collectionName, json, args, cb) {
-    console.log(arguments.length)
-    let skipNumber, limit, callback;
+    let skipNumber, limit, callback, sort;
     if (arguments.length === 3) {
         callback = args;
         skipNumber = 0;
         limit = 0;
     } else if (arguments.length === 4) {
-        skipNumber = args.pageSize * args.page;
-        limit = args.pageSize;
+        skipNumber = parseInt(args.pageSize * args.page);
+        limit = parseInt(args.pageSize);
         callback = cb;
-    }else {
+        sort = args.sort || {}
+    } else {
         throw '参数错误';
     }
+
+    console.log(limit, skipNumber);
+
     _connectDB((err, db)=> {
         if (err) {
             callback(err);
             return;
         }
         let collection = db.collection(collectionName);
-        collection.estimatedDocumentCount().then((res)=>{
+        collection.estimatedDocumentCount().then((res)=> {
             console.log(res)
         });
-        let cursor = collection.find(json).limit(limit).skip(skipNumber);
+        let cursor = collection.find(json).limit(limit).skip(skipNumber).sort(sort);
         let arr = [];
         cursor.toArray((err, items)=> {
             if (err) {
@@ -195,6 +198,7 @@ exports.du = function (collectionName, json, args, cb) {
             }
             (function iterator(i) {
                 if (arr.length === items.length) {
+                    console.log(arr)
                     callback(null, arr);
                     return;
                 }
@@ -204,4 +208,35 @@ exports.du = function (collectionName, json, args, cb) {
         })
     });
 };
+
+exports.getAllCount = function (collectionName, callback) {
+    _connectDB(function (err, db) {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        collection.count({}).then((count)=> {
+            callback(null, parseInt(count));
+        });
+    })
+};
+
+exports.delete = function (collectionName, json, callback) {
+    _connectDB(function (err, db) {
+        if (err) {
+            callback(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        collection.deleteMany(json, function (err, result) {
+            console.log(json);
+            if (err) {
+                callback(err);
+                return;
+            }
+            callback(null, result);
+        })
+    })
+}
 
