@@ -89,7 +89,7 @@ app.get('/getAllCount', (req, res, next)=> {
 app.get('/delete', (req, res, next)=> {
     let id = req.query.id;
     console.log( {_id: ObjectId(id)});
-    db.delete('liuyanban', {"_id": ObjectId(id)}, (err, result)=> {
+    db.delete('liuyanban', {"_id"  : ObjectId(id)}, (err, result)=> {
         if (err) {
             res.json({
                 status: 1,

@@ -291,4 +291,7 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 14.在ejs页面中使用underscore会存在模版冲突，解决方法是改underscore的源码，或者模版引擎用html格式;
 15.$('.pabutton:first').addClass('active’);这个挺有用；要充分利用data-id，data-page等这样的自定义属性来存储数据便于获取值；
 16.使用ejs时，页面时nodejs渲染好后传递给浏览器的，如果提前写了即将通过ajax获取到的标签的点击事件，就无法点击，应该在标签请求渲染完成时再添加点击事件；
+17.http是无状态的协议，每一次的请求是没有关系的，第一次的时候一定是没有cookie的，登录时服务器设置客户端获取到cookie保存在请求头里面，cookie没有跨域限制，可以设置支持的域，用户可以自由看到，删除，修改或者禁用cookie，也可以用于攻击，存储量小；
+18.cookie中的domain为空就支持任何服务器,maxAge为-1就是临时的，下次请求不带cookie了，使用的业务比如猜你喜欢，和特殊的cookie用于保存登录状态；
+19.session依赖cookie，浏览器可以禁用或者清楚cookie，服务器下发的登录cookie是乱码，下次请求时服务器从缓冲中做匹配；
 
