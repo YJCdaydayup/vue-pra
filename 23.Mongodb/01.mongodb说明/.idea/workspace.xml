@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b2c5b60-87eb-4043-83b4-ae8491a7fc70" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/abulms/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/abulms/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/02.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/02.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/model/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/model/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/sum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/sum.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" beforeDir="false" afterPath="$PROJECT_DIR$/../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../19.vuex应用/sum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../19.vuex应用/sum.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,8 +25,8 @@
         <entry file="file://$PROJECT_DIR$/01.des.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="855">
-                <caret line="75" column="34" lean-forward="true" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
+              <first_editor relative-caret-position="133">
+                <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
               </first_editor>
               <second_editor />
             </state>
@@ -201,12 +196,12 @@
       <workItem from="1562554396042" duration="4838000" />
       <workItem from="1562574403041" duration="4298000" />
       <workItem from="1562722993424" duration="1585000" />
-      <workItem from="1569826163375" duration="904000" />
+      <workItem from="1569826163375" duration="1156000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43771000" />
+    <option name="totallyTimeSpent" value="44023000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -257,8 +252,8 @@
     <entry file="file://$PROJECT_DIR$/01.des.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="855">
-            <caret line="75" column="34" lean-forward="true" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
+          <first_editor relative-caret-position="133">
+            <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
           </first_editor>
           <second_editor />
         </state>

@@ -176,13 +176,31 @@ exports.du = function (collectionName, json, args, cb) {
         skipNumber = parseInt(args.pageSize * args.page);
         limit = parseInt(args.pageSize);
         callback = cb;
-        sort = args.sort || {}
     } else {
         throw '参数错误';
     }
+    _connectDB((err, db) => {
+        let collection = db.collection(collectionName);
+        let cursor = collection.find(json,{_id: 0}).skip(skipNumber).limit(limit);
+        cursor.toArray(function (err, items) {
+            if (err) {
+                callback(err);
+                return;
+            }
+            let data = [];
+            (function iterator(i) {
+                if (data.length === items.length) {
+                    callback(null, data);
+                    return;
+                }
+                data.push(items[i]);
+                iterator(i + 1);
+            })(0)
+        });
+    })
+}
 
-    console.log(limit, skipNumber);
-
+exports.pushAll = function (collectionName, json, rule, callback) {
     _connectDB((err, db)=> {
         if (err) {
             callback(err);
@@ -194,7 +212,7 @@ exports.du = function (collectionName, json, args, cb) {
         });
         let cursor = collection.find(json).limit(limit).skip(skipNumber).sort(sort);
         let arr = [];
-        cursor.toArray((err, items)=> {
+        cursor.toArray((err, items) => {
             if (err) {
                 callback(err);
                 db.close();
@@ -209,9 +227,17 @@ exports.du = function (collectionName, json, args, cb) {
                 arr.push(items[i]);
                 iterator(i + 1);
             })(0)
-        })
-    });
-};
+            collection.updateMany(json, rule, (err, result) => {
+                if (err) {
+                    throw err
+                    callback(err);
+                    return;
+                }
+                callback(null, result);
+            })
+        });
+    })
+}
 
 exports.getAllCount = function (collectionName, callback) {
     _connectDB(function (err, db) {
