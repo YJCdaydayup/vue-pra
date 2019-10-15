@@ -63,6 +63,10 @@ exports.find = function (collectionName, json, callback) {
                 callback(err);
                 return;
             }
+            if (item.length === 0) {
+                callback(null, result);
+                return ;
+            }
             item.forEach((itm) => {
                 result.push(itm);
                 if (result.length === item.length) {
