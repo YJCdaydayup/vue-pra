@@ -9,7 +9,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
-    "mongodb": "^3.3.2"
+    "formidable": "^1.2.1",
+    "jquery": "^3.4.1",
+    "mongodb": "^3.3.2",
+    "underscore": "^1.9.1",
+    "util": "^0.12.1"
   }
 }

@@ -285,6 +285,13 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 8.mongodb的js操作中，insert和update必须要有insertOne/insertMany,updateOne/updateMany来代替，关键字是写在{$set:{}}规则的最前面的；
 9.获取集合的属性，比如大小，文档个数，db.teacher.stats().count或者db.teacher.count()；
 10.分页 limit skip配合使用进行分页,此时的查找规则一般为{}即可；
-11.js中获取集合文档个数:collection.estimatedDocumentCount().then((res)=>{console.log(res)});
-12.
+11.js中获取集合文档个数:collection.estimatedDocumentCount().then((res)=>{console.log(res)}),也可以使用collection.count({条件}).then((count)=>{})得到满足条件的个数；
+12.不产生新页面展示服务器的返回数据，就用ajax请求来请求数据；
+13.underscore前端模版引擎中，ajax请求到数据后需要在js里面进行for循环生产一整套hmtl在append到父标签里面，而ejs可以直接在html里面写for循环类似Vue；
+14.在ejs页面中使用underscore会存在模版冲突，解决方法是改underscore的源码，或者模版引擎用html格式;
+15.$('.pabutton:first').addClass('active’);这个挺有用；要充分利用data-id，data-page等这样的自定义属性来存储数据便于获取值；
+16.使用ejs时，页面时nodejs渲染好后传递给浏览器的，如果提前写了即将通过ajax获取到的标签的点击事件，就无法点击，应该在标签请求渲染完成时再添加点击事件；
+17.http是无状态的协议，每一次的请求是没有关系的，第一次的时候一定是没有cookie的，登录时服务器设置客户端获取到cookie保存在请求头里面，cookie没有跨域限制，可以设置支持的域，用户可以自由看到，删除，修改或者禁用cookie，也可以用于攻击，存储量小；
+18.cookie中的domain为空就支持任何服务器,maxAge为-1就是临时的，下次请求不带cookie了，使用的业务比如猜你喜欢，和特殊的cookie用于保存登录状态；
+19.session依赖cookie，浏览器可以禁用或者清楚cookie，服务器下发的登录cookie是乱码，下次请求时服务器从缓冲中做匹配；
 
