@@ -125,22 +125,33 @@ app.get('/update/push', (req, res, next) => {
 });
 
 // 分页 limit skip配合使用进行分页
-app.get('/du', (req, res, next)=> {
+app.get('/du', (req, res, next) => {
     let page = parseInt(req.query.page);
     let pageSize = parseInt(req.query.pageSize);
-    console.log(pageSize,page);
+    console.log(pageSize, page);
     db.du('teacher', {}, {
         page: page,
         pageSize: pageSize
     }, function (err, data) {
         if (err) {
             next();
-            return ;
+            return;
         }
         res.json({
             result: data
         })
     })
+})
+
+app.get('/update/pushAll', (req, res, next) => {
+    let arr = ['中国', '美国', '德国'];
+    db.pushAll('teacher', {}, {$pushAll: {'info.counties': arr}}, function (err, result) {
+        if (err) {
+            next();
+            return;
+        }
+        res.send(result);
+    });
 });
 
 app.use((req, res, next) => {

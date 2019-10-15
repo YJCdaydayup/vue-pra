@@ -163,7 +163,6 @@ exports.push = function (collectionName, json, rule, callback) {
 };
 
 exports.du = function (collectionName, json, args, cb) {
-    console.log(arguments.length)
     let skipNumber, limit, callback;
     if (arguments.length === 3) {
         callback = args;
@@ -173,21 +172,43 @@ exports.du = function (collectionName, json, args, cb) {
         skipNumber = args.pageSize * args.page;
         limit = args.pageSize;
         callback = cb;
-    }else {
+    } else {
         throw '参数错误';
     }
-    _connectDB((err, db)=> {
+    _connectDB((err, db) => {
+        let collection = db.collection(collectionName);
+        let cursor = collection.find(json,{_id: 0}).skip(skipNumber).limit(limit);
+        cursor.toArray(function (err, items) {
+            if (err) {
+                callback(err);
+                return;
+            }
+            let data = [];
+            (function iterator(i) {
+                if (data.length === items.length) {
+                    callback(null, data);
+                    return;
+                }
+                data.push(items[i]);
+                iterator(i + 1);
+            })(0)
+        });
+    })
+}
+
+exports.pushAll = function (collectionName, json, rule, callback) {
+    _connectDB((err, db) => {
         if (err) {
             callback(err);
             return;
         }
         let collection = db.collection(collectionName);
-        collection.estimatedDocumentCount().then((res)=>{
+        collection.estimatedDocumentCount().then((res) => {
             console.log(res)
         });
         let cursor = collection.find(json).limit(limit).skip(skipNumber);
         let arr = [];
-        cursor.toArray((err, items)=> {
+        cursor.toArray((err, items) => {
             if (err) {
                 callback(err);
                 db.close();
@@ -201,7 +222,15 @@ exports.du = function (collectionName, json, args, cb) {
                 arr.push(items[i]);
                 iterator(i + 1);
             })(0)
-        })
-    });
-};
+            collection.updateMany(json, rule, (err, result) => {
+                if (err) {
+                    throw err
+                    callback(err);
+                    return;
+                }
+                callback(null, result);
+            })
+        });
+    })
+}
 
