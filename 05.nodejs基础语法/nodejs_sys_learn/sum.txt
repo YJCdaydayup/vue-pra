@@ -297,3 +297,12 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 20.服务器一般自带生成session的插件，express-session是服务器中生成session的插件，在req上面，只需要先use(session({secret: ‘keyboard cat’,reserve: false,saveUninitialized: true}))一下，在登录时设置req.login = 1，req.cookie.maxAge = 100000;req.useName = ‘Sara’等等，客户端会自动获取一个乱码唯一的cookie，这个cookie不用取管它，下次请求会传给服务器，服务器只需要通过req.session里面去取前面设置信息即可；
 21.session不会体现cookie机理，但是要记住是基于cookie制作的；
 
+第十三节课
+1.MD5可以用于版本校验;
+2.只要服务器要处理图片，就要装graphicmagick，然后可以通过命令行来操作图片了；https://blog.csdn.net/iteye_9339/article/details/82476321
+3.格式转换：$ gm convert a.jpeg b.png
+4.修改图片尺寸大小，并保存到指定位置，压缩图片的鼻祖就调用这个；$ gm mogrify -output-directory 保存的目录名 -resize 320*200 dany.jpg
+5.nodejs要使用graphicmagick，需要安装一个gm的包,但是要执行gm的api，系统环境中必须要安装graphicImagick全局命令；
+6.nodejs非常适合裁剪图片，开一个服务裁剪图片，开一个服务提供java服务；
+7.研究jquery的前台图片裁剪，jcrop插件，demo；
+8.

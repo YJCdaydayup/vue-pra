@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script src="/js/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <p>
+        登录名: <input type="text" id="dengluming">
+    </p>
+    <p>
+        登录名: <input type="text" id="mima">
+    </p>
+    <p>
+        <input type="button" value="注册" id="zhuce">
+    </p>
+    <script>
+        $('#zhuce').click(function () {
+            $.post('/doregister', {
+                dengluming: $('#dengluming').val(),
+                mima: $('#mima').val()
+            }, function (result) {
+                console.log(result);
+            })
+        });
+    </script>
+</div>
+</body>
+</html>
