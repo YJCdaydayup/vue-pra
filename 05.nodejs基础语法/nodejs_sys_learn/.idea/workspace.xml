@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a02ca2e7-21f1-48e6-9180-1b21b15cf0d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/03.记事本.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/04.cookie.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/css/bootstrap-theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/css/bootstrap-theme.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/css/bootstrap-theme.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/css/bootstrap-theme.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/imgs/err.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/imgs/timg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/js/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/js/jquery.slim.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/js/npm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/public/js/underscore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/16.mongoDB原生/views/index.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/16.mongoDB原生/model/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/16.mongoDB原生/model/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/16.mongoDB原生/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/16.mongoDB原生/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sum.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" beforeDir="false" afterPath="$PROJECT_DIR$/../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" afterDir="false" />
     </list>
@@ -50,19 +25,49 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sum.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="262" column="21" selection-start-line="262" selection-start-column="21" selection-end-line="262" selection-end-column="21" />
+            <state relative-caret-position="4856">
+              <caret line="299" column="89" selection-start-line="299" selection-start-column="89" selection-end-line="299" selection-end-column="89" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/16.mongoDB原生/model/db.js">
+        <entry file="file://$PROJECT_DIR$/src/16.mongoDB原生/04.cookie.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-206">
-              <caret line="198" column="67" selection-start-line="198" selection-start-column="67" selection-end-line="198" selection-end-column="67" />
+            <state relative-caret-position="133">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/09.crypto加密模块/02.HMAC算法.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/16.mongoDB原生/03.记事本.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-468" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/16.mongoDB原生/model/db.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1993">
+              <caret line="249" column="44" selection-start-line="249" selection-start-column="44" selection-end-line="249" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/05.debug调试.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -74,12 +79,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/16.mongoDB原生/model/db.js" />
+        <option value="$PROJECT_DIR$/sum.txt" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="166" />
-    <option name="y" value="53" />
+    <option name="x" value="218" />
+    <option name="y" value="259" />
     <option name="width" value="2270" />
     <option name="height" value="1377" />
   </component>
@@ -106,6 +112,12 @@
               <item name="nodejs_sys_learn" type="b2602c69:ProjectViewProjectNode" />
               <item name="nodejs_sys_learn" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="09.crypto加密模块" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nodejs_sys_learn" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nodejs_sys_learn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="16.mongoDB原生" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -124,6 +136,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -151,15 +164,15 @@
       <option name="presentableId" value="Default" />
       <updated>1570606690057</updated>
       <workItem from="1570606691312" duration="620000" />
-      <workItem from="1571127335620" duration="345000" />
+      <workItem from="1571127335620" duration="2925000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="965000" />
+    <option name="totallyTimeSpent" value="3545000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="166" y="53" width="2270" height="1377" extended-state="0" />
+    <frame x="218" y="259" width="2270" height="1377" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24988884" />
@@ -188,17 +201,39 @@
     <entry file="file://$PROJECT_DIR$/前后端分离模式.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/sum.txt">
+    <entry file="file://$PROJECT_DIR$/src/16.mongoDB原生/03.记事本.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="262" column="21" selection-start-line="262" selection-start-column="21" selection-end-line="262" selection-end-column="21" />
-        </state>
+        <state relative-caret-position="-468" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/16.mongoDB原生/model/db.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-206">
-          <caret line="198" column="67" selection-start-line="198" selection-start-column="67" selection-end-line="198" selection-end-column="67" />
+        <state relative-caret-position="1993">
+          <caret line="249" column="44" selection-start-line="249" selection-start-column="44" selection-end-line="249" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/05.debug调试.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sum.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4856">
+          <caret line="299" column="89" selection-start-line="299" selection-start-column="89" selection-end-line="299" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/09.crypto加密模块/02.HMAC算法.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/16.mongoDB原生/04.cookie.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
