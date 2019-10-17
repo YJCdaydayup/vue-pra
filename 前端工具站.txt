@@ -1,0 +1,8 @@
+# 1.前端开发仓库: http://code.ciaoca.com
+# 2.基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用:  http://www.worldlink.com.cn/osdir/vue2-elm.html
+# 3.v-chart的使用： https://v-charts.js.org/#/
+# 4.图标使用antV：https://antv.alipay.com/zh-cn/f2/3.x/demo/index.html
+# 5.SUI移动端UI框架： http://m.sui.taobao.org/components/#buttons
+# 6.MUI移动端UI框架： https://dev.dcloud.net.cn/mui/ui/#accordion
+# 7.haorooms博客： https://www.haorooms.com/nav
+# 8.好用的规范，框架，代码库： http://nec.netease.com/plugin

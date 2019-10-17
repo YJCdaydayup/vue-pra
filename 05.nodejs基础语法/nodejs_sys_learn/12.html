@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 200px;
+      background-color: gainsboro;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" id="box"></div>
+  <script>
+    document.onselectstart=new Function('event.returnValue=false;');
+
+    (function (parentNode) {
+      function Slider(el) {
+        this.el = this.$(el);
+        this.startX = 0;
+        this.startY = 0;
+        this.moveX = 0;
+        this.moveY = 0;
+        this.startLeft = this.el.offsetLeft;
+        this.startTop = this.el.offsetTop;
+        this._init();
+      }
+
+      Slider.prototype.$ = function (el) {
+        if (!el || typeof el !== 'string') {
+          throw '参数错误'
+        }
+        return document.getElementById(el);
+      }
+
+      Slider.prototype._init = function () {
+        var me = this;
+        me.el.ontouchstart = function (event) {
+          var event = event || window.event;
+          me.startX = event.touches[0].clientX;
+          me.startY = event.touches[0].clientY;
+        }
+
+        me.el.ontouchmove = function (event) {
+          me.el.style.transition = 'none';
+          me.move(event);
+        }
+
+        me.el.ontouchend = function (event) {
+          // me.startLeft = me.el.offsetLeft;
+          // me.startTop = me.el.offsetTop;
+          me.el.style.transition = 'all 2s linear';
+          me.moveX = 0;
+          me.moveY = 0;
+          me.updateSliderPosition();
+
+        }
+      }
+
+      Slider.prototype.move = function(event) {
+        var me = this;
+        var event = event || window.event;
+        me.moveX = event.touches[0].clientX - me.startX;
+        me.moveY = event.touches[0].clientY - me.startY;
+        me.updateSliderPosition();
+      };
+
+      Slider.prototype.updateSliderPosition = function() {
+        var me = this;
+        me.el.style.left =  me.startLeft + me.moveX + 'px';
+        me.el.style.top =  me.startTop + me.moveY + 'px';
+      };
+
+      parentNode.Slider = Slider;
+
+    })(window)
+
+    new Slider('box')
+
+  </script>
+</body>
+</html>
