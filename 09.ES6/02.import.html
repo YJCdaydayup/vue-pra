@@ -5,10 +5,31 @@
     <title>import / export</title>
   </head>
   <body>
+  <div style="width: 200px;height: 200px;background-color: lavender;" id="app"></div>
   <script>
 
+    function createSaveStream() {
+      let timer ;
+      return function () {
+        if (timer) {
+          return ;
+        }
+        timer = setTimeout(function () {
+          clearTimeout(timer);
+          timer = null;
+          console.log(parseInt(Math.random()*1000000));
+        },2000);
+      }
+    }
+    let fn = createSaveStream();
 
-      // 1.一个文件只能有一个export default，可以有多个export；
+
+    document.getElementById('app').addEventListener('touchmove',function () {
+      fn()
+    })
+
+
+    // 1.一个文件只能有一个export default，可以有多个export；
       // 2.使用export default people， 就用import people导入；
       // 3.使用export name时，用import {name} 导入；
       // 4.一个文件既有export default people，又有多个export name 或者 export age时，导入就用import people {name, age}

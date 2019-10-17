@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a02ca2e7-21f1-48e6-9180-1b21b15cf0d4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sum.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" beforeDir="false" afterPath="$PROJECT_DIR$/../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -84,8 +82,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="218" />
-    <option name="y" value="259" />
+    <option name="x" value="147" />
+    <option name="y" value="548" />
     <option name="width" value="2270" />
     <option name="height" value="1377" />
   </component>
@@ -164,16 +162,15 @@
       <option name="presentableId" value="Default" />
       <updated>1570606690057</updated>
       <workItem from="1570606691312" duration="620000" />
-      <workItem from="1571127335620" duration="2925000" />
+      <workItem from="1571127335620" duration="3204000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3545000" />
+    <option name="totallyTimeSpent" value="3824000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="218" y="259" width="2270" height="1377" extended-state="0" />
-    <editor active="true" />
+    <frame x="147" y="548" width="2270" height="1377" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24988884" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/animation.css">
+    <style>
+        #animate{position:absolute;top:50%;left:50%;width:280px;height:100px;margin:-50px 0 0 -140px;border-radius:5px;line-height:100px;text-align:center;color:#fff;background:#71acb9;}
+    </style>
+</head>
+<body>
+<div style="display: none;" id="animate" class="a-bouncein">弹入</div>
+<div onclick="show()">展示</div>
+<script>
+    function show() {
+        var ani = document.getElementById('animate');
+        ani.style.display = 'block';
+    }
+</script>
+</body>
+</html>
