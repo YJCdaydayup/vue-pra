@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "formidable": "^1.2.1",
+    "gm": "^1.23.1",
+    "mongodb": "^3.3.3"
+  }
+}
