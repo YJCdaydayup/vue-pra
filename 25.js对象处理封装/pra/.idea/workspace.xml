@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aa964b40-73f1-4748-89e5-2fafa8d87671" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/06.有加密的注册登录.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/06.有加密的注册登录.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/07.图片处理gm.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../05.nodejs基础语法/nodejs_sys_learn/src/16.mongoDB原生/07.图片处理gm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" beforeDir="false" afterPath="$PROJECT_DIR$/../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../banner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../banner/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -128,8 +125,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-289" />
-    <option name="y" value="907" />
+    <option name="x" value="242" />
+    <option name="y" value="313" />
     <option name="width" value="1915" />
     <option name="height" value="1396" />
   </component>
@@ -222,7 +219,7 @@
     <option name="totallyTimeSpent" value="4024000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-289" y="907" width="1915" height="1396" extended-state="0" />
+    <frame x="242" y="313" width="1915" height="1396" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973601" />
