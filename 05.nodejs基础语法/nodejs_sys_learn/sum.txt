@@ -318,4 +318,6 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 10.ejs针对通用代码，可以抽出来再include进来；语法<%- include('./header') %>相当于是把这个文件的内容拷贝进index.ejs里面，传参还是从res.render(‘index’,{names: []})传进来；
 11.OPTIONS请求是一种浏览器级行为，只有在跨域情况下才会出现，当出现跨域前提时，如果自定义请求头或者请求头中有application/x-www-form-urlencoded，multipart/form-data，text/plain之外的格式就会自动触发OPTIONS请求进行预检，此时服务器只需要先判断是否支持这个域名然后在method里面判断一下返回一个200状态即可；
 12.cookie虽然时没有跨域限制，但是不同域下的cookie是不共享的，可以通过domain来设置子域名或者二级域名是否可以访问cookie；
+13.返回页面并让页面自动刷新的话可以，window.location = ‘/‘这种是重新push过去,会存在之前的’/‘页面还在history里面；
+14.
 

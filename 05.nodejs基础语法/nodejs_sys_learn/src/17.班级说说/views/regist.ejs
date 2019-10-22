@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>注册</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-right a:last-child {
+            color: white;
+        }
+
+        .alert {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+<%-include('header')%>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h3>欢迎注册</h3>
+        <form style="margin-top: 20px">
+            <div class="form-group">
+                <label for="exampleInputEmail1">用户名</label>
+                <input type="email" class="form-control" id="username" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">密码</label>
+                <input type="password" class="form-control" id="password" placeholder="请输入密码">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">Example block-level help text here.</p>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> 我遵守注册规定
+                </label>
+            </div>
+            <button type="button" id="zhuce" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+
+    <hr>
+    <div id="succuss" class="alert alert-success" role="alert">注册成功</div>
+    <div id="warning" class="alert alert-danger" role="alert"></div>
+    <footer>
+        <p>&copy; 2016 Company, Inc.</p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/js/bootstrap.min.js"></script>
+<script>
+    $('#zhuce').click(function () {
+        $.post('/doregist',{
+            username: $("#username").val(),
+            password: $('#password').val()
+        },function (result) {
+            if (result == 1) {
+//                console.log('注册成功');
+//                $('#succuss').fadeIn()
+//                $("#warning").fadeOut();
+                alert('注册成功');
+                window.location = '/'
+                history.go(-1);
+            }else if (result == -1) {
+                console.log('用户名被占用');
+                $('#succuss').fadeOut()
+                $("#warning").fadeIn().text('用户名被占用');
+            }else if (result == -3 ) {
+                $('#succuss').fadeOut()
+                $("#warning").text('系统错误').fadeIn();
+            }
+        })
+    })
+</script>
+</body>
+</html>
