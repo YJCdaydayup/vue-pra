@@ -46,7 +46,8 @@ Day03 https://blog.csdn.net/qq_39523111/article/details/79638614
 3.module里面的状态是局部的，可以通过模块来访问:this.$store.state.a.count来访问
 4，虽然上面的getters，mutations，actions默认是全局的，但是里面的参数是局部的，最好通过解构的方式拿取：context中多了{rootState,rootGetter}两个参数来获取全局的状态
 5.也可以添加一个namespaced属性来限制命名空间,当用到了命名空间，提交mutations，actions，getters前需要加模块了，this.&store.commit('a/muA')
-
+6.父子孙组件通信，正向可以通过props进行传递数据，或者通过ref拿到子组件通过子组件来调用其方法，反向可以通过$emit派发事件，还可以通过在子组件中this.$parent,孙组件this.$parent.$parent来获取父组件调用方法，还以通过在父组件中暴露自己,provide() {return {fatherObj: this}}子孙组件在inject:['fatherObj']后，直接通过this.fatherObj获取父组件；
+7.watch监听data里面的属性，当时一般对象时name(newv,oldv) {}或者'name'(newv,oldv){}，当监听data属性里面的对象的属性时，'obj.name'(){},当监听整个对象时，obj: {hanlder(){},deep:true}
 
 
 

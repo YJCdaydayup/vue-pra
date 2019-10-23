@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d4d455c-dc94-49cb-8a23-ea48a6d95558" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../17.班级说说/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../17.班级说说/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../18.前端预览裁剪效果后端裁剪/public/css/basic.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../18.前端预览裁剪效果后端裁剪/public/css/jquery.Jcrop.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../18.前端预览裁剪效果后端裁剪/public/imgs/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../18.前端预览裁剪效果后端裁剪/public/imgs/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../18.前端预览裁剪效果后端裁剪/public/imgs/bb.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../18.前端预览裁剪效果后端裁剪/public/imgs/bch.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/19.ejs的include用法.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../12.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../123.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../17.班级说说/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../17.班级说说/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../17.班级说说/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../17.班级说说/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../17.班级说说/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../17.班级说说/views/index.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../sum.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../16.RN_Fighting/01.RN项目/课程源码/项目与使用说明文档/项目V1.0版分章节源码/第十章/imooc_gp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../25.js对象处理封装/pra/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../25.js对象处理封装/pra/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../前端工具站.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../前端工具站.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+            <state relative-caret-position="133">
+              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -152,12 +130,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571728365544</updated>
-      <workItem from="1571728366676" duration="1393000" />
+      <workItem from="1571728366676" duration="1395000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1393000" />
+    <option name="totallyTimeSpent" value="1395000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1028" y="141" width="1343" height="1227" extended-state="0" />
@@ -212,8 +190,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+        <state relative-caret-position="133">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
         </state>
       </provider>
     </entry>

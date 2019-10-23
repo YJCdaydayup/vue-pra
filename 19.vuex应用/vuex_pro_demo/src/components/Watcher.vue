@@ -2,7 +2,8 @@
   <div>
     <input type="text" v-model="inputText">
     <input type="text" v-model="demo.name">
-    <div>{{val}}</div>
+    <child></child>
+    <h3>{{val}}</h3>
   </div>
 </template>
 
@@ -16,39 +17,57 @@
 
 <script>
 
+  import Child from './childvue/child'
+
   export default {
     data() {
       return {
         inputText: '',
-        val: '',
+        val: '12',
         demo: {
           name: 'abc'
         }
       }
+    },
+    provide() {
+      return {
+        thisObj: this
+      }
+    },
+    components: {
+      Child
     },
     computed: {
 //      newName() {
 //        return this.demo.name;
 //      }
     },
-    methods: {},
+    methods: {
+
+    },
     watch: {
-      inputText(val,old) {
-        this.val = val;
-        console.log(old)
+      'val'(newv,oldv) {
+        console.log('change...')
+        console.log('newv',newv)
+        console.log('oldv',oldv)
       },
 //      newName(val) {
 //        this.val = val;
 //      },
       demo: {
-        handler(val, oldVal) {
+        handler(newv,oldv) {
 //          console.log(val.name);
-          console.log(oldVal.name  === val.name)
+//           console.log(oldVal.name  === val.name)
+          console.log('change...')
+          console.log('newv',newv)
+          console.log('oldv',oldv)
         },
         deep: true
       },
-      'demo.name'(val, oldVal) {
-//        console.log(val + 'aaa');
+      'demo.name'(newv,oldv) {
+        // console.log('change...')
+        // console.log('newv',newv)
+        // console.log('oldv',oldv)
       }
     }
   }
