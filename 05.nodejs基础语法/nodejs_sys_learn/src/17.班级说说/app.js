@@ -14,11 +14,16 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.use('/avatar',express.static('./avatar'));
 
 app.get('/', router.showIndex);
 app.get('/regist',router.showRegist);
 app.post('/doregist',router.doregist);
 app.get('/login',router.showlogin);
 app.post('/dologin',router.dologin);
+app.get('/setavatar',router.setavatar);
+app.post('/dosetavatar',router.dosetavatar);
+app.get('/cut',router.showcut);
+app.get('/docut',router.docut);
 
 app.listen(3000);
