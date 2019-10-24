@@ -5,6 +5,25 @@
 const MongoClient = require('mongodb').MongoClient;
 const settings = require('./../setting/setting');
 
+// require的时候会执行这个文件一次而已，进来的时候建立索引
+__init();
+
+
+function __init() {
+    _connectDB(function (err, db) {
+        if (err) {
+            throw err;
+        }
+        let collection = db.collection('users');
+        collection.createIndex({
+            username: 1,
+            function (err, result) {
+                console.log()
+            }
+        })
+    })
+}
+
 // 不管数据库的什么操作都要先连接数据库，可以把这个封装
 // 加下划线表示内部函数
 function _connectDB(callback) {
@@ -65,7 +84,7 @@ exports.find = function (collectionName, json, callback) {
             }
             if (item.length === 0) {
                 callback(null, result);
-                return ;
+                return;
             }
             item.forEach((itm) => {
                 result.push(itm);
@@ -181,7 +200,7 @@ exports.du = function (collectionName, json, args, cb) {
     }
     _connectDB((err, db) => {
         let collection = db.collection(collectionName);
-        let cursor = collection.find(json,{_id: 0}).skip(skipNumber).limit(limit);
+        let cursor = collection.find(json, {_id: 0}).skip(skipNumber).limit(limit);
         cursor.toArray(function (err, items) {
             if (err) {
                 callback(err);

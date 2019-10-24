@@ -14,78 +14,67 @@
         .navbar-right a {
             color: gray;
         }
+
+        .container1 {
+            display: flex;
+        }
+
+        .left, .right {
+            flex: 1
+        }
+
     </style>
 </head>
 
 <body>
 <%- include('header') %>
 <!-- Main jumbotron for a primary marketing message or call to action -->
+<% if (login) { %>
 <div class="jumbotron">
     <div class="container">
-        <h1>
-            <img width="100px" height="100px" src="/avatar/<%= avatar %>" alt="">
-            <h3>Hello, world!</h3>
-        </h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a
-            jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-            unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <h4 style="display: flex;align-items: center">
+            <img style="border-radius: 10px" width="100px" height="100px" src="/avatar/<%= avatar %>" alt="">
+            <span style="margin-left: 20px">Hello <%= username %></span>
+        </h4>
+        <textarea id="content" style="display: block;margin-bottom: 10px;" name="content" cols="80" rows="4"></textarea>
+        <button id="fabiao" type="button" class="btn btn-success">发表</button>
     </div>
 </div>
+<% }else { %>
+<div class="container1" style="margin: 100px 60px 20px">
+    <div class="left">
+        <h1>欢迎</h1>
+        <p>欢迎来到我们的交流园地</p>
+
+        <button type="button" class="btn btn-success">注册</button>
+    </div>
+    <div class="right">
+        <h5>已有账号登录</h5>
+        <form style="margin-top: 20px">
+            <div class="form-group">
+                <label for="exampleInputEmail1">用户名</label>
+                <input type="email" class="form-control" id="username" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">密码</label>
+                <input type="password" class="form-control" id="password" placeholder="请输入密码">
+            </div>
+            <button type="button" id="login" class="btn btn-default">登录</button>
+        </form>
+    </div>
+</div>
+<% } %>
 
 <div class="container">
     <!-- Example row of columns -->
     <div class="row">
+        <% for (let i = 0;i < shuoshuo.length;i++) { %>
         <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <h2><%=shuoshuo[i].username%></h2>
+            <p><%=shuoshuo[i].content%> </p>
+            <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
         </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-
+        <% } %>
     </div>
 
     <hr>
@@ -102,5 +91,39 @@
 <script src="/js/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="/js/bootstrap.min.js"></script>
+
+<script>
+    $('#login').click(function () {
+        $.post('/dologin', {
+            username: $("#username").val(),
+            password: $('#password').val()
+        }, function (result) {
+            if (result == 1) {
+                alert('登录成功');
+                window.location = '/'
+            } else if (result == -1) {
+                console.log('用户名不存在');
+            } else if (result == -2) {
+            }
+        })
+    })
+
+    $('#fabiao').click(function () {
+        $.post('/post', {
+            content: $('#content').val()
+        }, function (result) {
+            if (result == 1) {
+                alert('发表成功');
+                window.location = '/'
+            } else if (result == -3) {
+                alert('发表失败');
+            } else if (result == -1) {
+                alert('发表失败');
+            }
+        })
+    })
+
+</script>
+
 </body>
 </html>

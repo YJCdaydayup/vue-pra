@@ -14,27 +14,30 @@ const gm = require('gm')
  * @param res
  */
 exports.showIndex = (req, res)=> {
+    let usename = null;
+    let avatar;
     if (req.session.login == 1) {
+        username = req.session.username;
+    }
+    db.find('posts', {}, (err, results)=> {
         db.find('users', {
             username: req.session.username
         }, (err, result)=> {
             "use strict";
-            console.log(result[0].avatar)
+            if (result.length == 0) {
+                avatar = 'moren.jpg';
+            } else {
+                avatar = result[0].avatar;
+            }
             res.render('index', {
                 login: req.session.login == '1',
                 username: req.session.login == '1' ? req.session.username : '',
                 flag: '首页',
-                avatar: result[0].avatar || "moren.jpg"
+                avatar,
+                shuoshuo: results
             });
         })
-    } else {
-        res.render('index', {
-            login: req.session.login == '1',
-            username: req.session.login == '1' ? req.session.username : '',
-            flag: '首页',
-            avatar: "moren.jpg"
-        });
-    }
+    })
 };
 
 /**
@@ -56,6 +59,8 @@ exports.showRegist = (req, res)=> {
  * @param res
  */
 exports.doregist = (req, res)=> {
+    res.redirect('https://www.baidu.com');
+    return;
     let form = new formidable.IncomingForm();
     form.parse(req, (err, fields, files)=> {
         console.log(fields)
@@ -186,23 +191,56 @@ exports.docut = (req, res)=> {
     var x = req.query.x;
     var y = req.query.y;
     gm("./avatar/" + req.session.avatar)
-        .crop(w,h,x,y)
-        .resize(100,100,"!")
-        .write("./avatar/" + req.session.avatar,function(err){
-            if(err){
+        .crop(w, h, x, y)
+        .resize(100, 100, "!")
+        .write("./avatar/" + req.session.avatar, function (err) {
+            if (err) {
                 res.send("-1");
                 return;
             }
-            db.set('users',{
+            db.set('users', {
                 username: req.session.username
-            },{
+            }, {
                 $set: {
                     avatar: req.session.avatar
                 }
-            },(err, result)=>{
+            }, (err, result)=> {
                 if (!err) {
                     res.send('1');
                 }
             })
         });
+};
+
+/**
+ * 发表说说
+ * @param req
+ * @param res
+ */
+exports.dopost = (req, res)=> {
+    if (req.session.login !== 1) {
+        res.send('非法闯入，需要先登录');
+        return;
+    }
+    let form = new formidable.IncomingForm();
+    form.parse(req, (err, fields, files)=> {
+        if (err) {
+            res.send("-1");
+            return;
+        }
+        let {content} = fields;
+        let username = req.session.username;
+        console.log(content)
+        db.insertOne('posts', {
+            username,
+            content,
+            datetime: new Date()
+        }, (err, result)=> {
+            if (err) {
+                res.send("-3");
+                return;
+            }
+            res.send('1'); // 写入了另外一个表posts成功
+        })
+    })
 };

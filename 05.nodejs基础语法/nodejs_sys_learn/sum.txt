@@ -319,6 +319,14 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 11.OPTIONS请求是一种浏览器级行为，只有在跨域情况下才会出现，当出现跨域前提时，如果自定义请求头或者请求头中有application/x-www-form-urlencoded，multipart/form-data，text/plain之外的格式就会自动触发OPTIONS请求进行预检，此时服务器只需要先判断是否支持这个域名然后在method里面判断一下返回一个200状态即可；
 12.cookie虽然时没有跨域限制，但是不同域下的cookie是不共享的，可以通过domain来设置子域名或者二级域名是否可以访问cookie；
 13.返回页面并让页面自动刷新的话可以，window.location = ‘/‘这种是重新push过去,会存在之前的’/‘页面还在history里面；
-14.res.rediect(301,url)和res.location(url)都是用于重定向的，会将里面的url传递给浏览器，让浏览器加载url的网页,只用于有跳转效果的请求如a标签，form提交，window.location，一般的get／post请求跳转就让页面来处理自己的跳转；
+14.res.rediect(301,url)和res.location(url)都是用于重定向的，会将里面的url传递给浏览器，让浏览器加载url的网页,只用于有跳转效果的请求如a标签，form提交，window.location，一般的get／post请求跳转就让页面来处理自己的跳转,如果接收redirect就会报错；
+
+第十四节课
+1.router逻辑分到更小的子模块child.js,可以在router.js里面先导入，然后exports.showxixi = child.xixi;
+2.mongodb中当使用db.student.createIndex({name:1,age:1})建立name和age的索引后(也可以只设置一个索引)，通过name进行查找的速度会变快，但是会导致插入数据的速度变慢；
+3.db,student.createIndex({name:1},{unique:1})代表name的值在这个集合中不可以重复；
+4.索引在底层是一个hash表，建立一个索引字段的顺序；
+5.明天完成分页，排序的DAO层方法；
+6.
 
 
