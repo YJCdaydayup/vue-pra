@@ -327,6 +327,8 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 3.db,student.createIndex({name:1},{unique:1})代表name的值在这个集合中不可以重复；
 4.索引在底层是一个hash表，建立一个索引字段的顺序；
 5.明天完成分页，排序的DAO层方法；
-6.
+6.普通函数中的this指调用它的对象，严格模式下没有直接指明调用者那this就是undefined，apply/call/bind中的this是绑定的对象；箭头函数中的this默认是所处的第一个非箭头函数的this找到为止，一直到最外层；
+7.css不存在文件依赖的问题，但是只有当css加载完毕不管成功或者失败才会开始渲染页面；
+8.js存在文件的依赖问题，当正常添加到html页面的script标签加载js时，会加载一个js再执行这个js，然后加载后面的script中的js文件，当存在运行时加载时，就不会按顺序加载了，会加载完谁就去执行谁，所以就要有一个办法去控制这个js的加载先后顺序，通过script的onload方法和onreadystatechange(兼容性)监听去递归加载或者拼接字符串然后使用eval(‘(function res(){})’)来执行；
 
 

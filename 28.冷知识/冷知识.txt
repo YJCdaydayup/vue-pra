@@ -73,3 +73,17 @@ A.li标签下不要嵌套多个div，最合理的结构是ul li a span，可能�
 
 22.css,js下载失败后，依然会进行DOM树的渲染显示；
 
+23.//判断系统
+            let u = navigator.userAgent;
+            let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+            let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if (isAndroid) {
+                this.system = 'Android';
+            } else if (isIOS) {
+                this.system = 'IOS';
+            } else {
+                this.system = 'pc';
+            }
+
+
+

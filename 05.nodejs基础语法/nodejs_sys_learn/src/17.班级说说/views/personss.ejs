@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%= username %>说说</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-right a {
+            color: gray;
+        }
+
+        .container1 {
+            display: flex;
+        }
+
+        .left, .right {
+            flex: 1
+        }
+
+    </style>
+</head>
+
+<body>
+<%- include('header') %>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="container">
+    <h3>《<%= username %>发表的说说》</h3>
+    <!-- Example row of columns -->
+    <div class="row">
+        <% for (let i = 0;i < shuoshuo.length;i++) { %>
+            <div class="col-md-4" style=";padding-right: 10px">
+                <h4>
+                    <img src="/avatar/<%= shuoshuo[i].avatar %>" alt=""
+                         style="width: 30px;height: 30px;border-radius: 5px">
+                    <%= shuoshuo[i].username %>
+                </h4>
+                <p><%= shuoshuo[i].content %> </p>
+                <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
+            </div>
+        <% } %>
+    </div>
+    <hr>
+    <footer>
+        <p>&copy; 2016 Company, Inc.</p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>

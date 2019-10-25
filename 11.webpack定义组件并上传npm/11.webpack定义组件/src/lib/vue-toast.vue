@@ -1,23 +1,24 @@
 <template>
-    <transition name="fade">
-        <div class="toast" v-show="visible">
+<!--    <transition name="fade">-->
+        <div class="toast" v-show="visible" :class="showout">
             <span>{{ message }}</span>
         </div>
-    </transition>
+<!--    </transition>-->
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
-        .toast
-            transition all 2s
+    .toast
+        position fixed
+        bottom 36px
+        left 50%
+        background-color rgba(29, 29, 29, 0.3)
+        transition opacity 1s linear
+        opacity 0
+        &.in
             opacity 1
-            position fixed
-            bottom 36px
-            left 50%
-            background-color rgba(29, 29, 29, 0.3)
-            opacity 1
-            &.fade-enter, &.fade-leave-to
-                opacity 0
 
+        &.out
+            opacity 0
 
 </style>
 
@@ -25,11 +26,11 @@
     export default {
         data() {
             return {
-                visible: false,
-                message: ""
+                visible: true,
+                message: "",
+                showout: 'out'
             }
-        },
-        components: {}
+        }
     }
 </script>  
    

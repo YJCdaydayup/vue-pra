@@ -13,17 +13,22 @@ const gm = require('gm')
  * @param req
  * @param res
  */
-exports.showIndex = (req, res)=> {
-    let usename = null;
-    let avatar;
+exports.showIndex = (req, res) => {
+    let username, avatar;
     if (req.session.login == 1) {
         username = req.session.username;
     }
-    db.find('posts', {}, (err, results)=> {
+    db.multiFind('posts', {}, {
+        sort: {
+            datetime: -1
+        }
+    }, (err, results) => {
+        if (err) {
+            throw err;
+        }
         db.find('users', {
             username: req.session.username
-        }, (err, result)=> {
-            "use strict";
+        }, (err, result) => {
             if (result.length == 0) {
                 avatar = 'moren.jpg';
             } else {
@@ -37,7 +42,7 @@ exports.showIndex = (req, res)=> {
                 shuoshuo: results
             });
         })
-    })
+    });
 };
 
 /**
@@ -45,7 +50,7 @@ exports.showIndex = (req, res)=> {
  * @param req
  * @param res
  */
-exports.showRegist = (req, res)=> {
+exports.showRegist = (req, res) => {
     res.render('regist', {
         login: req.session.login == '1',
         username: req.session.login == '1' ? req.session.username : '',
@@ -58,16 +63,14 @@ exports.showRegist = (req, res)=> {
  * @param req
  * @param res
  */
-exports.doregist = (req, res)=> {
-    res.redirect('https://www.baidu.com');
-    return;
+exports.doregist = (req, res) => {
     let form = new formidable.IncomingForm();
-    form.parse(req, (err, fields, files)=> {
+    form.parse(req, (err, fields, files) => {
         console.log(fields)
         let {username, password} = fields;
         db.find('users', {
             username
-        }, (err, result)=> {
+        }, (err, result) => {
             if (err) {
                 res.send('-3');
                 return;
@@ -80,7 +83,7 @@ exports.doregist = (req, res)=> {
                 username,
                 password: md5(password),
                 avatar: 'moren.jpg'
-            }, (err, result)=> {
+            }, (err, result) => {
                 if (err) {
                     res.send('-3');
                     return;
@@ -98,7 +101,7 @@ exports.doregist = (req, res)=> {
  * @param req
  * @param res
  */
-exports.showlogin = (req, res)=> {
+exports.showlogin = (req, res) => {
     res.render('login', {
         login: req.session.login == '1',
         username: req.session.login == '1' ? req.session.username : '',
@@ -106,13 +109,13 @@ exports.showlogin = (req, res)=> {
     })
 };
 
-exports.dologin = (req, res)=> {
+exports.dologin = (req, res) => {
     let form = new formidable.IncomingForm();
-    form.parse(req, (err, fields, files)=> {
+    form.parse(req, (err, fields, files) => {
         let {username, password} = fields;
         db.find('users', {
             username
-        }, (err, result)=> {
+        }, (err, result) => {
             if (err) {
                 res.send('-3');
                 return;
@@ -127,6 +130,7 @@ exports.dologin = (req, res)=> {
 
             req.session.login = 1;
             req.session.username = username;
+            req.session.avatar = result[0].avatar;
             res.send('1');
         })
     });
@@ -137,7 +141,7 @@ exports.dologin = (req, res)=> {
  * @param req
  * @param res
  */
-exports.setavatar = (req, res)=> {
+exports.setavatar = (req, res) => {
     if (req.session.login !== 1) {
         res.send('非法闯入，必须登录')
     } else {
@@ -154,15 +158,15 @@ exports.setavatar = (req, res)=> {
  * @param req
  * @param res
  */
-exports.dosetavatar = (req, res)=> {
+exports.dosetavatar = (req, res) => {
     let form = new formidable.IncomingForm();
     form.uploadDir = './avatar';
-    form.parse(req, (err, fields, files)=> {
+    form.parse(req, (err, fields, files) => {
         console.log(files);
         // let extname = fs.extname(files.touxiang.name);
         let oldname = files.touxiang.path;
         let newname = './avatar/' + files.touxiang.name;
-        fs.rename(oldname, newname, (err)=> {
+        fs.rename(oldname, newname, (err) => {
             if (!err) {
                 req.session.avatar = files.touxiang.name;
                 res.redirect(301, '/cut');
@@ -176,13 +180,13 @@ exports.dosetavatar = (req, res)=> {
  * @param req
  * @param res
  */
-exports.showcut = (req, res)=> {
+exports.showcut = (req, res) => {
     res.render('cut', {
         avatar: req.session.avatar
     })
 };
 
-exports.docut = (req, res)=> {
+exports.docut = (req, res) => {
 //这个页面接收几个GET请求参数
     //文件名、w、h、x、y
     var filename = req.query.filename;
@@ -204,9 +208,20 @@ exports.docut = (req, res)=> {
                 $set: {
                     avatar: req.session.avatar
                 }
-            }, (err, result)=> {
+            }, (err, result) => {
                 if (!err) {
-                    res.send('1');
+                    // 更新所有此姓名的评论集合中的avatar
+                    db.set('posts', {
+                        username: req.session.username
+                    }, {
+                        $set: {
+                            avatar: req.session.avatar
+                        }
+                    }, (err, res1) => {
+                        if (!err) {
+                            res.send('1');
+                        }
+                    })
                 }
             })
         });
@@ -217,13 +232,13 @@ exports.docut = (req, res)=> {
  * @param req
  * @param res
  */
-exports.dopost = (req, res)=> {
+exports.dopost = (req, res) => {
     if (req.session.login !== 1) {
         res.send('非法闯入，需要先登录');
         return;
     }
     let form = new formidable.IncomingForm();
-    form.parse(req, (err, fields, files)=> {
+    form.parse(req, (err, fields, files) => {
         if (err) {
             res.send("-1");
             return;
@@ -234,13 +249,46 @@ exports.dopost = (req, res)=> {
         db.insertOne('posts', {
             username,
             content,
-            datetime: new Date()
-        }, (err, result)=> {
+            datetime: new Date(),
+            avatar: req.session.avatar
+        }, (err, result) => {
             if (err) {
                 res.send("-3");
                 return;
             }
             res.send('1'); // 写入了另外一个表posts成功
+        })
+    })
+};
+
+/**
+ * 获取某个人的所有说说
+ * @param req
+ * @param res
+ */
+exports.showusershuoshuo = (req, res) => {
+    if (!req.session.login) {
+        res.send('非法闯入，您需要先登录！');
+        return;
+    }
+    let {username} = req.params;
+    db.multiFind('posts', {
+        username
+    }, {
+        sort: {
+            datetime: -1
+        }
+    }, (err, result) => {
+        if (err) {
+            res.send("-3");
+            return;
+        }
+        console.log(this);
+        res.render('personss', {
+            login: req.session.login == '1',
+            username: req.session.username,
+            shuoshuo: result,
+            flag: '首页',
         })
     })
 };

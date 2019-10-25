@@ -17,7 +17,7 @@ function __init() {
         let collection = db.collection('users');
         collection.createIndex({
             username: 1,
-            function (err, result) {
+            function(err, result) {
                 console.log()
             }
         })
@@ -220,13 +220,13 @@ exports.du = function (collectionName, json, args, cb) {
 }
 
 exports.pushAll = function (collectionName, json, rule, callback) {
-    _connectDB((err, db)=> {
+    _connectDB((err, db) => {
         if (err) {
             callback(err);
             return;
         }
         let collection = db.collection(collectionName);
-        collection.estimatedDocumentCount().then((res)=> {
+        collection.estimatedDocumentCount().then((res) => {
             console.log(res)
         });
         let cursor = collection.find(json).limit(limit).skip(skipNumber).sort(sort);
@@ -265,7 +265,7 @@ exports.getAllCount = function (collectionName, callback) {
             return;
         }
         let collection = db.collection(collectionName);
-        collection.count({}).then((count)=> {
+        collection.count({}).then((count) => {
             callback(null, parseInt(count));
         });
     })
@@ -287,5 +287,57 @@ exports.delete = function (collectionName, json, callback) {
             callback(null, result);
         })
     })
-}
+};
+
+exports.multiFind = function (collectionName, query, params, callback) {
+    let find_query, request_query, completion;
+    let pageSize, page, sort;
+    let skipedNumber;
+    let result = [];
+    if (arguments.length === 3) {
+        completion = params;
+        find_query = query;
+        pageSize = 0;
+        page = 0;
+        sort = {};
+    } else if (arguments.length === 4) {
+        find_query = query;
+        request_query = params;
+        completion = callback;
+        pageSize = parseInt(find_query.pageSize || 0);
+        page = parseInt(find_query.page || 0);
+        sort = request_query.sort; // {name:1}
+    }else {
+        console.log(arguments)
+        throw '参数错误';
+    }
+    skipedNumber = pageSize * page;
+    _connectDB((err, db) => {
+        if (err) {
+            completion(err);
+            return;
+        }
+        let collection = db.collection(collectionName);
+        let cursor = collection.find(find_query).skip(skipedNumber).limit(pageSize).sort(sort);
+        cursor.toArray((err, items) => {
+            if (err) {
+                completion(err);
+                return;
+            }
+            if (items.length === 0) {
+                completion(null, result);
+                return;
+            }
+            (function iterator(i) {
+                if (result.length === items.length) {
+                    completion(null, result);
+                    return;
+                }
+                result.push(items[i]);
+                iterator(i + 1);
+            })(0)
+        })
+    });
+
+};
 

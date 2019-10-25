@@ -26,5 +26,6 @@ app.post('/dosetavatar',router.dosetavatar);
 app.get('/cut',router.showcut);
 app.get('/docut',router.docut);
 app.post('/post',router.dopost);
+app.get('/username/:username',router.showusershuoshuo);
 
 app.listen(3000);

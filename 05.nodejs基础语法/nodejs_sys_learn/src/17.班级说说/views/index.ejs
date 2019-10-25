@@ -40,6 +40,22 @@
         <button id="fabiao" type="button" class="btn btn-success">发表</button>
     </div>
 </div>
+<div class="container">
+    <h3>《全部说说》</h3>
+    <!-- Example row of columns -->
+    <div class="row">
+        <% for (let i = 0;i < shuoshuo.length;i++) { %>
+        <div class="col-md-4" style=";padding-right: 10px">
+            <h4>
+                <a href="/username/<%=shuoshuo[i].username%>"><img src="/avatar/<%=shuoshuo[i].avatar%>" alt="" style="width: 30px;height: 30px;border-radius: 5px"></a>
+                <%=shuoshuo[i].username%>
+            </h4>
+            <p><%=shuoshuo[i].content%> </p>
+            <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
+        </div>
+        <% } %>
+    </div>
+    <hr>
 <% }else { %>
 <div class="container1" style="margin: 100px 60px 20px">
     <div class="left">
@@ -65,19 +81,6 @@
 </div>
 <% } %>
 
-<div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <% for (let i = 0;i < shuoshuo.length;i++) { %>
-        <div class="col-md-4">
-            <h2><%=shuoshuo[i].username%></h2>
-            <p><%=shuoshuo[i].content%> </p>
-            <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
-        </div>
-        <% } %>
-    </div>
-
-    <hr>
 
     <footer>
         <p>&copy; 2016 Company, Inc.</p>
