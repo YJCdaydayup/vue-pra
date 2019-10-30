@@ -286,9 +286,73 @@ exports.showusershuoshuo = (req, res) => {
         console.log(this);
         res.render('personss', {
             login: req.session.login == '1',
-            username: req.session.username,
+            username: username,
             shuoshuo: result,
             flag: '首页',
         })
+    })
+};
+
+exports.existlogin = (req, res) => {
+    if (req.session.login !== 1) {
+        // 本来就未登录
+        res.redirect('/');
+    } else {
+        // 已经登录
+        req.session.login = null;
+        req.session.username = null;
+        req.session.avatar = null;
+        res.redirect('/')
+    }
+};
+
+/**
+ * 获取数据页码
+ */
+exports.getAllPages = (req, res) => {
+    let {username} = req.query;
+    db.getAllCount('posts', {
+        username
+    }, (err, count) => {
+        if (err) {
+            res.send("-3");
+            return;
+        }
+        res.send(count + '');
+    });
+};
+
+/**
+ * 获取某个用户的所有说说
+ * @param req
+ * @param res
+ */
+exports.getList = (req, res) => {
+    let {username, pagesize, page} = req.query;
+    console.log(req.query)
+    db.multiFind('posts', {
+        username
+    }, {
+        page,
+        pageSize: pagesize,
+        sort: {
+            datetime: -1
+        }
+    }, (err, result) => {
+        if (err) {
+            res.send('-3');
+            return;
+        }
+        res.json({
+            res: result
+        })
+    })
+};
+
+exports.showusers = (req, res) => {
+    db.find('users', {}, (err, result) => {
+        res.render('user', {
+            users: result
+        });
     })
 };

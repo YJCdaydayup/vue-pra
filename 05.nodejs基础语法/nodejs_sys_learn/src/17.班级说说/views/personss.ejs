@@ -15,12 +15,25 @@
             color: gray;
         }
 
-        .container1 {
+        .left, .right {
+            flex: 1
+        }
+
+        .ss-container {
+            margin-top: 20px;
+        }
+
+        .user-title {
             display: flex;
         }
 
-        .left, .right {
-            flex: 1
+        li {
+            list-style-type: none;
+        }
+
+        .ss-container li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
         }
 
     </style>
@@ -30,24 +43,30 @@
 <%- include('header') %>
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="container">
-    <h3>《<%= username %>发表的说说》</h3>
+    <h3 style="margin-top: 60px" id="username" data-name=<%= username %>>《<%= username %>发表的说说》</h3>
     <!-- Example row of columns -->
-    <div class="row">
-        <% for (let i = 0;i < shuoshuo.length;i++) { %>
-            <div class="col-md-4" style=";padding-right: 10px">
-                <h4>
-                    <img src="/avatar/<%= shuoshuo[i].avatar %>" alt=""
-                         style="width: 30px;height: 30px;border-radius: 5px">
-                    <%= shuoshuo[i].username %>
-                </h4>
-                <p><%= shuoshuo[i].content %> </p>
-                <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
-            </div>
-        <% } %>
+    <div class="ss-container" id="ss-container">
+        <ul id="ss-box">
+
+        </ul>
     </div>
+    <nav aria-label="...">
+        <ul id="pagination" class="pagination">
+            <li data-index='back' id="first" class="disabled">
+              <span>
+                <span aria-hidden="true">&laquo;</span>
+              </span>
+            </li>
+            <li data-index='go' id="last">
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <hr>
     <footer>
-        <p>&copy; 2016 Company, Inc.</p>
+        <p>&copy; 2019 Company, Inc.</p>
     </footer>
 </div> <!-- /container -->
 
@@ -58,6 +77,126 @@
 <script src="/js/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="/js/bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+
+        var username = $('#username').attr('data-name');
+        var currentIndex;
+
+        function getAllPages() {
+            $.get('/getAllPages?username=' + username, function (res) {
+                if (res == '-3') {
+                    alert('获取页码数据失败');
+                    return;
+                }
+                var htmlstr = '';
+                (function iterator(i) {
+                    if (i == Math.ceil(res / 3)) {
+                        $(htmlstr).insertAfter($("#first"))
+                        $('#pagination li').click(function () {
+                            var index = $(this).attr('data-index');
+                            var me = $(this);
+                            if (index === 'back' || index === 'go') {
+                                if (index === 'back') {
+                                    currentIndex = currentIndex - 1;
+                                } else {
+                                    currentIndex = currentIndex + 1
+                                }
+                                parserParams({
+                                    page: currentIndex,
+                                    pagesize: 3,
+                                    username: username
+                                }, function (paramstr) {
+                                    getListData(paramstr);
+                                })
+                            } else {
+                                currentIndex = index;
+                                parserParams({
+                                    page: currentIndex,
+                                    pagesize: 3,
+                                    username: username
+                                }, function (paramstr) {
+                                    getListData(paramstr);
+                                    me.addClass('active').siblings().removeClass('active');
+                                    changeControlButtonState(me, Math.ceil(res / 3))
+                                })
+                            }
+                        })
+                        return;
+                    }
+                    var x = i === 0 ? 'active' : '';
+                    htmlstr += '<li data-index=' + i + ' class=' + x + '><span>' + eval(i + 1) + '<span class="sr-only">(current)</span></span></li>'
+                    iterator(i + 1);
+                })(0)
+            })
+        }
+
+        function changeControlButtonState(e, count) {
+            var index = e.attr('data-index');
+            if (index == 0) {
+                $('#first').addClass('disabled');
+                $('#last').removeClass('disabled');
+            } else {
+                $('#first').removeClass('disabled');
+                console.log(index, count - 1)
+                if (index == count - 1) {
+                    $('#last').addClass('disabled');
+                } else {
+                    $('#last').removeClass('disabled');
+                }
+            }
+        }
+
+        function parserParams(params, callback) {
+            var paramstr = '';
+            var keys = Object.keys(params);
+            (function iterator(i) {
+                var k = keys[i];
+                var v = params[k];
+                if (i === keys.length - 1) {
+                    var t = k + '=' + v;
+                    paramstr += t;
+                    callback(paramstr)
+                    return;
+                } else {
+                    var t = k + '=' + v + '&';
+                    paramstr += t;
+                    iterator(i + 1);
+                }
+            })(0)
+        }
+
+        parserParams({
+            page: 0,
+            pagesize: 3,
+            username: username
+        }, function (paramstr) {
+            getListData(paramstr);
+        });
+
+        function getListData(paramstr) {
+            $.get('/getList?' + paramstr, function (results) {
+                var result = results.res;
+                var htmlstr = '';
+                $('#ss-box').html('');
+                for (var i = 0; i < result.length; i++) {
+                    htmlstr += '<li>\n' +
+                        '                <p class="user-title">\n' +
+                        '                    <img style="border-radius: 15px" width="30px" height="30px" src="' + '/avatar/' + result[i].avatar + '"alt="">\n' +
+                        '                    <span style="font-size: 20px;margin-left: 10px">' + result[i].username + '</span>\n' +
+                        '                </p>\n' +
+                        '                <p class="des">' + result[i].content +
+                        '                </p><h4>查看更多 <strong style="position: relative;top: -1px;">>></strong></h4></li>'
+                }
+                $('#ss-box').append(htmlstr);
+            })
+        }
+
+        getAllPages();
+    })
+</script>
+
 
 </body>
 </html>

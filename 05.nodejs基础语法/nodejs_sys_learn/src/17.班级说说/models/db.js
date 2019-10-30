@@ -258,14 +258,14 @@ exports.pushAll = function (collectionName, json, rule, callback) {
     })
 }
 
-exports.getAllCount = function (collectionName, callback) {
+exports.getAllCount = function (collectionName, json = {}, callback) {
     _connectDB(function (err, db) {
         if (err) {
             callback(err);
             return;
         }
         let collection = db.collection(collectionName);
-        collection.count({}).then((count) => {
+        collection.count(json).then((count) => {
             callback(null, parseInt(count));
         });
     })
@@ -304,10 +304,10 @@ exports.multiFind = function (collectionName, query, params, callback) {
         find_query = query;
         request_query = params;
         completion = callback;
-        pageSize = parseInt(find_query.pageSize || 0);
-        page = parseInt(find_query.page || 0);
+        pageSize = parseInt(request_query.pageSize || 0);
+        page = parseInt(request_query.page || 0);
         sort = request_query.sort; // {name:1}
-    }else {
+    } else {
         console.log(arguments)
         throw '参数错误';
     }
@@ -338,6 +338,4 @@ exports.multiFind = function (collectionName, query, params, callback) {
             })(0)
         })
     });
-
 };
-

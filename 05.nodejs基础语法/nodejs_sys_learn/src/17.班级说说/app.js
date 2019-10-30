@@ -16,6 +16,9 @@ app.use(session({
 }));
 app.use('/avatar',express.static('./avatar'));
 
+// app.set('view engine','html');
+// app.engine('html',ejs.__express);// ejs.__express 其实就是ejs的renderFile方法
+
 app.get('/', router.showIndex);
 app.get('/regist',router.showRegist);
 app.post('/doregist',router.doregist);
@@ -27,5 +30,9 @@ app.get('/cut',router.showcut);
 app.get('/docut',router.docut);
 app.post('/post',router.dopost);
 app.get('/username/:username',router.showusershuoshuo);
+app.get('/existlogin',router.existlogin);
+app.get('/getAllPages',router.getAllPages);
+app.get('/getList',router.getList);
+app.get('/users',router.showusers);
 
 app.listen(3000);

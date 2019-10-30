@@ -85,5 +85,37 @@ A.li标签下不要嵌套多个div，最合理的结构是ul li a span，可能�
                 this.system = 'pc';
             }
 
+24. <script>
+        window.onload = function(){
+            getRem(720,100)
+        };
+        window.onresize = function(){
+            getRem(720,100)
+        };
+	window.onorientationchange = function() {
+	    getRem(720,100)
+	}
+        function getRem(pwidth,prem){
+            var html = document.getElementsByTagName("html")[0];
+            var oWidth = document.body.clientWidth || document.documentElement.clientWidth;
+            html.style.fontSize = oWidth/pwidth*prem + "px";
+        }
+        /*
+        //小米官网的写法
+        !function(n){
+            var  e=n.document,
+                 t=e.documentElement,
+                 i=720,
+                 d=i/100,
+                 o="orientationchange"in n?"orientationchange":"resize",
+                 a=function(){
+                     var n=t.clientWidth||320;n>720&&(n=720);
+                     t.style.fontSize=n/d+"px"
+                 };
+                 e.addEventListener&&(n.addEventListener(o,a,!1),e.addEventListener("DOMContentLoaded",a,!1))
+        }(window);*/
+    </script>
+
+25.Vue中的指令一般用于初始化标签的时候定义标签的状态或者抽出来动态改变标签的状态，分为全局指令Vue.directive('demo',{bind(){},}),局部指令directives:{demo:{bind(el,binding){}}},抽出来通过mixins:[direcs],export const direcs = {directives: {demo: {bind(el){}}}}
 
 
