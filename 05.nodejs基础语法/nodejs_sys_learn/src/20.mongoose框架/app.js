@@ -3,16 +3,17 @@
  */
 
 let Student = require('./models/Student');
+let Teacher = require('./models/Teacher');
 
-let xm = new Student({
-    name: '小猫',
-    age: 3,
-    sex: 'female'
-});
-
-xm.save((err)=> {
-    console.log('小猫存储了');
-});
+// let xm = new Student({
+//     name: '小猫',
+//     age: 3,
+//     sex: 'female'
+// });
+//
+// xm.save((err)=> {
+//     console.log('小猫存储了');
+// });
 
 // Student.create({
 //     name: '小狗',
@@ -23,9 +24,22 @@ xm.save((err)=> {
 // Student.zhaoren('小狗', (err, result)=> {
 //     console.log(result);
 // });
+//
+// Student.xiugai({name: '小狗'},{$set: {
+//     age: 30
+// }},{},(err,result)=>{
+//
+// });
 
-Student.xiugai({name: '小狗'},{$set: {
-    age: 30
-}},{},(err,result)=>{
+// Teacher.create({
+//     name: 'Sara',
+//     age: '28',
+//     sex: '女'
+// });
 
+Teacher.finds({},{name: 1},(result)=>{
+    console.log(result);
 })
+
+
+

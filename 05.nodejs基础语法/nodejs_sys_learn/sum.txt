@@ -331,7 +331,7 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 7.css不存在文件依赖的问题，但是只有当css加载完毕不管成功或者失败才会开始渲染页面；
 8.js存在文件的依赖问题，当正常添加到html页面的script标签加载js时，会加载一个js再执行这个js，然后加载后面的script中的js文件，当存在运行时加载时，就不会按顺序加载了，会加载完谁就去执行谁，所以就要有一个办法去控制这个js的加载先后顺序，通过script的onload方法和onreadystatechange(兼容性)监听去递归加载或者拼接字符串然后使用eval(‘(function res(){})’)来执行；
 9.ajax请求中有一个onreadystatechange函数监听请求的状态，也有一个属性是用于确定请求是异步还是同步的；
-10.添加一个分页功能，清楚内容$(‘#content’).html(“”),$(this).addClass().siblings.removeClass():
+10.添加一个分页功能，清楚内容$(‘#content’).html(“”),$(this).addClass().siblings().removeClass():
 11.mongoose是将js对象与数据库产生关系的框架，操作对象就是操作数据库，对象产生了同时也持久化了，这个思路是java三道框架中的SSH中Hibernate框架的思路；
 12.研究mongoose的MVC模型，创建文档的方法有:let st = new Student({name: ’Sara’})，然后st.save((err)=>{})，还可以直接Student.create({name: ‘Sara’})会自动创建自动保存；
 13.可以直接在studentSchema的statics上添加方法，就可以在Student类上直接使用这些方法，获取集合就是this.model(‘Student’),然后数据的操作就是一样的了，updateOne,find,
