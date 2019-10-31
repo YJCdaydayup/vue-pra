@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加书</title>
+</head>
+<body>
+<form action="/doedit" method="get">
+    <p>
+        书名:
+        <input type="text" placeholder="书名" name="name" value=<%= name %>>
+    </p>
+    <input type="text" style="display: none" name="_id" value=<%= id %>>
+    <p>
+        作者:
+        <input type="text" placeholder="作者" name="author" value=<%= author %>>
+    </p>
+    <p>
+        价格:
+        <input type="text" placeholder="价格" name="price" value=<%= price %>>
+    </p>
+    <p>
+        <input type="submit" value="修改">
+    </p>
+</form>
+</body>
+</html>
