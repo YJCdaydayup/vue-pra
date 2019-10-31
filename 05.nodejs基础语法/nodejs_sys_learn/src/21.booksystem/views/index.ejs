@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加书</title>
+    <style>
+        tr, th, td {
+            border: 1px solid #ccc;
+            padding: 5px 12px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <a href="/addbook">增加图书</a>
+    <tr>
+        <th>图书</th>
+        <th>作者</th>
+        <th>价格</th>
+        <th>操作</th>
+    </tr>
+    <% for(let i = 0;i < tushu.length;i++) { %>
+    <tr>
+        <td><%= tushu[i].name %></td>
+        <td><%= tushu[i].author %></td>
+        <td><%= tushu[i].price %></td>
+        <td><a href="/edit?id=<%=tushu[i]._id%>">修改</a></td>
+    </tr>
+    <% } %>
+</table>
+</body>
+</html>

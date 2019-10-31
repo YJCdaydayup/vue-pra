@@ -334,5 +334,7 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 10.添加一个分页功能，清楚内容$(‘#content’).html(“”),$(this).addClass().siblings().removeClass():
 11.mongoose是将js对象与数据库产生关系的框架，操作对象就是操作数据库，对象产生了同时也持久化了，这个思路是java三道框架中的SSH中Hibernate框架的思路；
 12.研究mongoose的MVC模型，创建文档的方法有:let st = new Student({name: ’Sara’})，然后st.save((err)=>{})，还可以直接Student.create({name: ‘Sara’})会自动创建自动保存；
-13.可以直接在studentSchema的statics上添加方法，就可以在Student类上直接使用这些方法，获取集合就是this.model(‘Student’),然后数据的操作就是一样的了，updateOne,find,
-
+13.可以直接在studentSchema的statics上添加方法，就可以在Student类上直接使用这些方法，获取集合就是this.model(‘Student’),然后数据的操作就是一样的了，updateOne,find
+14.req.query默认就是个对象；
+15.Book.create(req.query,(err)=>{res.send(‘保存成功’)});后面是有一个一定会调用的回调的；
+16.通过this.model(‘Book’).find({},callback)查找到的回调中result就是一个数组了；
