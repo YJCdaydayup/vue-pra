@@ -12,5 +12,6 @@ app.get('/addbook',router.addbook);
 app.get('/doadd',router.doadd);
 app.get('/edit',router.showedit);
 app.get('/doedit',router.doedit);
+app.get('/delete',router.delete);
 
 app.listen(3000);

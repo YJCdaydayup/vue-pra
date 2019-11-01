@@ -17,7 +17,8 @@
         <th>图书</th>
         <th>作者</th>
         <th>价格</th>
-        <th>操作</th>
+        <th>操作1</th>
+        <th>操作2</th>
     </tr>
     <% for(let i = 0;i < tushu.length;i++) { %>
     <tr>
@@ -25,6 +26,7 @@
         <td><%= tushu[i].author %></td>
         <td><%= tushu[i].price %></td>
         <td><a href="/edit?id=<%=tushu[i]._id%>">修改</a></td>
+        <td><a href="/delete?id=<%=tushu[i]._id%>">删除</a></td>
     </tr>
     <% } %>
 </table>

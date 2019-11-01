@@ -1,4 +1,4 @@
-O第一节课
+xO第一节课
 1.模块化，解决命名冲突和文件依赖和无法私有性，如日志模块,最早常采用命名空间法来做的，var caculator = {}, caculator.add=function() {}
 2.驼峰命名法+匈牙利命名法(加上了类型)如numA，fnCaculator=function(){}
 3.还可以使用(function(){})()来定义模块
@@ -338,3 +338,4 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 14.req.query默认就是个对象；
 15.Book.create(req.query,(err)=>{res.send(‘保存成功’)});后面是有一个一定会调用的回调的；
 16.通过this.model(‘Book’).find({},callback)查找到的回调中result就是一个数组了；
+17.数据类型可以是数组和对象，数组里面如果是文档那么每个文档也会产生一个自己的_id;
