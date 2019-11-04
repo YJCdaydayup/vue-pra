@@ -338,4 +338,22 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 14.req.query默认就是个对象；
 15.Book.create(req.query,(err)=>{res.send(‘保存成功’)});后面是有一个一定会调用的回调的；
 16.通过this.model(‘Book’).find({},callback)查找到的回调中result就是一个数组了；
+<<<<<<< Updated upstream
 17.数据类型可以是数组和对象，数组里面如果是文档那么每个文档也会产生一个自己的_id;
+=======
+
+第十五节课
+1.schema是确定字段的，如果schema里面没有这个字段，即使赋予了这个字段和字段的值也是存不进去的；
+2.通过find查找到的数组中的每个元素都是一个文档实例，就是一个Cat的对象，可以直接修改其属性字段的值然后save就可以更新数据库里面的数据了；
+3.数据类型有: String Number Date Buffer Boolean Mixed ObjectId Array 
+4.Mixed复合类型比如:comments: [{body:String, date: Date}] meta: {votes: Number,favs: Number}
+5.在schema上面给类增加方法就是在statics上面添加，给实例添加方法就是在methods上面添加；
+6.获取实例上面的属性的值可以在schema上定义方法来获取， let blog = new Blog({title，“测试”});blog.showInfo();schema.methods.showInfo = function() {console.log(this.title)}
+7.可以在实例方法里面用this的字段去查找，this.model(‘Animal’)依然是集合对象，this.model(‘Animal’).find({name: this.name},(err, result)=>{})
+7.可以直接用类名去调用原生的查找方法而不用在schema的statics上定义方法，Animal.find({},(err,result)=>{})或者Animal.findOne();
+8.
+
+
+
+
+>>>>>>> Stashed changes
