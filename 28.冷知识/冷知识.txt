@@ -118,4 +118,15 @@ A.li标签下不要嵌套多个div，最合理的结构是ul li a span，可能�
 
 25.Vue中的指令一般用于初始化标签的时候定义标签的状态或者抽出来动态改变标签的状态，分为全局指令Vue.directive('demo',{bind(){},}),局部指令directives:{demo:{bind(el,binding){}}},抽出来通过mixins:[direcs],export const direcs = {directives: {demo: {bind(el){}}}}
 
+26.使用keep-alive处理页面不缓存的问题beforeRouteLeave(to, from, next) {
+      if (to.name === 'Form03') {
+        if (!from.meta.keepAlive) {
+          from.meta.keepAlive = true; //当我们进入到C时开启B的缓存
+        }
+        next()
+      } else {
+        from.meta.keepAlive = false;
+        this.$destroy(); //销毁B的实例
+        next(); //当我们前进的不是C时我们让B页面刷新
+      }}
 
