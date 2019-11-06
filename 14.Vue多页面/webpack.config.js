@@ -6,9 +6,9 @@ const path = require('path');
 module.exports = {
     entry: {
         cart: './src/enties/cart.js',
-        main: './src/enties/main.js',
-        verify: './src/enties/veriform.js',
-        chart: './src/enties/chart.js'
+        // main: './src/enties/main.js',
+        // verify: './src/enties/veriform.js',
+        // chart: './src/enties/chart.js'
     },
     output: {
         path: path.join(__dirname, '/dist'),
@@ -88,29 +88,29 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            filename: 'index1.html',
+            filename: 'index.html',
             template: './src/mounts/cart.html',
             inject: 'body',
             chunks: ['cart']
         }),
-        new HtmlWebpackPlugin({
-            filename: 'index2.html',
-            template: './src/mounts/main.html',
-            inject: 'body',
-            chunks: ['main']
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'index3.html',
-            template: './src/mounts/main.html',
-            inject: 'body',
-            chunks: ['verify']
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './src/mounts/chart.html',
-            inject: 'body',
-            chunks: ['chart']
-        }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'index2.html',
+        //     template: './src/mounts/main.html',
+        //     inject: 'body',
+        //     chunks: ['main']
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'index3.html',
+        //     template: './src/mounts/main.html',
+        //     inject: 'body',
+        //     chunks: ['verify']
+        // }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'index.html',
+        //     template: './src/mounts/chart.html',
+        //     inject: 'body',
+        //     chunks: ['chart']
+        // }),
         new CleanWebpackPlugin(['./dist'], {
             root: __dirname + '',
             verbose: true,

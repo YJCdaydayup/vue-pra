@@ -10,3 +10,12 @@
 3.子组件通信给父组件，一般可以在子组件中用this.$emit('add-ball'， this.count)，然后在父组件中<compo @add-ball="add">拿到回调，还可以在子组件中通过event.$emit('addball',this.count),父组件里面在created函数中加，event.$on('addball',(count)=>{})监听这个事件，前提是定义一个new Vue()对象作为event，大家都用这个event
 4.自己通过webpack搭建的vue多页面，也可以进行第三方组件的安装，并在页面入口js文件中注册到Vue中，就可以了，比如Vuerify
 5.导入了Vue就意味着window上已经有了Vue构造函数，就可以直接使用Vue.use()了，就意味着在html里面测试Vue时，通过script导入Vue时可以直接使用了
+6.自定义Vue组件上传到npm上时，先创建一个继承根vue的Vue实例，let instance = Vue.extent(myVue),然后new instance(),再$mount绑定到document.querySelector('#app')上，其实封装
+起来就是，new Vue({el: '#app'},router,computed: {
+                                         ViewPage() {
+                                             return cart_by;
+                                         }
+                                     },
+                                     render(h) {
+                                         return h(this.ViewPage);
+                                     }),其中使用封装的话就可以方便使用路由了；

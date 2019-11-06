@@ -7,6 +7,8 @@ import Vue from '../../node_modules/vue/dist/vue.js'
 //     new MainPage().$mount(document.querySelector('#app'));
 // }
 
+import router from './router/router';
+
 export default class common {
     static bind(com) {
         let mainPage = Vue.extend(com);
