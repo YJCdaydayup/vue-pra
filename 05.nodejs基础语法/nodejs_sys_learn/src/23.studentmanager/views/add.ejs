@@ -7,10 +7,20 @@
 <body>
 <form action="/doadd">
     <p>
+        学号: <input type="text" name="sid">
+    </p>
+    <p>
         姓名: <input type="text" name="name">
     </p>
     <p>
         年龄: <input type="text" name="age">
+    </p>
+    <p>
+        全部课程:
+        <br>
+        <% for (let i = 0;i < quanbukecheng.length;i++) { %>
+            <input type="checkbox" name="kechengs" value=<%=quanbukecheng[i].kid%> ><%=quanbukecheng[i].name%>
+        <% } %>
     </p>
     <p>
         性别:

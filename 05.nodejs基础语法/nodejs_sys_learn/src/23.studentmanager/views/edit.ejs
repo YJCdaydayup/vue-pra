@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>修改学生</title>
+</head>
+<body>
+<form action="/doedit?<%=student.sid%>" method="get">
+    <p>
+        学号: <input type="text" name="sid" value=<%= student.sid %> disabled>
+    </p>
+    <p>
+        姓名: <input type="text" name="name" value=<%= student.name %>>
+    </p>
+    <p>
+        年龄: <input type="text" name="age" value="<%= student.age %>">
+    </p>
+    <p>
+        性别:
+        <br>
+        男:<input type="radio" name="sex" value="男"
+                <% if (student.sex === '男'){ %>
+                 checked
+                <%} %>
+        >
+        女:<input type="radio" name="sex" value="女"
+                <% if (student.sex === '女'){ %>
+                 checked
+                <%} %>
+        >
+    </p>
+    <input type="submit" value="修改">
+</form>
+</body>
+</html>
