@@ -9,7 +9,7 @@
 				<key>kind</key>
 				<string>software-package</string>
 				<key>url</key>
-				<string>https://xingyb.oss-cn-hangzhou.aliyuncs.com/ios.ipa</string>
+				<string>https://github.com/YJCdaydayup/vue-pra/raw/master/30.test/cczq-wit-v201901.09.000AM1-20191105.ipa</string>
 			</dict>
 			<dict>
 				<key>kind</key>
@@ -17,7 +17,7 @@
 				<key>needs-shine</key>
 				<true/>
 				<key>url</key>
-				<string>https://raw.githubusercontent.com/YJCdaydayup/vue-pra/master/30.test/zy_512.png</string>
+				<string>https://github.com/YJCdaydayup/vue-pra/raw/master/30.test/zy_512.png</string>
 			</dict>
 			<dict>
 				<key>kind</key>
@@ -25,7 +25,7 @@
 				<key>needs-shine</key>
 				<true/>
 				<key>url</key>
-				<string>https://raw.githubusercontent.com/YJCdaydayup/vue-pra/master/30.test/zy_57.png</string>
+				<string>https://github.com/YJCdaydayup/vue-pra/raw/master/30.test/zy_57.png</string>
 			</dict>
 		</array>
 		<key>metadata</key>
