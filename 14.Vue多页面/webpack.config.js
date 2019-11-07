@@ -1,5 +1,5 @@
 let HtmlWebpackPlugin = require('html-webpack-plugin')
-let { VueLoaderPlugin } = require('vue-loader')
+let {VueLoaderPlugin} = require('vue-loader')
 let CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require('path');
 
@@ -34,7 +34,7 @@ module.exports = {
                 test: /\.scss$/,
                 exclude: /node_modules/,
                 loaders: [
-                    'style-loader',
+                    'vue-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -50,7 +50,7 @@ module.exports = {
                 test: /\.stylus$/,
                 exclude: /node_modules/,
                 loaders: [
-                    'style-loader',
+                    'vue-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -65,7 +65,7 @@ module.exports = {
                 test: /\.styl$/,
                 exclude: /node_modules/,
                 loaders: [
-                    'style-loader',
+                    'vue-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -76,23 +76,47 @@ module.exports = {
                     'stylus-loader'
                 ]
             },
+            // {
+            //     test: /\.css$/,
+            //     // exclude: /node_modules/,
+            //     loaders: [
+            //         'vue-loader',
+            //         {
+            //             loader: 'css-loader',
+            //             options: {
+            //                 importLoaders: 1
+            //             }
+            //         },
+            //         'postcss-loader',
+            //     ]
+            // },
+            {
+                test: /\.(woff|svg|eot|ttf)\??.*$/,
+                loader: 'url-loader'
+            },
             {
                 test: /\.css$/,
-                loaders: [
-                    'vue-loader',
-                    'css-loader'
+                use: [
+                    'vue-style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                    'postcss-loader',
                 ]
             }
         ]
     },
     plugins: [
         new VueLoaderPlugin(),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './src/mounts/cart.html',
-            inject: 'body',
-            chunks: ['cart']
-        }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'index.html',
+        //     template: './src/mounts/cart.html',
+        //     inject: 'body',
+        //     chunks: ['cart']
+        // }),
         // new HtmlWebpackPlugin({
         //     filename: 'index2.html',
         //     template: './src/mounts/main.html',

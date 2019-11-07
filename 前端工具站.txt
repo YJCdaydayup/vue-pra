@@ -7,3 +7,4 @@
 # 7.haorooms博客： https://www.haorooms.com/nav
 # 8.好用的规范，框架，代码库： http://nec.netease.com/plugin
 # 9.脚本之家 https://www.jb51.cc/vue/485437.html
+# 10.收录好的vue UI插件 https://cloud.tencent.com/developer/chapter/18052

@@ -19,3 +19,7 @@
                                      render(h) {
                                          return h(this.ViewPage);
                                      }),其中使用封装的话就可以方便使用路由了；
+7.使用第三方Vue UI插件时，如果看不到效果也没有报错，先检查一下css文件是否引入，不行就在最外层的index.html模版里面手动引入这个css文件;
+8.对于Vue开发，在Vue文件里面编写css的时候，要申明lang，lang可以是css stylus scss less，然后在webpack.config.js里面的规则中，对应的文件用对应的规则获取，并按照它正常的顺序进行解析，最底层的loader统一采用vue-style-loader;
+9.如果使用了node_modules中第三方插件的css，且通过import引入了，在对应的规则解析下不能排除node_modules //exclude: /node_modules/,不然
+10.单独打包出js文件可以不使用html-webpack-plugin，会起一个服务器通过这个服务访问这个js文件，使用了html-webpack-plugin就可以build出模版文件和dev出热更新网页；
