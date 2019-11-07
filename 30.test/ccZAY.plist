@@ -17,7 +17,7 @@
 				<key>needs-shine</key>
 				<true/>
 				<key>url</key>
-				<string>http://xingyb.oss-cn-hangzhou.aliyuncs.com/webapp/512.png</string>
+				<string>https://raw.githubusercontent.com/YJCdaydayup/vue-pra/master/30.test/zy_512.png</string>
 			</dict>
 			<dict>
 				<key>kind</key>
@@ -25,7 +25,7 @@
 				<key>needs-shine</key>
 				<true/>
 				<key>url</key>
-				<string>http://xingyb.oss-cn-hangzhou.aliyuncs.com/webapp/57.png</string>
+				<string>https://raw.githubusercontent.com/YJCdaydayup/vue-pra/master/30.test/zy_57.png</string>
 			</dict>
 		</array>
 		<key>metadata</key>
