@@ -10,11 +10,11 @@ export default new Router({
     routes: [
         {
             path: '',
-            redirect: '/page1'
+            redirect: '/zhanye'
         },
         {
-            path: '/page1',
-            name: 'page1',
+            path: '/zhanye',
+            name: 'zhanye',
             component: page1,
         },
         {

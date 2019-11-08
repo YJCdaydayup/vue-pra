@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>123cart</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
     <meta name="screen-orientation" content="portrait"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
@@ -12,7 +13,22 @@
     <meta name="x5-fullscreen" content="true">
     <link rel="dns-prefetch" href="//cangdu.org">
     <link rel="dns-prefetch" href="//elm.cangdu.org">
-<!--    <link rel="stylesheet" href="./../../node_modules/element-ui/lib/theme-chalk/index.css">-->
+    <script>
+        window.onload = function(){
+            /*720代表设计师给的设计稿的宽度，你的设计稿是多少，就写多少;100代表换算比例，这里写100是
+              为了以后好算,比如，你测量的一个宽度是100px,就可以写为1rem,以及1px=0.01rem等等*/
+            getRem(664,100)
+        };
+        window.onresize = function(){
+            getRem(644,100)
+        };
+        function getRem(pwidth,prem){
+            var html = document.getElementsByTagName("html")[0];
+            var oWidth = document.body.clientWidth || document.documentElement.clientWidth;
+            html.style.fontSize = oWidth/pwidth*prem + "px";
+        }
+    </script>
+
 </head>
 <body>
 <div id="app"></div>

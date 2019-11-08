@@ -20,7 +20,7 @@ module.exports = {
         // hot: true,
         compress: true,
         host: 'localhost',
-        port: 8080
+        port: 8081
     },
     module: {
         rules: [
@@ -91,11 +91,12 @@ module.exports = {
             //     ]
             // },
             {
-                test: /\.(woff|svg|eot|ttf)\??.*$/,
+                test: /\.(woff|svg|eot|ttf|png)\??.*$/,
                 loader: 'url-loader'
             },
             {
                 test: /\.css$/,
+                exclude: /node_modules/,
                 use: [
                     'vue-style-loader',
                     {
@@ -111,12 +112,12 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
-        // new HtmlWebpackPlugin({
-        //     filename: 'index.html',
-        //     template: './src/mounts/cart.html',
-        //     inject: 'body',
-        //     chunks: ['cart']
-        // }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './src/mounts/cart.html',
+            inject: 'body',
+            chunks: ['cart']
+        }),
         // new HtmlWebpackPlugin({
         //     filename: 'index2.html',
         //     template: './src/mounts/main.html',

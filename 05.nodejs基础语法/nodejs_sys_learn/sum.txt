@@ -354,6 +354,6 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 10.外键的作用就是关联两个表，一个表里面的外键上的数据变化了，则另一个表里面的这个外键字段的值也会发生变化，mongoose不支持外键；
 11.虽然mongoose不支持外键，但是可以通过在两个集合上添加对象方法，并在父集合的对象方法中使用子集合的对象方法来做到数据的同步改变；
 12.主键是一个表中不能重复的，确定每个元素的唯一性，外键是多表的同步性建立多表的关系的；
-13.db.js这个文件写的是通过mongoose连接数据库，只需要执行一次这个文件，创建model的时候需要使用到db这个对象，db.model(’Studeng’,studentSchema);
+13.db.js这个文件写的是通过mongoose连接数据库，只需要执行一次这个文件，创建model的时候需要使用到db这个对象，db.model(’Student’,studentSchema);
 14.
 
