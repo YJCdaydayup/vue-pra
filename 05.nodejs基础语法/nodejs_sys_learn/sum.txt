@@ -357,5 +357,6 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 13.db.js这个文件写的是通过mongoose连接数据库，只需要执行一次这个文件，创建model的时候需要使用到db这个对象，db.model(’Studeng’,studentSchema);
 14.通过form提交表单时，如果是POST请求，参数直接在body里面，如果是GET请求，那么参数直接拼接请求地址后面，如果此时自己在请求地址后面加参数会被肢解忽略掉，可以通过/edit/:id来定义这种路由带参数；
 15.get请求或者post请求，如果有几个同样的key值，比如:key=12&key=23那么就会变成key:[12,23],自动接收为数组；
-
+16.db.js这个文件写的是通过mongoose连接数据库，只需要执行一次这个文件，创建model的时候需要使用到db这个对象，db.model(’Student’,studentSchema);
+17.
 

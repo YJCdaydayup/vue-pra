@@ -1,5 +1,5 @@
 let HtmlWebpackPlugin = require('html-webpack-plugin')
-let { VueLoaderPlugin } = require('vue-loader')
+let {VueLoaderPlugin} = require('vue-loader')
 let CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require('path');
 
@@ -20,7 +20,7 @@ module.exports = {
         // hot: true,
         compress: true,
         host: 'localhost',
-        port: 8080
+        port: 8081
     },
     module: {
         rules: [
@@ -34,7 +34,7 @@ module.exports = {
                 test: /\.scss$/,
                 exclude: /node_modules/,
                 loaders: [
-                    'style-loader',
+                    'vue-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -50,7 +50,7 @@ module.exports = {
                 test: /\.stylus$/,
                 exclude: /node_modules/,
                 loaders: [
-                    'style-loader',
+                    'vue-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -65,7 +65,7 @@ module.exports = {
                 test: /\.styl$/,
                 exclude: /node_modules/,
                 loaders: [
-                    'style-loader',
+                    'vue-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -76,11 +76,36 @@ module.exports = {
                     'stylus-loader'
                 ]
             },
+            // {
+            //     test: /\.css$/,
+            //     // exclude: /node_modules/,
+            //     loaders: [
+            //         'vue-loader',
+            //         {
+            //             loader: 'css-loader',
+            //             options: {
+            //                 importLoaders: 1
+            //             }
+            //         },
+            //         'postcss-loader',
+            //     ]
+            // },
+            {
+                test: /\.(woff|svg|eot|ttf|png)\??.*$/,
+                loader: 'url-loader'
+            },
             {
                 test: /\.css$/,
-                loaders: [
-                    'vue-loader',
-                    'css-loader'
+                exclude: /node_modules/,
+                use: [
+                    'vue-style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                    'postcss-loader',
                 ]
             }
         ]

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增学生</title>
+    <style>
+        th,td {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<a href="/add">新增学生</a>
+<table>
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>课程</th>
+        <th>编辑</th>
+    </tr>
+    <% for(let i = 0;i < students.length;i++) { %>
+    <tr>
+        <td><%= students[i].sid %></td>
+        <td><%= students[i].name %></td>
+        <td><%= students[i].age %></td>
+        <td><%= students[i].sex %></td>
+        <td>
+            <% for (let j = 0;j < students[i].kechengs.length;j++){ %>
+                <span><%=students[i].kechengs[j]%></span>
+            <% } %>
+        </td>
+        <td><a href="/edit?sid=<%=students[i].sid%>">编辑</a></td>
+    </tr>
+    <% } %>
+</table>
+</body>
+</html>
