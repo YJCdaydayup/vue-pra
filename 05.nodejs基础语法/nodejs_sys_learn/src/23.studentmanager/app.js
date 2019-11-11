@@ -11,7 +11,9 @@ app.get('/add', router.showadd);
 app.get('/doadd', router.doadd);
 app.get('/edit/:sid',router.edit);
 
-app.get('/doedit',router.doedit);
+app.get('/doedit/:sid',router.doedit);
 
+
+app.get('/delete/:sid',router.deleteStudent);
 
 app.listen(3000);

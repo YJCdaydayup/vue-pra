@@ -20,7 +20,6 @@ const Kecheng = require('./../model/Kecheng');
 
 exports.showIndex = (req, res)=> {
     Kecheng.find({}, (err, kechengs)=> {
-
         Student.find({}, (err, students)=> {
             if (err) {
                 throw err;
@@ -42,9 +41,18 @@ exports.showadd = (req, res)=> {
 };
 
 exports.doadd = (req, res)=> {
-    console.log(req.query);
+    let kids;
+    if (req.query.kechengs.constructor.name !== 'Array') {
+        kids = [];
+        kids.push(req.query.kechengs);
+    } else {
+        kids = req.query.kechengs;
+    }
     Student.create(req.query, function (err, result) {
-        Kecheng.tianjiaxuesheng(req.query.kechengs, req.query.sid, function (err, result) {
+        if (err) {
+            throw err;
+        }
+        Kecheng.tianjiaxuesheng(kids, req.query.sid, function () {
             res.redirect('/')
         });
     })
@@ -52,16 +60,41 @@ exports.doadd = (req, res)=> {
 
 exports.edit = (req, res)=> {
     let {sid} = req.params;
-    Student.findOne({sid}, (err, student)=> {
-        res.render('edit', {
-            student
+    Kecheng.find({},(err,kechengsObjs)=>{
+        Student.findOne({sid}, (err, student)=> {
+            Kecheng.getAllKecheng((kechengs)=> {
+                res.render('edit', {
+                    student,
+                    kechengs,
+                    kechengsObjs
+                })
+            })
         })
     })
 };
 
 exports.doedit = (req, res)=> {
     console.log(req.query)
+    console.log(req.params.sid);
     Student.updateOne({sid: req.params.sid}, req.query, (err, result)=> {
+        if (err) {
+            throw err;
+        }
         res.redirect('/')
     });
+};
+
+exports.deleteStudent = (req, res)=> {
+    let {sid} = req.params;
+    Student.deleteOne({sid}, (err, result)=> {
+        if (err) {
+            throw err;
+        }
+        Kecheng.deleteStudents(sid, (err1)=> {
+            if (err1) {
+                throw err1;
+            }
+            res.redirect('/')
+        });
+    })
 };

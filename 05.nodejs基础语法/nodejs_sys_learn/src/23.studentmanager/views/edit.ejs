@@ -5,7 +5,7 @@
     <title>修改学生</title>
 </head>
 <body>
-<form action="/doedit?<%=student.sid%>" method="get">
+<form action="/doedit/<%= student.sid %>" method="get">
     <p>
         学号: <input type="text" name="sid" value=<%= student.sid %> disabled>
     </p>
@@ -21,13 +21,26 @@
         男:<input type="radio" name="sex" value="男"
                 <% if (student.sex === '男'){ %>
                  checked
-                <%} %>
+                <% } %>
         >
         女:<input type="radio" name="sex" value="女"
                 <% if (student.sex === '女'){ %>
                  checked
-                <%} %>
+                <% } %>
         >
+    </p>
+    <p>
+        选修课程:
+        <% for (let i = 0;i < kechengsObjs.length;i++) {
+            let checked;
+            if (student.kechengs.indexOf(kechengsObjs[i].kid) > -1) {
+                checked = true;
+            }else {
+                checked = false;
+            }
+        %>
+        <%= kechengsObjs[i].name %><input type="checkbox" name="kechengs" value=<%= kechengsObjs[i].kid%> <%=checked?'checked':''%>>
+        <% } %>
     </p>
     <input type="submit" value="修改">
 </form>
