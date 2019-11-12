@@ -24,15 +24,11 @@
     <p>
         全部课程:
         <br>
-        语文课: <input type="checkbox" name="kechengs" value="1000">
-        数学课: <input type="checkbox" name="kechengs" value="1001">
-        英语课: <input type="checkbox" name="kechengs" value="1002">
-        体育课: <input type="checkbox" name="kechengs" value="1003">
-        音乐课: <input type="checkbox" name="kechengs" value="1004">
-        美术课: <input type="checkbox" name="kechengs" value="1005">
-        政治课: <input type="checkbox" name="kechengs" value="1006">
-        地理课: <input type="checkbox" name="kechengs" value="1007">
-        历史课: <input type="checkbox" name="kechengs" value="1008">
+        <% for (let i = 0;i < kechengs.length;i++) {
+            let kecheng = kechengs[i];
+        %>
+            <%=kecheng.name%> <input type="checkbox" value=<%=kecheng.kid%>>
+        <% } %>
     </p>
     <p>
         <input type="submit">

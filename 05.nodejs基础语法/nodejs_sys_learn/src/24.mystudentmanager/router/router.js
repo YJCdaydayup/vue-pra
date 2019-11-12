@@ -7,7 +7,11 @@ const Kecheng = require('./../models/Kecheng');
  * @param res
  */
 exports.showAdd = (req, res) => {
-    res.render('add.ejs')
+    Kecheng.find({}, (err, kechengs) => {
+        res.render('add.ejs', {
+            kechengs
+        })
+    });
 };
 
 /**
@@ -20,18 +24,26 @@ exports.doAdd = (req, res) => {
         if (err) {
             throw err;
         }
-        res.send('插入数据成功');
+        Kecheng.addStudent(req.query.sid, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            res.redirect('/');
+        })
     });
 };
 
 exports.showStudents = (req, res) => {
     Student.find({}, (err, students) => {
-       Kecheng.getAllKecheng((kechengkvs)=>{
-           console.log(kechengkvs);
-           res.render('students',{
-               students,
-               kechengkvs
-           })
-       })
+        Kecheng.getAllKecheng((kechengkvs) => {
+            res.render('students', {
+                students,
+                kechengkvs
+            })
+        })
     });
+};
+
+exports.deleteStudent = (req, res) => {
+
 };

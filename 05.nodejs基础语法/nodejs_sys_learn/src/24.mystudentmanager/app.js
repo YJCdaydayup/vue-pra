@@ -12,5 +12,7 @@ app.get('/',router.showStudents);
 app.get('/add',router.showAdd);
 app.get('/doAdd',router.doAdd);
 
+app.get('/delete',router.deleteStudent);
+
 app.listen(3000);
 

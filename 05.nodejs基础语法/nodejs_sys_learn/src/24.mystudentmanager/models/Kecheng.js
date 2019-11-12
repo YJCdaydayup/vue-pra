@@ -8,7 +8,7 @@ let kechengSchema = new mongoose.Schema({
     students: [String]
 });
 
-kechengSchema.statics.getAllKecheng = (callback) => {
+kechengSchema.statics.getAllKecheng = function (callback) {
     let kechengkv = {};
     this.model('Kecheng').find({}, (err, kechengs) => {
         (function iterator(i) {
@@ -21,6 +21,24 @@ kechengSchema.statics.getAllKecheng = (callback) => {
             iterator(i + 1);
         })(0)
     });
+};
+
+kechengSchema.statics.addStudent = function (sid, callback) {
+    this.model('Kecheng').find({}, (err, kechengs) => {
+        for (let i = 0; i < kechengs.length; i++) {
+            let kecheng = kechengs[i];
+            kecheng.addStudent(sid,callback);
+        }
+    });
+};
+
+kechengSchema.methods.addStudent = function (sid, callback) {
+    if (this.students.indexOf(sid) > -1) {
+        callback('不能重复添加同一个学生号');
+    } else {
+        this.students.push(sid);
+        this.save(callback);
+    }
 };
 
 let Kecheng = db.model('Kecheng', kechengSchema);

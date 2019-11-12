@@ -32,7 +32,10 @@
                 <span><%=students[i].kechengs[j]%></span>
             <% } %>
         </td>
-        <td><a href="/edit?sid=<%=students[i].sid%>">编辑</a></td>
+        <td>
+            <a href="/edit?sid=<%=students[i].sid%>">编辑</a>
+            <a href="/delete?sid=<%=students[i].sid%>">删除</a>
+        </td>
     </tr>
     <% } %>
 </table>

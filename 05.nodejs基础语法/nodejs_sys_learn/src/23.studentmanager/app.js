@@ -13,7 +13,6 @@ app.get('/edit/:sid',router.edit);
 
 app.get('/doedit/:sid',router.doedit);
 
-
 app.get('/delete/:sid',router.deleteStudent);
 
 app.listen(3000);

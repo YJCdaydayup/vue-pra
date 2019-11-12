@@ -13,15 +13,28 @@ let kechengSchema = new mongoose.Schema({
 
 kechengSchema.statics.getAllKecheng = function (callback) {
     let names = [];
-    this.model('Kecheng').find({}, (err, kechengs)=> {
+    this.model('Kecheng').find({}, (err, kechengs) => {
         if (err) {
             throw err;
         }
         for (let i = 0; i < kechengs.length; i++) {
-          names.push(kechengs[i].name);
+            names.push(kechengs[i].name);
         }
         callback(names);
     });
+};
+
+kechengSchema.statics.getKechengsObj = function (callback) {
+    let kvs = {};
+    this.model('Kecheng').find({}, (err, kechengs) => {
+        for (let i = 0; i < kechengs.length; i++) {
+            let kecheng = kechengs[i];
+            kvs[kecheng.kid] = kecheng.name;
+        }
+        console.log(123)
+        console.log(kvs)
+        !callback ? null : callback(kvs);
+    })
 };
 
 kechengSchema.statics.tianjiaxuesheng = function (kids, sid, callback) {
@@ -29,14 +42,14 @@ kechengSchema.statics.tianjiaxuesheng = function (kids, sid, callback) {
     (function iterator(i) {
         let kid = kids[i];
         console.log(kids);
-        me.model('Kecheng').findOne({kid}, (err, kecheng)=> {
+        me.model('Kecheng').findOne({kid}, (err, kecheng) => {
             if (i === kids.length) {
                 callback();
                 return;
             }
             let {students} = kecheng;
             students.push(sid);
-            kecheng.save(()=> {
+            kecheng.save(() => {
                 iterator(i + 1);
             })
         });
@@ -44,7 +57,7 @@ kechengSchema.statics.tianjiaxuesheng = function (kids, sid, callback) {
 };
 
 kechengSchema.statics.deleteStudents = function (sid, callback) {
-    this.model('Kecheng').find({}, (err, kechengs)=> {
+    this.model('Kecheng').find({}, (err, kechengs) => {
         (function iterator(i) {
             let kecheng = kechengs[i];
             if (i === kechengs.length) {
@@ -64,6 +77,8 @@ kechengSchema.statics.deleteStudents = function (sid, callback) {
 kechengSchema.methods.deleteStudent = function (sid, callback) {
     let index = this.students.indexOf(sid);
     if (index > -1) {
+        console.log('找到了')
+        console.log(index);
         this.students.splice(index, 1);
         this.save(callback)
     } else {
@@ -75,6 +90,41 @@ kechengSchema.methods.deleteStudent = function (sid, callback) {
 kechengSchema.index({kid: 1});
 
 let Kecheng = db.model('Kecheng', kechengSchema);
+
+// Kecheng.create({
+//     kid: 10000,
+//     name: '数学课'
+// })
+//
+// Kecheng.create({
+//     kid: 10001,
+//     name: '语文课'
+// })
+//
+// Kecheng.create({
+//     kid: 10002,
+//     name: '英语课'
+// })
+//
+// Kecheng.create({
+//     kid: 10003,
+//     name: '物理课'
+// })
+//
+// Kecheng.create({
+//     kid: 10004,
+//     name: '化学课'
+// })
+//
+// Kecheng.create({
+//     kid: 10005,
+//     name: '生物课'
+// })
+//
+// Kecheng.create({
+//     kid: 10006,
+//     name: '音乐课'
+// })
 
 module.exports = Kecheng;
 
