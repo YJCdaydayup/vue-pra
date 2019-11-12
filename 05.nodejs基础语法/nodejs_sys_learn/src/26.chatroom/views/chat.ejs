@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>聊天室</title>
+    <style>
+
+        .liebiao {
+            height: 500px;
+            width: 100%;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .liebiao li {
+            width: 100%;
+            background-color:red;
+            word-break: break-all;
+            white-space: wrap;
+        }
+
+        .caozuo {
+            font-size: 16px;
+        }
+
+        .caozuo input[type = button] {
+            margin-top: 6px;
+            padding: 10px 30px;
+            border-radius: 6px;
+            outline: none;
+            background-color: cornflowerblue;
+            font-weight: bolder;
+            font-size: 16px;
+            color: white;
+            position: relative;
+            top: 2px;
+            width: 18%;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+<h1>聊天室</h1>
+<div>
+    <ul class="liebiao">
+    </ul>
+</div>
+<div class="caozuo">
+    <input style="display: inline-block;width: 70%;height: 36px;padding: 0 10px" type="text" id="neirong">
+    <input type="button" id="fayan" value="发言">
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    $('#fayan').click(function () {
+       socket.emit('liaotian',$("#neirong").val());
+    });
+
+    socket.on('liaotian',function (msg) {
+        $('.liebiao').append('<li>' + msg +'</li>')
+    })
+
+</script>
+</body>
+</html>

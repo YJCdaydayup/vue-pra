@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我是第一个WecSocket页面</title>
+</head>
+<body>
+    <h1>我是第一个WecSocket页面</h1>
+    <input type="text" id="wenben">
+    <input type="button" value="问候服务器是否吃饭了" id="btn">
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        document.getElementById('btn').onclick = function () {
+            socket.emit('tiwen',document.getElementById('wenben').value);
+        };
+        socket.on('huida',function (msg) {
+            console.log('服务器说: ',msg);
+        })
+    </script>
+</body>
+</html>

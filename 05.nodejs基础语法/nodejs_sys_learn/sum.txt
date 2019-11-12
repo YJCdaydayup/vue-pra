@@ -359,5 +359,15 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 15.get请求或者post请求，如果有几个同样的key值，比如:key=12&key=23那么就会变成key:[12,23],自动接收为数组；
 16.db.js这个文件写的是通过mongoose连接数据库，只需要执行一次这个文件，创建model的时候需要使用到db这个对象，db.model(’Student’,studentSchema);
 17.form表单提交时，如果input设置为disabled，那么这个字段的值是不传递出去的；
-18.
 
+
+第十六节课
+1.HTTP是无状态，与客户端不能持续连接；
+2.长轮询，每间隔1s去查询服务器有没有新的消息，对服务器和客户端压力特别大；
+3.长连接，客户端请求一次，但是服务器将连接保存，不返回(只有res.write没有res.end)，服务器有了新的数据就将数据发回来,又有了新的数据将新数据发回来，而一直保持挂起状态，这种会造成大量的性能浪费；
+4.HTML5提供了WebSocket协议让浏览器和服务器全双工实时通信，原理是先利用HTTP请求产生握手，HTTP头部含有WebSocket协议的请求，握手之后，再转用TCP协议进行交流；
+5.Websocket需要浏览器支持，更需要服务器支持，Chrome4 火狐4 IE10 safari5 Node0.0.0(本身支持) Apache7.0.2 Nginx1.3
+6. SocketIO新手福音，屏蔽了所有底层细节，让顶层调用更简单，并且还为不支持Websocket协议的浏览器提供长轮询的透明模拟机制；cnpm i -D socket.io
+7.html页面中必须引入socket.io.js，且var socket = io();查看XHR的type，请求头和相应头都有websocket；
+8.此时此刻，客户端和服务器都有一个socket对象，而且可以监听和派发事件；socket.on(‘shijian’,(msg)=>{}) socket.emit(‘shijina’,(msg)=>{});
+9.给所有监听发送消息，io.emit(‘guangbo’,(msg)=>{});
