@@ -5,6 +5,10 @@
     <title>聊天室</title>
     <style>
 
+        ul {
+            list-style-type: none;
+        }
+
         .liebiao {
             height: 500px;
             width: 100%;
@@ -14,9 +18,10 @@
 
         .liebiao li {
             width: 100%;
-            background-color:red;
             word-break: break-all;
-            white-space: wrap;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin-top: 3px;
         }
 
         .caozuo {
@@ -41,7 +46,7 @@
     </style>
 </head>
 <body>
-<h1>聊天室</h1>
+<h3><strong id="username"><%= username %></strong>的聊天室</h3>
 <div>
     <ul class="liebiao">
     </ul>
@@ -55,11 +60,14 @@
 <script>
     var socket = io();
     $('#fayan').click(function () {
-       socket.emit('liaotian',$("#neirong").val());
+        socket.emit('liaotian', {
+            username: $("#username").text(),
+            msg: $('#neirong').val()
+        });
     });
 
-    socket.on('liaotian',function (msg) {
-        $('.liebiao').append('<li>' + msg +'</li>')
+    socket.on('huida', function (msgObj) {
+        $('.liebiao').prepend('<li>' + msgObj.username + '说: ' + msgObj.msg + '</li>')
     })
 
 </script>

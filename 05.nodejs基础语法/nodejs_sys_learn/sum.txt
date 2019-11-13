@@ -371,3 +371,5 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 7.html页面中必须引入socket.io.js，且var socket = io();查看XHR的type，请求头和相应头都有websocket；
 8.此时此刻，客户端和服务器都有一个socket对象，而且可以监听和派发事件；socket.on(‘shijian’,(msg)=>{}) socket.emit(‘shijina’,(msg)=>{});
 9.给所有监听发送消息，io.emit(‘guangbo’,(msg)=>{});
+10.插入作为元素子标签用prepend或者append；
+11.要保证进入一个页面必须先登录，就使用session来完成；

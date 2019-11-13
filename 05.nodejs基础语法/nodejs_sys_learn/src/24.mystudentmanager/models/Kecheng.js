@@ -23,12 +23,22 @@ kechengSchema.statics.getAllKecheng = function (callback) {
     });
 };
 
-kechengSchema.statics.addStudent = function (sid, callback) {
+kechengSchema.statics.addStudent = function (student, callback) {
     this.model('Kecheng').find({}, (err, kechengs) => {
-        for (let i = 0; i < kechengs.length; i++) {
+        (function iterator(i) {
+            console.log(i, kechengs.length);
+            if (i === kechengs.length) {
+                callback()
+                return;
+            }
             let kecheng = kechengs[i];
-            kecheng.addStudent(sid,callback);
-        }
+            if (student.kechengs.indexOf(kecheng.kid) > -1) {
+                kecheng.addStudent(student.sid, function () {
+
+                });
+            }
+            iterator(i + 1);
+        })(0)
     });
 };
 
@@ -38,6 +48,58 @@ kechengSchema.methods.addStudent = function (sid, callback) {
     } else {
         this.students.push(sid);
         this.save(callback);
+    }
+};
+
+kechengSchema.methods.deleteStudent = function (sid) {
+    if (this.students.indexOf(sid) > -1) {
+        this.students.splice(this.students.indexOf(sid), 1);
+        this.save();
+    }
+};
+
+kechengSchema.statics.deleteStudent = function (sid, callback) {
+    this.model('Kecheng').find({}, (err, kechengs) => {
+        if (err) {
+            throw err;
+        }
+        (function iterator(i) {
+            if (i == kechengs.length) {
+                callback();
+                return;
+            }
+            let kecheng = kechengs[i];
+            kecheng.deleteStudent(sid);
+            iterator(i + 1);
+        })(0)
+    })
+};
+
+kechengSchema.statics.editKecheng = function (sid, student_kechengs, callback) {
+    this.model('Kecheng').find({}, (err, kechengs) => {
+        (function iterator(i) {
+            if (i === kechengs.length) {
+                callback()
+                return ;
+            }
+            let kecheng = kechengs[i];
+            kecheng.updateKecheng(sid, student_kechengs);
+            iterator(i + 1);
+        })(0)
+    });
+};
+
+kechengSchema.methods.updateKecheng = function (sid, kechengs) {
+    if (kechengs.indexOf(this.kid) > -1) {
+        if (this.students.indexOf(sid) === -1) {
+            // 存进来
+            this.addStudent(sid);
+        }
+    } else {
+        if (this.students.indexOf(sid) > -1) {
+            this.students.splice(this.students.indexOf(sid), 1);
+            this.save();
+        }
     }
 };
 

@@ -29,12 +29,12 @@
         <td><%= students[i].sex %></td>
         <td>
             <% for (let j = 0;j < students[i].kechengs.length;j++){ %>
-                <span><%=students[i].kechengs[j]%></span>
+                <span><%=kechengkvs[students[i].kechengs[j]]%></span>
             <% } %>
         </td>
         <td>
-            <a href="/edit?sid=<%=students[i].sid%>">编辑</a>
-            <a href="/delete?sid=<%=students[i].sid%>">删除</a>
+            <a href="/edit/<%=students[i].sid%>">编辑</a>
+            <a href="/delete/<%=students[i].sid%>">删除</a>
         </td>
     </tr>
     <% } %>

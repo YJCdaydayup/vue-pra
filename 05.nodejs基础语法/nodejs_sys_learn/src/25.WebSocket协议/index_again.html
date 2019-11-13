@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全双工实时通信</title>
+</head>
+<body>
+<div class="box">
+    <input type="text" placeholder="请输入要发送的内容" id="content">
+    <input onclick="send();" type="button" value="发送">
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    function send() {
+        var content = document.getElementById('content').value;
+        socket.emit('send',content);
+    }
+
+    socket.on('back',function (msg) {
+        console.log(msg);
+        socket.emit('send',msg);
+    })
+</script>
+</body>
+</html>

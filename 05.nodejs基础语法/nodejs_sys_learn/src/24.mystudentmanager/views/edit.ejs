@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑学生信息</title>
+</head>
+<body>
+<form action="/doEdit/<%= student.sid %>" method="get">
+    <p>
+        学号: <input type="text" name="sid" disabled value="<%= student.sid %>">
+    </p>
+    <p>
+        姓名: <input type="text" name="name" value="<%= student.name %>">
+    </p>
+    <p>
+        年龄: <input type="text" name="age" value="<%= student.age %>">
+    </p>
+    <p>
+        性别:
+        <br>
+        男:<input type="radio"
+                <%= student.sex === '男' ? 'checked' : '' %>
+                 name="sex" value="男">
+        女:<input type="radio" name="sex" <%= student.sex === '女' ? 'checked' : '' %>value="女">
+    </p>
+    <p>
+        课程选择:
+        <br>
+        <% for (let i = 0;i < kechengs.length;i++) {
+            let kecheng = kechengs[i];
+            let checked = student.kechengs.indexOf(kecheng.kid) > -1
+        %>
+        <%= kecheng.name %> <input type="checkbox" name="kechengs" <%= checked?'checked':'' %>
+                                   value="<%= kecheng.kid %>">
+        <% } %>
+    </p>
+    <p>
+        <input type="submit">
+    </p>
+</form>
+</body>
+</html>
