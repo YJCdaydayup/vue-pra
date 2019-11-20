@@ -1,3 +1,7 @@
 1.一个组件包括html标签 css js以及入口js，有时候css，js包含在html中如vue文件，也可以是外部文件导入到vue中
 2.vue组件必须安装vue依赖 cnpm i --save-dev vue
 3.vue-loader必须添加plugin配置:  const { VueLoaderPlugin } = require('vue-loader')  new VueLoaderPlugin()
+4.webpack-dev-server如果配置contentBase:'src'指定托管的根目录，那么启动的服务就是静态化这个src目录里面的所有文件，如果不配置contentBase属性，就会在当前看有没有使用html-webpack-plugin生成index.html，如果有就直接打开这个index页面，如果没有就自动查找当前目录下的index.html作为静态化页面打开,如果也没有就静态化整个项目
+5.不管怎么样都会静态化output里面生成的所有文件；
+6.多页面的htmlwebpackplugin中注入打包的js时可以选择某个chunk到chunks里面，单页面默认只有一个入口，就会默认插入这个chunk进去，所以单页面的HtmlWebpackPlugin不需要设置chunks；
+7.固定写法，Toast = {}, Toast.install = (Vue,opotions)=>{},当use这个Toast时就会讲里面的方法执行；（所以在里面就为Vue的原型添加方法即可）

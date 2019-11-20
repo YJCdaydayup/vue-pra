@@ -21,6 +21,8 @@ router.post('/login',function (req,  res, next) {
     userPwd: req.body.userPwd
   };
 
+  console.log(param);
+
   // 进都没进来，可能是数据库原因或者数据库找不到对应数据
   User.findOne(param, function (err, doc) {
     if (err) {

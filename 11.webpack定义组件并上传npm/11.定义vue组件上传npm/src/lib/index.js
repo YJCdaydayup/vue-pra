@@ -27,7 +27,9 @@ Toast.install = function (Vue,options) {
 
         setTimeout(()=>{
             instance.visible = false;
-            document.body.removeChild(instance.$el);
+            setTimeout(()=>{
+                document.body.removeChild(instance.$el);
+            },1000);
             typeof callback == 'function' ? callback():null;
         },opt.duration);
     }
@@ -49,7 +51,9 @@ Toast.install = function (Vue,options) {
     }
 }
 
+console.log('asdfgh')
 if (window.Vue) {
+    console.log(1234567890)
     Vue.use(Toast);
 }
 

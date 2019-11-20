@@ -75,7 +75,7 @@
   import axios from "axios"
 
   // 使用vuex中辅助的函数
-  import vuex from "vuex"
+  import {mapState,mapMutations} from "vuex"
 
   export default {
     data() {
@@ -84,24 +84,28 @@
         userPwd: "",
         errorTip: false,
         loginModalFlag: false,
-//        nickName: ""
       }
     },
     computed: {
-//      nickName() {
-//        return this.$store.state.nickName;
-//      },
-//      cartCount() {
-//        return this.$store.state.cartCount;
-//      }
+     // nickName() {
+     //   return this.$store.state.nickName;
+     // },
+     // cartCount() {
+     //   return this.$store.state.cartCount;
+     // }
       // 三个点 是对得到的对象的展开
-      ...vuex.mapState([nickName,cartCount])
+      ...mapState([
+        'nickName','cartCount'
+      ]),
     },
     mounted: function () {
       this.checkLogin();
     },
     methods: {
-      login(){
+      ...mapMutations([
+        'updateUserInfo','updateUserInfo','initCartCount'
+      ]),
+      login() {
         // 校验
         if (!this.userName || !this.userPwd) {
           this.errorTip = true;
@@ -111,42 +115,44 @@
         axios.post("/users/login", {
           userName: this.userName,
           userPwd: this.userPwd
-        }).then((response)=> {
+        }).then((response) => {
           let res = response.data;
+          console.log(res)
           if (res.status == '0') {
             this.errorTip = false;
             // to-do
             this.loginModalFlag = false;
-            this.$store.commit('updateUserInfo',res.result.userName);
+            this.updateUserInfo(res.result.userName);
             this.getCartCount();
           } else {
             this.errorTip = true;
           }
         });
       },
-      logout(){
+      logout() {
         // 没有参数可以不写{}
-        axios.post("/users/logout").then((res)=>{
+        axios.post("/users/logout").then((res) => {
           if (res.data.status == '0') {
 //            this.nickName = '';
-            this.$store.commit('updateUserInfo','');
+            this.updateUserInfo('')
           }
         });
       },
-      checkLogin(){
-        axios.get('/users/checkLogin').then((response)=>{
+      checkLogin() {
+        axios.get('/users/checkLogin').then((response) => {
           let res = response.data;
-          if (res.status = '0') {
+          console.log(res)
+          if (res.status == 0) {
 //            this.nickName = res.result.userName;
-            this.$store.commit("updateUserInfo",res.result.userName);
+            this.updateUserInfo(res.result.userName);
             this.getCartCount();
           }
         });
       },
       getCartCount() {
-        axios.get('/users/getCartCount').then((response)=>{
+        axios.get('/users/getCartCount').then((response) => {
           let res = response.data;
-          this.$store.commit('initCartCount',res.result);
+          this.initCartCount(res.result)
         });
       }
     }
