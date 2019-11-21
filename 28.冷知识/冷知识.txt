@@ -157,5 +157,7 @@ routes: [
             }
         }
     ]
+
+28)组件每次进来都重新拉取网络数据的话，就在beforeRouteEnter里面的next((vm)=>{vm.loadData()}),这时就取消created里面的网络数据获取，不然会请求两次；
    
 

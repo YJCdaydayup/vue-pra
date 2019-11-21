@@ -1,2 +1,4 @@
 1.document.write('<script src="http://thirdparty.com/b.js"><\/script>’)加载js文件时，会阻塞后面的js文件的加载，一般不用，但可以用于加载带参数的动态js文件或者需要加载很多个必须有顺序的js文件；
 2.善于利用标签的自定义属性date-timer={time: 12345632,item:134123456}，可以通过eval将获取到的转化成对象进行利用；
+3.封装功能可以使用字面量对象也可以使用构造函数，参考Ajax请求封装；
+4.

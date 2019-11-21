@@ -9,7 +9,7 @@
         </div>
         <div class="overview-right">
           <div class="score-wrapper">
-            <span class="title">服务态度</span>
+            <span class="title">服务态度{{count}}</span>
             <star class="star" :size="36" :score="seller.serviceScore"></star>
             <span class="score">{{seller.serviceScore}}</span>
           </div>
@@ -245,26 +245,32 @@
         showFlag: false,
         selectType: ALL,
         onlyContent: false,
-        ratings: []
+        ratings: [],
+        count: 0
       }
     },
     created() {
-      this.$http.get('/api/ratings').then((res) => {
-        let data = res.data;
-        if (data.errno === ERR_OK) {
-          this.ratings = data.data;
-          if (!this.scroll) {
-            this.$nextTick(() => {
-              this.scroll = new BScroll(this.$refs.ratingsWrapper, {
-                click: true
-              });
-            })
-          }
-        }
-      })
+      // this.loadData();
     },
     computed: {},
     methods: {
+      loadData() {
+        console.log('评论再次拉取网络数据')
+        this.count ++;
+        this.$http.get('/api/ratings').then((res) => {
+          let data = res.data;
+          if (data.errno === ERR_OK) {
+            this.ratings = data.data;
+            if (!this.scroll) {
+              this.$nextTick(() => {
+                this.scroll = new BScroll(this.$refs.ratingsWrapper, {
+                  click: true
+                });
+              })
+            }
+          }
+        })
+      },
       toggleContent() {
         this.onlyContent = !this.onlyContent;
         this.$nextTick(() => {
@@ -298,6 +304,21 @@
       star,
       split,
       ratingselect
+    },
+    beforeRouteEnter(to, from ,next) {
+      console.log('123')
+      next(vm => {
+        console.log(vm)
+        vm.loadData()
+      })
+    },
+    beforeRouteUpdate(to, from ,next) {
+      console.log('456')
+      next()
+    },
+    beforeRouteLeave(to, from ,next) {
+      console.log('789')
+      next()
     }
   }
 </script>
