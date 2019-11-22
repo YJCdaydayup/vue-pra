@@ -1,9 +1,10 @@
-1.document.write('<script src="http://thirdparty.com/b.js"><\/script>’)加载js文件时，会阻塞后面的js文件的加载，一般不用，但可以用于加载带参数的动态js文件或者需要加载很多个必须有顺序的js文件；
+1.document.write('<script src="http://thirdparty.com/b.js"><\/script>’)加载js文件时，会阻塞后面的js文件的加载，一般不用，但可以用于加载带参数的动态js文件；
 2.善于利用标签的自定义属性date-timer={time: 12345632,item:134123456}，可以通过eval将获取到的转化成对象进行利用；
 3.封装功能可以使用字面量对象也可以使用构造函数，参考Ajax请求封装；
 4.
 3.学习老师对于Ajax请求的字面量对象的封装；
 4.防止重复点击可以使用setTimeout或者使用一个bool值来控制；
+
 5.前端优化办法：
 1)减少http请求,合并css js 或者直接把js css写在首页
 2)CDN，通过DNS判断用户地址就近访问资源；
@@ -71,4 +72,6 @@ function cal(params) {
 8）保持数组元素类型一致
 9）yslow pagespeed
 10)css js Dom加载的顺序 https://www.cnblogs.com/janrodney/p/10768451.html
+
+10.使用script的src img的src link的src 加载的资源，下载完毕后这些资源会加载到内存里面，这个时候甚至可以手动删掉这个标签，内存中对于这个src的数据已经存在了，所以可以直接使用这些数据，做法就是将指定的标签的src指向这个src即可；
 
