@@ -159,5 +159,11 @@ routes: [
     ]
 
 28)组件每次进来都重新拉取网络数据的话，就在beforeRouteEnter里面的next((vm)=>{vm.loadData()}),这时就取消created里面的网络数据获取，不然会请求两次；
+
+29)路由守护中的(to, from, next)=>{})to和from的match是一个数组，默认这个数组里面只有一个元素，且这个元素包含路由需要的所有信息，在做路由里面meta参数判断时，可以： // if (to.matched.some(r => r.meta.requireAuth)) {  // 判断该路由是否需要登录权限 或者 if (to.matched[0].meta.requireAuth) {
+
+30)ES6语法中的数组方法some和every,arr.some((item)=>{return item > 2}) 有一个为真就是真；every就是有一个为假就是假的
+
+31)采用slot插槽，在主组件设定其位置和class样式，再引用组件也可以设置其样式，但是当样式属性与主组件的样式属性重名时，会以主组件的样式优先；
    
 
