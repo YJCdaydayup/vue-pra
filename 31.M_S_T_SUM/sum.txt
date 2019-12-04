@@ -15,4 +15,15 @@
 8.new的原理:let obj = {};
 obj.__proto__ = Dog.prototype;
 Dog.call(obj); // 继承Dog自身属性和方法
+
+9.规范: 
+  不要同一行声明多个变量
+  使用=== ！==
+  使用对象字面量
+  switch 带default
+  函数不要有时候有return有时候没有return
+  for if带括号
+  forin带var
+
+10.字面量对象中的箭头函数属性的this为{}，test: function() {} 和test() {}一样
  
