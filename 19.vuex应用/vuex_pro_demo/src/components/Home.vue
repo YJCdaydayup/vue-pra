@@ -1,10 +1,10 @@
 <template>
   <div class="h-box">
-    <v-header :goBack="false">
-      <div  class="header-title" slot="title">首页</div>
+    <v-header :goBack="false" :lay-index="1">
+      <div class="header-title" slot="title">首页</div>
     </v-header>
     <div class="h-content">
-      <button @click="goTologout">去登出页面</button>
+      <button @click="goTologout">下一个页面</button>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@
     name: "Home",
     methods: {
       goTologout() {
-        this.$router.push('/logout');
+        this.$router.push('/two');
       }
     },
     components: {
@@ -27,13 +27,16 @@
 </script>
 
 <style scoped>
+
+
+
   .h-content {
-    margin-top: 64px;
+    padding-top: 64px;
   }
 
-  .header-title {
-    color: white;
-    font-size: 20px;
-  }
+  /*.header-title {*/
+  /*  color: white;*/
+  /*  font-size: 20px;*/
+  /*}*/
 
 </style>

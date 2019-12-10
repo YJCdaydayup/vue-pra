@@ -1,5 +1,5 @@
 <template>
-  <div class="header-box">
+  <div class="header-box" :style="{zIndex: (layIndex + 100)}">
     <div class="head-goback" v-if="goBack" @click="$router.go(-1)">
       <span class="back-label"> <strong class="arrow"><</strong> 返回 </span>
     </div>
@@ -14,6 +14,10 @@
       goBack: {
         type: Boolean,
         default: true
+      },
+      layIndex: {
+        type: Number,
+        default: 100
       }
     },
     beforeRouteEnter(to, from,next) {
@@ -23,6 +27,12 @@
 </script>
 
 <style scoped>
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
   .header-box {
     position: fixed;
     top: 0;

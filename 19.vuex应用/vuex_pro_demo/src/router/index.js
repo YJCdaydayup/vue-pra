@@ -13,28 +13,29 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/one'
     },
     {
-      path: '/home',
-      name: 'home',
+      path: '/one',
+      name: 'one',
       component: () => import('./../components/Home.vue'),
       meta: {
         requireAuth: true
       }
     },
     {
-      path: '/login',
-      name: 'login',
+      path: '/two',
+      name: 'two',
       component: () => import('./../components/Login.vue'),
       meta: {
-        requireAuth: false
+        requireAuth: false,
+        sliderable: true
       }
     },
 
     {
-      path: '/logout',
-      name: 'logout',
+      path: '/three',
+      name: 'three',
       component: () => import('./../components/Logout.vue'),
       meta: {
         requireAuth: false
@@ -53,7 +54,7 @@ const router = new Router({
       name: 'Promise',
       component: Promise,
       meta: {
-        requireAuth: true
+        requireAuth: false
       }
     },
     {
@@ -61,7 +62,7 @@ const router = new Router({
       name: 'Module',
       component: Module,
       meta: {
-        requireAuth: true
+        requireAuth: false
       }
     },
     {
@@ -69,7 +70,7 @@ const router = new Router({
       name: 'Watcher',
       component: Watcher,
       meta: {
-        requireAuth: true
+        requireAuth: false
       }
     }
   ],
@@ -77,25 +78,25 @@ const router = new Router({
 })
 
 
-router.beforeEach((to, from, next) => {
-
-  console.log(to.matched);
-  // if (to.matched.some(r => r.meta.requireAuth)) {  // 判断该路由是否需要登录权限
-  if (to.matched[0].meta.requireAuth) {
-    // 1 登录 0 未登录
-    if (store.state.isLogin - 0 === 1) {  // 通过vuex 如果当前有登录
-      console.log('已登录')
-      next();
-    } else {
-      console.log('没有登录哦')
-      next({
-        path: '/login',
-        //query: {redirect: to.fullPath}
-      })
-    }
-  } else {
-    next();
-  }
-})
+// router.beforeEach((to, from, next) => {
+//
+//   console.log(to.matched);
+//   // if (to.matched.some(r => r.meta.requireAuth)) {  // 判断该路由是否需要登录权限
+//   if (to.matched[0].meta.requireAuth) {
+//     // 1 登录 0 未登录
+//     if (store.state.isLogin - 0 === 1) {  // 通过vuex 如果当前有登录
+//       console.log('已登录')
+//       next();
+//     } else {
+//       console.log('没有登录哦')
+//       next({
+//         path: '/two',
+//         //query: {redirect: to.fullPath}
+//       })
+//     }
+//   } else {
+//     next();
+//   }
+// })
 
 export default router;

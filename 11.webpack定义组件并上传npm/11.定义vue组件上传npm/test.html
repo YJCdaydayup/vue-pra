@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toast</title>
     <script src="node_modules/vue/dist/vue.js"></script>
-    <script src="node_modules/yangli_demo/dist/vue-toast-demo.js"></script>
+<!--    <script src="node_modules/yangli_demo/dist/vue-toast-demo.js"></script>-->
 </head>
 <body>
     <div id="app">
@@ -16,9 +16,7 @@
             el: "#app",
             methods: {
                 show() {
-                    this.$toast.show('再来',{
-                        duration: 1000
-                    },function () {
+                    this.$alert.show('抱歉, 未查询到您在中登的场外基金账户信息。请确认您已开立中登场外基金账户或您的基金账户与我公司开立的证券账户资料(证件)一致',function () {
                         console.log("调用完毕，立即执行")
                     })
                 }

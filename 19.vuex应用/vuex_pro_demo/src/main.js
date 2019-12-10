@@ -72,30 +72,24 @@ export const store = new Vuex.Store({
     },
     checkout({commit, state}, payload) {
       return new Promise((resolve, reject) => {
-        setInterval(() => {
           commit('increment', {
             len: payload.len
           })
           resolve('提交完毕');
-        }, 3000)
       })
     },
     login({commit, state}, params) {
       console.log(params)
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
           commit(`LOGIN_MUTATION`, params);
           resolve();
-        }, 2000);
       });
     },
     // 第二种action
     logout({commit, state}) {
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
           commit(`LOGOUT_MUTATION`);
           resolve();
-        }, 2000);
       })
     }
   }

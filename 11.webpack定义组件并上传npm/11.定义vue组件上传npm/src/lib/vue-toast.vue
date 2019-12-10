@@ -1,37 +1,62 @@
 <template>
     <div class="toast-container">
-
-        <!--        <div class="toast" :class="[visible? 'fadeIn':'fadeOut']">-->
+        <div class="mask"></div>
         <transition name="fade">
             <div ref="toast" class="toast" v-show="visible">
-                <span>{{ message }}</span>
+                <p class="des">{{message}}</p>
+                <div id="confirm" class="confirm" ref="confrimBtn">确定</div>
             </div>
         </transition>
     </div>
 </template>
 
 <style lang="css" rel="stylesheet/css" scoped>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
     .toast-container {
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 2000;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
+    .mask {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
     .toast {
-        width: 180px;
-        height: 60px;
+        width: 70%;
         border-radius: 10px;
-        line-height: 60px;
         text-align: center;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.61);
+        background-color: white;
         transform: scale(1);
+        color: #404040;
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .des {
+        padding: 22px;
+        border-bottom: 1px solid #E8E8E8;
+        text-align: left;
+        font-family: PingFangSC-Regular;
+    }
+
+    .confirm {
+        line-height: 51px;
+        color: #306CFF;
     }
 
     .fade-enter-active, .fade-enter {
@@ -62,39 +87,26 @@
         }
 
         100% {
-           opacity: 0;
+            opacity: 0;
         }
     }
 
-    /*.fadeIn {*/
-    /*    animation-name: fadeIn;*/
-    /*    animation-duration: 0.3s;*/
-    /*    animation-fill-mode: both;*/
-    /*}*/
-
-    /*.fadeOut {*/
-    /*    animation-name: fadeOut;*/
-    /*    animation-duration: 0.3s;*/
-    /*    animation-fill-mode: both;*/
-    /*}*/
 </style>
 
 <script>
 
-    // import "./toast.css"
     export default {
         data() {
             return {
                 visible: false,
-                message: ""
+                message: "",
             }
         },
-        // watch: {
-        //     'visible'(newv,oldv) {
-        //         if (!newv) {
-        //
-        //         }
-        //     }
-        // }
+        mounted() {
+            this.confrimBtn = this.$refs.confrimBtn
+        },
+        methods: {
+
+        }
     }
 </script>

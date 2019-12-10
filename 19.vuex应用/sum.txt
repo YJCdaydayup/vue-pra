@@ -49,6 +49,7 @@ Day03 https://blog.csdn.net/qq_39523111/article/details/79638614
 6.父子孙组件通信，正向可以通过props进行传递数据，或者通过ref拿到子组件通过子组件来调用其方法，反向可以通过$emit派发事件，还可以通过在子组件中this.$parent,孙组件this.$parent.$parent来获取父组件调用方法，还以通过在父组件中暴露自己,provide() {return {fatherObj: this}}子孙组件在inject:['fatherObj']后，直接通过this.fatherObj获取父组件；
 7.watch监听data里面的属性，当时一般对象时name(newv,oldv) {}或者'name'(newv,oldv){}，当监听data属性里面的对象的属性时，'obj.name'(){},当监听整个对象时，obj: {hanlder(){},deep:true}
 8.Vue.use(Toast);底层就是执行了Toast对象的install方法，里面会在Vue的原型上添加方法和属性；所以定义自定义的Vue组件时，要先,let Toast = {};Toast.install = function() {}
+9.Vue中的每个Vue作为page页面时，如果要每个页面都充满整个屏幕，可以在最外层的App.vue中将view-router(给一个class)将其设置position:absolute，left： 0 right：0 width:100% height: 100%;
 
 
 
