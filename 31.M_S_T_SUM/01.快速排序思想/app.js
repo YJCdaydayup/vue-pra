@@ -14,9 +14,9 @@ function quickSort(arr) {
             right.push(arr[i]);
         }
     }
-    return quickSort(left).concat([numValue],quickSort(right));
+    return quickSort(left).concat(numValue,quickSort(right));
 }
 
-var arr = [1,3,2,100,23,45,134,22,345,11,25,22,44,33,13,2,3,5,7,2,3,5,1,25];
+var arr = [1,3,2,100,23,45,134,22,345,11,25,22,44,33,13,2,3,5,7,2,3,5,1,25,123,1234,1234,13];
 
 console.log(quickSort(arr).join(' '));
