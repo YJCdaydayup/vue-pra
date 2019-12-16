@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            border-bottom: 1px solid red;
+            position: relative;
+        }
+
+        div::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            bottom: 0;
+            height: 1px;
+            background-color: red;
+        }
+        
+        @media screen and (-webkit-max-device-pixel-ratio: 2) {
+            div::after {
+                transform: scaleY(0.5);
+            }
+        }
+
+        @media screen and (-webkit-max-device-pixel-ratio: 3) {
+            div::after {
+                transform: scaleY(0.3333333);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+//        var div = document.getElementById('box');
+//        var r = window.devicePixelRatio;
+//        var meta = document.querySelector('meta[name="viewport"]');
+//        meta.content = "width=device-width,initial-scale=" + 1/r + "user-scalable=no"
+//        
+        
+        
+    </script>
+</body>
+</html>
