@@ -57,7 +57,24 @@ Dog.call(obj); // 继承Dog自身属性和方法
 
 25.像素比=物理像素／css像素，其中css像素就是pc下的像素大小，物理像素是移动端下的像素，可以通过window.devicePixelRatio获取像素比；
 
-26. 
+26.垂直居中办法，弹性布局flex，绝对定位+transform，position:absolute+left:0,right:0,top:0,bottom:0,margin:auto（这种的前提是子div必须有自己显式的定义宽高）
+
+27.实现三角形可以通过设置border来做，但是必须写出自己的width:0，height：0才行；
+
+28.rem的原理是相对html标签的fontSize的大小，实现方式是，保证设计稿的相对屏幕的比例一致，所以，fs =   function setRem(pwidth, rate) {
+    var htmlNode = document.querySelector('html');
+    var oWidth = document.documentElement.clientWidth;
+    htmlNode.style.fontSize = 100 * oWidth / pwidth + 'px';
+  }
+  setRem(375, 100);
+  document.getElementById('box').style.width = 2 + 'rem';
+
+29.变量提升和函数提升，前面的提升依然排在前面，当变量名和函数名重名时，这个变量就时这个函数了，点语法优先(当点前面有括号时(),优先执行()前面的代码)
+
+30.函数节流：一个函数执行一次后，只有大雨设定的执行周期才会执行第二次，比如频繁触发的函数(处于优化性能的角度，在规定时间内，函数只触发一次)
+
+31.防抖函数，一个需要频繁触发的函数，在规定时间内只让最后一次生效，前面不生效,（防止按钮在一定时间内被重复点击），原理每次点击就将上一次的timer去掉，只有最有一次的timer才有效；
+
 
 
 

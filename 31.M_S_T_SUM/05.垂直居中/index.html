@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>居中</title>
+  <style>
+    .box {
+      width: 360px;
+      height: 360px;
+      background-color: red;
+      /*display: flex;*/
+      /*justify-content: center;*/
+      /*align-items: center;*/
+
+      /*position: relative;*/
+
+    }
+
+    .sub {
+      height: 0;
+      width: 0;
+      border-width: 20px;
+      border-color: red red red red;
+      border-style: solid;
+      /*position: absolute;*/
+      /*top: 50%;*/
+      /*left: 50%;*/
+      /*transform: translate3d(-50%,-50%,0);*/
+
+      /*position: absolute;*/
+      /*top: 0;*/
+      /*left: 0;*/
+      /*right: 0;*/
+      /*bottom: 0;*/
+      /*margin: auto;*/
+    }
+
+  </style>
+</head>
+<body>
+<div id="box" class="box">
+  <div class="sub"></div>
+</div>
+<script>
+  // rem就是将html的fontSize设置成屏幕的宽度，则1rem就是屏幕宽
+  // 设计稿中，将设计控件宽／设计屏幕宽得到比例，在开发中就是比例个rem
+  var htmlNode = document.querySelector('html');
+  var oWidth = document.documentElement.clientWidth;
+  htmlNode.style.fontSize = oWidth + 'px';
+
+  // 比如，设计稿的屏幕宽是375px，元素尺寸100px，那么比例是:
+  var pWidth = 375;
+  var r = 200 / pWidth;
+
+//  document.getElementById('box').style.width = r + 'rem';
+
+
+  function setRem(pwidth, rate) {
+    var htmlNode = document.querySelector('html');
+    var oWidth = document.documentElement.clientWidth;
+    htmlNode.style.fontSize = 100 * oWidth / pwidth + 'px';
+  }
+
+  setRem(375, 100);
+
+  document.getElementById('box').style.width = 2 + 'rem';
+
+
+
+
+</script>
+</body>
+</html>
