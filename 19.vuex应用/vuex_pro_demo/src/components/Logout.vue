@@ -17,6 +17,9 @@
 
   export default {
     name: "Logout",
+    beforeCreate() {
+      console.log('Logout de beforeCreate')
+    },
     computed: {
       userName() {
         return this.$store.state.userName;

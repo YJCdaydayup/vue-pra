@@ -21,7 +21,7 @@
             <div class="download">
                 <!--                   <a class="download-btn" href="itms-services://?action=download-manifest&url=https://www.cczq.com/business/app/zay/ccZAY.plist">立即下载</a>-->
                 <a class="download-btn"
-                   href="http://172.23.1.200/zywit/app/cczqV20190109000AM1.ipa">立即下载</a>
+                   href="http://172.23.1.200/zywit/app/cczqV20190111000.ipa">立即下载</a>
             </div>
         </div>
 

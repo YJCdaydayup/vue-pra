@@ -4,12 +4,17 @@ import Counter from '@/components/Counter'
 import Promise from './../components/Promise'
 import Module from './../components/Module.vue'
 import Watcher from './../components/Watcher.vue'
+
+// import Two from './../components/Login'
+// import Three from './../components/Logout'
+// import One from './../components/Home.vue'
+
 import {store} from './../main'
 
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '/',
@@ -18,7 +23,7 @@ const router = new Router({
     {
       path: '/one',
       name: 'one',
-      component: () => import('./../components/Home.vue'),
+      component:  resolve => require(['./../components/Home.vue'], resolve),//懒加载
       meta: {
         requireAuth: true
       }
@@ -26,7 +31,7 @@ const router = new Router({
     {
       path: '/two',
       name: 'two',
-      component: () => import('./../components/Login.vue'),
+      component:  resolve => require(['./../components/Login.vue'], resolve),//懒加载
       meta: {
         requireAuth: false,
         sliderable: true
@@ -36,7 +41,7 @@ const router = new Router({
     {
       path: '/three',
       name: 'three',
-      component: () => import('./../components/Logout.vue'),
+      component:  resolve => require(['./../components/Logout.vue'], resolve),//懒加载
       meta: {
         requireAuth: false
       }
