@@ -1,5 +1,5 @@
 <template>
-  <div class="header-box" :style="{zIndex: (layIndex + 100)}">
+  <div class="header-box">
     <div class="head-goback" v-if="goBack" @click="$router.go(-1)">
       <span class="back-label"> <strong class="arrow"><</strong> 返回 </span>
     </div>
@@ -34,7 +34,7 @@
   }
 
   .header-box {
-    position: fixed;
+    position:absolute;
     top: 0;
     left: 0;
     width: 100%;
