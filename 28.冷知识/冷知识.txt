@@ -184,8 +184,15 @@ routes: [
         publicPath: "http://172.23.1.151:9099/", // 子文件要获取到必须配置publicPath，不加会造成打包时拼接本地file://的地址
         chunkFilename: "js/[name].[chunkhash].js", // 管理懒加载生成的子文件的路径
 
-37)然后看devserver下的contentBase: path.resolve(__dirname)静态了谁，加起来就是所有被静态服务的文件了；
+37)dev下会静态化所有的publicPath+filename的文件和publicPath+outputPath+filename的文件，然后看devserver下的contentBase: path.resolve(__dirname)静态了谁，加起来就是所有被静态服务的文件了；
 
-38）打包生产的文件，依赖子文件也是根据配置里面的路径来的，比如chunkFilename为js/[name].js，那么主文件里面找这个子文件时就域名加js加文件名；
+38）打包生产的文件中依赖的子文件路径会根据publicPath，filename，outputPath来确定的，同时dev调试模式下起服务会根据publicPath，filename，outputPath确定产生的文件的服务器路径和静态化这个路径，所以把这些配置好，调试的时候就可以直接调试了
+
+39）webpack解析http://开头的网络图片时，不会使用对应的loader，而是将这个网络图片地址打进去，本地图片才会启动对于的loader；
+
+40)Vue中的任意组件，包括父子组件，兄弟组件的通信可以通过EventBus(自己写的一个js文件，输出Vue实例对象)，派发消息用eventBus.$emit('事件名',参数)，监听事件在created生命周期里面用eventBus.$on('事件名',(params)=>{});
+
+
+
 
 

@@ -8,13 +8,18 @@
     </div>
     <button @click="shows">展示弹框</button>
     <alert :show="show" @hide="hide"></alert>
+    <brother></brother>
+    <sister></sister>
   </div>
 </template>
 
 <script>
 
   import Head from './Head.vue'
+  import Brother from './brother.vue'
+  import Sister from './sister.vue'
   import Alert from './childvue/alert.vue'
+
 
   export default {
     name: "Home",
@@ -36,7 +41,9 @@
     },
     components: {
       vHeader: Head,
-      alert: Alert
+      alert: Alert,
+      Brother,
+      Sister
     },
   }
 </script>
