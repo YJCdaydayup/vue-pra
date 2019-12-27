@@ -13,27 +13,25 @@ Foo.prototype.getName = function () {
   console.log(3)
 }
 
-var getName = function () {
-  console.log(4)
-}
+// var getName = function () {
+//   console.log(4)
+// }
 
 function getName() {
   console.log(5)
 }
 
-Foo.getName();
+Foo.getName(); // 2
 
-getName()
+getName() // 5
 
-Foo().getName()
+// Foo().getName() // 1
 
-getName()
+new Foo.getName() // 2
 
-new Foo.getName()
+new Foo().getName() // 3
 
-new Foo().getName()
-
-new new Foo().getName()
+new new Foo().getName() // 3
 
 
 
