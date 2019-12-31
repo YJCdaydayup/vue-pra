@@ -23,7 +23,7 @@
                 msg: ''
             }
         },
-          created() {
+        created() {
             eventBus.$on('meimei',(data)=>{
                 this.msg = data;
             })

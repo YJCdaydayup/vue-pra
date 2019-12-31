@@ -1,21 +1,19 @@
 <template>
   <div class="h-box">
-    <v-header :goBack="false">
-      <div class="header-title" slot="title">首页</div>
-    </v-header>
-    <div class="h-content">
+    <top-header></top-header>
+    <!-- <div class="h-content">
       <button @click="goTologout">下一个页面</button>
     </div>
     <button @click="shows">展示弹框</button>
     <alert :show="show" @hide="hide"></alert>
     <brother></brother>
-    <sister></sister>
+    <sister></sister> -->
   </div>
 </template>
 
 <script>
 
-  import Head from './Head.vue'
+  import TopHeader from './top-header.vue'
   import Brother from './brother.vue'
   import Sister from './sister.vue'
   import Alert from './childvue/alert.vue'
@@ -40,7 +38,7 @@
       }
     },
     components: {
-      vHeader: Head,
+      TopHeader,
       alert: Alert,
       Brother,
       Sister

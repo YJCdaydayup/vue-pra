@@ -172,6 +172,9 @@ Dog.call(obj); // 继承Dog自身属性和方法
    2.import是解构过程，编译时执行的，必须写在文件的顶部
    3.require性能稍低，因为require运行时引入并赋值，而import在编译时只需依据import中的接口编译指定模块
 
+50.Vue中数组本身的赋值可以通过Object.defineProperty进行监听，但是对于数组的push pop shift unshift splice sort等方法是无法直接通过defineProperty进行监听的，为不影响数组的原型，创建了一份基于数组原型的对象，之后在观察数据时进行挂载，浏览器支持__proto__就直接挂载到被监听数组__proto__上，不支持就将新的原型对象中的方法拷贝到数组实例中去，但是通过下标修改数组时无法进行监听的；
+
+
 
 
 
