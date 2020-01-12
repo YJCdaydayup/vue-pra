@@ -11,4 +11,15 @@
 2.自定义全局指令或者局部指令时，可以参考v-if的用法，绑定，绑定值，然后通过el，binding.value获取到值，update(){}获取到值的变化；bind只会执行一次，要值改变多次执行也要用到update(){}钩子函数；
 3.点击事件@click传递自己出去就把自己$event放在最后面msg(’s’,$event)即可
 4.prop可以有动态的和静态的，动态绑定就用:msg=“message”,直接静态绑定数据就是 msg=“我是消息”
-5.
+5.actions里面参数：test:({commit},params)=>{}
+
+第三节课
+1.koa-generator aysnc await koa2中间件 koa2路由 cookie／session mongoose redis
+2.cnpm i -g koa-generator 然后 $ koa2 -e koa2-learn(-e表示模版引擎是ejs)
+3.$ cnpm i --update-binary 解决可能出现的问题
+4.cnpm run start 只是启动一次，cnpm run dev 就是服务端代码改动就会自动重新启动
+5.有了async不一定需要await，里面有await外层必须要有async，启动await后面的函数必须返回promise对象
+6.async await就是用同步的写法完成异步的事件处理
+7.await后面要跟promise对象，如果不是promise对象，会自动转位promise对象，new Promise((resolve)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
+8.koa2中间件的原理：request->各种中间件->response，中间件的引用没有顺序，就好比一个个圈，每个中间件都经历了进和出两次,这进出中存在一个上下文对象被各个中间件引用的ctx
+9.
