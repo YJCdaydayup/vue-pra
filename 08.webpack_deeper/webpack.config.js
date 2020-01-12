@@ -11,22 +11,22 @@ module.exports = {
     },
     // 独立于整个打包系统，生成一个外部可访问的网页
     devServer:{
-        host: 'localhost', //可选，ip
-        port: 3000, //可选，端口
-        contentBase:path.resolve(__dirname,'dist'), //可选，基本目录结构
+        host: '172.23.1.207', //可选，ip
+        port: 3001, //可选，端口
+        // contentBase:path.resolve(__dirname,'dist'), //可选，基本目录结构
         compress: false //可选，压缩
     },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                loader: "babel-loader",
-                exclude: path.resolve(__dirname, 'node_modules'),
-                include: path.resolve(__dirname, 'src'),
-                query: {
-                    presets: ["latest"]
-                }
-            },
+            // {
+            //     test: /\.js$/,
+            //     loader: "babel-loader",
+            //     exclude: path.resolve(__dirname, 'node_modules'),
+            //     include: path.resolve(__dirname, 'src'),
+            //     options: {
+            //         presets: ["env"]
+            //     }
+            // },
             {
                 test: /\.css$/,
                 use: [
@@ -57,7 +57,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.tpl$/,
+                test: /\.tpl1$/,
                 loader: 'ejs-loader'
             },
             // {

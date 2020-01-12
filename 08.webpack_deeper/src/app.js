@@ -6,7 +6,7 @@ const Opp = function () {
     console.log([...arr,4,5,6]);
     var app = document.getElementById('app');
     app.innerHTML = Layer().tpl({
-        name: 'Layer',
+        name: 'Layerwknvdkjnvjkdsvnjdsvndskv',
         arr: ['apple','orange','oppo']
     });
 };

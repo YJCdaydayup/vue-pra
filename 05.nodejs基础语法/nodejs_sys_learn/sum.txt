@@ -294,7 +294,7 @@ app.post('/formdata',multipartMiddleware, function (req, res) {
 17.http是无状态的协议，每一次的请求是没有关系的，第一次的时候一定是没有cookie的，登录时服务器设置客户端获取到cookie保存在请求头里面，cookie没有跨域限制，可以设置支持的域，用户可以自由看到，删除，修改或者禁用cookie，也可以用于攻击，存储量小；
 18.cookie中的domain为空就支持任何服务器,maxAge为-1就是临时的，下次请求不带cookie了，使用的业务比如猜你喜欢，和特殊的cookie用于保存登录状态；
 19.session依赖cookie，浏览器可以禁用或者清楚cookie，服务器下发的登录cookie是乱码，下次请求时服务器从缓冲中做匹配；
-20.服务器一般自带生成session的插件，express-session是服务器中生成session的插件，在req上面，只需要先use(session({secret: ‘keyboard cat’,reserve: false,saveUninitialized: true}))一下，在登录时设置req.login = 1，req.cookie.maxAge = 100000;req.useName = ‘Sara’等等，客户端会自动获取一个乱码唯一的cookie，这个cookie不用取管它，下次请求会传给服务器，服务器只需要通过req.session里面去取前面设置信息即可；
+20.服务器一般自带生成session的插件，express-session是服务器中生成session的插件，在req上面，只需要先use(session({secret: ‘keyboard cat’,reserve: false,saveUninitialized: true}))一下，在登录时设置req.session.login = 1，req.cookie.maxAge = 100000;req.session.useName = ‘Sara’等等，客户端会自动获取一个乱码唯一的cookie，这个cookie不用取管它，下次请求会传给服务器，服务器只需要通过req.session里面去取前面设置信息即可；
 21.session不会体现cookie机理，但是要记住是基于cookie制作的；
 
 第十三节课
