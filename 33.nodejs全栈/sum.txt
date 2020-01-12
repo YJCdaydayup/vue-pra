@@ -1,0 +1,8 @@
+一.补充
+1.查看哪个进程占用了这个端口 $ lsof -i:4000,然后$ kill -9 pid 杀掉这个进程，系统的进程不要杀；
+2.ctrl + C 关闭进程，ctrl + D是暂停了进程，但是这个进程依然存在；
+3.将server端的代码拷到服务器，启动服务，外部就可以访问了；
+4.pm2 start bin/www 启动服务，pm2 stop bin／www 关闭服务后 删掉其进程 pm2 delete bin/www 就可以了
+5.重命名 mv www demo-server,其实就是移动改名
+6.pm2 start all ／ pm2 stop all ／pm2 list 查看所有任务 ／ pm2 log 查看日志
+7.

@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="691363c9-412b-4209-a744-f8063a44a565" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../19.vuex应用/vuex_pro_demo/src/components/Head.vue" afterPath="$PROJECT_DIR$/../../19.vuex应用/vuex_pro_demo/src/components/Head.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../19.vuex应用/vuex_pro_demo/src/components/Home.vue" afterPath="$PROJECT_DIR$/../../19.vuex应用/vuex_pro_demo/src/components/Home.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../31.M_S_T_SUM/07.函数节流/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../31.M_S_T_SUM/07.函数节流/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../31.M_S_T_SUM/sum.txt" afterPath="$PROJECT_DIR$/../../31.M_S_T_SUM/sum.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/lib/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
+            <state relative-caret-position="684">
               <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding />
             </state>
@@ -87,7 +83,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vue-toast.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="vue-toast.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/vue-toast.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1159">
@@ -157,8 +153,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-194" />
-    <option name="y" value="510" />
+    <option name="x" value="119" />
+    <option name="y" value="41" />
     <option name="width" value="1436" />
     <option name="height" value="877" />
   </component>
@@ -300,15 +296,15 @@
       <workItem from="1574215477982" duration="5114000" />
       <workItem from="1574227107935" duration="2068000" />
       <workItem from="1575955420913" duration="5858000" />
-      <workItem from="1576677962773" duration="873000" />
+      <workItem from="1576677962773" duration="897000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29762000" />
+    <option name="totallyTimeSpent" value="29786000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-194" y="510" width="1436" height="877" extended-state="0" />
+    <frame x="119" y="41" width="1436" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -431,14 +427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.MD">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -484,6 +472,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1159">
           <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding />
         </state>
       </provider>
