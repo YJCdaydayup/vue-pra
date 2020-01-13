@@ -14,6 +14,13 @@ const m1 = require('./middleware/m1');
 const m2 = require('./middleware/m2');
 const m3 = require('./middleware/m3');
 
+const mongoose = require('mongoose');
+const dbConfig = require('./dbs/config');
+
+mongoose.connect(dbConfig.dbs,{
+  useNewUrlParser: true
+});
+
 app.use(pv());
 app.use(m1());
 app.use(m2());
