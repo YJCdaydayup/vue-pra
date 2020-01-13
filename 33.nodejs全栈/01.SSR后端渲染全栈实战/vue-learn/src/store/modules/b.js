@@ -18,7 +18,7 @@ const actions = {
     add: ({commit})=>{
         commit('add')
     },
-    reduce: ({commit})=>{
+    reduce({commit}){
         commit('reduce');
     }
 };

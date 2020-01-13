@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-view></router-view>
+  <div class="box1">
+    <router-view class="appView"></router-view>
     <div class="tab">
       <router-link class="item" to='/animation'>
         <i class="el-icon-delete"></i>动画
@@ -18,9 +18,23 @@
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  *
-    padding 0
-    margin 0
+  
+  .box1
+    position absolute
+    left 0
+    top 0
+    right 0
+    bottom 0;
+    background-color orange
+
+  .appView 
+    position absolute
+    left 0
+    top 0
+    right 0
+    bottom 50px
+    background-color #ccc
+
   .tab
     width 100%
     position fixed
@@ -28,25 +42,26 @@
     display flex
     justify-content space-between
     border-top 1px solid rgba(0,0,0,0.1)
-  .item
-    height 50px
-    line-height 40px
-    flex 1
-    color: black
-    text-align center
-    text-decoration none
-    font-size 12px
-    display flex
-    flex-direction column
-    i
-      position relative
-      top 8px
-      font-size 16px
-    &.active
-      color: red
-      font-size 13px
+    background-color  #fff
+    .item
+      height 50px
+      line-height 50px
+      flex 1
+      color: black
+      text-align center
+      text-decoration none
+      font-size 12px
+      display flex
+      flex-direction column
       i
-        font-size 17px
+        position relative
+        top 8px
+        font-size 16px
+      &.active
+        color: red
+        font-size 13px
+        i
+          font-size 17px
 
 
 </style>

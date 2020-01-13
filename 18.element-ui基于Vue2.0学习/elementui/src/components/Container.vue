@@ -4,7 +4,7 @@
 
 -->
 <template>
-  <div class="box">
+  <div class="app">
     <!--<el-container>-->
     <!--<el-aside width="100px"></el-aside>-->
     <!--<el-container>-->
@@ -27,7 +27,7 @@
     <!--</el-container>-->
     <!--</el-container>-->
 
-    <el-container>
+    <el-container class="container">
       <el-aside width="100px">
         <el-menu :default-openeds="['1']">
           <el-submenu index="1">
@@ -109,7 +109,15 @@
   </div>
 </template>
 
-<style>
+<style scoped>
+
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 
   /*.child-container {*/
   /*width: 100%;*/

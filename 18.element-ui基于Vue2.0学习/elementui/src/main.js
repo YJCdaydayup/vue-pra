@@ -31,9 +31,12 @@ import {
   CheckboxButton,
   CheckboxGroup,
   Autocomplete,
+  Notification
 } from 'element-ui'
 
+Vue.use(Notification);
 
+Vue.prototype.$notify = Notification;
 Vue.prototype.$ELEMENT = {
   size: 'small',
   zIndex: 3000

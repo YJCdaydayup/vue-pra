@@ -1,102 +1,74 @@
 <template>
-  <div class="box">
-    <el-row>
-      <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-    </el-row>
-    <hr color="purple"/>
-    <el-row>
-      <el-col :span="12">
-        <div class="grid-content bg-purple"></div>
-      </el-col>
-      <el-col :span="12">
-        <div class="grid-content bg-purple-dark"></div>
-      </el-col>
-      <hr color="purple">
-      <el-row>
-        <el-col :span="8">
-          <div class="grid-content bg-purple-dark"></div>
-        </el-col>
-        <el-col :span="8">
-          <div class="grid-content bg-purple"></div>
-        </el-col>
-        <el-col :span="8">
-          <div class="grid-content bg-purple-light"></div>
-        </el-col>
-      </el-row>
-      <hr color="red"/>
-      <el-row :gutter="20">
-        <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-      </el-row>
-    </el-row>
-    <hr color="yellow"/>
-    <el-row :gutter="20">
-      <el-col :span="16">
-        <div class="grid-content bg-purple-light"></div>
-      </el-col>
-      <el-col :span="8">
-        <div class="grid-content bg-purple"></div>
-      </el-col>
-    </el-row>
-    <hr color="red"/>
-    <el-row :gutter="20">
-      <el-col :span="6" :offset="6">
-        <div class="grid-content bg-purple"></div>
-      </el-col>
-      <el-col :span="6">
-        <div class="grid-content bg-purple"></div>
-      </el-col>
-    </el-row>
-    <hr color="red"/>
-    <el-row type="flex" justify="space-between">
-      <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-      <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-    </el-row>
-
-  </div>
+ <div>
+    <el-button
+    plain
+    @click="open1">
+    可自动关闭
+  </el-button>
+  <el-button
+    plain
+    @click="open2">
+    不会自动关闭
+    </el-button>
+    <hr color="red">
+    <button @click="show">展示</button>
+    <transition name="slide">
+      <div class="alert" v-show="visible">
+        <h3>这是标题</h3>
+        <p>这是提示文案这是提示文案这是提示文案这是提示文案这是提这是提示文案这是提示文案这是提示文案这是提示文案这是提</p>
+      </div>
+    </transition>
+ </div>
 </template>
 
-<style lang="stylus">
-  /*.el-row*/
-    /*margin-bottom: 20px*/
-    /*&:last-child*/
-       /*margin-bottom: 0*/
-  /*.el-col*/
-    /*border-radius: 4px*/
+<style lang="stylus" scoped>
+  .alert
+    padding 10px
+    background-color #fff
+    margin 10px 
+    border-radius 6px
+    transform translate3d(0,0,0)
+    &.slide-enter-active,&.slide-leave-active
+      transition all 0.5s linear 
+    &.slide-enter
+      transform translate3d(100%,0,0)
+    &.slide-leave-to
+      transform translate3d(100%,0,0)
 
-  .bg-purple-dark
-    background: #99a9bf
 
-  .bg-purple
-    background: #d3dce6
-
-  .bg-purple-light
-    background: #e5e9f2
-
-  .grid-content
-    border-radius: 4px
-    min-height: 36px
-
-  /*.row-bg*/
-    /*padding: 10px 0*/
-    /*background-color: #f9fafc*/
 
 </style>
 
 <script>
-
   export default {
-    name: 'Layout',
     data() {
       return {
-        msg: ''
+        visible: false
+      }
+    },
+    methods: {
+      show() {
+        this.visible = true
+        let timer = setTimeout(()=>{
+          this.visible = false;
+        },1000);
+      },
+      open1() {
+        const h = this.$createElement;
+
+        this.$notify({
+          title: '标题名称',
+          message: h('em', { style: 'color: red'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
+        });
+      },
+
+      open2() {
+        this.$notify({
+          title: '提示',
+          message: '这是一条不会自动关闭的消息',
+          duration: 0
+        });
       }
     }
   }
-
 </script>

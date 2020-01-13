@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .box
     position: absolute
     top: 50px

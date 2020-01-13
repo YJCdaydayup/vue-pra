@@ -15,10 +15,10 @@ const mutations = {
 }
 
 const actions = {
-    add: ({commit},param)=>{
-        commit('add',param)
+    add(context,param){
+        context.commit('add',param)
     },
-    reduce: ({commit})=>{
+    reduce({commit}){
         commit('reduce');
     }
 };

@@ -10,6 +10,7 @@ import NavMenue from './../components/NavMenu.vue'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'hash',
   linkActiveClass: 'active',
   routes: [
     {
