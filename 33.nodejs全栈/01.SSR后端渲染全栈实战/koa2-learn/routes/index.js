@@ -2,7 +2,6 @@ const router = require('koa-router')()
 
 router.get('/', async (ctx, next) => {
   console.log('自启动1')
-
   // 设置cookie
   ctx.cookies.set('pvid',Math.random());
 

@@ -33,5 +33,17 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 3.考虑函数里面可能有异步操作，就直接用async和await来做；
 4.ctx对象里面有ctx.request和ctx.response两个对象，参数的获取和express是一样的，get用query或者params，post用ctx.request.body.name来取值；
 5.koa中的引用都要用严格的commonjs规范；
+6.redis是一种快速的读写数据库，brew install redis进行安装，启动radis服务 $ radis server,两个中间件来操作radis，cnpmi i -D koa-generic-session（用于操作radis的来处理session） koa-redis(用于连接radis服务的)
+7.session一般是放在服务器的内存中，如果数据量大的话可能内存不够，这个时候才用radis最好，性能比较高；
+8.使用时，app.key={key: ‘keyskeys’},app.use(session({
+	key: ‘’,
+	prefix: ‘’,
+	store: new Redis() // 默认使用内存，这样写就会使用radis进行存储了
+})),操作时用ctx.session.count++进行读写操作就行了；就是操作了redis，对于session的操作不用显式的操作redis；
+9.启动终端来操作redis，$ redis-cli 默认是6379端口
+10.存储的是健值对， $keys * 获取所有的key值
+11.$ get hchajchachahjhcbajhcbajcb（其中的某个key值） 就可以得到session里面设置的信息
+12.curl -p https://… 加-p就是post 不加就是get请求；
+13.通过hset(‘key’，’name’, ‘value’)）设置，获取就用hget fix name,看菜鸟网站的radis；
 
 

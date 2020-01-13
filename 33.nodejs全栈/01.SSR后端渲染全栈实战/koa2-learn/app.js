@@ -17,6 +17,19 @@ const m3 = require('./middleware/m3');
 const mongoose = require('mongoose');
 const dbConfig = require('./dbs/config');
 
+const session = require('koa-generic-session');
+const redis = require('koa-redis');
+
+app.key = {
+  key: 'keyskeys'
+}
+
+app.use(session({
+  key: '改名',
+  prefix: '前缀',
+  store: new session(),
+}));
+
 mongoose.connect(dbConfig.dbs,{
   useNewUrlParser: true
 });
