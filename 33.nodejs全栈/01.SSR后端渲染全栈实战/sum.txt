@@ -47,3 +47,23 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 13.通过hset(‘key’，’name’, ‘value’)）设置，获取就用hget fix name,看菜鸟网站的radis；
 
 
+第五节课
+1.nuxt.js是vue做SSR的框架；
+2.基于Vue2 包含vue-router路由 支持vuex
+3.支持Vue server renderer即SSR
+4.支持vue-meta
+5.工作流：
+  Incoming Request(浏览器发出请求)
+  |
+  检查有没有nuxtServerInit配置项，有就执行Store action
+  |
+  middleware中间件
+  |
+  验证(鉴权)
+  |
+  获取数据（asyncData（）渲染渲染组件／fetch()修改Vuex的）
+  |
+  渲染Render
+6.安装基于koa2的脚手架模版 $ vue init nuxt-community/koa-template nuxt-learn
+7.nuxt是非常方便做SSR服务端渲染的；
+8.
