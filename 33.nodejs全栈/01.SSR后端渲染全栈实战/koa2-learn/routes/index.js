@@ -6,7 +6,7 @@ router.get('/', async (ctx, next) => {
   ctx.cookies.set('pvid',Math.random());
 
   await ctx.render('index', {
-    title: 'Hello Koa 2!'
+    title: ctx.session.count
   })
 })
 

@@ -18,16 +18,13 @@ const mongoose = require('mongoose');
 const dbConfig = require('./dbs/config');
 
 const session = require('koa-generic-session');
-const redis = require('koa-redis');
+const redisStore = require('koa-redis');
 
-app.key = {
-  key: 'keyskeys'
-}
-
+app.keys = ['keys', 'keykeys'];
 app.use(session({
-  key: '改名',
-  prefix: '前缀',
-  store: new session(),
+  store: redisStore({
+    
+  })
 }));
 
 mongoose.connect(dbConfig.dbs,{

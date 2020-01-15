@@ -194,6 +194,8 @@ routes: [
 
 41）一般的滚动监听就用el.addEventListener('scroll',()=>{}),获取滚动的高度el.scrollTop,设置滚动到哪里：el.scrollTo(0,100);
 
+42)window上面的方法和属性，在任何地方都可以直接拿来使用，只要不加this就好了，比如clearTimeout(timer)，在函数里面取这个局部函数，取不到就从全局里面去取，和全局变量使用一样
+
 
 
 

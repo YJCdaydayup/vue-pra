@@ -13,6 +13,8 @@
 
 <script>
 
+  'use strict'
+
   import TopHeader from './top-header.vue'
   import Brother from './brother.vue'
   import Sister from './sister.vue'
@@ -23,9 +25,16 @@
     name: "Home",
     data() {
       return {
-        show: false
+        show: false,
+        timer: ''
       }
     },
+    mounted() {
+      this.timer = setTimeout(()=>{
+        console.log(this.clearTimeout)
+        clearTimeout(this.timer)
+      },1000);
+    },git
     methods: {
       goTologout() {
         this.$router.push('/two');
