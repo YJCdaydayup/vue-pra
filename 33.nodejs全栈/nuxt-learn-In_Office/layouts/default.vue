@@ -1,6 +1,7 @@
 <template>
-  <div>acas
+  <div>
     <nuxt/>
+    <my-footer/>
   </div>
 </template>
 

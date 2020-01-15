@@ -1,6 +1,5 @@
 import Koa from 'koa'
 import { Nuxt, Builder } from 'nuxt'
-import cityInterface from './interface/city'
 
 async function start () {
   const app = new Koa()
@@ -19,9 +18,6 @@ async function start () {
     const builder = new Builder(nuxt)
     await builder.build()
   }
-
-  // 放在这里
-  app.use(cityInterface.routes()).use(cityInterface.allowedMethods());
 
   app.use(ctx => {
     ctx.status = 200

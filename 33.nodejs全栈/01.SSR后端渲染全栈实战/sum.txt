@@ -63,7 +63,18 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
   |
   获取数据（asyncData（）渲染渲染组件／fetch()修改Vuex的）
   |
-  渲染Render
+  渲染Render(指的是服务器的Render)
 6.安装基于koa2的脚手架模版 $ vue init nuxt-community/koa-template nuxt-learn
 7.nuxt是非常方便做SSR服务端渲染的；
-8.
+8.Mac下的redis安装办法：https://www.jianshu.com/p/bb7c19c5fc47
+9.安装这个模版默认会报错，原因是backpack-core和eslint-loader这两个loader的版本太低了，删掉后重新安装，记得去掉node_modules里面对应的这两个文件；
+10.创建即配置，只要创建了store这个目录，就默认用了vuex；
+11.路由 页面模版layout 异步数据 Vuex应用
+12.创建即配置，在pages里面创建search.vue文件，就会默认把这个文件作为一个页面/search了，默认的入口Vue文件就在layouts里面的default.vue，通过<nuxt/>加载路由的页面的，类似Vue里面的<router-view></router-view>;
+13.对于永远存在的组件，就可以放在App.vue或者default.vue里面最外层上面；
+14.<nuxt/>对应<router-view/>,<router-link/>对应<nuxt-link/>
+15.layout文件里面可以定义很多各种各样的Vue模版,如myDefault.vue，使用模版只需要在对应页面Vue文件里面增加:layout: “myDefault”即可，一般模版用于定义页面的通用风格，默认使用default模版；
+16.产生的h5页面的页面信息配置meta title css，loading(这里配置的css文件是全局的css文件) 都是在nuxt.config.js里面配置的，还有其他的配置可以看看nuxtjs的英文文档；
+17.SSR开发中，在服务器端Vue的周期方法智慧执行beforeCreated和created两个方法，mounted方法是下发到浏览器后浏览器来发起的；
+18.vuex的使用看文档即可，创建store文件夹就自动配置了
+

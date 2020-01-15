@@ -1,8 +1,8 @@
 {
-  "name": "nuxt-learn",
+  "name": "nuxt-learn-in_office",
   "version": "1.1.0",
   "description": "Nuxt.js project",
-  "author": "Your Name <you@example.com>",
+  "author": "yangli <yangli@example.com>",
   "private": true,
   "scripts": {
     "dev": "backpack dev",
@@ -18,10 +18,9 @@
     "source-map-support": "^0.4.15"
   },
   "devDependencies": {
-    "axios": "^0.19.1",
-    "babel-eslint": "^7.1.1",
+    "babel-eslint": "^10.0.3",
     "backpack-core": "^0.8.4",
-    "eslint": "^3.13.1",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-html": "^2.0.3",
@@ -29,7 +28,6 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
-    "koa-router": "^7.4.0",
     "nodemon": "^1.11.0",
     "scmp": "^2.0.0"
   }
