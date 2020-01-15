@@ -34,7 +34,7 @@
         console.log(this.clearTimeout)
         clearTimeout(this.timer)
       },1000);
-    },git
+    },
     methods: {
       goTologout() {
         this.$router.push('/two');
