@@ -68,6 +68,7 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 7.nuxt是非常方便做SSR服务端渲染的；
 8.Mac下的redis安装办法：https://www.jianshu.com/p/bb7c19c5fc47
 9.安装这个模版默认会报错，原因是backpack-core和eslint-loader这两个loader的版本太低了，删掉后重新安装，记得去掉node_modules里面对应的这两个文件；
+<<<<<<< HEAD
 10.创建即配置，只要创建了store这个目录，就默认用了vuex；
 11.路由 页面模版layout 异步数据 Vuex应用
 12.创建即配置，在pages里面创建search.vue文件，就会默认把这个文件作为一个页面/search了，默认的入口Vue文件就在layouts里面的default.vue，通过<nuxt/>加载路由的页面的，类似Vue里面的<router-view></router-view>;
@@ -77,4 +78,6 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 16.产生的h5页面的页面信息配置meta title css，loading(这里配置的css文件是全局的css文件) 都是在nuxt.config.js里面配置的，还有其他的配置可以看看nuxtjs的英文文档；
 17.SSR开发中，在服务器端Vue的周期方法智慧执行beforeCreated和created两个方法，mounted方法是下发到浏览器后浏览器来发起的；
 18.vuex的使用看文档即可，创建store文件夹就自动配置了
+=======
+>>>>>>> 4ebbc2f7771caa8acb62a2354aeee633d12cde34
 
