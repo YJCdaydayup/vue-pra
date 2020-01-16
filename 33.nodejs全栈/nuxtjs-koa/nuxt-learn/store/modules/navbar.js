@@ -1,22 +1,19 @@
 /**
  * Created by yangli on 2020/1/15.
  */
-/**
- * Created by yangli on 2020/1/15.
- */
 const state = {
   app: []
 }
 
 const mutations = {
-  add(state,text) {
+  add(state, text) {
     state.app.push(text)
   }
 }
 
 const actions = {
-  add({commit},text) {
-    commit('add',text)
+  add({commit}, text) {
+    commit('add', text)
   }
 }
 

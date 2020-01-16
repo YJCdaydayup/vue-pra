@@ -9,12 +9,20 @@ import navbar from './modules/navbar'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  modules:{
+const store = () => new Vuex.Store({
+  modules: {
     city,
     navbar
   },
   actions: {
-
+    // 每次进来时都会经过这里
+    // 在这里可以保存登录的用户名
+    nuxtServerInit({commit}, {req}) {
+      if (req.session.user) {
+        commit('city', req.sesson.user)
+      }
+    }
   }
 })
+
+export default store

@@ -2,18 +2,18 @@
  * Created by yangli on 2020/1/15.
  */
 const state = {
-  list: []
+  list: [1, 2, 3, 4, 5, 6]
 }
 
 const mutations = {
-  add(state,text) {
+  add(state, text) {
     state.list.push(text)
   }
 }
 
 const actions = {
-  add({commit},text) {
-    commit('add',text)
+  add({commit}, text) {
+    commit('add', text)
   }
 }
 
