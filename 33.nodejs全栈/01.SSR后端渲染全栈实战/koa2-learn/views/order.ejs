@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title><%= title %></title>
+        <style>
+            .form {
+                margin: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h3><%= title %></h3>
+        <form class="form" action="/orders/dologin" method="POST" enctype="multipart/form-data">
+            <input type="text" placeholder="请输入姓名" name="name">
+            <hr>
+            <input type="text" placeholder="请输入年龄" name="age">
+            <hr>
+            <input type="file" placeholder="请选择文件" name="avatar">
+            <hr>
+            <input type="submit">
+        </form>
+    </body>
+</html>
