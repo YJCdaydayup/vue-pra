@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  layout: 'modal',
   data() {
     return {
       msg: '123456'
