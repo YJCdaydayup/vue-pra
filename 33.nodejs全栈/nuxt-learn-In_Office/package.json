@@ -18,8 +18,11 @@
     "source-map-support": "^0.4.15"
   },
   "devDependencies": {
+    "axios": "^0.19.1",
     "babel-eslint": "^10.0.3",
     "backpack-core": "^0.8.4",
+    "dgram": "^1.0.1",
+    "dns": "^0.2.2",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^3.0.3",
@@ -28,7 +31,15 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
+    "fs": "^0.0.1-security",
+    "koa-generic-session": "^2.0.4",
+    "koa-redis": "^4.0.1",
+    "koa-router": "^7.4.0",
+    "net": "^1.0.2",
     "nodemon": "^1.11.0",
-    "scmp": "^2.0.0"
+    "scmp": "^2.0.0",
+    "tls": "^0.0.1",
+    "vue": "^2.6.11",
+    "vuex": "^3.1.2"
   }
 }

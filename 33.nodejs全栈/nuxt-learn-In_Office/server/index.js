@@ -1,8 +1,15 @@
 import Koa from 'koa'
 import { Nuxt, Builder } from 'nuxt'
+import cityRouter from './interface/city'
+import session from 'koa-generic-session'
+import redisStore from 'koa-redis'
 
 async function start () {
   const app = new Koa()
+  app.keys = ['keys', 'keykeys'];
+  app.use(session({
+    store: redisStore()
+  }));
   const host = process.env.HOST || '127.0.0.1'
   const port = process.env.PORT || 3000
 
@@ -18,6 +25,8 @@ async function start () {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  app.use(cityRouter.routes()).use(cityRouter.allowedMethods())
 
   app.use(ctx => {
     ctx.status = 200
