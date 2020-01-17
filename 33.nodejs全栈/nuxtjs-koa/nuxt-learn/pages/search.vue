@@ -2,7 +2,7 @@
   <section>
     <nuxt-link to="/index">跳转index</nuxt-link>
     <ul>
-      <li v-for="(item,index) in list" :key="index">{{item}}</li>
+      <li v-for="(item, index) in $store.state.city.list" :key="index">{{item}}</li>
     </ul>
   </section>
 </template>
@@ -34,15 +34,15 @@
       // 在这个方法里面就不存在this了，拿到不
 //      let self = this;
 //      // 解构赋值
-      let {status, data:{list}} = await axios.get('http://localhost:3000/city/list')
+      let {status, data: {list}} = await axios.get('http://localhost:3000/city/list')
       if (status === 200) {
         // 赋值就通过return的方式，赋值给谁就把谁作为key即可
         // 这个时候就是完全渲染好了给浏览器的
         // 通过这种方式也会异步获取的数据扔给了浏览器端
-       return {
-         list
-       }
-     }
+        return {
+          list
+        }
+      }
     },
     // 这里是用来处理vuex相关的数据的
     // fetch是请求到数据后，提交mutation修改vuex的state
