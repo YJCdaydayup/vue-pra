@@ -166,11 +166,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var koa__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(koa__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var nuxt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! nuxt */ "nuxt");
 /* harmony import */ var nuxt__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nuxt__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _interface_city__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface/city */ "./server/interface/city.js");
+/* harmony import */ var koa_generic_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! koa-generic-session */ "koa-generic-session");
+/* harmony import */ var koa_generic_session__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(koa_generic_session__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var koa_redis__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! koa-redis */ "koa-redis");
+/* harmony import */ var koa_redis__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(koa_redis__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
 
 
 
 async function start() {
   const app = new koa__WEBPACK_IMPORTED_MODULE_0___default.a();
+  app.keys = ['keys', 'keykeys'];
+  app.use(koa_generic_session__WEBPACK_IMPORTED_MODULE_3___default()({
+    store: koa_redis__WEBPACK_IMPORTED_MODULE_4___default()()
+  }));
   const host = process.env.HOST || '127.0.0.1';
   const port = process.env.PORT || 3000; // Import and Set Nuxt.js options
 
@@ -185,6 +197,7 @@ async function start() {
     await builder.build();
   }
 
+  app.use(_interface_city__WEBPACK_IMPORTED_MODULE_2__["default"].routes()).use(_interface_city__WEBPACK_IMPORTED_MODULE_2__["default"].allowedMethods());
   app.use(ctx => {
     ctx.status = 200;
     ctx.respond = false; // Mark request as handled for Koa
@@ -201,6 +214,30 @@ start();
 
 /***/ }),
 
+/***/ "./server/interface/city.js":
+/*!**********************************!*\
+  !*** ./server/interface/city.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const Router = __webpack_require__(/*! koa-router */ "koa-router");
+
+const router = new Router({
+  prefix: '/city'
+});
+router.get('/list', async ctx => {
+  ctx.session.user = 'Tom';
+  ctx.body = {
+    list: ['北京', '天津', '惠州', ctx.session.user]
+  };
+});
+/* harmony default export */ __webpack_exports__["default"] = (router);
+
+/***/ }),
+
 /***/ "koa":
 /*!**********************!*\
   !*** external "koa" ***!
@@ -209,6 +246,39 @@ start();
 /***/ (function(module, exports) {
 
 module.exports = require("koa");
+
+/***/ }),
+
+/***/ "koa-generic-session":
+/*!**************************************!*\
+  !*** external "koa-generic-session" ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-generic-session");
+
+/***/ }),
+
+/***/ "koa-redis":
+/*!****************************!*\
+  !*** external "koa-redis" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-redis");
+
+/***/ }),
+
+/***/ "koa-router":
+/*!*****************************!*\
+  !*** external "koa-router" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-router");
 
 /***/ }),
 

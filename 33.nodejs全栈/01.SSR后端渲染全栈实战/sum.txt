@@ -59,7 +59,7 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
   |
   middleware中间件
   |
-  验证(鉴权)
+  路由判断是否存在，存在则进入这个页面
   |
   获取数据（asyncData（）渲染渲染组件／fetch()修改Vuex的）
   |
@@ -81,6 +81,8 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 20.从vuex里面获取数据:$store.state.city.list,模块名加载state的后面；
 21.SSR和核心就是asyncData服务端获取数据渲染展示；
 22.nuxtServerInit的用法，可选的方法；
+ nuxtServerInit({commit},{req}),发起请求后第一个经过这里，这里可以拿到页面vuex对象存储状态，可以拿到node服务的request对象获取请求参数，这个在服务端的中间件之前就调用了；
 23.Vue SSR的工作原理研究；
+24.外层store和子module的关系，如果要改变子module的state，可以直接用store.state.city.token = 'cjsakcjaskcascasjkcjnas'
 
 
