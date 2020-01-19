@@ -1,0 +1,108 @@
+第一节课
+1.打造前端+服务端，业务内容：首页，产品详情 登录注册 购物车 产品列表 订单
+2.技术上,前端使用Vue-cli下nuxt.js+vue2.5+vuex 后端使用koa2 + mongoose + redis
+3.基础知识 + 实战重点 Vue全家桶+koa2核心知识+nuxt.js入门 登录注册+SMTP服务+城市服务+推荐服务+搜索服务+地图服务+购物车设计+订单设计+组件复用设计+接口设计+思维技巧
+4.特色：注册-登陆-首页-推荐／搜索-产品列表-产品详情-登陆-购物车-订单
+5.系统完整-体验逼真-技能全面-数据真实-通俗易懂
+6.安装vue教授教 cnpm i -g @vue/cli
+
+第二节课
+1.对于import和require，一个是编译时执行，一个是运行时执行，加载到内存里面去，当定义全局方法，指令，变量等时可以直接创建一个js文件在里面写方法，全局指令等，然后通过import引入，由于js里面没有使用export输出，就不能使用import from引入，只用import即可加载到内存；
+2.自定义全局指令或者局部指令时，可以参考v-if的用法，绑定，绑定值，然后通过el，binding.value获取到值，update(){}获取到值的变化；bind只会执行一次，要值改变多次执行也要用到update(){}钩子函数；
+3.点击事件@click传递自己出去就把自己$event放在最后面msg(’s’,$event)即可
+4.prop可以有动态的和静态的，动态绑定就用:msg=“message”,直接静态绑定数据就是 msg=“我是消息”
+5.actions里面参数：test:({commit},params)=>{}
+
+第三节课
+1.koa-generator aysnc await koa2中间件 koa2路由 cookie／session mongoose redis
+2.cnpm i -g koa-generator 然后 $ koa2 -e koa2-learn(-e表示模版引擎是ejs)
+3.$ cnpm i --update-binary 解决可能出现的问题
+4.cnpm run start 只是启动一次，cnpm run dev 就是服务端代码改动就会自动重新启动
+5.有了async不一定需要await，里面有await外层必须要有async，启动await后面的函数必须返回promise对象
+6.async await就是用同步的写法完成异步的事件处理
+7.await后面要跟promise对象，如果不是promise对象，会自动转位promise对象，new Promise((resolv
+e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
+8.koa2中间件的原理：request->各种中间件->response，中间件的引用没有顺序，就好比一个个圈，每个中间件都经历了进和出两次,这进出中存在一个上下文对象被各个中间件引用的ctx
+9.不同的路由的前缀是不一样的，router.prefix(‘/user’),不写默认是‘／’；
+10.返回里面 await ctx.render(‘index’,{title:’这是标题’})返回页面，返回字符串或json用ctx.body=‘字符串’／ctx.body={title: ‘这是标题’}
+11.cookie的处理，ctx.cookies.set(‘pvid’,’123456’),得到cookie，ctx.cookies.get(‘pvid’);
+
+第四节课
+1.https://robomongo.org下载mongodb客户端；
+2.koa中的mongoose数据库的连接就直接写在了app.js文件里面，具体业务model操作写在路由里面
+3.考虑函数里面可能有异步操作，就直接用async和await来做；
+4.ctx对象里面有ctx.request和ctx.response两个对象，参数的获取和express是一样的，get用query或者params，post用ctx.request.body.name来取值；
+5.koa中的引用都要用严格的commonjs规范；
+6.redis是一种快速的读写数据库，brew install redis进行安装，启动radis服务 $ radis server,两个中间件来操作radis，cnpmi i -D koa-generic-session（用于操作radis的来处理session） koa-redis(用于连接radis服务的)
+7.session一般是放在服务器的内存中，如果数据量大的话可能内存不够，这个时候才用radis最好，性能比较高；
+8.使用时，app.key={key: ‘keyskeys’},app.use(session({
+	key: ‘’,
+	prefix: ‘’,
+	store: new Redis() // 默认使用内存，这样写就会使用radis进行存储了
+})),操作时用ctx.session.count++进行读写操作就行了；就是操作了redis，对于session的操作不用显式的操作redis；
+9.启动终端来操作redis，$ redis-cli 默认是6379端口
+10.存储的是健值对， $keys * 获取所有的key值
+11.$ get hchajchachahjhcbajhcbajcb（其中的某个key值） 就可以得到session里面设置的信息
+12.curl -p https://… 加-p就是post 不加就是get请求；
+13.通过hset(‘key’，’name’, ‘value’)）设置，获取就用hget fix name,看菜鸟网站的radis；
+
+
+第五节课
+1.nuxt.js是vue做SSR的框架；
+2.基于Vue2 包含vue-router路由 支持vuex
+3.支持Vue server renderer即SSR
+4.支持vue-meta
+5.工作流：
+  Incoming Request(浏览器发出请求)
+  |
+  检查有没有nuxtServerInit配置项，有就执行Store action
+  |
+  middleware中间件
+  |
+  路由判断是否存在，存在则进入这个页面
+  |
+  获取数据（asyncData（）渲染渲染组件／fetch()修改Vuex的）
+  |
+  渲染Render(指的是服务器的Render)
+6.安装基于koa2的脚手架模版 $ vue init nuxt-community/koa-template nuxt-learn
+7.nuxt是非常方便做SSR服务端渲染的；
+8.Mac下的redis安装办法：https://www.jianshu.com/p/bb7c19c5fc47
+9.安装这个模版默认会报错，原因是backpack-core和eslint-loader这两个loader的版本太低了，删掉后重新安装，记得去掉node_modules里面对应的这两个文件；
+10.创建即配置，只要创建了store这个目录，就默认用了vuex；
+11.路由 页面模版layout 异步数据 Vuex应用
+12.创建即配置，在pages里面创建search.vue文件，就会默认把这个文件作为一个页面/search了，默认的入口Vue文件就在layouts里面的default.vue，通过<nuxt/>加载路由的页面的，类似Vue里面的<router-view></router-view>;
+13.对于永远存在的组件，就可以放在App.vue或者default.vue里面最外层上面；
+14.<nuxt/>对应<router-view/>,<router-link/>对应<nuxt-link/>
+15.layout文件里面可以定义很多各种各样的Vue模版,如myDefault.vue，使用模版只需要在对应页面Vue文件里面增加:layout: “myDefault”即可，一般模版用于定义页面的通用风格，默认使用default模版；
+16.产生的h5页面的页面信息配置meta title css，loading(这里配置的css文件是全局的css文件) 都是在nuxt.config.js里面配置的，还有其他的配置可以看看nuxtjs的英文文档；
+17.SSR开发中，在服务器端Vue的周期方法智慧执行beforeCreated和created两个方法，mounted方法是下发到浏览器后浏览器来发起的；
+18.vuex的使用看文档即可，创建store文件夹就自动配置了
+19.nuxtjs里面才用了eslint规范，对于分号不需要，对象，数组要空格；
+20.从vuex里面获取数据:$store.state.city.list,模块名加载state的后面；
+21.SSR和核心就是asyncData服务端获取数据渲染展示；
+22.nuxtServerInit的用法，可选的方法；
+ nuxtServerInit({commit},{req}),发起请求后第一个经过这里，这里可以拿到页面vuex对象存储状态，可以拿到node服务的request对象获取请求参数，这个在服务端的中间件之前就调用了；
+23.Vue SSR的工作原理研究；
+24.外层store和子module的关系，如果要改变子module的state，可以直接用store.state.city.token = 'cjsakcjaskcascasjkcjnas'
+
+第六节课
+1.使用nuxt官方提供的脚手架，$ npx create-nuxt-app project-name;前面时社区提供的脚手架模版；
+2.安装时的选择：koa element-uiUniversal axios eslint  
+3.nodemon是用来监听并热启动服务端脚本的；
+4.官方提供的脚手架默认不支持import from导入，是因为启动的时候没有执行babel转化，可以在cnpm run dev后面加 —-exec babel-node后，再安装cnpm i -S babel-cli,再配置babel的配置文件，.babelrc里面加
+{
+   "presets": ["es2015"]
+}，再安装babel-preset-es2015即配置完成
+5.项目采用sass编写css，安装cnpm i -D sass-loader node-sass
+6.运行时弹警告，一般就安装一下警告的文件，不然可能运行不会报错，但是可能会有某些功能的缺失；
+
+第七节课
+1.需求分析：
+   1)城市服务组件：原理是通过请求的ip可以查到此ip所在的城市；
+   请求页面+mouted里面有浏览器请求城市名称,或者使用asyncData结合vuex来做，只请求一次即可节省请求
+   2)用户数据和状态(登录／注册)
+   浏览器请求->服务器通过cookie查询redis判断是否登录,也是vuex和SSR
+   3)不变的东西就写死在模版里面得了
+2.某个标签下存在多种状态，可以用div包裹后，里面写多组dl+dt+dd，然后对每个dl进行判断；
+3.组件化的data已经达到了mock数据的效果，所以不需要考虑mock来写Vue；
+

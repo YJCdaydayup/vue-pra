@@ -18,9 +18,9 @@ const store = () => new Vuex.Store({
     // 每次进来时都会经过这里
     // 在这里可以保存登录的用户名
     nuxtServerInit({commit}, {req}) {
-      if (req.session.user) {
-        commit('city', req.sesson.user)
-      }
+      // if (req.session.user) {
+      //   commit('city', req.sesson.user)
+      // }
     }
   }
 })
