@@ -1,7 +1,7 @@
 <template>
   <el-container class="layout-default">
     <el-header>
-      <index/>
+      <my-header/>
     </el-header>
     <el-main>
       <nuxt/>
@@ -12,11 +12,11 @@
 
 <script>
 
-  import Index from '@/components/public/header/index.vue'
+  import MyHeader from '@/components/public/header/index.vue'
 
   export default {
     components: {
-      Index
+      MyHeader
     }
   }
 
