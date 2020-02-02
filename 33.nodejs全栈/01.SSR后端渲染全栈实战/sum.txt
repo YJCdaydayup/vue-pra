@@ -106,5 +106,22 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 2.某个标签下存在多种状态，可以用div包裹后，里面写多组dl+dt+dd，然后对每个dl进行判断；
 3.组件化的data已经达到了mock数据的效果，所以不需要考虑mock来写Vue；
 4.直接子元素就用比如：>dl
+5.对于一般的菜单hover状态下显示子菜单，可以将利用结构ul>li>dl(子列表)>dh>dd，dl的width要设置为100%
+6.对于比较复杂的hover下要显示另外的菜单，这个菜单可以在任意位置，就可以将咬显示的这个子菜单独立一个div出来，通过事件进行控制，原菜单ul或者dl上要@mouseleave结合计时器timer控制一个属性kind为空，菜单栏目dd上加mouseenter事件改变kind的值，由于鼠标移出原菜单会造成独立的子菜单隐藏，可以在独立子菜单上添加事件mouseenter将计时器timer clear掉，mouseleave是再创建计时器timer将kind置为空即可；
+7.如果组件比较简单，不想定义新组件，可以用<template></template>将内容包裹起来，并且tempalte可以用v-for循环进行，注意的是template里面不需要:key属性，但是template里面的元素要加:key属性；
 
+第八节课
+1.接口分析 /users/signup /users/signin /users/verify /users/exit /users/getUser
+2.package.json里面安装的插件，发布上线的时候将^符号去掉，将版本号锁死，防止版本以后更新了跑不起来；
+3.nuxt.config.js中可以通过proxy配置请求代理；
+4.如果脚手架安装的时候没有安装axios，可以现npm安装npm i @nuxtjs/axios，然后在nuxt.config.js里面的modules里面配置@nuxtjs/axios即可,这样配置后，全局就会有this.$axios了，可以直接用于做网络请求了；
+5.js中常用的加密库是crypto-js这个库，这里使用里面的MD5加密；
+6.Vue里面的编程路由跳转可以使用this.$router.push也可以使用location.href=‘/login’
+7.发送验证码的验证逻辑：
+  将验证码相关的信息保存在redis里面，包括 code 过期时间expire用于服务端注册时做校验，邮箱等
+  使用自定义的hmset(`nodemail:${ko.user}`,’code’,ko.code,’expire’,ko.expire,’email’,ko.email)中用户名拼接作为key值存储
+8.passport的作用就是用于登录的，它authenticate时就执行passport.use方法，会从ctx里面的request.body里面拿用户名和密码做校验，有个回调，这个回调在登录接口的业务逻辑判断，关键一步，登录成功后,执行return ctx.login(user)，就会跑过来执行passport.serializeUser(function(user, done) 这个方法，将use里面查到的user对象数据存到session中，进而存到redis里面；
+9.登录成功后以后获取数据通过cookie带过来登录状态，通过ctx.session.passport.user去取，可以看到整个的登录验证都是在passport中进行的；
+10.Vue里面的方法里面，开始就先用let self = this做好，全局的方法就用window.encodeURIComponent执行；
+11.
 

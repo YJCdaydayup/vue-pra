@@ -7,7 +7,7 @@
       <el-col :span="19">2</el-col>
     </el-row>
     <el-row :span="24">
-        3
+        <mid-menue/>
     </el-row>
   </div>
 </template>
@@ -21,10 +21,12 @@
 <script>
 
   import Emenue from '@/components/index/menue.vue'
+  import MidMenue from '@/components/index/midmenue.vue'
 
 export default {
   components: {
-    Emenue
+    Emenue,
+    MidMenue
   }
 }
 </script>
