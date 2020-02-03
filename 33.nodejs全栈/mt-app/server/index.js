@@ -12,6 +12,7 @@ import json from 'koa-json'
 import dbConfig from './dbs/config'
 import passport from './interface/utils/passport'
 import users from './interface/users'
+import geo from './interface/geo'
 import mongoose from 'mongoose'
 
 
@@ -66,6 +67,7 @@ async function start () {
 
   // 5.添加路由
   app.use(users.routes()).use(users.allowedMethods())
+  app.use(geo.routes()).use(geo.allowedMethods())
 
   app.use((ctx) => {
     ctx.status = 200

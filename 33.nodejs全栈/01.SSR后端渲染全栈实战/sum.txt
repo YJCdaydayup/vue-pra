@@ -123,5 +123,18 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 8.passport的作用就是用于登录的，它authenticate时就执行passport.use方法，会从ctx里面的request.body里面拿用户名和密码做校验，有个回调，这个回调在登录接口的业务逻辑判断，关键一步，登录成功后,执行return ctx.login(user)，就会跑过来执行passport.serializeUser(function(user, done) 这个方法，将use里面查到的user对象数据存到session中，进而存到redis里面；
 9.登录成功后以后获取数据通过cookie带过来登录状态，通过ctx.session.passport.user去取，可以看到整个的登录验证都是在passport中进行的；
 10.Vue里面的方法里面，开始就先用let self = this做好，全局的方法就用window.encodeURIComponent执行；
-11.
+11.登录成功后获取用户数据可以放在vuex里面，也可以在相应组件中的mounted方法里面自己获取用户信息数据；
+12.返回promise对象可以用.then方法处理，也可以用async await获取成功的数据
+13.取消iOS下键盘首字母大写的问题：<input autocapitalize="off" autocorrect="off" /> 
+14.表单的使用，模版代码拷贝下来；
+15.page里面的页面的middleware: async function() {}，加载的流程是nuxtServerInit，middleware，路由判断，asyncData／fetch／渲染页面供前端展示，这些个方法都在具体的每一个page的页面里面做；
+16.nuxt项目中，没有keep-alive的缓存，每次刷新页面都会执行mounted里面的方法；
+
+第九节课
+1.接口分析：／search/top /search/resultsByKeywords /search/hotPlace /search/:id
+2.node服务端可以安装axios通过axios向其他的接口发送请求（需要外网地址的ip，端口），也可以向自己的接口发送请求（无需ip，端口，默认就是同域的）
+3.Vuex在nuxt里面的用法和正常的vue项目是一样的，唯一的区别是在actions里面增加了nuxtServerInit方法,注意的是state对象可以用字面量对象或者用函数来获取，const state = {position： {}} / const state = ()=> ({position: {}})
+4.vuex中，modules是对象不是数组，切记： modules： {geo}
+5.对于mongoose中schema的字段设计，可以只根据最外层的字段进行，如{menu: Array}，至于数组里面的内容不管，就可以直接读取到这个数据；
+6.对于实时性要求比较高，且会频繁切换，数据不会变化的地方就可以使用SSR，nuxtServerInit进行获取放到Vuex状态池里面,这样的体验就是非常好的
 

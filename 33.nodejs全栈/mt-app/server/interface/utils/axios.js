@@ -3,6 +3,8 @@
  */
 
 
+// 全局的axios的二次添加配置
+
 import axios from 'axios'
 
 const instance = axios.create({

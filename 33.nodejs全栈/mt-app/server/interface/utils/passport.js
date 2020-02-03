@@ -30,8 +30,6 @@ passport.use(new LocalStrategy(async function(username, password,done){
 
 // 登录成功,执行return ctx.login(user)，就会执行这个方法，将use里面查到的user对象数据存到session中，进而存到redis里面
 passport.serializeUser(function(user, done) {
-
-  console.log('没有执行ctx.login操作，看执行不执行')
   done(null, user)
 })
 

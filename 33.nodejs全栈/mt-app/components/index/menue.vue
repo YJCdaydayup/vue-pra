@@ -2,7 +2,7 @@
     <div class="m-menu">
       <dl class="nav" @mouseleave="mouseleave">
         <dt>全部分类</dt>
-        <dd v-for="(item, index) in menue" :key="index" @mouseenter="mouseenter">
+        <dd v-for="(item, index) in $store.state.home.menu" :key="index" @mouseenter="mouseenter">
           <i :class="item.type"/> {{item.name}} <span class="arrow"/>
         </dd>
       </dl>
@@ -86,8 +86,8 @@
         },
         computed: {
           curdetail() {
-            console.log(this.menue.filter((item)=>item.type === this.kind)[0])
-            return this.menue.filter((item)=>item.type === this.kind)[0]
+            console.log(this.$store.state.home.menu.filter((item)=>item.type === this.kind)[0])
+            return this.$store.state.home.menu.filter((item)=>item.type === this.kind)[0]
           }
         },
         methods: {

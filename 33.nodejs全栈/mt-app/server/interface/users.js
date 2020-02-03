@@ -198,18 +198,24 @@ router.get('/exit', async (ctx, next)=>{
   }
 })
 
+// *********
 
+// 遗留问题：redis里面以及存储了cookie里面的信息，但是sessionid没有生成，导致cookie没有派发个客户端，没法做到保持登录状态
+
+// *********
 router.get('/getUser', async (ctx)=>{
+  console.log(ctx.session)
   if (ctx.isAuthenticated()) {
     const {username, email} = ctx.session.passport.user;
     ctx.body = {
       user: username,
       email
     }
-  }else {}
-  ctx.body = {
-    user: '',
-    email: ''
+  }else {
+    ctx.body = {
+      user: '',
+      email: ''
+    }
   }
 })
 
