@@ -200,6 +200,7 @@ router.get('/exit', async (ctx, next)=>{
 
 // *********
 
+// 已解决！！！
 // 遗留问题：redis里面以及存储了cookie里面的信息，但是sessionid没有生成，导致cookie没有派发个客户端，没法做到保持登录状态
 
 // *********

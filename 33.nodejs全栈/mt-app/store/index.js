@@ -4,30 +4,26 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import geo from './modules/geo'
-import home from './modules/home'
+import geo from './geo'
+import home from './home'
+import axios from './../server/interface/utils/axios'
 
-Vue.use(Vuex)
+// Vue.use(Vuex)
 
-const store = () => new Vuex.Store({
-  modules: {
-    geo,
-    home
-  },
-  actions: {
+export const actions = {
     // 研究一下第二个参数里面的app对象,顺便研究下那个完整项目的登录使用vuex的情况
-    async nuxtServerInit(store, {req, app}) {
+    async nuxtServerInit(store, {req, app,redirect,error}) {
+      // error(404,'错误页面')
+      // redirect('https://www.baidu.com')
 
       // 获取全局定位地址
       const {status, data: {province,city}} = await app.$axios.get('/geo/getPosition')
       store.commit('geo/setPosition',status === 200? {city,province} : {city: '',province: ''})
 
-      // 获取hotPlace，对于
+      // 获取hotPlace
       const {status:status2,data: {menu}} = await app.$axios.get('/geo/menu')
       store.commit('home/setMenu',menu.menu)
-
     }
   }
-})
 
-export default store
+// export default store

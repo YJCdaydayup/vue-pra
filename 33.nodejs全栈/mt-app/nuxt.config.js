@@ -25,7 +25,8 @@ module.exports = {
   css: [
     'element-ui/lib/theme-chalk/reset.css',
     'element-ui/lib/theme-chalk/index.css',
-    '~assets/css/main.css'
+    '~assets/css/main.css',
+    '@/assets/animate.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -63,5 +64,11 @@ module.exports = {
     extend (config, ctx) {
     }
   },
-  cache: false // 增加缓存，提高编译速度
+  cache: false, // 增加缓存，提高编译速度
+  layoutTransition: 'layout',
+   // or
+  transition: {
+     name: 'layout',
+     mode: 'out-in'
+   }
 }

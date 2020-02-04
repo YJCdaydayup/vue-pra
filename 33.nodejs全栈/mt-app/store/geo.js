@@ -1,26 +1,26 @@
 /**
  * Created by yangli on 2020/2/3.
  */
-const state = {
+ export const state = () => {
   position: {}
 }
 
-const mutations = {
+export const mutations = {
   setPosition(state, val) {
     state.position = val
   }
 }
 
-const actions = {
+export const actions = {
   setPosition({commit}, position) {
     commit('setPosition', position)
   }
 }
 
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
-}
+// export default {
+//   namespaced: true,
+//   state,
+//   mutations,
+//   actions
+// }
 

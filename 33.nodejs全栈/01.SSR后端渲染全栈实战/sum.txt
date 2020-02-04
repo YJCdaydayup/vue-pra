@@ -7,7 +7,29 @@
 6.安装vue教授教 cnpm i -g @vue/cli
 
 第二节课
-1.对于import和require，一个是编译时执行，一个是运行时执行，加载到内存里面去，当定义全局方法，指令，变量等时可以直接创建一个js文件在里面写方法，全局指令等，然后通过import引入，由于js里面没有使用export输出，就不能使用import from引入，只用import即可加载到内存；
+1.对于import和require，一个是编译时执行，一个是运行时执行，加载到内存里面去，当定义全局方法，指令，变量等时可以直接创建一个js文件在里面写方法，全局指令等，然后通过import引入，由于js里面没有使用export输出，就不能使用import from引入，只用import即可加载到内存,或者全局method方法；
+// plugins/global.js
+import Vue from 'vue'
+
+Vue.mixin({
+  methods: {
+    // 必传 标题，描述。其他的 meta 标签通过 payload 注入，其中，每个 meta 的 hid 需要是唯一的。
+    $seo(title, content, payload = []) {
+      return {
+        title,
+        meta: [{
+          hid: 'description',
+          name: 'description',
+          content
+        }].concat(payload)
+      }
+    }
+  }
+})
+调用：
+在具体组件的methods方法中调用如：head() {
+    return this.$seo(this.detail.title, this.detail.summary)
+}
 2.自定义全局指令或者局部指令时，可以参考v-if的用法，绑定，绑定值，然后通过el，binding.value获取到值，update(){}获取到值的变化；bind只会执行一次，要值改变多次执行也要用到update(){}钩子函数；
 3.点击事件@click传递自己出去就把自己$event放在最后面msg(’s’,$event)即可
 4.prop可以有动态的和静态的，动态绑定就用:msg=“message”,直接静态绑定数据就是 msg=“我是消息”
@@ -131,10 +153,12 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 16.nuxt项目中，没有keep-alive的缓存，每次刷新页面都会执行mounted里面的方法；
 
 第九节课
-1.接口分析：／search/top /search/resultsByKeywords /search/hotPlace /search/:id
+1.接口分析：/search/top /search/resultsByKeywords /search/hotPlace /search/:id
 2.node服务端可以安装axios通过axios向其他的接口发送请求（需要外网地址的ip，端口），也可以向自己的接口发送请求（无需ip，端口，默认就是同域的）
-3.Vuex在nuxt里面的用法和正常的vue项目是一样的，唯一的区别是在actions里面增加了nuxtServerInit方法,注意的是state对象可以用字面量对象或者用函数来获取，const state = {position： {}} / const state = ()=> ({position: {}})
+3.Vuex在nuxt2.00中的用法和正常的vue项目是一样的，唯一的区别是在actions里面增加了nuxtServerInit方法,注意的是state对象可以用字面量对象或者用函数来获取，const state = {position： {}} / const state = ()=> ({position: {}})，但是在nuxt3.00时配置有nuxt脚手架自己完成了，不需要modules文件夹，自己实现actions里面的nuxtServerInit方法后就export const actions，提交mutation的方法都是和原来一样的；
 4.vuex中，modules是对象不是数组，切记： modules： {geo}
 5.对于mongoose中schema的字段设计，可以只根据最外层的字段进行，如{menu: Array}，至于数组里面的内容不管，就可以直接读取到这个数据；
 6.对于实时性要求比较高，且会频繁切换，数据不会变化的地方就可以使用SSR，nuxtServerInit进行获取放到Vuex状态池里面,这样的体验就是非常好的
-
+7.nuxtServerInit带有两个参数，store对象，context对象(包括app就是前端vue根实例对象，route路由对象，req，res);
+8.注册成功后必须要先在服务端掉用一下登录的接口，通过passport中间件会执行ctx.login(user),产生session存放在redis里面，此时由于不涉及浏览器客户端所以不会有cookie产生，当由客户端调起登录接口时，经过策略判断逻辑回调，当进入成功登录回调后就回执行ctx.login(user)，这个方法会写redis和产生session给客户端，保存在客户端的cookie里面；
+9.当执行ctx.logout()时，就会将redis里面的passport里面的数据清空，同时也将session里面的passport清空，这样客户端再次登录就拿不到客户信息了；

@@ -53,6 +53,7 @@
                      </div>
             </div>
         </div>
+        <button @click="$router.back()">返回</button>
     </div>
 </template>
 
@@ -215,6 +216,9 @@
 export default {
     layout: 'test',
     data() {
+
+        console.log('$nuxt',this.$nuxt.isOffline)
+
         return {
             isFocus: false,
             searchText: '',

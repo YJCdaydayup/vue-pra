@@ -13,7 +13,6 @@ let router = new Router({
 const sign = 'abc'
 
 router.get('/getPosition', async (ctx) => {
-  console.log('走到这里来了吗')
   let {status, data: {province, city}} = await axios.get(`http://cp-tools.cn/geo/getPosition?sign=${sign}`)
   if (status === 200) {
     ctx.body = {

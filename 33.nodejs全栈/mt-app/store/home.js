@@ -1,12 +1,12 @@
 /**
  * Created by yangli on 2020/2/3.
  */
-const state = ()=>({
+ export const state = () => ({
   menu: [],
   hotPlace: []
 })
 
-const mutations = {
+ export const mutations = {
   setMenu(state, val) {
     console.log('123456')
     console.log(val)
@@ -17,7 +17,7 @@ const mutations = {
   },
 }
 
-const actions = {
+ export const actions = {
   setMenu({commit}, menu) {
     commit('setMenu', menu)
   },
@@ -26,10 +26,10 @@ const actions = {
   }
 }
 
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
-}
+// export default {
+//   namespaced: true,
+//   state,
+//   mutations,
+//   actions
+// }
 
