@@ -358,7 +358,7 @@
             }
         },
         methods: {
-          mouseenter(index) {
+         async mouseenter(index) {
             if (index === 0) {
               return;
             }
@@ -367,6 +367,7 @@
             }
             this.menue[index].selected = true;
             this.type = this.menue[index].type;
+
           }
         },
         computed: {

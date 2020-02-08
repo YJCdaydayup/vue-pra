@@ -162,3 +162,29 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 7.nuxtServerInit带有两个参数，store对象，context对象(包括app就是前端vue根实例对象，route路由对象，req，res);
 8.注册成功后必须要先在服务端掉用一下登录的接口，通过passport中间件会执行ctx.login(user),产生session存放在redis里面，此时由于不涉及浏览器客户端所以不会有cookie产生，当由客户端调起登录接口时，经过策略判断逻辑回调，当进入成功登录回调后就回执行ctx.login(user)，这个方法会写redis和产生session给客户端，保存在客户端的cookie里面；
 9.当执行ctx.logout()时，就会将redis里面的passport里面的数据清空，同时也将session里面的passport清空，这样客户端再次登录就拿不到客户信息了；
+10.定义配置文件的时候，可以在定义字面量对象的属性的时候使用get方法，比如const conf = {
+   get name() {return ‘123’} // 第一可以计算，第二调用时只需conf.name即可
+}
+11.善于在computed属性里面运用数组的filter方法，以及map方法
+	filter的：curMenue() {
+            return this.midMenue.filter((item)=>item.type === this.type)[0]
+          }
+       map的：	ctx.body = {
+   		 province: province.map(item => {
+  		    return {
+    		    id: item.id,
+      		    name: item.value[0]
+      		}
+    })
+  }
+12.当写后台接口mongoose查询时，遇到中文要匹配时可以使用new RegExp(ctx.query.input)将中文包裹就会形成正则匹配了；
+13.axios做get请求时，参数可以跟在url后面，也可以放在第二个参数里面:this.$axios.get(‘/’,{params: {name: ‘Sara’}}),服务端从ctx.query.name里面获取；
+14.切记，express里面参数从req.query/req.params/req.body里面拿，在koa里面参数从，ctx.query/ctx.params/ctx.body里面，没有中间一层了
+15.lodash库里面有个方法_.debounce(函数，时间),将函数进行包裹，就会延时响应函数，节流作用
+16.贯彻iselect组件里面的querySearchAsync方法，内存临时缓存数据的用法；
+17.js-pinyin插件完成中文到拼音的转化
+18.’z’.charCodeAt(0)获取小写a的ascll码值97
+19.研究changecity文件夹里面的三个组件的模版DOM用法，值得学习
+20
+
+

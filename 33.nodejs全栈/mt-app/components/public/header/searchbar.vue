@@ -10,19 +10,14 @@
             <button class="el-button el-button--primary"><i class="el-icon-search"></i></button>
             <dl class="hotPlace" v-if="isHotPlace">
               <dt>热门搜索</dt>
-              <dd v-for="(item, index) in hotPlace" :key="index">{{item}}</dd>
+              <dd v-for="(item, index) in $store.state.home.hotPlace.slice(0, 5)" :key="index">{{item.name}}</dd>
             </dl>
             <dl class="searchList" v-if="isSearchList">
-              <dd v-for="(item, index) in searchList" :key="index">{{item}}</dd>
+              <dd v-for="(item, index) in searchList" :key="index">{{item.name}}</dd>
             </dl>
           </div>
           <p class="suggest">
-            <a href="#">故宫博物院</a>
-            <a href="#">故宫博物院</a>
-            <a href="#">故宫博物院</a>
-            <a href="#">故宫博物院</a>
-            <a href="#">故宫博物院</a>
-            <a href="#">故宫博物院</a>
+          <a v-for="(item, index) in $store.state.home.hotPlace.slice(0, 5)" :key="index">{{item.name}}</a>
           </p>
           <ul class="nav">
             <li>
@@ -58,13 +53,16 @@
 </style>
 
 <script>
+
+  import _ from 'lodash'
+
     export default {
         data() {
             return {
                 isFocus: false,
                 search: '',
                 hotPlace: ['火锅','麻辣香锅','宫保鸡丁'],
-                searchList: ['故宫','天津','惠州','大亚湾澳头']
+                searchList: []
             }
         },
         computed: {
@@ -86,9 +84,25 @@
               this.isFocus = false;
             },200);
           },
-          input() {
-            console.log(this.search)
-          }
+          input:_.debounce(async function(){
+            let self=this;
+            let city = self.$store.state.geo.position.city.replace('市','')
+            self.searchList=[]
+            let {status,data:{top}}=await self.$axios.get('/search/top',{
+              params: {
+                input:self.search,
+                city: '三亚'
+              }
+            })
+            if (status === 200) {
+              if (top.length > 10) {
+                self.searchList=top.slice(0,10)
+              }else {
+                self.searchList = top;
+                console.log(self.searchList)
+              }
+            }
+          },300)
         }
     }
 </script>

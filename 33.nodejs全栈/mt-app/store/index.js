@@ -22,7 +22,18 @@ export const actions = {
 
       // 获取hotPlace
       const {status:status2,data: {menu}} = await app.$axios.get('/geo/menu')
-      store.commit('home/setMenu',menu.menu)
+      store.commit('home/setMenu',status2 === 200? menu.menu: [])
+
+      // 获取热门城市
+      const {status:status3, data: {result}} = await app.$axios.get('/search/hotPlace',{
+        params: {
+          city: '三亚'
+        }
+      })
+
+
+      console.log(result)
+      store.commit('home/setHotPlace',status3 === 200 ? result:[])
     }
   }
 
