@@ -6,13 +6,13 @@
             <a :href="'#city-' + item">{{item}}</a>
           </dd>
         </dl>
-      <dl class="m-categroy-section" v-for="(item, index) in block" :key="index">
-        <dt :id="'city-'+ item.title">{{item.title}}</dt>
-        <dd>
-          <!-- 可以考虑在dd里面遍历span -->
-          <span v-for="c in item.city" :key="c">{{c}}</span>
-        </dd>
-      </dl>
+        <dl class="m-categroy-section" v-for="(item, index) in block" :key="index">
+          <dt :id="'city-'+ item.title">{{item.title}}</dt>
+          <dd>
+            <!-- 可以考虑在dd里面遍历span -->
+            <span v-for="c in item.city" :key="c">{{c}}</span>
+          </dd>
+        </dl>
     </div>
 </template>
 
@@ -48,9 +48,8 @@
               p = pyjs.getFullChars(item).toLocaleLowerCase().slice(0, 1)
               // 拿到首字母的code值,0是固定参数
               c = p.charCodeAt(0)
-              //
+              // a - z 95 - 122
               if (c > 96 && c < 123) {
-                // 异常
                 if (!d[p]) {
                   d[p] = []
                 }

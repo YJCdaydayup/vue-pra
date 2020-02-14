@@ -11,7 +11,7 @@
 6.运行在内存，持久化到磁盘，操作的数据量不能大于硬件内存
 
 7.常用配置命令
-$ CONFIG GET * 
+$ CONFIG KEYS * 
 $ CONFIG GET requirepass // 获取连接密码
 $ CONFIG SET requirepass "123456" // 设置连接密码
 $ AUTH "123456" // 验证连接密码

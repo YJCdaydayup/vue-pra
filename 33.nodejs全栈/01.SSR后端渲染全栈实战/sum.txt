@@ -30,6 +30,7 @@ Vue.mixin({
 在具体组件的methods方法中调用如：head() {
     return this.$seo(this.detail.title, this.detail.summary)
 }
+还可以直接在入口文件的Vue的原型上添加Vue.prototype.$show = (msg) => { alert(msg) }
 2.自定义全局指令或者局部指令时，可以参考v-if的用法，绑定，绑定值，然后通过el，binding.value获取到值，update(){}获取到值的变化；bind只会执行一次，要值改变多次执行也要用到update(){}钩子函数；
 3.点击事件@click传递自己出去就把自己$event放在最后面msg(’s’,$event)即可
 4.prop可以有动态的和静态的，动态绑定就用:msg=“message”,直接静态绑定数据就是 msg=“我是消息”
@@ -56,7 +57,7 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
 4.ctx对象里面有ctx.request和ctx.response两个对象，参数的获取和express是一样的，get用query或者params，post用ctx.request.body.name来取值；
 5.koa中的引用都要用严格的commonjs规范；
 6.redis是一种快速的读写数据库，brew install redis进行安装，启动radis服务 $ radis server,两个中间件来操作radis，cnpmi i -D koa-generic-session（用于操作radis的来处理session） koa-redis(用于连接radis服务的)
-7.session一般是放在服务器的内存中，如果数据量大的话可能内存不够，这个时候才用radis最好，性能比较高；
+7.session一般是放在服务器的内存中，如果数据量大的话可能内存不够，这个时候才用redis最好，性能比较高；
 8.使用时，app.key={key: ‘keyskeys’},app.use(session({
 	key: ‘’,
 	prefix: ‘’,
@@ -179,12 +180,49 @@ e)=>{resolve(12)}),await可以直接取到resolve里面的回调的值；
   }
 12.当写后台接口mongoose查询时，遇到中文要匹配时可以使用new RegExp(ctx.query.input)将中文包裹就会形成正则匹配了；
 13.axios做get请求时，参数可以跟在url后面，也可以放在第二个参数里面:this.$axios.get(‘/’,{params: {name: ‘Sara’}}),服务端从ctx.query.name里面获取；
-14.切记，express里面参数从req.query/req.params/req.body里面拿，在koa里面参数从，ctx.query/ctx.params/ctx.body里面，没有中间一层了
+14.切记，express里面参数从req.query/req.params/req.body里面拿，在koa里面参数从，ctx.query/ctx.params/ctx.request.body里面，post才有中间一层了
 15.lodash库里面有个方法_.debounce(函数，时间),将函数进行包裹，就会延时响应函数，节流作用
 16.贯彻iselect组件里面的querySearchAsync方法，内存临时缓存数据的用法；
 17.js-pinyin插件完成中文到拼音的转化
 18.’z’.charCodeAt(0)获取小写a的ascll码值97
 19.研究changecity文件夹里面的三个组件的模版DOM用法，值得学习
-20
+20.使用for of对对象进行遍历，for (let [k, v] of Object.entries(d)) {blocks.push({title: k.toLocalUpperCase(),city: v})}
+21.对数组依据里面的某个元素进行排序，blocks.sort((a, b)=>a.title.charCodeAt(0) - b.title.charCodeAt(0))
 
+第十节课
+1.父组件固定传递的值： <crumba keyword="烧烤店”/>，动态用:keyword=“放变量”
+
+第十一节课
+1.编程路由传递参数其实就是往$route里面动态添加属性，所以要从$route里面取query的参数；
+2.前端要有自己的数据结构，不是字段名，是结构，先定义DOM结构，再考虑数据结构，通过map，filter等做转化，这样数据可控些
+3.定义的组件在css中不能直接当做标签使用,可以在这个虚拟标签上加class类来改变虚拟标签的显示／隐藏；
+4.在asyncData方法里面的参数是ctx。此ctx和后台的ctx是一样的，页面跳转的参数可以直接通过ctx.query.keyword去获取
+5.自定义的组件在template中可以遍历 <Item
+        v-for="(item,idx) in list"
+        :key="idx"
+        :meta="item"/>
+6.数组里面是单个数据时用indexOf来判断是否存在，得到index取出某个数据,当数组里面时对象时可以通过：
+   let x = [{a:1},{a:2},{a:3}]
+   x.find(item=>item.a === 1) 筛选得到第一个符合条件的对象，查不到返回undefined
+   x.findIndex(item=>item.a===1)得到第一个符合条件的对象的索引，查不到返回-1
+
+第十二节课
+1.async asyncData(ctx) {}中的ctx也包括有$axios，所以可以直接通过await ctx.$axios.get发起网络请求,Vue对象虽然一早就创建出来了但页面还没创建出来不能拿到页面的对象的data属性，可以拿到ctx.app这个vue实例的$axios，但是脚手架配置axios后，在每个页面的asyncData的ctx对象上配置了axios，也可以直接ctx.$axios
+
+
+第十三节课
+1.想要支付必须先后台创建订单，然后拿着订单跳转支付页面,这里美团中每个产品下单都会创建一个订单，进而就是一个订单页面
+2.mongodb操作里面，要更新数组里面的某个数据，可以考虑将这个文档的这个数组整个数据重新$set一次即可
+3.研究一下el-tab-pan，属于分栏显示的一个菜单下对应一个内容，结合watch来监听当前的type的变化
+4.当前标签的最后一个&:last-child, 第一个 &:first-child, 某一个&:nth-child(2)来定位DOM，减少增加class；
+5.自定义外部字体:
+@font-face {
+  font-family: 'meituan';
+  src: url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.eot?t=1503027869484);
+    src: url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.eot?t=1503027869484#iefix) format('embedded-opentype'),
+    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.woff?t=1503027869484) format('woff'),
+    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.ttf?t=1503027869484) format('truetype'),
+    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.svg?t=1503027869484#home-category-iconfont) format('svg')
+}
+ 
 

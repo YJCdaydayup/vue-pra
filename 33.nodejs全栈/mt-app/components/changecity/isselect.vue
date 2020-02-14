@@ -74,24 +74,52 @@
       }
     },
     methods: {
-      querySearchAsync: _.debounce(async function(query, cb) {
-        let self = this;
-        if (self.cities.length) {
-          cb(self.cities.filter(item => item.value.indexOf(query) > -1))
-        }else {
-          let {status, data: {cities}} = await self.$axios.get('/geo/city')
-          if (status === 200) {
-            self.cities = cities.map(item => {
-              return {
-                value: item
-              }
-            })
-            cb(self.cities.filter(item => item.indexof(query) > -1))
-          }else {
-            cb([])
+      querySearchAsync: (function () {
+        let timer;
+        return function (query, cb) {
+          if (timer) {
+            return false;
           }
+          timer = setTimeout(async ()=>{
+            if (this.cities.length) {
+              cb(this.cities.filter(item => item.value.indexOf(query) > -1))
+            }else {
+              let {status, data: {cities}} = await this.$axios.get('/geo/city')
+              if (status === 200) {
+                this.cities = cities.map(item => {
+                  return {
+                    value: item
+                  }
+                })
+                console.log(this.cities[0])
+                cb(this.cities.filter(item => item.value.indexOf(query) > -1))
+              }else {
+                cb([])
+              }
+            }
+            clearTimeout(timer)
+            timer = null
+          },200)
         }
-      }),
+      })(),
+//      querySearchAsync: _.debounce(async function(query, cb) {
+//        let self = this;
+//        if (self.cities.length) {
+//          cb(self.cities.filter(item => item.value.indexOf(query) > -1))
+//        }else {
+//          let {status, data: {cities}} = await self.$axios.get('/geo/city')
+//          if (status === 200) {
+//            self.cities = cities.map(item => {
+//              return {
+//                value: item
+//              }
+//            })
+//            cb(self.cities.filter(item => item.value.indexOf(query) > -1))
+//          }else {
+//            cb([])
+//          }
+//        }
+//      }),
       handleSelect(item) {
         alert(item.value)
       }

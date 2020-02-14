@@ -7,17 +7,17 @@
         <el-col :span="14" class="center">
           <div class="wrapper">
             <el-input @input="input" @blur="blur" @focus="focus" v-model="search" placeholder="搜索商家和地点"/>
-            <button class="el-button el-button--primary"><i class="el-icon-search"></i></button>
+            <button @click="searches" class="el-button el-button--primary"><i class="el-icon-search"></i></button>
             <dl class="hotPlace" v-if="isHotPlace">
               <dt>热门搜索</dt>
-              <dd v-for="(item, index) in $store.state.home.hotPlace.slice(0, 5)" :key="index">{{item.name}}</dd>
+              <dd @click="click(item.name)" v-for="(item, index) in $store.state.home.hotPlace.slice(0, 5)" :key="index">{{item.name}}</dd>
             </dl>
             <dl class="searchList" v-if="isSearchList">
-              <dd v-for="(item, index) in searchList" :key="index">{{item.name}}</dd>
+              <dd @click="click(item.name)" v-for="(item, index) in searchList" :key="index">{{item.name}}</dd>
             </dl>
           </div>
           <p class="suggest">
-          <a v-for="(item, index) in $store.state.home.hotPlace.slice(0, 5)" :key="index">{{item.name}}</a>
+            <a @click="click(item.name)" v-for="(item, index) in $store.state.home.hotPlace.slice(0, 5)" :key="index">{{item.name}}</a>
           </p>
           <ul class="nav">
             <li>
@@ -74,6 +74,17 @@
           }
         },
         methods: {
+          searches() {
+            this.$router.push({
+              path: '/product',
+              query: {
+                keyword: this.search
+              }
+            })
+          },
+          click(e) {
+            this.search = e
+          },
           focus() {
             this.isFocus = true;
           },
