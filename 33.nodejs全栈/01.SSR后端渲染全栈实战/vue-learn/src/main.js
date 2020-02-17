@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store/index'
+import Loading from './components/loading/index'
 import './conf'
 
 Vue.config.productionTip = false
+Vue.use(Loading)
 
 Vue.prototype.$show = function () {
   alert('show')

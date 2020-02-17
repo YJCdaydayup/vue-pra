@@ -1,0 +1,135 @@
+地址：
+https://www.cnblogs.com/chenwenhao/p/11258895.html
+
+一.Vue双向绑定原理
+1.mvvm双向绑定
+2.采用数据劫持 + 发布者-订阅者模式
+3.通过Object.defineProperty()来劫持各个属性的setter getter方法，来监听所有属性（Observer的事情），在数据变动时发布消息给订阅者，触发相应监听回调
+4.三个对象 Observer Compile Watcher
+5.Observer，数据监听器，对数据对象的所有属性进行监听，如有变动可拿到最新值通知订阅者
+6.Compile，用于初始化视图，指令解析器，对每个元素节点的指令进行扫描和解析，根据指令／模版替换数据，初始化视图，绑定相应的更新函数
+7.Watcher，用于调用其update方法更新视图，订阅者，连接Observer和Compile的桥梁，会被添加到消息订阅器Dep中，订阅并接收通知，执行指令绑定的回调函数，从而更新视图
+
+二.Vue从初始— — 到修改数据— — 刷新UI过程
+1.初始化阶段，遍历data中的属性，用Object.defineProperty劫持setter／getter方法进行监听，另一方面，Vue的指令解析器Compile遍历和解析所有指令，根据指令／模版绑定数据，初始化视图，还一方面，创建订阅者Watcher来订阅数据的变化，此时Watcher会将自己添加到消息订阅器Dep中，初始化完毕
+2.数据变化，触发Observer中的setter方法，立即调用Dep.notify(),开始遍历Dep数组中所有订阅者Watcher，然后调用Watcher的update方法，再通过内部的diff算法，更新视图
+
+三.虚拟DOM理解
+1.其实就是自定义的组件，虚拟DOM本质上是JS对象，是对真实DOM的抽象，(我加的：也可以遍历，加class但不能直接那虚拟DOM标签在css中使用）
+2.状态变更时，记录新树和旧树的差异
+3.把差异更新到真正的dom中
+
+四.Vue通过数据劫持可以精准探测到数据变化，为什么还有虚拟DOM进行diff差异
+1.虚拟DOM就是组件，组件的复用可以提高开发效率
+2.现代前端探测数据变化的方式push pull，pull代表是React push代表是Vue
+3.Vue的原理是数据变化时触发Observer的setter／getter方法，就会调用Dep.notify()遍历所有的Watcher，取出Watcher调用起update方法更新视图，这样一个绑定就有一个watcher，当细粒度过高就会产生大量watcher，内存开销大，过低无法精准检测变化，所以Vue是选择中等细粒度的方案，在组件级别进行push侦测变化
+
+五.Key的作用
+1.通过v-for进行遍历时，默认就地复用策略
+2.如果数据项顺序改变，Vue不会移动DOM的顺序
+3.为确保它在特定索引下显示已被渲染过的每个元素
+4.更高效的更新DOM
+
+六.Vue的生命周期函数
+beforeCreate created
+beforeMounte mounted
+beforeUpdate updated
+beforeDestory destoryed
+activated deactivated
+
+七.组件通信六种方式
+props／$emit
+$emit/$on
+Vuex
+provide/inject
+$parent/$children与ref
+$attrs/$listeners 主要是用于父组件和孙子组件正向和反向通讯的，必须在子组件的孙子组件上加v-bind=“$attrs”和v-on=“$listeners”,这样孙子组件就能获取父组件传递的参数(子组件props以外的参数)以及父组件接收孙子组件$emit派发事件，事件和属性的写法和父子组件通信一样
+参考地址:/Users/yangli/Desktop/vue-pra/33.nodejs全栈/01.SSR后端渲染全栈实战/vue-learn
+
+八.如何获取当前的data属性，重置data属性
+   	let currentData = this.$data
+	let originData = this.$options.data(this)
+	window.console.log(currentData)	                	
+	window.console.log(originData
+	Object.assign(currentData, originData)
+
+九.组件的name作用
+1.项目使用keep-alive时，搭配name做换成过滤
+2.使用vue-devtools调试时显示的组件名
+
+十.vue-router钩子函数
+全局前置守卫 beforeEach 
+全局后置守卫 afterEach(to, from) 此时没有next函数了
+组件内守卫 beforeRouterEnter beforeRouterUpdate beforeRouterAfter
+独享路由 beforeEnter
+全局解析守卫 router.beforeResolve
+
+十一.route和router的区别
+Route是路由信息对象，包括path params query hash matched name fullPath等信息，所有的路由守护获取的to／from就是route对象，所有的监听watch路由的new／old都是route对象
+Router是路由实例对象，用于处理路由跳转push replace，钩子函数等
+
+十二.React／Vue对比
+1.Vue通过getter／setter劫持监听所有属性，能快速计算出虚拟DOM差异，刷新时不需刷新整个页面
+2.Reach是通过对比状态器state的方式，如果不做拦截判断每次回刷新所有组件和页面
+3.Vue是组件和DOM可以双向绑定，父子组件数据流是单向的
+4.React数据流是单向的
+5.React是通过JSX渲染模版，Vue是拓展HTML语法进行的
+
+十三.Vue中nextTick原理
+1.Vue一般不直接操作DOM，但是有时候也会操作比如数据变化后获取DOM宽高，这是就需要nextTick
+2.页面刷新是异步的
+3.js是单线程的，事件循环run-loop是采用宏任务和微任务来实现的
+宏任务：主线程代码 setTimeout setTimeInterval setImmedate等
+微任务：process.nextTick（nodejs里面的） Primise.then MutationObserver
+4.查看Vue的nextTick源码可以看到此处就是用MutationObserver来监听DOM变化的，它属于微任务，所以需要在this.$nextTick的回调中获取到正确的变化后的值
+
+十四.Vue首屏优化
+1.把不常用的库放到index.html中通过CDN引入，然后在webpack的配置文件中加
+externals:{
+ ‘vue’: ‘Vue’,
+ ‘Vue-router’: ‘vue-router’,
+ ‘element-ui’: ‘ELEMENT’
+}
+2.Vue路由采用懒加载，这里需要结合webpack进行配置
+3.不生成map文件
+4.组件按需引入
+5.服务器开启gzip
+6.首页如果真的有瓶颈，可以采用服务端渲染SSR，可以考虑使用nuxt.js，或者直接把首页写成静态页面
+
+十五.Vue3.0了解
+1.提出新的setup函数
+2.支持typescript
+3.采用proxy替换Object.defineProperty(),因为传统的无法检测数组的更新操作，Proxy存在浏览器的兼容问题
+
+十六.Vue自定义组件
+1.可以定义好vue组件，在具体页面import进来，通过components导入组件，这种针对通用的组件（不针对弹框，弹框有更好办法）
+2.定义Toast = {} Toast.install = function() {在这里给Vue的原型上蒸架方法}
+ (参考/Users/yangli/Desktop/vue-pra/11.webpack定义组件并上传npm/11.定义vue组件上传npm/src/lib)
+3.直接创建loading = {show() {},hide() {}},导入export default { install() {
+   if (!Vue.prototype.$loading) {
+	Vue.prototype.$loading = loading	
+   }
+} }
+（参考/Users/yangli/Desktop/vue-pra/33.nodejs全栈/01.SSR后端渲染全栈实战/vue-learn）
+4.Vue组件加载到DOM的办法：
+1）new Vue({el: ‘#app’}) 最原始的用于加载项目页面入口
+2）new Vue.extent(myVue).$mount(document.createElement(‘div’)) 用于项目入口和自定义组件
+3）new Vue.extent(myVue)({el: document.createElemtent(‘div’)}) 通过instance.$el获取div，用于项目入口和自定义组件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

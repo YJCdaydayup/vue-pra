@@ -5,4 +5,10 @@
 4.pm2 start bin/www 启动服务，pm2 stop bin／www 关闭服务后 删掉其进程 pm2 delete bin/www 就可以了
 5.重命名 mv www demo-server,其实就是移动改名
 6.pm2 start all ／ pm2 stop all ／pm2 list 查看所有任务 ／ pm2 log 查看日志
-7.
+
+二.koa2 koa1 express比较
+1.在koa中，一切流程都是中间件，数据流向遵循洋葱模型，先进后出，类似栈的方式组织和执行的；
+2.koa2和koa1最大区别是koa2实现异步是通过async／await，koa1是通过generaror／yield，而expres是通过回调来实现的；
+3.koa2和express提供的api大致相同，express大而全比较重量级，内置大多数中间件，koa2不绑定任何中间件，比较轻量级，拓展性好；
+4.express没有提供ctx上下文对象，都是要手动处理，本身也不支持洋葱模型和数据流出流入；
+5.koa的数据流入流出遵循洋葱模型，先走到最后一个中间件然后从最后一个中间件走到第一个，最后next出去；

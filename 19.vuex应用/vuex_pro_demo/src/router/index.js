@@ -83,25 +83,24 @@ const router = new Router({
 })
 
 
-// router.beforeEach((to, from, next) => {
-//
-//   console.log(to.matched);
-//   // if (to.matched.some(r => r.meta.requireAuth)) {  // 判断该路由是否需要登录权限
-//   if (to.matched[0].meta.requireAuth) {
-//     // 1 登录 0 未登录
-//     if (store.state.isLogin - 0 === 1) {  // 通过vuex 如果当前有登录
-//       console.log('已登录')
-//       next();
-//     } else {
-//       console.log('没有登录哦')
-//       next({
-//         path: '/two',
-//         //query: {redirect: to.fullPath}
-//       })
-//     }
-//   } else {
-//     next();
-//   }
-// })
+router.beforeEach((to, from, next) => {
+
+  // if (to.matched.some(r => r.meta.requireAuth)) {  // 判断该路由是否需要登录权限
+  if (to.matched[0].meta.requireAuth) {
+    // 1 登录 0 未登录
+    if (store.state.isLogin - 0 === 1) {  // 通过vuex 如果当前有登录
+      console.log('已登录')
+      next();
+    } else {
+      console.log('没有登录哦')
+      next({
+        path: '/two',
+        //query: {redirect: to.fullPath}
+      })
+    }
+  } else {
+    next();
+  }
+})
 
 export default router;

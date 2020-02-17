@@ -34,6 +34,11 @@
     watch: {
       // 监听路有变化，决定页面过渡动画
       $route(to, from) {
+
+        console.log('watch')
+        console.log(to)
+        console.log('watch')
+
         // //判断是否返回
         let routersArr = sessionStorage.getItem('routers') && sessionStorage.getItem('routers').split(',') || [];
         if (routersArr.length === 0) {

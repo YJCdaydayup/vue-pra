@@ -7,8 +7,29 @@
     <nuxt-link class="button" to="/about">
       About page
     </nuxt-link>
+    <button @click="showLoginError">
+      Notif me!
+    </button>
   </section>
 </template>
+
+<script>
+
+  import miniToastr from 'mini-toastr'
+
+  export default {
+    mounted() {
+      miniToastr.init()
+    },
+    notifications: {
+      showLoginError: {
+        title: 'Welcome!',
+        message: 'Hello from nuxt.js',
+        type: 'info'
+      }
+    }
+  }
+</script>
 
 <style scoped>
 .title
