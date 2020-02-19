@@ -1,0 +1,129 @@
+第一节课
+1.生产环境所需元素：
+  域名 服务器 域名备案 配置服务器应用环境（nginx 权限 nodejs环境 ssl证书 防火墙）数据库（可以使用本地数据库或者云数据库 角色 权限 读写机制） 远程部署发布／更新
+
+第二节课
+1.将代码可以托管到git仓库，每次提交到git仓库，然后在服务器上部署时都从git仓库拉代码进行部署
+2.购买一个域名，然后分配出二级域名
+3.一个nginx服务器来代理转发多个应用程序的服务
+
+第三节课 狼烟滚滚jeff 
+域名：通过阿里云购买
+1.阿里云的方便备案 DNSPOD 爱名网
+2.域名纯英文好些，越短越好
+3.可以在爱名网上查看这个域名有没有被注册
+4..cn便宜点
+5.可以先不够买SSL证书，可以生成免费的证书
+主机
+1.国外 亚马逊AWS Linode DigitOcean／Heroku
+2.国内 阿里云ECS推荐 青云／UCload／百度云 推荐 审核备案方便 远程快
+3.镜像选择Ubantu 64位1404 
+4.学习使用的话就选按量付费
+5.设置密码：root用户
+6.购买后进入控制台可以看到外网ip 
+7.阿里云的域名备案
+8.登录-备案-备案服务号申请-申请-去备案-提交资料等三周-
+
+第四节课
+1.47.115.140.196外网地址 登录$ ssh root@47.115.140.196 vnc的264186
+2.查看云服务器上有几个盘：$ fdisk -l
+3.查看硬盘的使用情况：$df -h
+4./dev/vda1        40G  1.9G   36G   5% / 就是系统盘
+5.在MAC电脑上安装经常要用的命令的别名：打开.bash_profile或者.zshrc文件，加上：alias ws="open -a /Applications/WebStorm.app ./“，然后source一下即可
+6.root权限太大可以增加用户,给每个用户添加权限
+$ adduser sara  密码sara // 每个用户进来的操作是自己的空间
+$ gpasswd -a sara sudo // 升权：给这个用户添加root权限但是每次要输入密码
+$ sudo vi /etc/ssh/sshd_config // 打开一个配置，,找到root那里，增加：sara ALL=(ALL:ALL) ALL // 就是给权限配置
+保存，ctrl + X -> shift + Y -> 回车
+$ service ssh restart // 重启ssh
+$ ssh sara@47.115.140.196 // 新开一个终端，登录创建的这个用户，这个用户下的操作就是二级权限做的，但是可以加sudo做root做的事情
+7.SSH 无密码登录 服务器持有本地公钥即可
+本地（已经有ssh公钥／私钥）
+$ eval “$(ssh-agent -s)” // 开启ssh代理
+$ ssh-add ~/.ssh/id_rsa  // 将私钥加到ssh代理中 
+服务器
+$ ssh-keygen -t rsa -b 4096 -C "sara@imooc.com" // 重新生成
+$ eval "$(ssh-agent -s)" // 也开启代理
+$ ssh-add ~/.ssh/id_rsa  // 将私钥加到ssh代理中
+$ vi .ssh/authorized_keys // 创建权限配置文件
+再将本地的ssh里面的公钥拷贝进服务器的authorized_keys文件里面
+$ chmod 600 authorized_keys // 修改这个文件的权限
+$ sudo service ssh restart  // 重启ssh
+
+第五节课 研究iptables
+增加登录安全等级：
+1.默认的登录服务器端口是22
+
+2.修改默认端口:(修改时最好先开一个窗口以备修改错了通过这个窗口能进去修改回来)
+$ vi /etc/ssh/sshd_config 
+1)修改默认登录端口
+0-1024 一般被系统占用
+1025-65536 可以使用
+2)保证UseDNS 为no
+3）AllowUsers sara root  // 增加了这个就默认只有sara可以登录了，root也不可登录,要登录root AllowUsers sara root 
+4)带端口登录：ssh -p 3999 sara@47.115.140.196
+
+3.关闭root登录权限：PermitRootLogin no
+4.可以取消使用密码登录，密码不能为空
+
+5.防火墙：iptables 进／出 
+参考：http://www.zsythink.net/archives/1493
+1) sudo apt-get update && sudo apt-get upgrade // 升级ubantu
+2）sudo iptables -F // 清空所有的规则
+3) sudo vi /etc/iptables.up.rules // 编写防火墙规则
+4）sudo iptables-restore </etc/iptables.up.rules  // 启用这些规则
+5) sudo ufw status // 查看防火墙是否激活
+6) sudo ufw enable // 激活防火墙
+7) sudo vi /etc/network/if-up.d/iptables // 创建脚本,开机自动启动
+8) chmod +x /etc/network/if-up.d/iptables
+9) 安装 sudo apt-get install fail2ban
+10）sudo vi /etc/fail2ban/jail.conf  // 修改下fail2ban的配置
+11）sudo service fail2ban status // 查看fail2ban的运行状态
+12) sudo service fail2ban start/stop // 开启／关闭fail2ban
+
+第六节课 
+1.sudo apt-get update // 更新系统 
+2.安装相关包文件
+$ sudo apt-get vim openssl build-essential libel-dev wget curl git
+$ 安装node工具，先安装nvm，进nvp的github找到安装的命令：wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash // 安装nvm, 然后配置一下.bashrc，根据git文档的要求
+$ nvm install v6.9.5 // 安装6.9.5版本的node工具
+$ nvm use v6.9.5 
+$ nvm alias default v6.9.5 // 默认一下
+$ node -v  // 查看node版本 
+$ npm - -registry=https://registry.npm.taobao.org install -g npm // 从淘宝镜像源处更新npm
+$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+$ npm - -registry=https://registry.npm.taobao.org install -g cnpm // 通过npm安装cnpm
+$ cnpm sync koa // 强制从npm将这个模块同步到国内的镜像上去
+$ npm i pm2 webpack gulp grunt-cli -g // 安装常用的工具,全局的话加：-g
+$ 如果安装不了就强行指定源：npm - -registry=https://registry.npm.taobao.org install -g pm2
+3.阿里云的防火墙设置还有个地方就是网页里面的安全组规则那里
+$ 采用pm2启动服务： $ pm2 start app.js $ pm2 list $ pm2 show name
+
+第七节课 研究nginx
+1.使用root级别的权限启动对80端口的监听，同时把80端口的流量分配给另外一个端口，实现代理
+2.安装nginx：
+$ update-rc.d -f apache2 remove // 先删除本地的apache
+$ sudo apt-get remove apache2 // 清理干净 
+$ sudo apt-get update // 更新包列表
+$ sudo apt-get install nginx // 安装nginx
+$ nginx -v // 查看nginx版本
+$ /etc/nginx/conf.d // 进来这个nginx配置目录
+$ sudo vi jeff-com-8081.conf // 创建配置文件
+$ sudo nginx -t // 检查配置文件是否语法正确
+$ sudo nginx -s reload // 重新启动nginx, 查看请求头可以看到：Server: nginx/1.4.6 (Ubuntu)
+$ sudo vi nginx.conf // 找到 server_tokens off 打开
+$ sudo service nginx reload // 重仔ngin
+
+第八节课
+1.域名是需要一个域名解析器的，通常可以在阿里云 Godaddy DNSPOD购买
+2.域名需要提供一个DNS地址用于解析这个域名
+3.最好是用DNSPOD上面，大厂商方便备案，将域名解析地址拷贝进阿里云域名管理下，
+4.A记录：将域名映射到一个ip地址
+5.阿里云购买域名后默认是有DNS服务器绑定的，但是我们还是选择DNSPOD来处理，进入DNSPOD问题管理，找到问题中心把两个地址拷到阿里云的DNS修改那里修改DNS解析后台为DNSPOD后台
+6.然后在NDSPOD控制台的云解析模块添加我在阿里云上买的那个域名
+7.两个地址：
+DNSPOD后台：https://console.cloud.tencent.com/cns/detail/iucen121.top/records/0
+阿里云：https://dc.console.aliyun.com/next/index?spm=5176.12818093.recommends.ddomain.488716d0A2b9vk#/domain/list/all-domain
+8.
+
+

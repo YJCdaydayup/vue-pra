@@ -1,0 +1,23 @@
+{
+  "name": "koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01.promisify用法.js",
+  "scripts": {
+    "dev": "nodemon -w src --exec \"babel-node src --presets env\"",
+    "build": "babel src -s -D -d dist --presets env",
+    "rebuild": "rimraf dist && babel src -s -D -d dist --presets env",
+    "production": "node dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-node": "^0.0.1-security",
+    "babel-preset-env": "^1.7.0",
+    "co": "^4.6.0",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.2"
+  }
+}

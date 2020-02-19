@@ -1,0 +1,25 @@
+第一节课
+1.正常一般转Promise可以用return new Promise((resolve, reject)=>{})
+2.对于项目中已经使用了callback回调的，可以使用util库的promisify进行迁移，转成promise，如：
+   util.promisify(fs.readFile)(‘./package.json’).then().catch()
+注意：callback不管是错误回调还是正确回调都只会走到then里面，then会判断callback第一个参数，有值直接回调，为空就取第二个参数，如果第二个参数也为空，直接then()返回的是空
+3.转promise后就可以配合async／await使用了
+
+第二节课
+1.迭代器原理是返回一个对象，对象里面包含一个next()方法，方法返回数组的值，以及让index++
+2.生成器就是简化了我们自己去创建迭代器，多了 * 和yield关键字
+3.tj是nodejs高产的大神，之前是做视觉设计的，在github上搜索tj看看
+4.箭头函数和父作用域共享上下文，即就是最近的function共享this
+5.const fs = require(‘fs’)运行时加载，import from就是编译时加载，如果不支持就需要用node-babel编译库
+ $ cnpm i -D babel-cli babel-preset-env babel-node
+ $ 增加.babelrc {presets: [[“env”,{“targets”: {“node”: current}}]]} // 就是使用当前的node环境
+ $ cnpm i -D nodemon
+ $ “dev”: “nodemon -w src —-exec \” babel-node src(默认寻找src下的index.js文件，可以省略) —-presets env\”” // 
+ $ “build”: “babel src -s -D -d dist —-presets env” // 这里会编译src里面全部的js文件
+ $ “rebuild”: “rimraf dist && babel src -s -D -d dist —-presets env” //rimraf 就是删除这个文件夹
+ $ “production”: “node dist” // babel-plugin-transform-runtime babel-runtime —-registry=https://registry.npm.taobao.org，.babelrc增加 plugins: [[“transform-runtime”: {“polyfill”: false, “regenerator”: true}]]
+// 注：cnpm run prodcution 执行的必须就是编译build之后的代码，以启动压缩后代码作为生产环境
+
+第三节课
+1.
+ 
