@@ -124,6 +124,84 @@ $ sudo service nginx reload // 重仔ngin
 7.两个地址：
 DNSPOD后台：https://console.cloud.tencent.com/cns/detail/iucen121.top/records/0
 阿里云：https://dc.console.aliyun.com/next/index?spm=5176.12818093.recommends.ddomain.488716d0A2b9vk#/domain/list/all-domain
-8.
+8.A记录：是将一个域名映射到一个服务器的ip地址
+9.CNAME：别名，如果需要一个域名指向另一个域名，再由另一个域名提供ip地址
+10.MX：如果需要设置邮箱，让邮箱收到邮件，需要添加MX记录
+11.TXT：可以填写任何东西，长度255，一般用于SPF记录反垃圾邮件
+12.TTL: 超时时间，超时后会重新老DNSPOD上解析获取一个记录值
+13.域名解析：就是通过域名解析服务器DNSPOD解析主机记录其实就是一个筛选后得到记录值是ip地址或者一个新的域名再进行访问
+14.主机记录就是最先的筛选条件：www，@，*，mail，abc(随意单词就是二级域名了)
+15.七牛上做服务器存储添加域名时会要求你的域名先备案
+16.在七牛上找到你的资源对应的域名然后在DNSPOD域名解析的记录那里选择CNAME，这样就是一个域名指向七牛的另一个域名了
+
+第九节课
+1.可以采用阿里云数据库服务比如；mongodb，mysql
+理解一下：
+$ /ext/apt 里面管理着各种包，当使用sudo apt-get update就会查找source-list-d下面的文件去下载，默认使用的是他们自己的源，可以在对应的source文件夹下改变各个插件的下载源头
+如：http://mirrors.aliyun.com/mongodb/...
+2.一般来说就是一台服务器跑应用，一台服务器用来装数据
+3.安装mongodb：
+$  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+// 然后在/etc/apt/source_list_d目录下改变mongo的源为aliyun的源
+$ sudo apt-get update
+$ sudo apt-get install -y mongodb-org // 最后安装
+$ sudo mongod // 开启mongodb服务
+$ 默认的配置都会在etc文件夹下面
+$ sudo mongodump -h 127.0.0.1:27017 -d dbname -o(导入的新文件) filename -u 用户名 -p 密码 // 批量备份本地mongodb数据
+$ tar zcvf indust-app.tar.gz originfile(需要打包的文件夹)
+$ scp -P 22 /Desktop/indust-app.tar.gz jeff@47.115.140.196:/home/jeff/dbbackup // 上传本地文件到服务器
+$ /home/jeff 就是当前用户的根目录
+$ tar xvf indust-app.tar.gz  // 对这个文件解压缩
+$ mongorestore —-host 127.0.0.1:27017 -d dbname ./indust-app // 将备份数据批量导入数据库中
+$ mongoexport -d dbname -c students -q ‘{name: {$ne: null}}’ -o ./ // 导出students表中name不为空的所有数据
+$ mongoimport -d dynamo -c students —drop 文件
+$ 一般可以先导入数据再设置用户权限
+4.不同数据库的权限控制
+$ mongoddb没有默认的管理员账号,所以先创建admin
+$ use admin // 必须先切换到admin数据库才能进行
+$ db.createUser({user: ‘jeff_cases_owner’,pwd: ‘123456’,roles: [{role: ‘userAdminAnyDatabase’,db: ‘admin’}]}) // 创建admin用户来管理admin数据库
+$ db.auth('jeff_cases_owner','123456') // 对jeff_cases_owner用户进行授权
+// 必须先切换到students数据库下才能进行以下操作：
+$ db.createUser({user: 'imooc_runner',pwd: '123456',roles: [{role: 'readWrite',db:'students’}]}) // 创建imooc_runner用户对students数据库具有读写权限
+$ db.createUser({user: 'imooc_runner_reader',pwd: '123',roles: [{role: 'read',db:'student’}]}) // 创建一个imooc_runner_reader对数据库students指具有读的权限
+// 切换到imooc_up数据库
+$ db.createUser({user: 'imooc_up_runner',pwd: '123',roles:[{role: 'readWrite',db: 'imooc_up'}]}) // 创建主用户imooc_up_runner
+$ db.createUser({user: 'imooc_up_runner_helper',pwd: '123',roles:[{role: 'read',db: 'imooc_up'}]}) // 创建备份只读用户imooc_up_runner_helper
+// 每次以上操作后就切换到admin，进行一次认证操作,这样才能把上面创建的用户权限加入到db.system.user里面去生效
+$ db.auth('jeff_cases_owner','123456')
+// 进入sudo vi /etc/mongod.conf编辑，security: authorization: ‘enabled’
+// sudo service mongod restart // 重启mongodb
+// mongo —port 27017 进入mongodb终端模式
+// 此时要进行mongodb的操作必须先进行验证：
+$ db.auth('jeff_cases_owner','123456') 
+$ exit 退出
+// 如果要直接进入某个数据库
+$ mongo 127.0.0.1:27017/imooc_up -u imooc_up_runner -p 123 // 此时进来的数据库就是这个用户的数据库，但是他此时只能操作这个数据，没发看到或者操作别的数据库
+$ mongodump -h 127.0.0.1:27017 -d imooc_up -u imooc_up_runner -p 123 -o indust-app-old // 导出数据库(即备份)
+$ mongoexport -h 127.0.0.1:27017 -d imooc_up -u imooc_up_runner -p 123 -c imooc_up -q ‘{"name": {$ne: ""}}‘ -o ./indust_old_json.json // 导出具体一个表
+// 将服务器的资源下载到本地
+$ scp -P 22 jeff@47.115.140.196:/home/jeff/db/indust-app-old/imooc_up.old.gz.zip ./
+$ scp -P 22 /Desktop/indust-app.tar.gz jeff@47.115.140.196:/home/jeff/dbbackup // 上传本地文件到服务器 和上面下载只是服务器地址的位置相反
+$ scp -P 22 jeff@47.115.140.196:/home/jeff/db/indust-app-old/indust_old_json.json ./ // 也将json文件下载到本地来
+// 练习将本地的文件上传到服务器的某个文件夹 
+$ scp -P 22 ./test.ipa jeff@47.115.140.196:/home/jeff/other_db
+$ db.createUser({user: 'des',pwd:'123',roles: [{role: 'readWrite',db: 'des_imooc'}]} // 创建新的数据库
+// 进入数据库要操作admin权限的是事情就要auth管理员的账户，如果要查看具体某个数据库的信息则需要再次验证这个数据库下的用户auth，记住，要先切换到这个数据库下在auth，如果直接查看某个数据库就要先知道这个数据库名称然后切换过来后进行auth才能做其他操作
+// 某个数据库只要设置了用户管理，那么每次操作这个数据就需要先切换过来后进行auth才行
+// 批量导入
+$ mongorestore -h 127.0.0.1:22 -d des_imooc -u des -p 123 file 
+
+4.数据库的备份
+$ 在根目录创建一个脚本，具体查看这个脚本，然后在脚本里面通过mongodump进行备份，tar zcvf压缩到指定文件，灾备的话最好上传云数据库服务器
+$ 直接使用 cd命令就是自动回到根目录了
+$ crontab -e // 这里面可以写定时任务，执行上面的脚本: 17 22 * * * sh /home/jeff/task/movie.back.sh，
+
+ 
+
+
+
+
+
+
 
 
