@@ -120,7 +120,7 @@ $ sudo service nginx reload // 重仔ngin
 3.最好是用DNSPOD上面，大厂商方便备案，将域名解析地址拷贝进阿里云域名管理下，
 4.A记录：将域名映射到一个ip地址
 5.阿里云购买域名后默认是有DNS服务器绑定的，但是我们还是选择DNSPOD来处理，进入DNSPOD问题管理，找到问题中心把两个地址拷到阿里云的DNS修改那里修改DNS解析后台为DNSPOD后台
-6.然后在NDSPOD控制台的云解析模块添加我在阿里云上买的那个域名
+6.然后在NDSPOD控制台的云解析模块添加我在阿里云上买的那个域名，添加解析规则条件
 7.两个地址：
 DNSPOD后台：https://console.cloud.tencent.com/cns/detail/iucen121.top/records/0
 阿里云：https://dc.console.aliyun.com/next/index?spm=5176.12818093.recommends.ddomain.488716d0A2b9vk#/domain/list/all-domain
@@ -128,7 +128,7 @@ DNSPOD后台：https://console.cloud.tencent.com/cns/detail/iucen121.top/records
 9.CNAME：别名，如果需要一个域名指向另一个域名，再由另一个域名提供ip地址
 10.MX：如果需要设置邮箱，让邮箱收到邮件，需要添加MX记录
 11.TXT：可以填写任何东西，长度255，一般用于SPF记录反垃圾邮件
-12.TTL: 超时时间，超时后会重新老DNSPOD上解析获取一个记录值
+12.TTL: 超时时间，超时后会重新到DNSPOD上解析获取一个记录值
 13.域名解析：就是通过域名解析服务器DNSPOD解析主机记录其实就是一个筛选后得到记录值是ip地址或者一个新的域名再进行访问
 14.主机记录就是最先的筛选条件：www，@，*，mail，abc(随意单词就是二级域名了)
 15.七牛上做服务器存储添加域名时会要求你的域名先备案
@@ -137,7 +137,7 @@ DNSPOD后台：https://console.cloud.tencent.com/cns/detail/iucen121.top/records
 第九节课
 1.可以采用阿里云数据库服务比如；mongodb，mysql
 理解一下：
-$ /ext/apt 里面管理着各种包，当使用sudo apt-get update就会查找source-list-d下面的文件去下载，默认使用的是他们自己的源，可以在对应的source文件夹下改变各个插件的下载源头
+$ /etc/apt 里面管理着各种包，当使用sudo apt-get update就会查找source-list-d下面的文件去下载，默认使用的是他们自己的源，可以在对应的source文件夹下改变各个插件的下载源头
 如：http://mirrors.aliyun.com/mongodb/...
 2.一般来说就是一台服务器跑应用，一台服务器用来装数据
 3.安装mongodb：
@@ -194,7 +194,62 @@ $ mongorestore -h 127.0.0.1:22 -d des_imooc -u des -p 123 file
 4.数据库的备份
 $ 在根目录创建一个脚本，具体查看这个脚本，然后在脚本里面通过mongodump进行备份，tar zcvf压缩到指定文件，灾备的话最好上传云数据库服务器
 $ 直接使用 cd命令就是自动回到根目录了
-$ crontab -e // 这里面可以写定时任务，执行上面的脚本: 17 22 * * * sh /home/jeff/task/movie.back.sh，
+$ crontab -e // 这里面可以写定时任务，执行上面的脚本: 17 22 * * * sh /home/jeff/task/movie.back.sh
+$ 上传文件到私有云七牛上面：
+   1) 通过node执行js代码外部传递参数
+   2) node file.js/node file(默认就会找file文件夹下的index.js文件)
+   3) 可以通过命令来调用node file.js文件，传递参数是：
+   调用：NODE_ENV1=参数1 NODE_ENV2=参数2 node file.js (理解成：{NODE_ENV1: 参数1,NODE_ENV2: 参数2}
+   获取参数：process.env.NODE_ENV1就是获取参数值1
+
+  
+第十节课（开始部署服务器流程）
+1. 配置git仓库的ssh，先生成RSA公钥和私钥,如下，再将公钥拷贝到git仓库的ssh验证中，然后通过ssh地址clone代码即可
+$  ssh-keygen -t rsa -b 4096 -C "sara@imooc.com" // 会生成到.ssh文件夹下
+2. 将本地仓库关联到远程仓库
+$ git remote add origin git@gitee.com:yang_li123/class_ss.git // 前提是空的仓库
+3. 管理代码更新和服务器的重启：pm2 ，守护服务，自动更新
+本地步骤:
+$ 1.创建ecosystem.json,配置里面的apps和deploy，deploy下的production这个名称要与后面的本地命令中的一致
+$ pm2 deploy ecosystem.json production  setup // 执行后回连接到服务器，根据里面的配置创建三个文件，同时通过pm2也将git仓库与服务器关联起来了
+$ 将项目拷贝到本地来并将ecosystem.json文件提交到git仓库里面
+服务器：
+$ 1. 创建对应的文件夹： sudo mkdir /www/class_ss
+$ 2. 给class_ss文件夹增加权限： sudo chmod 777 class_ss
+本地开始启动node服务
+$ pm2 deploy ecosystem.json product // 启动服务器的服务
+$ 如果报错，pm2 command not found，就到.bashrc里面把第一个判断代码注释掉
+
+4. 到DNSPOD里面配置域名解析，A记录
+5. 本地数据迁移到服务器：
+$ mongodump
+$ tar zcvf 
+$ scp -P 
+$ tar xvf
+$ db.createUser({user: 'first',pwd: '123',roles: [{role: 'readWrite',db: 'bjss'}]}) // 必须先做admin验证,然后use bjss切换到这个数据，就开始创建这个用户
+$ mongorestore -h 127.0.0.1:27017 -d bjss -u first -p file // 将备份的数据导入数据库
+$ 修改nodejs中mongodb代码的连接方式："mongodb://" + options.db_user + ":" + options.db_pwd + "@" + options.db_host + ":" + options.db_port + "/" + options.db_name;
+
+6.在ecosystem.json中加入： "post-deploy": "cnpm install --registry=https://registry.npm.taobao.org && grunt build && pm2 startOrRestart ecosystem.json --env production" // 服务器就会自动安装，编译压缩样式，重启pm2一条龙了
+
+7.当要在一个服务器上部署多个服务时，nginx的80端口要做多个服务的代理，域名解析中通过添加记录可以设置多个域名，但是www.iucen123.top这种域名只能有一个，可以用做一个服务，当要多个服务器时就只能采用二级域名了，nginx的配置下/etc/nginx/conf.d就要多添加几个需要代理的服务文件：如：jeff-com-3000.conf，jeff-com-3001.conf
+
+8.防火墙iptables一般是用于限制某个端口的
+
+9.pm2 logs // 查看pm2所有运行的日志, 也通过pm2 list查看每个服务重启的次数，以及cpu占用，很多的话就说明这个服务启动有问题
+
+第十一节课
+1.  Google从2017年开始将http协议都会标记为不安全的网站，苹果也在2017年开始必须支持https
+2. 微信小程序的域名必须是https的
+3. 强制自己的网站使用https，防止被劫持后注入广告
+4. DV证书（有些免费，只需要验证域名）OV（审核严格，需验证企业信息）EV（全球统一的，最高等级，浏览器的地址栏显示绿色，支付，金融）
+5. 免费的ssl证书，又拍云（https://www.upyun.com），腾讯云(推荐使用，里面有免费的ssl证书一年)，七牛云
+注：https://console.cloud.tencent.com/ssl 这个是腾讯云ssl的地址
+6. 在腾讯云里面ssl证书管理申请免费证书，通用名称为你自己在阿里云上购买的域名，然后将生成的主机记录和记录值拷贝到DNSPod域名解析的记录列表里面就可以对这个ssl生成的主机记录和记录值进行解析了，这个时候会受到审核通过的信息，下载ssl证书，打开；
+7. 包含有Apache，IIS， Nginx，Tomcat证书
+8.浏览器默认端口是80端口，所以使用https时，直接输入域名会被默认加上80端口在后面
+9.
+
 
  
 
