@@ -196,6 +196,9 @@ routes: [
 
 42)window上面的方法和属性，在任何地方都可以直接拿来使用，只要不加this就好了，比如clearTimeout(timer)，在函数里面取这个局部函数，取不到就从全局里面去取，和全局变量使用一样
 
+43)使用第三方组件比如：ant-design-vue的table时，如果发现定位和宽高不好控制，就在最外层用一个div包裹，给div进行定位，宽高，再把这个table放进来，滚动出去的话就设置这个div的overflow： scroll；
+
+
 
 
 

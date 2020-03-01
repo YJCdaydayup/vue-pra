@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import shopcart from './views/shopcart.vue';
 
 Vue.use(Router);
 
@@ -8,12 +9,12 @@ let router = new Router({
     routes: [
         {
             path: '/',
-            redirect: '/home/center'
+            redirect: '/home'
         },
         {
             path: '/home',
             name: 'index',
-            component: Home
+            component: shopcart
         },
         {
             path: '/home/center',

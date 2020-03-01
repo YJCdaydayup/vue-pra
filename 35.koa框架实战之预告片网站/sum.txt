@@ -21,5 +21,87 @@
 // 注：cnpm run prodcution 执行的必须就是编译build之后的代码，以启动压缩后代码作为生产环境
 
 第三节课
-1.
+1.koa主打 中间件，执行上下文，主要有 Application Context Request Response Middlewares session cookie
+2.查看koa的application.js的源码
+3.context.js文件通读：最重要的是delegate(proto, ‘response’).method(‘redirect’).method(‘set’).method(‘status’).method(‘body’)等，以及delegate(photo, ‘request’)就是用response/request上面的方法挂载到proto上面，这个proto就是一个context.js中导出的context对象
+4.request.js文件通读：里面返回一个对象module.exports = {get header {return this.req.header}}
+5.在拿到context后，可以进行 ctx.type = ‘text/html; charset=utf-8’, ctx.body = ‘返回的信息’
+6.理解在字面量对象里面定义属性通过get和set进行操作：
+let obj = {
+   get socket() {
+     return this.mySocket
+   },
+   set socket(val) {
+     this.mySocket = val
+   }
+}
+这里get和set方法名可以任意取（最好一样），需要保证处理的属性是同一个mgSocket，这样通过obj拿到mySocket的值就是通过obj.socket，而且这里的this.mySocket无需先在属性里面定义，这样写的好处是第一可以计算一下再返回，第二是将一个属性重命名了来获取
+7.koa中，只要被app.use的都是中间件，一切皆是中间件；
+8.koa中，数据在中间件之间流动需要使用next, 结合异步的处理，写成 wait next（)
+9.koa中，ctx.body就是设定返回内容，只要能流动到中间件设置了ctx.body就会拼接body在后面，当所有的中间件走完了，这个时候开始将body中的数据返回出去；
+10.中间件的数据流动逻辑：查看app.js里面，use好各个中间件mid1 mid2 mid3后，顺序执行时遇到next()就将控制权交给下一个中间件，执行到最后一个后，就开始往回交控制权；
+1）谁给我控制权我就把控制权还给谁，我会找到他给的位置以便他能继续从这个位置往下走
+2）到达最后一个中间件后，不管有没有next()都会执行完最后中间件里面所有的代码后，将控制权交给曾给我控制权的那个中间件（找到它的位置再给控制权），上一个中间件执行后面的代码后自动交还控制权给上上个，反正控制权一定会交回去
+11.koa-logger通过交出控制权等到其他中间件走完了再回来从而计算并打印相应的时间和body出去的数据大小，logger要放在中间件的第一个进行use
+12.纯函数，不会对全局变量造成任何影响
+13.之前用迭代数组的方式如下：
+(function tailing(k) {
+    if (k > 3) {
+        return false
+    }
+    console.log('xiugaiqian1 ', k)
+    tailing( k + 1)
+    console.log('xiugaihou1 ', k)
+
+})(0)
+// koa-compose中间件将中间件组合在一起就是利用这一原理通过迭代的方式从middleware中间件数组取出中间件去一一执行的，每个中间件执行完毕，就会在中间件的next（）方法里面调用dispatch(i + 1)来执行下一个中间件，所以一个中间件是一个函数，里面不执行next就不会从数组里面取出下一个中间件来执行，在return dispatch(i + 1)前面加了return就意味着要等下一个中间件返回了再去执行这个中间件next后面的代码
+核心源码：
+function compose(middleware) {
+    return function (context, next) {
+        let index = -1
+        return dispatch(0)
+        function dispatch(i) {
+            index = i
+            let fn = middleware[i]
+            if (i === middleware.length) return false
+            return Promise.resolve(fn(context, function next() {
+                return dispatch( i + 1) // 由于是异步同步处理，这里要return完了才会出来
+            }))
+
+        }
+    }
+}
+// 每一次next就会执行下一个中间件，当最后一个中间件return了就会执行倒数第二个next后面的代码，因为整个采用的就是await同步处理异步的方式，从这里可以看出，最后一个中间件无论有没有next都会return从而回到上一个中间件
+14.原始的路由使用就是通过path进行判断区别的，express框架中默认通过restful规范实现了路由，
+
+第四节课
+1.koa2和koa1的对比：
+1) 语法：koa1使用的生成器generator和迭代器yeild(通过yeild next进入到下一个中间件)，koa2使用的是async／await以及箭头函数来（通过await next（）进入下一个中间件）
+2）koa1依赖的库是co这个库，koa2依赖的是koa-compose这个库，以ES6语法为主
+相同点：
+3）都是洋葱模型，一层层穿过中间件到达业务的核心部分，然后一层层穿过中间件，穿过中间件时会检查cookie，对请求增加tag等操作
+2.中间件一分为二，前面部分处理请求，后面部分处理响应，分界线就是next（）
+3.安装全局的翻译模块：$ cnpm i -g fanyi,可以在命令行对中文或者英文进行翻译，朗读
+4.koa1到koa2的升级的话，可以先升级koa库的版本，配套的三方库如果不兼容koa2，需要使用koa-convert进转化
+5.最新的koa-logger是已经对koa2进行了兼容
+6.定义函数为DOM里面的文件增加空格：let tab = (n) => new Array(n).join('&nbsp;')
+7.koa2中一切都是中间件，不使用插件的话，响应数据也是在use的中间件里面的，后面可以通过koa-router来实现restful请求路由
+8.koa2里面通过配置好ctx.body后，框架里面会通过原生的res.end(body)出去，所以返回出去就只考虑配置好ctx里面的body；
+9.koa和express对比
+1）服务能力差别不大，不绑定任何中间件，非常干净的裸框架，需要什么加什么。express大而全
+2）采用的是大量的callback回调来处理业务逻辑的，koa2是采用async／await同步的方式处理异步的
+3）koa中间件是洋葱模型，数据先流进去再流出，一般分上游和下游，上游用于处理请求，下游用于处理响应，而express的中间件默认是只流进不流出的（单向的，通过事件机智才能实现双向流动）
+
+第五节课
+1.进入github搜huanglong，可以学习他的很多源代码
+2.创建码云私有仓库：git@gitee.com:yang_li123/douban-trailer.git
+3.安装最新的koa就使用cnpm i -D koa@latest
+4.
+
+
+
+
+
+
+
  
