@@ -1,0 +1,17 @@
+{
+  "name": "koa2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "koa-logger": "^3.2.1",
+    "koa-session": "^5.13.1",
+    "koa2": "^2.0.0-alpha.7",
+    "logger": "^0.0.1"
+  }
+}

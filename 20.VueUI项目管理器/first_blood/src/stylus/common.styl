@@ -1,0 +1,16 @@
+border_bottom_1($color)
+  position relative
+  &::after
+    content ''
+    position absolute
+    left 0
+    right 0
+    bottom 0
+    height 1px
+    background-color $color
+
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2)
+  .border_bottom_1
+    &::after
+      transform scaleY(0.5)
