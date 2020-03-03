@@ -12,3 +12,27 @@
 3.koa2和express提供的api大致相同，express大而全比较重量级，内置大多数中间件，koa2不绑定任何中间件，比较轻量级，拓展性好；
 4.express没有提供ctx上下文对象，都是要手动处理，本身也不支持洋葱模型和数据流出流入；
 5.koa的数据流入流出遵循洋葱模型，先走到最后一个中间件然后从最后一个中间件走到第一个，最后next出去；
+
+三.几种规范的理解
+CommonJS规范主要用于node服务端，加载是同步的，不适合浏览器环境，会造成阻塞加载
+AMD异步加载，requirejs的实现，依赖前置，性能较优
+CMD异步加载，seajs的实现，就近依赖
+ES6种使用export default实现模块功能，完全可以取代CommonJS，和AMD
+
+四.node中event loop的六个阶段
+
+五.node在服务端如何处理跨域问题
+1.在app.use里面指定允许跨域访问的来源域，通配符*表示所有域都可以访问
+ctx.set("Access-Control-Allow-Origin", "*");
+2.当设置成允许跨域访问后，默认情况下Cookie是不包括在内的，可以通过设置Access-Control-Allow-Creditails为true，来允许携带Cookie，此时允许的域名不能是*，而要写成具体的域名名称
+ctx.set("Access-Control-Allow-Credentials", true);
+3.指定允许跨域访问的方法列表
+ctx.set("Access-Control-Allow-Methods", "OPTIONS, GET, PUT, POST, DELETE");
+4.指定允许进行跨域访问的请求头列表，一般用于预检请求上
+ ctx.set("Access-Control-Allow-Headers", "x-requested-with, accept, origin, content-type");
+5.告诉客户端数据返回的类型
+ctx.set("Content-Type", "application/json;charset=utf-8");
+5.如果不设置mode，默认跨域模式是cors，在跨域POST请求之前会先发一个OPTIONS请求来探路，如果服务器允许再进行POST请求，这种要在服务端判断一下：
+if (ctx.request.method == "OPTIONS") {
+      ctx.response.status = 200
+   }

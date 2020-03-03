@@ -96,7 +96,11 @@ function compose(middleware) {
 1.进入github搜huanglong，可以学习他的很多源代码
 2.创建码云私有仓库：git@gitee.com:yang_li123/douban-trailer.git
 3.安装最新的koa就使用cnpm i -D koa@latest
-4.
+4.有的云服务器部署了CDN服务，可以通过提供的CDN地址来加载bootstrap依赖文件，比如https://www.bootcdn.cn里面，在里面可以搜需要的CDN库
+5.git合作开发办法：我在主分支master上开发后，先 git checkout master -b daily-5-2, 产生新分支并切换到这个分支，然后推到git仓库，再进入git仓库里面pull request，选择两个分支，选择审查人员再提交，审查人员进来后审查完毕就merge合并即可, 也可以直接切换到master后merge一下：git merge orgin/daily-5-4，然后推到服务端
+6.通过ejs框架本身的ejs.render(导出的ejs模版字符串，{name: ‘Sara’})，可以将数据与导出的字符串做绑定赋值生成字符串后返回给前端做展示
+7.使用koa-views中间件，实现ctx.render(‘index’,{name: ‘Sara’})，支持pug，ejs等模版引擎, use方法是一样的，只是extention不一样
+8.研究一下DPlayer这个h5视频播放器
 
 
 
