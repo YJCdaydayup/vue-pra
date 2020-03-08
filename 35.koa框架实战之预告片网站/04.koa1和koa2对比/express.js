@@ -33,6 +33,7 @@ let mid3 = () => (req, res, next)=> {
     res.body += `<h3>${tab(8)}响应 <= 第三层中间件</h3>`
 }
 
+app.use(express.static('./public'))
 app.use(mid1())
 app.use(mid2())
 app.use(mid3())
@@ -42,5 +43,5 @@ app.get('/', (req, res, next)=>{
     res.send(res.body)
 })
 
-app.listen(2333)
+app.listen(3001)
 
