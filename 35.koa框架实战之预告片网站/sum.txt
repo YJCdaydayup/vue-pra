@@ -100,7 +100,41 @@ function compose(middleware) {
 5.git合作开发办法：我在主分支master上开发后，先 git checkout master -b daily-5-2, 产生新分支并切换到这个分支，然后推到git仓库，再进入git仓库里面pull request，选择两个分支，选择审查人员再提交，审查人员进来后审查完毕就merge合并即可, 也可以直接切换到master后merge一下：git merge orgin/daily-5-4，然后推到服务端
 6.通过ejs框架本身的ejs.render(导出的ejs模版字符串，{name: ‘Sara’})，可以将数据与导出的字符串做绑定赋值生成字符串后返回给前端做展示
 7.使用koa-views中间件，实现ctx.render(‘index’,{name: ‘Sara’})，支持pug，ejs等模版引擎, use方法是一样的，只是extention不一样
-8.研究一下DPlayer这个h5视频播放器
+8. 研究一下DPlayer这个h5视频播放器
+
+第六节课
+1.puppeteer是无请求头浏览器，模拟真实用户的网页访问，注入脚本再解析网页上的文本，提取目标数据；
+2.正常使用async／await就结合await方法返回一个promise对象，resolve时才会执行后面的代码，如果判断后面不是promise对象或者常数或者同步函数就立即返回undefined，是常数会包裹成promise对象将常数放在resolve（常数）里面;
+注：await 后面可以是 promise 常数 同步函数（是异步函数的话拿到的就是undfined）
+3.如果要将异步函数的数据先返回到调用这个函数的地方，在调用的地方重新处理，就传递一个callback进去，callback return后再调用resolve函数
+function test(callback) {
+    return new Promise((resole, reject)=> {
+        setTimeout(function () {
+            let x = 'A' + 'B' + 'C'
+            resole(callback(x))
+        }, 2000)
+    })
+}
+;(async ()=>{
+
+    let x = await test((data)=> {
+        return '123456' + data + y
+    })
+    console.log(x)
+})()
+4.通过puppeteer进行网站数据爬取和对爬取的h5数据进行解析；
+5.由于node是单线程的，对于在主线程上的cpu密集性任务会造成主线程阻塞，这时可以使用子进程模块child_process派生子进程来执行新的任务，可以监听err exit message事件，子进程任务执行完毕后就通过process.send(data)发送回来；
+6.整理 同步／异步，异步IO，阻塞／非阻塞 子进程 子进程通信
+7.后端编写接口文档可以参照豆瓣提供的接口那种模块格式：https://douban-api-docs.zce.me/movie.html
+8.使用request-promise-native来进行后端的网络请求，得到数据是从promise获取的
+9.同步，都是在主线程上运行，前者未执行完不会执行后者
+10.异步，被动等待进度，通过轮询或者执行完毕后，通过回调来告知
+11.执行过程中获取状态之前是什么都不能做就是阻塞， 反之就是非阻塞
+12.异步非阻塞，通过回调的方式实现异步，等待的过程中继续可以监听事件就是非阻塞，nodejs的一大卖点
+13.
+
+
+
 
 
 
