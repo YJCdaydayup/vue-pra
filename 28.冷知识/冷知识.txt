@@ -198,6 +198,10 @@ routes: [
 
 43)使用第三方组件比如：ant-design-vue的table时，如果发现定位和宽高不好控制，就在最外层用一个div包裹，给div进行定位，宽高，再把这个table放进来，滚动出去的话就设置这个div的overflow： scroll；
 
+44)延时处理可以使用，const sleep = time => new Promise(resolve => setTimeout(resolve, time))，调用结合await即可
+
+
+
 
 
 
