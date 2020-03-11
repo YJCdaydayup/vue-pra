@@ -132,6 +132,8 @@ function test(callback) {
 11.执行过程中获取状态之前是什么都不能做就是阻塞， 反之就是非阻塞
 12.异步非阻塞，通过回调的方式实现异步，等待的过程中继续可以监听事件就是非阻塞，nodejs的一大卖点
 13.豆瓣代码地址: git@gitee.com:yang_li123/douban-trailer.git 
+14.对于cpu密集型任务可以采用子进程child_process的方式，也可以使用Cluster集群或者开启几个node服务然后通过nginx进行负载均衡处理来用到cpu的多核；
+15.
 
 
 

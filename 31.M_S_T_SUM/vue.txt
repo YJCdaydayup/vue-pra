@@ -78,7 +78,7 @@ Router是路由实例对象，用于处理路由跳转push replace，钩子函�
 十三.Vue中nextTick原理
 1.Vue一般不直接操作DOM，但是有时候也会操作比如数据变化后获取DOM宽高，这是就需要nextTick
 2.页面刷新是异步的
-3.js是单线程的，事件循环run-loop是采用宏任务和微任务来实现的
+3.js是单线程的，采用宏任务和微任务来实现的
 宏任务：主线程代码 setTimeout setTimeInterval setImmedate等
 微任务：process.nextTick（nodejs里面的） Primise.then MutationObserver
 4.查看Vue的nextTick源码可以看到此处就是用MutationObserver来监听DOM变化的，它属于微任务，所以需要在this.$nextTick的回调中获取到正确的变化后的值
@@ -140,6 +140,11 @@ Symbol这种类型的存在是为了表示独一无二的值，通过Symbol函�
 二十.Vue中created和mounted的区别
 1.created，实例被创建后立即调用，完成以下配置：数据观测（data observer），属性和方法的运算，watch／event事件回调，挂载还没开始，故el不存在
 2.mounted，模版渲染成html后调用，不会承诺所有的字组件一起挂载，
+
+二十一.Webpack中的代理proxy
+1.配置SPA单页面应用的使用，脚手架也提供了node服务器的功能；
+2.启动本地服务器热加载dev-server里面配置proxy
+3.proxy是一个对象，可以监听路由后进行重定向
 
 
 
