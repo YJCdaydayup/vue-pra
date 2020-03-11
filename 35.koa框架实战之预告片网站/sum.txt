@@ -103,7 +103,7 @@ function compose(middleware) {
 8. 研究一下DPlayer这个h5视频播放器
 
 第六节课
-1.puppeteer是无请求头浏览器，模拟真实用户的网页访问，注入脚本再解析网页上的文本，提取目标数据；
+1.puppeteer是无请求头浏览器，模拟真实用户的网页访问，注入脚本执行一些js代码再解析网页上的文本，提取目标数据；
 2.正常使用async／await就结合await方法返回一个promise对象，resolve时才会执行后面的代码，如果判断后面不是promise对象或者常数或者同步函数就立即返回undefined，是常数会包裹成promise对象将常数放在resolve（常数）里面;
 注：await 后面可以是 promise 常数 同步函数（是异步函数的话拿到的就是undfined）
 3.如果要将异步函数的数据先返回到调用这个函数的地方，在调用的地方重新处理，就传递一个callback进去，callback return后再调用resolve函数
@@ -133,7 +133,21 @@ function test(callback) {
 12.异步非阻塞，通过回调的方式实现异步，等待的过程中继续可以监听事件就是非阻塞，nodejs的一大卖点
 13.豆瓣代码地址: git@gitee.com:yang_li123/douban-trailer.git 
 14.对于cpu密集型任务可以采用子进程child_process的方式，也可以使用Cluster集群或者开启几个node服务然后通过nginx进行负载均衡处理来用到cpu的多核；
-15.
+15.通过qiniu这个库上传资源到七牛存储空间；（可以通过nanoid库实现随机数）
+
+第七节课
+1.前端js层面就理解分宏任务和微任务，node端js层面就理解event-loop机制
+2.libuv就是向nodejs提供一套异步非阻塞的代码+事件循环机制
+3.总结前端宏任务 + 微任务
+4.nodejs的事件循环机制：
+1）底层uv_run跑起来后就会依次运行，uv-update-time uv-run-timers uv-run-pending uv-run-idle uv-run-prepare uv-io-poll uv-run-check uv-run-closing-handles八个函数组成了nodejs事件循环的完整的整个过程,总共分为六个阶段
+2）异步的操作就是叫个libuv来做的
+3）timers定时器（对应函数是uv-run-timers）setTimeout setTimeInterval -> I/O callbacks（对应函数uv-run-pending）（执行系统的错误，比如Socket错误，TCP／UDP） ->idle/prepare（uv-run-idle uv-run-prepare做一些准备的工作） -> 
+Poll（轮询阶段，非常重要uv-io-poll函数）,如果轮询队列不为空，依次取出轮询队列的第一个回调函数进行执行，直到轮询队列为空或达到最大值（负载高崩溃），如果轮询队列为空，如果之前设置了setImmediate函数就会跳到下一个阶段，如果没有immediate函数就在poll当前阶段等待有新的回调函数添加到轮询队列，执行完毕后如果有计时器任务到期就回到第一阶段
+ -> check（函数uv-run-check会执行immediate函数的回调） -> close callbacks（uv-run-closing-handles函数）
+4）process.nextTick优先执行，包括Promise.resolve()回调仅次于process.nextTick,
+
+
 
 
 
