@@ -1,14 +1,15 @@
 CACHE MANIFEST
-# 2019-01-31:v9
 # Explicitly cached entries
 index.html
-./index.css
+/index.css
+/1.jpg
 # offline.html will be displayed if the user is offline
 FALLBACK:
-/ /offline.html
+*
+# offline.html
 # All other resources (e.g. sites) require the user to be online.
 NETWORK:
 *
 # Additional resources to cache
 CACHE:
-image/1.jpg
+

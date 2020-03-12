@@ -145,7 +145,15 @@ function test(callback) {
 3）timers定时器（对应函数是uv-run-timers）setTimeout setTimeInterval -> I/O callbacks（对应函数uv-run-pending）（执行系统的错误，比如Socket错误，TCP／UDP） ->idle/prepare（uv-run-idle uv-run-prepare做一些准备的工作） -> 
 Poll（轮询阶段，非常重要uv-io-poll函数）,如果轮询队列不为空，依次取出轮询队列的第一个回调函数进行执行，直到轮询队列为空或达到最大值（负载高崩溃），如果轮询队列为空，如果之前设置了setImmediate函数就会跳到下一个阶段，如果没有immediate函数就在poll当前阶段等待有新的回调函数添加到轮询队列，执行完毕后如果有计时器任务到期就回到第一阶段
  -> check（函数uv-run-check会执行immediate函数的回调） -> close callbacks（uv-run-closing-handles函数）
-4）process.nextTick优先执行，包括Promise.resolve()回调仅次于process.nextTick,
+4）process.nextTick优先执行，包括Promise.resolve()回调仅次于process.nextTick
+5.具体eventloop执行判断依据办法：
+1）.启动执行js时，同一种回调有多个的话会随机取其中一进行调用
+2）.根据event-loop事件循环将各个任务划分循环轮数，从上而下执行，不能先执行回调的就放在下一轮的列表中
+3）.setTimeout有延时时间则放在最后一轮
+4）.有异步任务因为不能立刻回来所以本轮的setImmediate优先执行了的放在第二轮是不会执行的
+6.
+
+
 
 
 
