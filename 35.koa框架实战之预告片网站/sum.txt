@@ -151,8 +151,13 @@ Poll（轮询阶段，非常重要uv-io-poll函数）,如果轮询队列不为�
 2）.根据event-loop事件循环将各个任务划分循环轮数，从上而下执行，不能先执行回调的就放在下一轮的列表中
 3）.setTimeout有延时时间则放在最后一轮
 4）.有异步任务因为不能立刻回来所以本轮的setImmediate优先执行了的放在第二轮是不会执行的
+5)process.nextTick和Promise.resolve().then()，是在每个阶段切换的时候调用的
 
-
+第八节课
+1.mongoose处理可以先在入口文件初始化连接数据库，然后在需要的地方require对应的表对象如Student，然后进行操作，也可以直接用一个文件写好数据库的连接，然后通过promise放回出去，在wait connect()的后面一个个注册所有的schema，在需要的地方直接const Student = mongoose.model(‘Student’)即可使用了
+2.shema的中间件处理：studentSchema.pre(‘save’,function(next){}),每次save前作的处理
+3.schem中的数据类型可以是Date类型：{type: Date, default: Date.now()}
+4.
 
 
 
