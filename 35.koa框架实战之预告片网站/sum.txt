@@ -157,7 +157,8 @@ Poll（轮询阶段，非常重要uv-io-poll函数）,如果轮询队列不为�
 1.mongoose处理可以先在入口文件初始化连接数据库，然后在需要的地方require对应的表对象如Student，然后进行操作，也可以直接用一个文件写好数据库的连接，然后通过promise放回出去，在wait connect()的后面一个个注册所有的schema，在需要的地方直接const Student = mongoose.model(‘Student’)即可使用了
 2.shema的中间件处理：studentSchema.pre(‘save’,function(next){}),每次save前作的处理
 3.schem中的数据类型可以是Date类型：{type: Date, default: Date.now()}
-4.
+4.将mongoose的promise指向全局ES6的primose：mongoose.Promise = global.Promise，后面的以对象／类操作数据库返回的就是promise，可以用await了
+5.mongoose中定义schema时，有unique:true,required:true这些属性，当时数组时可以：category:[{type: ObjectId,ref: ‘Movie（会存哪个表的_id）’}],也可以单独:[String]表示放string类型，const ObjectId = mongoose.Schema.Types.ObjectId，得到ObjectId类型
 
 
 
