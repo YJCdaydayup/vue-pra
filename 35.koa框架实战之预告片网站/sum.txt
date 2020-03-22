@@ -154,11 +154,43 @@ Poll（轮询阶段，非常重要uv-io-poll函数）,如果轮询队列不为�
 5)process.nextTick和Promise.resolve().then()，是在每个阶段切换的时候调用的
 
 第八节课
-1.mongoose处理可以先在入口文件初始化连接数据库，然后在需要的地方require对应的表对象如Student，然后进行操作，也可以直接用一个文件写好数据库的连接，然后通过promise放回出去，在wait connect()的后面一个个注册所有的schema，在需要的地方直接const Student = mongoose.model(‘Student’)即可使用了
+1.mongoose处理可以先在入口文件初始化连接数据库，然后在需要的地方require对应的表对象如Student，然后进行操作，也可以直接用一个文件写好数据库的连接，然后通过promise放回出去，在wait connect()的后面一个个注册所有的schema，在需要的地方直接const Student = mongoose.model(‘Student’)即可使用了,此时唤起Student这个表就不需要传schema了；
 2.shema的中间件处理：studentSchema.pre(‘save’,function(next){}),每次save前作的处理
 3.schem中的数据类型可以是Date类型：{type: Date, default: Date.now()}
 4.将mongoose的promise指向全局ES6的primose：mongoose.Promise = global.Promise，后面的以对象／类操作数据库返回的就是promise，可以用await了
 5.mongoose中定义schema时，有unique:true,required:true这些属性，当时数组时可以：category:[{type: ObjectId,ref: ‘Movie（会存哪个表的_id）’}],也可以单独:[String]表示放string类型，const ObjectId = mongoose.Schema.Types.ObjectId，得到ObjectId类型
+
+
+第九节课:通过装饰器对路由进行拆分和分层，支持路由命名空间
+1.koa-router的使用，首先引入koa-router，初始化const router = new Router(),router.get(‘/movies/all’, async (ctx, next) => {ctx.body = {}})，一定要module.exports=router进行导出,在入口文件引入后，使用app.use(router.route()).use(router.allowedMethods())这是固定写法
+2.koa一切皆中间件，app.use()自定义中间件时，处理符合自己逻辑的事件，不符合就必须在后面加await next()，这样才会走到最后的路由中间件；
+3.可以为某个单独的路由增加中间件：
+router.get('/movie/:id', (添加这个路由的中间件 =>)async (ctx, next)=>{
+    ctx.params.id = '5e6df9eb9088faf04fe9f41c'
+    return next()
+},async (ctx, next) => {
+    const Movie = mongoose.model('Movie')
+    let theMovie = await Movie.findOne({_id: ctx.params.id})
+    ctx.body = {
+        theMovie
+    }
+})
+4.添加路由前缀：let router = new Router({
+    prefix: '/movies'
+})
+5.还可以使用中间件后再添加路由：router.use(mid1()).use(mid2()).get(‘/movies’, await (cox, next) => {})
+6.Symbol没有构造函数，直接通过Symbol()得到，一旦创建不能被修改且每次产生的symbol是不一样的绝对不会重复，可以用于作为属性值，比如在nodejs中通过装饰器来抽象封装支持路由空间时可以将symbol挂到类的原型上来：
+expor controller = function (path) {
+    return function (target) {
+        target.prototype[symbolPrefix] = path)
+    }
+}
+7.对象的健值对的健必须是一个字符串或者symbol，不能是对象，如果是对象就会转成“[Object object]”,如果要健可以是对象，就使用let map = new Map(),通过map.set({name: ‘sara’},{age: 18})，然后遍历for (let [k,v] of map) {}
+8.装饰器语法@find(‘canshu’),@修饰的必须是一个函数，可以是一个返回函数的函数，这样的话@的时候就必须调用，另外，装饰器修饰的某个方法如不执行，这个装饰器函数也会默认的执行
+9.处理完回调后，后面的代码不需要执行就用return，如 return ctx.body = {code: 1}
+10.老师的总结文档地址：https://www.kancloud.cn/surahe/front-end-notebook/1110747
+11.不能采用webpack进行nodejs的编译打包，因为有些核心模块如fs，path等无法进行loader解析；
+12.
 
 
 
