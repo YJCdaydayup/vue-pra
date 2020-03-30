@@ -223,9 +223,24 @@ node: {
 6.Nodejs 线程 进程 同步异步 事件循环
 
 
-
-
-
+补充课1
+1.path.resolve(‘./public’)是路径相对转绝对
+2.服务器重定向是返回302临时重定向，301永久重定向，浏览器根据服务器返回的url打开另外一个地址
+3.重写url，一切都在服务器内部进行的，从一个路由跑到另外一个路由上，起到复用的效果；
+4.app.on(‘error’, (err, ctx)=>{在koa里面只是用于错误日志的收集处}) // 收集服务器可以用于监听服务器内部报错的处理
+5.使用session后用户数据存在session里面，客户端cookie里面的字符串就是默认用用户数据进行base64编码后的字符串
+6.session里面参数
+1）httpOnly：true // 不允许客户端操作cookie，document.cookie
+2）signed： true // 签名，会产生一个cookie字符串以及以这个字符串加密的字符串防止cookie被修改
+7.定义中间件来处理服务器报错返回页面：写在最上面即可，原理：由于有async／await，整个都是同步事件，可以直接在第一个next（）进行try catch，抛错就用ctx.throw()即可
+app.use(async (ctx, next)=>{
+ try {
+   await next()
+ }catch(err) {
+   ctx.body = `<div>错误页面</div>`
+ }
+})
+8.
 
 
 
