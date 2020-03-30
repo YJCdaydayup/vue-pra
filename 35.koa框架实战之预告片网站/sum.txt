@@ -189,9 +189,38 @@ expor controller = function (path) {
 8.装饰器语法@find(‘canshu’),@修饰的必须是一个函数，可以是一个返回函数的函数，这样的话@的时候就必须调用，另外，装饰器修饰的某个方法如不执行，这个装饰器函数也会默认的执行
 9.处理完回调后，后面的代码不需要执行就用return，如 return ctx.body = {code: 1}
 10.老师的总结文档地址：https://www.kancloud.cn/surahe/front-end-notebook/1110747
-11.不能采用webpack进行nodejs的编译打包，因为有些核心模块如fs，path等无法进行loader解析；
-12.
+11.可以采用webpack对node项目进行编译打包，需要
+1）target指向node：target：“node”，意思是在node环境中
+2）增加node配置：可以使node环境的代码在其他环境中运行如浏览器中运行：
+node: {
+    console: true,
+    global: true,
+    process: true,
+    Buffer: true,
+    __filename: true,
+    __dirname: true,
+    setImmediate: true,
+    path: true
+},
 
+
+第十节课
+1.前端打包除了webpack外，还可以使用parcel进行，先安装parcel，然后在package.json里面配置打包命令： "build": "rm -rf dist && parcel build src/index.html --no-cache -d dist --public-url /“，多个命令就用&&隔开，它不同于webpack，webpack是从入口js文件出发的，而parcel使用index.html出发，编译里面的所有本地的js文件和css文件，其中比如sass文件可以直接写在index.html里面，parcel会自动进行编译解析，也可以通过import引入到js文件里面，parcel会将样式文件自动抽出来作为css文件；
+2.parcel不需要配置文件，但是需要依赖比如postcss适配不同浏览器，要添加postcss.config.js，像sass文件的解析，就需要默认安装node-sass,如stylus就必须安装stylus stylus-loader，但是不需要像webpack那样在webpack.config.js里面配置规则；
+3.nodemon默认参数可以不配置，其实就是把—-watch src放在了打包命令上面，也可以配置起来nodemon.json，在里面可以配置那些文件的变化不需要监听；
+4.装饰器分三种：
+1）修饰类的装饰器，参数target就是被修饰的类
+2）修饰类成员的装饰器，参数target是类的实例对象
+3）修饰类的方法的装饰器，参数target是类的实例对象
+5.熟悉各种babel原理，如ES，presets，plugins等
+
+第十一节课
+1.Koa ctx request response middlewares
+2.MongoDB 
+3.Puppeteer 谷歌的无头浏览器 爬虫 迭代快
+4.parcel 构建速度快
+5.AntDesign react的组件框架
+6.Nodejs 线程 进程 同步异步 事件循环
 
 
 
