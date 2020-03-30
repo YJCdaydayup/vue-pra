@@ -1,13 +1,13 @@
 'use strict'
-//
-// setTimeout(()=> {
-//   console.log('setTimeout');
-// }, 0)
-//
-// setImmediate(()=> {
-//   console.log('setImmediate')
-// });
-//
+
+setTimeout(()=> {
+  console.log('setTimeout');
+}, 0)
+
+setImmediate(()=> {
+  console.log('setImmediate')
+});
+
 process.nextTick(()=> {
   console.log('nextTick')
 });
@@ -15,7 +15,6 @@ process.nextTick(()=> {
 
 /*
  闭包：
-
  */
 
 function fun() {
@@ -33,7 +32,7 @@ console.log('开始')
 
 setTimeout(function () {
   console.log('setTimeout');
-}, 10000);
+}, 10);
 
 
 new Promise((resolve, reject)=> {

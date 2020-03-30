@@ -4,6 +4,7 @@ const Koa = require('koa')
 const app = new Koa()
 const logger = require('koa-logger')
 const convert = require('koa-convert')
+const router = require('./router/index')
 
 let tab = (n) => new Array(n).join('&nbsp;')
 
@@ -36,10 +37,10 @@ app.use(mid1())
 app.use(mid2())
 app.use(mid3())
 
+app.use(router.routes()).use(router.allowedMethods())
 
 app.use(async (ctx, next) => {
     ctx.body += `<p style="color: red">${tab(12)}Koa 核心 处理业务</p>`
 })
 
-
-app.listen(2333)
+app.listen(3001)

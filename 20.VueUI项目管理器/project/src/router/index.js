@@ -15,6 +15,7 @@ const routes = [].concat(
 // const router = new Router({
 //     routes: routers
 // });
+
 const menu = getStore('menu', true);
 if (menu) {
     menu.forEach(function (v) {

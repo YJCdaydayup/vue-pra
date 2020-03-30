@@ -174,7 +174,14 @@ routes: [
 
 33）具体的vue页面的路由对象可以在最外层的路由监听里面的to上实时获取，并在上面修改其属性值；
 
-34)对于computed属性，只能监听自己组件的data里面的属性，没法监听vuex里面的属性的变化
+34)对于computed属性，既可以监听自己组件的data里面的属性，也可以监听vuex里面的属性的变化：
+computed: {
+   ...mapState({
+     myCount(state) {
+        return state.count
+     }
+   })
+}
 
 35)Vue默认使用的就是hash，使用history会生成多个路径而这时就需要服务器来配合；
 
@@ -199,6 +206,58 @@ routes: [
 43)使用第三方组件比如：ant-design-vue的table时，如果发现定位和宽高不好控制，就在最外层用一个div包裹，给div进行定位，宽高，再把这个table放进来，滚动出去的话就设置这个div的overflow： scroll；
 
 44)延时处理可以使用，const sleep = time => new Promise(resolve => setTimeout(resolve, time))，调用结合await即可
+
+45)vuescroll组件可以用于让内部超出范围的滚动起来且拥有滚动条，可以下拉刷新，下拉加载更多，可以做走马灯，如果要更加精确的计算滚动就用better-scroll即可，看具体需求；
+vuescroll的用法：https://vuescrolljs.yvescoding.org/demo/ 比较简单
+
+46）自定义全局组件，在入口文件：Vue.component('my-header', header),这里的header就是自定义的Vue组件，可以传递参数进去，像一般的组件那样使用，不经常使用的就自己定义组件，然后导入，然后components:{header}，两种办法根据实际情况使用；
+
+47）Vue.use其实就是执行了一个对象的install方法，在里面可以Vue.component('my-header', header)定义全局组件，也可以在vue的原型上加方法一般用于loading展示；
+
+48) 使用vuex进行登录判断，
+1，首先进入某个页面会经过全局路由的beforeEach这个路由守护方法，在里面判断Token是否存在，存在则表示用户登录过；
+2. 在判断token是否过期，如果过期就直接从服务器拉取最新的token以及此token的过期时间
+3. 如不存在token就进入路由判断，错误的路由就跳转到错误的页面，登录页路由直接跳转登录页，非登录页就看是否需要登录这个字段可以放在route对象里面做鉴权，不许要登录就
+登录成功后将token以及Token的过期时间存储在vuex或者localstorage里面，每次访问不同路由页面时，先做Token过期校验，如果过期就直接先从服务器拉取最新的Token保存在本地，并在封装AJAX请求时，在请求头里面配置好Token，这样每次请求都会将token带到服务器
+
+49) 自定义方法挂载到vue原型上面，可以let obj = {} export default obj,在这个obj里面一定有个install方法，在这个install方法里面挂载vue.prototype.$print = Print,而这个Print可以为一个对象，上面有一些方法来控制Vue组件的显示/隐藏，或者一些其他的方法，这个Print也可以是一个构造方法，一般用于处理比较复杂的逻辑，参考：
+const Print = function (dom, options) {
+    if (!(this instanceof Print)) return new Print(dom, options);
+
+    this.options = this.extend({
+        'noPrint': '.no-print'
+    }, options);
+
+    if ((typeof dom) === "string") {
+        this.dom = document.querySelector(dom);
+    } else {
+        this.isDOM(dom)
+        this.dom = this.isDOM(dom) ? dom : dom.$el;
+    }
+
+    this.init();
+};
+Print.prototype = {
+    init: function () {
+        var content = this.getStyle() + this.getHtml();
+        this.writeIframe(content);
+    },
+    extend: function (obj, obj2) {
+        for (var k in obj2) {
+            obj[k] = obj2[k];
+        }
+        return obj;
+    },
+...
+
+const MyPlugin = {}
+MyPlugin.install = function (Vue, options) {
+    // 4. 添加实例方法
+    Vue.prototype.$print = Print
+}
+export default MyPlugin
+
+
 
 
 

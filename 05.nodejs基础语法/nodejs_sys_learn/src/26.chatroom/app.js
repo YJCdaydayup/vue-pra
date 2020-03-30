@@ -39,7 +39,8 @@ app.get('/check', function (req, res) {
 
 app.get('/chat', function (req, res) {
   if (!req.session.username) {
-    res.send('必须先登录才可以进聊天室');
+    // res.send('必须先登录才可以进聊天室');
+    res.redirect('/')
     return;
   }
   res.render('chat', {

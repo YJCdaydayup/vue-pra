@@ -27,6 +27,8 @@ moment.locale('zh-cn');
 Vue.use(VueRouter);
 Vue.use(store);
 
+
+
 Vue.config.productionTip = false;
 Vue.use(Antd);
 Vue.component('WrapperContent', WrapperContent);

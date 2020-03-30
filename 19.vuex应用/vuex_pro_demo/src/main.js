@@ -4,8 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuex from 'vuex'
+import vuescroll from 'vuescroll'
+import head from './components/Head'
+import MyPlugin from "./tool/print";
 
 Vue.use(Vuex);
+Vue.use(MyPlugin)
+// Vue.use(vuescroll)
+Vue.component('vue-scroll', vuescroll);
+
+Vue.component('my-head', head)
 
 import {ADD_MUTATION, LOGIN_MUTATION, LOGOUT_MUTATION} from "./mutations/mutations"
 import moduleA from './modules/ModuleA'
