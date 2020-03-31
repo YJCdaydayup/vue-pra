@@ -76,7 +76,6 @@ MyTimer.prototype.timeCount = function (maxtime) {
      if (maxtime <= 0) {
        clearInterval(this.timer);
        return  '开始活动';
-       return;
      }
 
      var day = Math.floor(maxtime / 86400);

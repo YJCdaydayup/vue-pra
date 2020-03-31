@@ -180,7 +180,7 @@ router.get('/movie/:id', (添加这个路由的中间件 =>)async (ctx, next)=>{
 })
 5.还可以使用中间件后再添加路由：router.use(mid1()).use(mid2()).get(‘/movies’, await (cox, next) => {})
 6.Symbol没有构造函数，直接通过Symbol()得到，一旦创建不能被修改且每次产生的symbol是不一样的绝对不会重复，可以用于作为属性值，比如在nodejs中通过装饰器来抽象封装支持路由空间时可以将symbol挂到类的原型上来：
-expor controller = function (path) {
+export controller = function (path) {
     return function (target) {
         target.prototype[symbolPrefix] = path)
     }
