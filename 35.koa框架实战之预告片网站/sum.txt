@@ -240,8 +240,10 @@ app.use(async (ctx, next)=>{
    ctx.body = `<div>错误页面</div>`
  }
 })
-8.
-
+8.websocket简单流程：
+1）登录产生了一个随机数id->分配session->用户信息重定向list页面->把id传递给页面->页面吧id通过tcp送回来->创建socketId存储在:global.mySessionStore[id].socketId = ctx.socket.socket.id;
+2）这个id下可以获取用户信息，也可以获取sessionId
+9.任务：即时聊天，统计在线人数，显示在线列表，私聊，群组聊天
 
 
 

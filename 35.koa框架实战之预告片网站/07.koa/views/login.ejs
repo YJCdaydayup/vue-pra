@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style>
+        .login-box {
+            width: 100%;
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        .login-box>input {
+            outline: none;
+            width: 200px;
+            height: 46px;
+            box-shadow: 1px 1px 10px 1px yellow;
+            box-sizing: border-box;
+            border: 1px solid yellow;
+            padding: 0 20px;
+            font-size: 18px;
+        }
+
+        .login-box>button {
+            outline: none;
+            width: 60px;
+            height: 46px;
+            border: none;
+            border-radius: 3px;
+            background-color: aqua;
+            color: black;
+            font-size: 16px;
+            box-shadow: 1px 1px 10px 1px yellow;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <input id="name" type="text"><button id="login">登录</button>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('#login').click(function () {
+            var name = $('#name').val()
+            $.post('/chat/doLogin',{
+                name: name
+            },function(data,status){
+
+            });
+        })
+    })
+</script>
+</html>

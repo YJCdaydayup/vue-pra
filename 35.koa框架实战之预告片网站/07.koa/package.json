@@ -1,0 +1,27 @@
+{
+  "name": "07.koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -w ./ —-exec \"babel-node —-presets env\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-preset-env": "^1.7.0",
+    "ejs": "^3.0.2",
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
+    "koa-router": "^8.0.8",
+    "koa-session": "^5.13.1",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.1",
+    "node-babel": "^0.1.2",
+    "nodemon": "^2.0.2",
+    "socketio": "^1.0.0"
+  }
+}
