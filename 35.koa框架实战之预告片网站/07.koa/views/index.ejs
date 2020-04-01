@@ -1,17 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>登录页面</title>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style>
 
-        </style>
-    </head>
-    <body>
+    </style>
+</head>
+<body>
+<h5 id="username" data="<%= id %>">大家好，我是: <%= username %></h5>
+<div>
+    <p>
+        <span id="online">在线列表:<%= online %></span>
+        <select id="select" style="width: 60px;">
+            <% for (var i = 0;i < Object.keys(onliner).length;i++) { %>
+                <option><%= onliner[Object.keys(onliner)[i]].username %></option>
+            <% } %>
+        </select>
+    </p>
+</div>
+<button id="btn">发送</button>
+<div id="msg"></div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/socket.io.js"></script>
+<script>
+    var socket = io('ws://localhost:3000');
+    $(function () {
+        // 1.页面加载出来后将id发送给服务器
+        var id = $("#username").attr('data')
+        socket.emit('connect-id', id)
 
-    </body>
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script>
+        // 2.接收服务器返回的在线信息
+        socket.on('online-info', function (info) {
+            console.log('广播发送在线人数信息', info)
+            var onlines = Object.keys(info).length
+            $('#online').text('在线列表:' + onlines)
+        })
 
-    </script>
+        $('#btn').click(function () {
+            socket.emit('send', '12345678212345654323456');
+        })
+        socket.on('huida', function (msg) {
+            console.log(msg)
+        })
+    })
+</script>
 </html>

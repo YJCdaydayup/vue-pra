@@ -45,10 +45,15 @@
     $(function () {
         $('#login').click(function () {
             var name = $('#name').val()
-            $.post('/chat/doLogin',{
-                name: name
+            $.post('/doLogin',{
+                username: name
             },function(data,status){
-
+                var id = data.id
+                console.log(data)
+                if (status == 'success') {
+                    alert('登录成功')
+                    window.location = '/?id=' + id
+                }
             });
         })
     })

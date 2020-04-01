@@ -180,7 +180,7 @@ router.get('/movie/:id', (添加这个路由的中间件 =>)async (ctx, next)=>{
 })
 5.还可以使用中间件后再添加路由：router.use(mid1()).use(mid2()).get(‘/movies’, await (cox, next) => {})
 6.Symbol没有构造函数，直接通过Symbol()得到，一旦创建不能被修改且每次产生的symbol是不一样的绝对不会重复，可以用于作为属性值，比如在nodejs中通过装饰器来抽象封装支持路由空间时可以将symbol挂到类的原型上来：
-export controller = function (path) {
+expor controller = function (path) {
     return function (target) {
         target.prototype[symbolPrefix] = path)
     }
@@ -243,7 +243,7 @@ app.use(async (ctx, next)=>{
 8.websocket简单流程：
 1）登录产生了一个随机数id->分配session->用户信息重定向list页面->把id传递给页面->页面吧id通过tcp送回来->创建socketId存储在:global.mySessionStore[id].socketId = ctx.socket.socket.id;
 2）这个id下可以获取用户信息，也可以获取sessionId
-9.任务：即时聊天，统计在线人数，显示在线列表，私聊，群组聊天
+9.任务：即时聊天，统计在线人数，显示在线列表，私聊，群组聊天,参考：https://blog.csdn.net/function__/article/details/73089504
 
 
 
