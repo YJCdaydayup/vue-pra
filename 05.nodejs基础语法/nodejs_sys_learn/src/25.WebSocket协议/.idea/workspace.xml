@@ -7,10 +7,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/index.js" afterPath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/package.json" afterPath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/router/index.js" afterPath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/router/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/views/index.ejs" afterPath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/views/index.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/views/login.ejs" afterPath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/07.koa/views/login.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/sum.txt" afterPath="$PROJECT_DIR$/../../../../35.koa框架实战之预告片网站/sum.txt" />
     </list>
     <ignored path="25.WebSocket协议.iws" />
     <ignored path=".idea/workspace.xml" />

@@ -7,15 +7,16 @@ let router = new Router({
 
 router.get('/', async (ctx, next)=>{
     let id = ctx.query.id
-    if (!ctx.session.username || !id) {
+    let username = ctx.query.username
+    if (!username || !id) {
         return ctx.redirect('/login')
     }
     if (!global.sessionStorage[id]) {
         global.sessionStorage[id] = {}
     }
-    global.sessionStorage[id].username = ctx.session.username
+    global.sessionStorage[id].username = username
     await ctx.render('index', {
-        username: ctx.session.username,
+        username: username,
         online: Object.keys(global.sessionStorage).length,
         id,
         onliner: global.sessionStorage

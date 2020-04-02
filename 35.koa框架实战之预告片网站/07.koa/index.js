@@ -19,12 +19,17 @@ let io = socketio(server)
 
 io.on('connection', (socket) => {
     console.log('连接成功')
-    socket.on('connect-id', (id) => {
-        console.log('收到客户端发来的id：', id)
+    socket.on('connect-id', (msgObj) => {
+        let id = msgObj.id
+        let username = msgObj.username
+        console.log(`收到客户${username}发来的id:${id}`)
         global.sessionStorage[id].sessionId = socket.id
         // 广播发送在线人数信息
         io.sockets.emit("online-info", global.sessionStorage);
-        // socket.broadcast.emit("online-info",global.sessionStorage);
+    })
+    // 接收到客户端的群聊消息后广播出去
+    socket.on('msg_to_all', (msg)=>{
+        io.sockets.emit('transfer_to_all', msg)
     })
 })
 

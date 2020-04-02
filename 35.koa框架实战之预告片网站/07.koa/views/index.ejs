@@ -4,23 +4,71 @@
     <meta charset="UTF-8">
     <title>登录页面</title>
     <style>
+        .alert {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(29,29,29,0.3);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .alert>span {
+            display: inline-block;
+            padding: 20px 36px;
+            border-radius: 5px;
+            background-color: #fff;
+            color: orangered;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        h3 {
+            text-align: center;
+        }
 
     </style>
 </head>
 <body>
-<h5 id="username" data="<%= id %>">大家好，我是: <%= username %></h5>
+<h3 id="username" name="<%=username%>" data="<%= id %>">大家好，我是: <%= username %></h3>
 <div>
-    <p>
-        <span id="online">在线列表:<%= online %></span>
+    <div>
+        <span id="online">在线列表:<%= online %></span>人
         <select id="select" style="width: 60px;">
             <% for (var i = 0;i < Object.keys(onliner).length;i++) { %>
                 <option><%= onliner[Object.keys(onliner)[i]].username %></option>
             <% } %>
         </select>
-    </p>
+    </div>
+    <hr>
+    <div class="chat-kind">
+        <button>加入男生组</button>
+        <button>加入女生组</button>
+        <span>群组聊：</span>
+        <input type="text">
+        <button>发送群聊</button>
+    </div>
+    <hr>
+    <div class="priviate-kind">
+        <span>私聊：</span>
+        <input type="text">
+        <button>发送私聊</button>
+        <ul>
+            <li>Sara对所有人说我是mick</li>
+        </ul>
+    </div>
+    <hr>
+    <span><%=username%>你好，请说话：</span>
+    <input id="allinput" type="text">
+    <button id="sendAll">发送</button>
+    <ul id="all-chat"></ul>
+    <div class="alert">
+        <span>有新人登录</span>
+    </div>
 </div>
-<button id="btn">发送</button>
-<div id="msg"></div>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="/socket.io.js"></script>
@@ -29,7 +77,11 @@
     $(function () {
         // 1.页面加载出来后将id发送给服务器
         var id = $("#username").attr('data')
-        socket.emit('connect-id', id)
+        var username = $('#username').attr('name')
+        socket.emit('connect-id', {
+            id: id,
+            username: username
+        })
 
         // 2.接收服务器返回的在线信息
         socket.on('online-info', function (info) {
@@ -37,20 +89,37 @@
             var onlines = Object.keys(info).length
             $('#online').text('在线列表:' + onlines)
             var options = ''
-            alert('有新人上线')
-            $('#select').find('option').each(function(option, index){
-                var detailInfo = info[id]
-                options += '<option>' + info[Object.keys(info)[index]].username +'</option>'
-            })
+            $('.alert').css('display', 'flex')
+            setTimeout(function () {
+                $('.alert').css('display', 'none')
+            }, 1000)
+            var keys = Object.keys(info)
+            for (var i = 0;i<keys.length;i++) {
+                var key = keys[i]
+                var detail = info[key]
+                options += '<option>' + detail.username +'</option>'
+            }
             $('#select').html(options)
         })
 
-        $('#btn').click(function () {
-            socket.emit('send', '12345678212345654323456');
+        socket.on('all', function (msg) {
+            alert(msg)
         })
-        socket.on('huida', function (msg) {
-            console.log(msg)
+
+        // 广播发送消息给所有人，其实就是先发给服务器，由服务器广播出去
+        $('#sendAll').click(function () {
+            socket.emit('msg_to_all',{
+                username: username,
+                msg: $('#allinput').val()
+            })
         })
+        // 接收到广播聊天信息
+        socket.on('transfer_to_all', function (msgObj) {
+            var pre = '<strong>' + msgObj.username + '说：' + '</strong>'
+            $('#all-chat').append('<li>'+ pre + '<span>' + msgObj.msg +'</span>' + '</li>')
+        })
+
+
     })
 </script>
 </html>
