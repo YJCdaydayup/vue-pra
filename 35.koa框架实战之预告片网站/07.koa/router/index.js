@@ -7,6 +7,9 @@ let router = new Router({
 
 router.get('/', async (ctx, next)=>{
     let id = ctx.query.id
+    if (!ctx.session.username || !id) {
+        return ctx.redirect('/login')
+    }
     if (!global.sessionStorage[id]) {
         global.sessionStorage[id] = {}
     }
@@ -25,6 +28,12 @@ router.get('/login', async (ctx, next) => {
 
 router.post('/doLogin', async (ctx, next) => {
     let username = ctx.request.body.username
+    if (ctx.session.username && ctx.session.username == this.username) {
+        return ctx.body = {
+          code: 0,
+          id: ctx.session.id
+        }
+    }
     let id = Math.floor(Math.random() * 10000000).toString(16)
     id = cryptoJS.MD5(id).toString()
     ctx.session.username = username

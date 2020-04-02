@@ -36,6 +36,13 @@
             console.log('广播发送在线人数信息', info)
             var onlines = Object.keys(info).length
             $('#online').text('在线列表:' + onlines)
+            var options = ''
+            alert('有新人上线')
+            $('#select').find('option').each(function(option, index){
+                var detailInfo = info[id]
+                options += '<option>' + info[Object.keys(info)[index]].username +'</option>'
+            })
+            $('#select').html(options)
         })
 
         $('#btn').click(function () {

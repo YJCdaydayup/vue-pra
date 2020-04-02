@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
         io.sockets.emit("online-info", global.sessionStorage);
         // socket.broadcast.emit("online-info",global.sessionStorage);
     })
-});
+})
 
 app.on('error', async (err, ctx)=>{
     console.log(err)
