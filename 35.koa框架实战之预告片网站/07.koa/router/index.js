@@ -29,12 +29,29 @@ router.get('/login', async (ctx, next) => {
 
 router.post('/doLogin', async (ctx, next) => {
     let username = ctx.request.body.username
-    if (ctx.session.username && ctx.session.username == this.username) {
-        return ctx.body = {
-          code: 0,
-          id: ctx.session.id
+    let flag = false
+    let matchId
+    let ids = Object.keys(global.sessionStorage)
+    for (let i = ids.length;i--;) {
+        let id = ids[i]
+        let val = global.sessionStorage[id]
+        if (val.username == username) {
+            flag = true
+            matchId = id
+            break
         }
     }
+
+    if (flag) {
+        // 已经登录过，直接跳转到主页
+        ctx.body = {
+            code: -1,
+            msg: '该用户已经登录过了',
+            path: `/?id=${matchId}&username=${username}`
+        }
+        return false
+    }
+
     let id = Math.floor(Math.random() * 10000000).toString(16)
     id = cryptoJS.MD5(id).toString()
     ctx.session.username = username

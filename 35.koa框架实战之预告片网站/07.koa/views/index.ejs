@@ -2,8 +2,21 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>登录页面</title>
+    <title><%= username %>的聊天主页</title>
     <style>
+
+        * {
+            padding: 0;
+            margin: 2;
+            outline: none;
+        }
+
+        ul, li {
+            list-style-type: none;
+            color: #404040;
+            font-family: "American Typewriter";
+        }
+
         .alert {
             position: absolute;
             left: 0;
@@ -14,6 +27,18 @@
             display: none;
             justify-content: center;
             align-items: center;
+        }
+
+        input {
+            padding: 2px 5px;
+        }
+
+        button {
+            padding: 3px 6px;
+            background-color: chartreuse;
+            border-radius: 2px;
+            border-radius: 3px;
+            color: brown;
         }
 
         .alert>span {
@@ -30,6 +55,34 @@
             text-align: center;
         }
 
+        #all-chat, #group_chat_list {
+            padding: 20px 30px;
+            border-radius: 6px;
+            box-shadow: 10px 10px 20px 1px rgba(29,29,29,0.2);
+        }
+
+        #all-chat li, #group_chat_list li{
+            padding: 3px;
+            margin-top: 5px;
+            border-bottom: 1px solid rgba(29,29,29,0.2);
+        }
+
+        #all-chat li:first-child {
+            margin-top: 10px;
+        }
+
+        #private_chat_list {
+            padding: 20px 30px;
+            border-radius: 6px;
+            box-shadow: 10px 10px 20px 1px rgba(29,29,29,0.2);
+        }
+
+        #private_chat_list li {
+            padding: 3px;
+            margin-top: 5px;
+            border-bottom: 1px solid rgba(29,29,29,0.2);
+        }
+
     </style>
 </head>
 <body>
@@ -37,28 +90,27 @@
 <div>
     <div>
         <span id="online">在线列表:<%= online %></span>人
-        <select id="select" style="width: 60px;">
+        <select onselect="selectChat()" id="select" style="width: 60px;">
             <% for (var i = 0;i < Object.keys(onliner).length;i++) { %>
-                <option><%= onliner[Object.keys(onliner)[i]].username %></option>
+                <option data-id="<%= Object.keys(onliner)[i] %>"><%= onliner[Object.keys(onliner)[i]].username %></option>
             <% } %>
         </select>
     </div>
     <hr>
     <div class="chat-kind">
-        <button>加入男生组</button>
-        <button>加入女生组</button>
+        <button id="joinBoy">加入男生组</button>
+        <button id="joinGirl">加入女生组</button>
         <span>群组聊：</span>
-        <input type="text">
-        <button>发送群聊</button>
+        <input id="group_chat" type="text">
+        <button id="group_chat_button">发送群聊</button>
+        <ul id="group_chat_list"></ul>
     </div>
     <hr>
     <div class="priviate-kind">
         <span>私聊：</span>
-        <input type="text">
-        <button>发送私聊</button>
-        <ul>
-            <li>Sara对所有人说我是mick</li>
-        </ul>
+        <input id="private_chat" type="text">
+        <button id="private-chat-button">发送私聊</button>
+        <ul id="private_chat_list"></ul>
     </div>
     <hr>
     <span><%=username%>你好，请说话：</span>
@@ -97,13 +149,32 @@
             for (var i = 0;i<keys.length;i++) {
                 var key = keys[i]
                 var detail = info[key]
-                options += '<option>' + detail.username +'</option>'
+                options += '<option data-id='+ key + '>' + detail.username +'</option>'
             }
             $('#select').html(options)
         })
 
-        socket.on('all', function (msg) {
-            alert(msg)
+        // 3.接收服务器返回的在线信息
+        socket.on('offline-info', function (info) {
+            console.log('收到' + info.offline_name +'离线的消息')
+            if (info.offline_name == username) {
+                window.location('login')
+                return ;
+            }
+            var onlines = Object.keys(info.onliners).length
+            $('#online').text('在线列表:' + onlines)
+            var options = ''
+            $('.alert').css('display', 'flex')
+            setTimeout(function () {
+                $('.alert').css('display', 'none')
+            }, 1000)
+            var keys = Object.keys(info.onliners)
+            for (var i = 0;i<keys.length;i++) {
+                var key = keys[i]
+                var detail = info.onliners[key]
+                options += '<option data-id='+ key + '>' + detail.username +'</option>'
+            }
+            $('#select').html(options)
         })
 
         // 广播发送消息给所有人，其实就是先发给服务器，由服务器广播出去
@@ -120,6 +191,61 @@
         })
 
 
+        // 收到私聊回复的消息
+        socket.on('private_chat_back', function (msgObj) {
+            var chatlist = $('#private_chat_list').html()
+            chatlist += '<li>'+ msgObj.fromUser +'说： ' +  msgObj.msg +'</li>'
+            $('#private_chat_list').html(chatlist)
+        })
+
+        // 收到群组消息
+        socket.on('send_group_back', function (msgObj) {
+            var list = $('#group_chat_list').html() || ''
+            list += '<li>'+ msgObj.fromUser +'说： ' +  msgObj.msg +'</li>'
+            $('#group_chat_list').html(list)
+        })
+
+        var option = $('#select option:selected')
+        var private_chat_id = option.attr('data-id')
+        var private_chat_name = option.text()
+        $('#select').change(function () {
+            var option = $('#select option:selected')
+            private_chat_id = option.attr('data-id')
+            private_chat_name = option.text()
+        })
+
+        $('#private-chat-button').click(function () {
+            if (private_chat_name == username) {
+               return alert('不能给自己发送私聊消息')
+            }
+            socket.emit('private_chat', {
+                id: private_chat_id,
+                msg: $('#private_chat').val(),
+                fromUser: username
+            })
+        })
+
+        // 加入男生分组；
+        $('#joinBoy').click(function () {
+            socket.emit('boy_group', {
+                id: id
+            })
+        })
+
+        // 加入女生分组
+        $('#joinGirl').click(function () {
+            socket.emit('girl_group', {
+                id: id
+            })
+        })
+
+        $('#group_chat_button').click(function () {
+            socket.emit('send_group_message', {
+                id: id,
+                msg: $('#group_chat').val(),
+                fromUser: username
+            })
+        })
     })
 </script>
 </html>

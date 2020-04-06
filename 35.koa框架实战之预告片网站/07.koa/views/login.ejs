@@ -51,6 +51,10 @@
                 var id = data.id
                 console.log(data)
                 if (status == 'success') {
+                    if (data.code == -1) {
+                        alert(data.msg)
+                       return window.location = data.path
+                    }
                     alert('登录成功')
                     window.location = '/?id=' + id + '&username='+ name
                 }
