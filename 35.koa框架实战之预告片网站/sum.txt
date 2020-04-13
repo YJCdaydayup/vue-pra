@@ -246,10 +246,13 @@ app.use(async (ctx, next)=>{
 9.任务：即时聊天，统计在线人数，显示在线列表，私聊，群组聊天,参考：https://blog.csdn.net/function__/article/details/73089504
 10.测试websocket时，我遇到一个坑，就是同时开多个浏览器窗口作为客户端，但是都是同一个浏览器比如google浏览器，不管开多少个，他们的 cookie存储空间是共享的，除非的不同的协议，域名，端口，不然会造成相互cookie覆盖的情况；
 11.服务器可以使用默认的session来处理用户登录的问题，这样会生产token(用户信息可能是base64加密后的字符串)返回给客户端存在cookie里面，其实还有一种方式也可以是服务器自己生成一个唯一的id，将这个id和用户信息关联起来保存在服务器内存以及redis服务器里面，将这个id作为鉴权的唯一标识给客户端，客户端每次请求必须带上来处理登录的问题，要注意的是这个唯一id要给一个过期事件，一旦过期，就需要把这个id给服务器再从服务器重新获取；
-12.
 
-
-
+补充课2
+1.数据库的连接采用连接池才高效，mongodb本身就有连接池，mysql需要再创建的时候设置连接池；
+2.后端的架构模式：app —— router — controller（C）（V就是响应页面或者数据） —-model数据操作者—db常用操作
+3.path.parse(‘/Users/yangli/mongodb-linux-x86_64-3.0.6.tgz’),可以用于解析一个路径，得到路径，后缀和文件名
+4.Object.keys()和Object.values()得到所有的key或者value；
+5.
 
 
  
