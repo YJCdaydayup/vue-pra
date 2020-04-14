@@ -92,7 +92,7 @@
         <span id="online">在线列表:<%= online %></span>人
         <select onselect="selectChat()" id="select" style="width: 60px;">
             <% for (var i = 0;i < Object.keys(onliner).length;i++) { %>
-                <option data-id="<%= Object.keys(onliner)[i] %>"><%= onliner[Object.keys(onliner)[i]].username %></option>
+                <option data-id="<%= Object.keys(onliner)[i] %>"><%= onliner[Object.keys(onliner)[i]].name %></option>
             <% } %>
         </select>
     </div>
@@ -149,7 +149,7 @@
             for (var i = 0;i<keys.length;i++) {
                 var key = keys[i]
                 var detail = info[key]
-                options += '<option data-id='+ key + '>' + detail.username +'</option>'
+                options += '<option data-id='+ key + '>' + detail.name +'</option>'
             }
             $('#select').html(options)
         })
@@ -193,8 +193,9 @@
 
         // 收到私聊回复的消息
         socket.on('private_chat_back', function (msgObj) {
+            alert(msgObj)
             var chatlist = $('#private_chat_list').html()
-            chatlist += '<li>'+ msgObj.fromUser +'说： ' +  msgObj.msg +'</li>'
+            chatlist += '<li>'+ msgObj.from +'说： ' +  msgObj.msg +'</li>'
             $('#private_chat_list').html(chatlist)
         })
 
@@ -219,9 +220,11 @@
                return alert('不能给自己发送私聊消息')
             }
             socket.emit('private_chat', {
-                id: private_chat_id,
+                toId: private_chat_id,
                 msg: $('#private_chat').val(),
-                fromUser: username
+                from: username,
+                fromId: id,
+                to: private_chat_name
             })
         })
 

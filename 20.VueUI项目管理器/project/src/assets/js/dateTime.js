@@ -71,6 +71,7 @@ export const relativelyTime = (value, now) => {
         sameElse: 'M月D日 H:mm'
     });
 };
+
 /**
  *
  * @param value 日期
