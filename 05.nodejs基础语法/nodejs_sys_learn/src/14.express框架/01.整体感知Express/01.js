@@ -11,22 +11,38 @@
 const express = require('express');
 
 let app = express();
+//
+// app.get('/', (req, res)=> {
+//     res.send('你好');
+// })
+//
+// app.get('/haha', (req, res)=> {
+//     res.send('这是haha页面');
+// })
+//
+// app.get(/^\/student\/([\d]{10})$/, (req, res)=> {
+//     console.log(req)
+//     res.send('学生信息:学号:' + req.params[0]);
+// })
+//
+// app.get('/teacher/:gonghap',(req, res)=>{
+//     res.send('老师信息,工号: ' + req.params.gonghao);
+// })
 
-app.get('/', (req, res)=> {
-    res.send('你好');
-})
+let mid1 = function (req, res, next) {
+    console.log(123456)
+    next()
+    console.log(1234567)
+}
 
-app.get('/haha', (req, res)=> {
-    res.send('这是haha页面');
-})
 
-app.get(/^\/student\/([\d]{10})$/, (req, res)=> {
-    console.log(req)
-    res.send('学生信息:学号:' + req.params[0]);
-})
+let mid2 = function (req, res, next) {
+    console.log(123456789)
+    next()
+    console.log(12345673456)
+}
 
-app.get('/teacher/:gonghap',(req, res)=>{
-    res.send('老师信息,工号: ' + req.params.gonghao);
-})
+app.use(mid1)
+app.use(mid2)
 
 app.listen(3000);
