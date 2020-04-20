@@ -4,25 +4,34 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -w ./ —-exec \"babel-node —-presets env\""
+    "dev": "nodemon -w ./ --exec \"babel-node src —-presets env\"",
+    "build": "babel src -s -D -d dist --presets env",
+    "production": "nodemon -w dist --exec \"babel-node dist —-presets env\"",
+    "rebuild": "rimraf dist && babel src -s -D -d dist --presets env"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
+    "babel-node": "^0.0.1-security",
     "babel-preset-env": "^1.7.0",
     "crypto-js": "^4.0.0",
     "ejs": "^3.0.2",
+    "glob": "^7.1.6",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "koa-router": "^8.0.8",
     "koa-session": "^5.13.1",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.1",
+    "mongoose": "^5.9.7",
     "node-babel": "^0.1.2",
+    "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
+    "rimraf": "^3.0.2",
     "socket.io": "^2.3.0",
     "socketio": "^1.0.0"
   }

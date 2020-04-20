@@ -180,7 +180,7 @@ Dog.call(obj); // 继承Dog自身属性和方法
 3）tcp/ip是传输层协议，通过socket来实现的
 4）http协议是应用层协议，定义了数据包装格式，请求头请求体响应头响应体的形式进行数据传输
 
-52.Source Map调试压缩后的代码
+53.Vue中采用了keepAlive缓存的页面才会执行activated的生命周期函数，没有缓存的无论怎么都不会执行activated函数，而是会一直执行mounted函数；
 
 
 
