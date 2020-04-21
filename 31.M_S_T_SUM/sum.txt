@@ -182,6 +182,11 @@ Dog.call(obj); // 继承Dog自身属性和方法
 
 53.Vue中采用了keepAlive缓存的页面才会执行activated的生命周期函数，没有缓存的无论怎么都不会执行activated函数，而是会一直执行mounted函数；
 
+54.在Vue项目中，由于使用的是webpack打包，webpack也是基于node的，所以在项目中可以使用一些node的核心库，如querystring；
+
+55.Vue中的replace效果和push是一样的会跳转，但是replace跳转后页面的路由不会添加到新的路由栈不会留下history记录，而是会替换掉当前路由；
+
+56.
 
 
 

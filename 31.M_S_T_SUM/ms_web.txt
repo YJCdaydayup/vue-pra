@@ -1,0 +1,32 @@
+一.箭头函数和普通函数的区别
+1）箭头函数是匿名函数，不能作为构造函数，不能使用new，没有原型属性prototype
+2）箭头函数不绑定arguments，使用rest参数...解决； const fn = (...x) => {console.log(x)},这里的x是数组
+3）箭头函数不绑定this，会与父作用域共享上下文this
+4）箭头函数不能作为generator生成器函数，不能使用yield关键字
+
+二.宏任务和微任务有哪些
+1）宏任务：主代码块 settimeout setinterval setImediate requestAnimationFrame
+2）微任务：process.nextTick Promise.then() MutationObserver
+
+三.peerDependencies作用
+1）在npm2中，如果A模块依赖了B模块，在安装A模块后，如果需要直接使用B模块，可以再次安装B模块，但是也可以不在当前项目中的package.json中声明B的依赖，而是在A的package.json里面加上peerDependencies,就会安装A模块的时候自动安装B模块
+2）npm3中不会强制安装peerDependencies中的依赖包，而是会打印警告让用户安装
+
+四.requestAnimationFrame
+1）实现动画的方式有animation transition setInterval，还可以通过requstAnimationFrame
+2）屏幕刷新率一般为每秒60HZ，每16.7ms会刷新一次，由于人的视觉暂留会看起来是流畅的
+3）setTimeout来设定间隔改变位置，容易出现卡顿，抖动现象，由于settimeout属于宏任务，会等到主线程执行完毕后再执行，实际执行时间会比设定的晚，而且容易丢帧
+4）requestAnimationFrame会在屏幕每次刷新间隔执行一次不会卡顿，当屏幕最新化或者隐藏时刷新任务会被系统暂停，requestAnimationFrame也会停止渲染，节省CPU开销
+5）为了解决兼容性问题，优雅降级，优先使用高级特性，再根据不同情况回退，直到使用settimeout
+代码：
+    var progress = 0;
+    //回调函数
+    function render() {
+     progress += 1; //修改图像的位置
+     if (progress < 100) {
+     //在动画没有结束前，递归渲染
+     window.requestAnimationFrame(render);
+     }
+    }
+    //第一帧渲染
+    window.requestAnimationFrame(render);</pre>
