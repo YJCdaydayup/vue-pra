@@ -1,4 +1,4 @@
-第一节课
+x第一节课
 1.安装命令加上—save是为了把第三方组件添加到package.json里面
 2.图片放在webstorm工程，通过require加载时选择正常图片，但也要把@2x，@3x图加进来便于不同机型加载
 3.可以在static propTypes={}中设置组件的类型检查：PropTypes.string PropTypes.element,PropType.bool,同时可以通过，设置默认属性：static defaultProps={}
