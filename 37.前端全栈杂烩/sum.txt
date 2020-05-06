@@ -25,4 +25,33 @@
 2.使用sass，less，stylus预处理器时，可以将font,color，通用的样式抽象到不同的文件，通过import进行导入
 3.Koa 依靠 async/await（generator + co）让异步操作可以变成同步写法，更好理解。最关键的不是这些中间的执行顺序，而是响应的时机，Express 使用 res.end() 是立即返回，这样想要做出些响应前的操作变得比较麻烦；而 Koa 是在所有中间件中使用 ctx.body 设置响应数据，但是并不立即响应，而是在所有中间件执行结束后，再调用 res.end(ctx.body) 进行响应，这样就为响应前的操作预留了空间，所以是请求与响应都在最外层，中间件处理是一层层进行，所以被理解成洋葱模型；
 4.小程序每个页面有三个文件，index.js，wxml，wxss，可以使用Vue的写法将所有内容写到index.wxml里面，然后用template，script，style分别进行包裹起来；
-5.
+5.JS异步编程的五种方式；
+6.研究一下SSR和Preverndering预渲染对比
+7.mongoose建立模型后，一旦引用过这个文件，就可以在后面直接使用let User = mongoose.model(‘User’)取到这个模型对象
+8.mongoose中，schame.pre(‘save’, function(next) {这里的this是模型具体对象，且不能用箭头函数})，shema.statics.getUser = function(name) {这里的this是模型类}
+9.userSchema.methods = {
+  this.model(‘Student’)也可以拿到Student类
+}
+10.Restful Api有弊端，就是前后端接口要求的变化，导致可能会出现很对冗余的字段和接口，当项目复杂时，难以维护
+11.GraphQL 时facebook提出的，将查询规则给到前端，让前端来控制需要获取的数据：
+如：
+接口：http://xxoo.com/graphql
+参数：query {
+ gardens {
+   id,
+   name,
+   gardener
+ }
+ gardeners {
+  id,
+  name,
+  phone
+ }
+}
+
+第三节课
+1.Ngrok魔法隧道代理本地服务，比较类似于nginx来代理本地服务
+2.Nuxtjs流程时发起请求后走nuxtServerInit后，再走服务器中间件，服务器的路由，服务器路由不存在再进到某个页面，页面不存在就返回错误的页面
+3.研究ramda函数库
+4.
+

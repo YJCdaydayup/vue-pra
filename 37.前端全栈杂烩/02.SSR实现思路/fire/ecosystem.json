@@ -1,0 +1,28 @@
+{
+  "apps": [
+    {
+      "name": "fire",
+      "script": "app.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "sara",
+      "host": ["47.115.140.196"],
+      "port": "22",
+      "ref": "origin/master",
+      "repo": "git@gitee.com:yang_li123/resume.git",
+      "path": "/www/my_resume/production",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}

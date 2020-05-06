@@ -1,0 +1,135 @@
+第一节课
+1.最早微信提供了一套JSSDK来调用一些微信的功能，如分享，支付等；
+2.为了便于微信的管理，推出小程序；
+3.特点，几乎不占内存，易传播，不需下载，扫一扫或搜一下即可打开应用，用完即走的理念，不用考虑安装卸载；
+4.生态逐步开始完善起来了，各行各业已经开始接入小程序了
+5.步骤：
+1)注册小程序账号->激活邮箱->信息登记->登录管理后台->信息设置（多人协同开发需要在后台添加各个开发者的信息）
+2）安装微信开发者工具进行开发
+6.注册小程序账号的邮箱不能是之前用过的和微信生态关联过的，这里我用的13530580841@sina.com;
+7.工具下载：找到文档->下载->选择Mac版本的工具下载->安装工具即可；
+8.可以创建两种项目，小程序项目／公众号网页项目
+9.目录结构：
+1）app.js 注册微信小程序应用
+2）app.json 全局的配置信息 网络超时事件，窗口表现，页面注册路径
+3) app.wxss 全局样式 
+4) project.config.json 微信开发者配置信息,重新安装工具时恢复个性化设置
+5) pages 装所有的页面，每个页面包括：js文件处理小程序逻辑，数据交互， json文件配置信息 wxml文件展示页面元素和内容，wxss文件展示样式，比较类似：html css js，就多一个json配置信息文件
+6）util 工具函数，代码复用
+10.一个项目至少要有两个文件，app.js 和 app.json（注册页面路由 ）
+11.rpx是响应式的屏幕像素,比较类似于rem单位，这个是微信为了移动端做好的适配，一般iphone6上, 1rpx = 0.5px = 1物理像素，rem其实就是将屏幕和设计稿的宽度比例*100作为font-size的值即1rem
+
+第二节课
+1.开发框架：WXML WXSS WXS（将WXML能力增加，快速构建页面内容结构） JS
+2.WXML，是框架设计的一套标签语言，类似html，结合组件，WXS和事件系统，可以构建页面结构，大小写敏感
+3.WXML特性：
+1)数据绑定（类似Vue中的{{msg}},对应变量为data中的变量,没有类似vue中的:class的绑定，动态绑定不需要前面加冒号，变量的获取必须使用{{}}）,hidden属性hidden=“{{flag:? true: false}}”
+标签共同属性：id class style hidden data-* bind*/catch*绑定事件
+2)列表渲染 wx:for=“{{list}}”,data里面的属性必须用{{}} wx:for-item=“item” wx:key=“index”,不推荐使用index，而是使用唯一标示的
+3)条件渲染，wx：if=“{{condition === 1}}” wx:elif=“{{condition === 2}}”
+4)模版引用：其实就是Vue中的组件化，
+<template name=“tempItem”>
+  <view></view>
+</template>
+模版声明：
+<template is=“tempItem” data=“{{…item}}”></template> // 这里is属性可以动态绑定，需要传入的参数从data里面选择采用rest参数形式绑定；
+模版数据，每个模版的数据是有自己的作用域，只能通过data传入
+Page({
+ data: {
+   item: {
+     name: ‘张三’,
+     phone: ‘123456’,
+     address: “中国”
+   }
+ }
+})
+4.<block></block>这个元素标签不会被渲染出来，可以最外层用作包装,类似template,用作容器或者结合wx:for来遍历得到子元素的列表
+5.wx:if=“{{condition === 1}}” 也可以单独使用，其实就和v-if一样，它会保证不现实时里面的事件绑定和子元素都不会渲染，hidden就和v-show一样只是改变样式上的显示隐藏而已；
+6.引用文件方式：
+1）<import src=“a.wxml”></import>配套要写:<template is=“a”></template>,且渲染的内容只能是template包装起来的内容，子模版template外引用了其他模版是不会生效的； 
+2）<include src=“a.wxml” /> 配套要写: <template is=“a”></template>,渲染的内容只能是template标签以外的内容；
+7.WXSS，WeiXin Style Sheets，基于CSS修改：
+1）rpx 尺寸单位，响应式单位 物理像素； CSS像素（逻辑像素）； PPI／DPI（每英寸的像素点数，越高越清晰）
+PPI=x平方+y平方的开方除以屏幕的英寸数 DPR：像素比 = 物理像素／css像素
+2）rpx：规定屏幕宽度为750px进行适配的
+3）支持外联样式导入：
+@import ‘./assets/wxss’；和scss相似
+4）支持内联样式：<view style=“width: 500rpx”>Hello World</view>,且支持动态绑定，前面不加冒号：
+<view style=“width: 30rpx;background-color:{{colorValue}}””></view>
+5) 标签如果写多个class，会以最后面一个为最终唯一的class
+6）选择器：class id 标签选择器 伪类
+7）优先级：！important style id class 标签选择器
+8.还是以JS为开发语言
+
+第三节课
+1.nodejs中ECMAScript + Native + NPM
+2.小程序的js： ECMAScript + 小程序框架 + 小程序API，没有DOM对象的，无法用NPM进行包管理
+3.浏览器的js：ECMAScript + DOM + BOM
+4.平台环境：IOS->JSCore andriod->X5内核 开发者工具->nwjs(基于chrome和nodejs)，由于支持的内核不一致所以存在兼容性问题，可以使用开发者工具里面的远程调试来看真机效果；
+5.WXS：模块(有自己的作用域，导出的才是可以被外界访问的) 变量 注释 运算符 语句 数据类型 基础类库，一般过滤处理和计算处理
+6.WXS可以通过wxs标签声明使用：
+在index.wxml里面“
+<wxs module=“m1”>
+  var v = 1；
+  module.exports.val = v;
+</wxs>
+<view>{{m1.val}}</view>
+7.可以使用外部引入：不要重复声明同一个模块
+<wxs src=“./m2.wxs” module=“m2”></wxs>
+<view>{{m2.message}}</view>
+在m2.wxs中：
+module.exports = require(‘./m1.wxs’)
+在m1.wxs中：
+module.exports = {
+  message: “hello world”
+}
+8.wxs运算符: + - * / === ++ — —  > < == 等，不支持try catch语句
+9.wxs数据类型：number bool string object array function date regrep 
+10.wxs类库：Number Date（Date.path, Date.now() Date.UTC） Global console.log Math JSON
+
+第四节课
+1.MINA框架：View视图层（page，WXML WXSS）App Service（逻辑层 manager API，一个逻辑层常驻内存的），JSBridge机进行视图层和逻辑层通信（微信能力，离线缓存，网络请求）
+2.运行机制：
+1）热启动：之前打开过再打开就是热启动
+2）冷启动：首次打开或被微信销毁（打开后进入后台微信会维持状态超时会销毁，维持五分钟，第二种是两次收到系统告警会销毁，5s）
+3）更新机制：启动时有新版本会先用之前打开时缓存下来的包，然后异步从CDN下载新包，也可以通过Api来控制使用最新的包；
+3.应用的生命周期，类似于AppDelegate里面
+1）onLaunch
+2）onShow 
+3）onHide
+4）onError
+4.页面生命周期：
+1)onLoad 只会调用一次
+2)onShow，多次调用
+3)onReady 渲染完成 只会调用一次
+4）onHide 多次调用
+5）onUnload 关闭后调用
+5.两大线程：AppService线程 + View线程
+6.小程序时多页面的原生的，拥有自己多页面的路由；
+7.页面路由形式：新页面入栈 新页面入栈 页面重定向  页面按顺序返回出栈 Tab切换和重加载就是所有的页面全部出栈只留下根页面
+8.打开页面：wx.navigateTo()或者<navigator open-type=“navigateTo”>
+9.事件绑定：<view bindTap=“clickMe”>点击</view>,在Page({
+  clickMe(e) {console.log(e)}
+  // type 事件类型 
+})
+10. 事件是先捕获再冒泡和H5是一致的,默认事件或者添加的事件能捕获就先捕获，不能捕获就去冒泡
+11.bindTap不会阻止事件的冒泡,从自身向下传递
+12.capture-bind:tap 可以绑定捕获
+13. capture-catch:tap 阻止冒泡和捕获
+
+第五节课
+1.小程序组件：媒体组件 地图组件 视图容器 基础组件 表单组件导航组件 画布 开放能力 
+2.视图容器： scroll-view swiper movable-view缩放 cover-view
+view组件:
+  class="container"
+    hover-class="hover-container"
+    hover-stop-propagation="false" // 不写默认就会执行父容器的hover-container样式属性
+    hover-start-time="500"
+    hover-stay-time="300"
+scroll-view组件
+swiper，swiper-item
+movable-view 必须在movable-area里面
+cover-view和cover-image是覆盖在原生组件上面的，比如在<video><cover-view>
+   <cover-image></cover-image>
+</cover-view></video>
+3.属性绑定的数据都在data里面，获取就用this.data.list, 修改值：this.setData({}),这点类似react里面的状态器

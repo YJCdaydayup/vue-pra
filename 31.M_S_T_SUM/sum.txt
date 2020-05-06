@@ -42,7 +42,6 @@ Dog.call(obj); // 继承Dog自身属性和方法
 17.页面加载时link同时加载，而@import引用的css要等到页面被加载完后才加载，link时xhtml标签无兼容问题；
 
 18.doctype是放在html标签里面的，告诉浏览器用什么文档类型规范解析文档；严格模式是以该浏览器支持的最高标准来运行；混杂模式相对宽松和向下兼容，DOCTYPE不存在或格式不正确会以混杂模式加载；
-
 19.HTML全局属性：class data-* dragable id lang元素内容的语言 style title
 
 20.svg绘制的是独立的DOM节点可以绑定事件和修改，矢量的，canvas是画布会失真；
