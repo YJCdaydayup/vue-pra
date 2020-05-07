@@ -132,4 +132,17 @@ movable-view 必须在movable-area里面
 cover-view和cover-image是覆盖在原生组件上面的，比如在<video><cover-view>
    <cover-image></cover-image>
 </cover-view></video>
+基础组件：
+1.icon
+2.text
+3.rich-text 可以装在html
+4.progress
+表单组件
+ Button 各种属性和事件
+ picker 
+checkbox 结合checkbox-group name=“checkbox”一般使用label将其包裹起来使用的
+picker-view radio 
+form bindsubmit bindreset 提交按钮的formType必须是submit 重置的button的formType必须是reset
+input  
+ switch label text-area
 3.属性绑定的数据都在data里面，获取就用this.data.list, 修改值：this.setData({}),这点类似react里面的状态器
