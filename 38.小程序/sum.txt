@@ -140,9 +140,20 @@ cover-view和cover-image是覆盖在原生组件上面的，比如在<video><cov
 表单组件
  Button 各种属性和事件
  picker 
-checkbox 结合checkbox-group name=“checkbox”一般使用label将其包裹起来使用的
-picker-view radio 
-form bindsubmit bindreset 提交按钮的formType必须是submit 重置的button的formType必须是reset
-input  
+ checkbox 结合checkbox-group name=“checkbox”一般使用label将其包裹起来使用的
+ picker-view radio 
+ form bindsubmit bindreset 提交按钮的formType必须是submit 重置的button的formType必须是reset
+ input  
+ label button checkbox radio switch组件的包裹
+ picker
+ picker-view
  switch label text-area
+ radio radio-box组件 
+ slider
+ switch也可以实现checkbox的效果，设置type为checkbox即可
+导航组件，通过组件进行跳转
+navigator组件：navigate默认 redirect switchTab reLaunch 明天研究
+<navigator url="/page/navigate/navigate?title=navigate" type=“redirect” hover-class="navigator-hover">跳转到新页面</navigator>
+媒体组件：
+audio image video live-player camare
 3.属性绑定的数据都在data里面，获取就用this.data.list, 修改值：this.setData({}),这点类似react里面的状态器
