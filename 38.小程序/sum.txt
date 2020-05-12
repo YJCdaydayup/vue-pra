@@ -138,7 +138,7 @@ cover-view和cover-image是覆盖在原生组件上面的，比如在<video><cov
 3.rich-text 可以装在html
 4.progress
 表单组件
- Button 各种属性和事件
+ button 各种属性和事件
  picker 
  checkbox 结合checkbox-group name=“checkbox”一般使用label将其包裹起来使用的
  picker-view radio 
@@ -155,5 +155,28 @@ cover-view和cover-image是覆盖在原生组件上面的，比如在<video><cov
 navigator组件：navigate默认 redirect switchTab reLaunch 明天研究
 <navigator url="/page/navigate/navigate?title=navigate" type=“redirect” hover-class="navigator-hover">跳转到新页面</navigator>
 媒体组件：
-audio image video live-player camare
+audio image video live-player直播组件需要开通组件权限才可以用 push-player推流组件 camare
+画布组件
+canvas完成复杂动画
+展示微信开放数据组件：open-data组件
+外部网页：web-view 需要添加打开的网页的域名和配置
 3.属性绑定的数据都在data里面，获取就用this.data.list, 修改值：this.setData({}),这点类似react里面的状态器
+
+第六节课
+1.微信客户端的API模块：网络 媒体（音视频） 文件（上传下载） 存储 位置（当前位置信息） 设备（获取系统设备信息） 界面（导航标题颜色等）开发接口（微信支付 登录授权等）
+2.规则：wx.on监听事件 接受object参数 succuss回调 fail回调 compete回调，wx.get指获取环境数据 wx.set写入环境接口
+3.let requestTask = wx.request({
+  url，需要到小程序管理后台配置请求域名https开头，合法备案
+  data，请求的参数
+  header，
+  method，
+  dataType： ‘json’，会进行一次JSON解析
+  回调函数
+}),可以通过requestTask来取消请求，自己通过node来模拟学习
+4.wx.uploadFile,wx.downloadFile需要设置域名，通过node来模拟一下
+5.header不能设置refer，了解一下
+6.定义模块依然通过commonjs规范，module.exports来定义；
+7.下载文件时，需要的地址只是一个文件的路径，可以使用nodejs里面的静态化
+8.基于websocket请求：通过nodejs模拟一下
+1）HTTP基于tcp／ip通信协议，wesocket握手还是需要http协议，然后基于单个tcp连接的一种全双工通信协议，wss是在ws协议上做了一层加密的协议
+2）
