@@ -163,7 +163,7 @@ canvas完成复杂动画
 3.属性绑定的数据都在data里面，获取就用this.data.list, 修改值：this.setData({}),这点类似react里面的状态器
 
 第六节课 (开发的时候可以不需要https和wss安全协议，上线时一定要切换成安全的协议)
-1.微信客户端的API模块：网络 媒体（音视频） 文件（上传下载） 存储 位置（当前位置信息） 设备（获取系统设备信息） 界面（导航标题颜色等）开发接口（微信支付 登录授权等）
+1.微信客户端的API模块：网络 媒体（音视频） 文件（上传下载） 存储 位置（当前位置信息） 设备（获取系统设备信息） 界面（导航标题颜色等）开放接口（微信支付 登录授权等）
 2.规则：wx.on监听事件 接受object参数 succuss回调 fail回调 compete回调，wx.get指获取环境数据 wx.set写入环境接口
 3.let requestTask = wx.request({
   url，需要到小程序管理后台配置请求域名https开头，合法备案
@@ -180,3 +180,4 @@ canvas完成复杂动画
 8.基于websocket请求：通过nodejs模拟一下
 1）HTTP基于tcp／ip通信协议，wesocket握手还是需要http协议，然后基于单个tcp连接的一种全双工通信协议，wss是在ws协议上做了一层加密的协议
 2）
+9.通过pm2启动package.json里面的脚本命令：pm2 start npm --watch  -- run dev
