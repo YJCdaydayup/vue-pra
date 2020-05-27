@@ -7,5 +7,6 @@ const router = new Router({
 
 router.get('/', miniProgram.getInfo)
 router.get('/getData', miniProgram.getData)
+router.get('/uploadFile', miniProgram.uploadFile)
 
 export default router

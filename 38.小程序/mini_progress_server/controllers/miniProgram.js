@@ -1,8 +1,12 @@
+import formidable from 'formidable'
+import path from 'path'
+
 export default {
-    getInfo(ctx, next) {
+    async getInfo(ctx, next) {
         
     },
-    getData(ctx, next) {
+    // get请求
+    async getData(ctx, next) {
         let {name, age} = ctx.query
         console.log(name,age)
         ctx.body = {
@@ -12,5 +16,13 @@ export default {
                 age
             }
         }
+    },
+    // 文件上传
+    async uploadFile(ctx, next) {
+        const form = formidable({ multiples: true, uploadDir: path.resolve('./temp') })
+        form.parse(req, (err, fields, files) => {
+            console.log('fields:', fields);
+            console.log('files:', files);
+        });
     }
 }

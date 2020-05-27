@@ -181,3 +181,11 @@ canvas完成复杂动画
 1）HTTP基于tcp／ip通信协议，wesocket握手还是需要http协议，然后基于单个tcp连接的一种全双工通信协议，wss是在ws协议上做了一层加密的协议
 2）
 9.通过pm2启动package.json里面的脚本命令：pm2 start npm --watch  -- run dev
+10.动画可以通过wx.createAnimation({
+  duration: 1000,
+  timeFunction: ‘ease’
+}),然后this.animation.translate(100,200).step()第一步，第二步：this.animation.scale(2,2).step,然后在this.setData({animationData: this.animation.export()})导出给属性变量即可；
+
+第七节课
+1.项目目录：pages config(请求的api) images utils（工具类）app.js app.json app.wxss 
+2.服务端:bin(开启服务) conf(配置文件) controllers Dao middleware node_modules routes util app-token.js app.js
