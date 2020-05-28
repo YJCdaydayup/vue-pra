@@ -4,9 +4,9 @@
     <h1 class="title">
       Universal Vue.js Application Framework
     </h1>
-    <nuxt-link class="button" to="/about">
+    <button @click="goAbout" class="button">
       About page
-    </nuxt-link>
+    </button>
   </section>
 </template>
 
@@ -16,3 +16,15 @@
   margin: 50px 0;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    goAbout() {
+      this.$router.push({
+        path: '/about'
+      })
+    }
+  }
+}
+</script>

@@ -2,7 +2,7 @@ import Router from 'koa-router'
 import config from '../../config/index'
 import sha1 from 'sha1'
 
-export const router = (app) => {
+export default router = (app) => {
     const router = new router()
     console.log('asbjcsajlcnabkcas;cnskahcnkasl')
     router.get('/wechat-hear', async (ctx)=>{

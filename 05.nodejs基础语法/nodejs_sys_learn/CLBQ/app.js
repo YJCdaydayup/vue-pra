@@ -56,6 +56,35 @@ app.get('/setting', (req, res) => {
     res.end();
 })
 
+app.get('/long', (req, res, next)=>{
+    let control = (()=>{
+        let close, timer;
+        return {
+            start() {
+                if (!timer) {
+                    timer = setInterval(()=>{
+                        if (!close) {
+                            console.log(Date.now() + '')
+                            res.write('123');
+                        }else {
+                            console.log('结束')
+                            clearInterval(timer)
+                            timer = null
+                        }
+                    }, 1000);
+                }
+            },
+            close() {
+                close = true
+            }
+        }
+    })()
+    control.start()
+    req.on('close', ()=>{
+        control.close()
+    })
+})
+
 app.get('/connect', (req, res) => {
     let control = (function () {
         let timer;

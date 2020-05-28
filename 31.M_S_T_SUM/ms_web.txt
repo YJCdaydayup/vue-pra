@@ -49,8 +49,8 @@ x一.箭头函数和普通函数的区别
 1）webpack只能理解js和JSON文件，对于其他资源，如css，less，sass，图片等，需要不同的loader来进行解析
 2）plugin属于webpack功能的扩展，解决loader无法实现的事情，比如打包优化，压缩，提供公共模块
 3）webpack4提供了mode选项，可以不需要配置文件，使用一些默认的配置进行打包
-4）预设presets，预设是结合babel-preset-env来使用，还有stage-2配置都是转义器，主要对最新的语法糖进行编译，比如let，const，promise
-5）babelrc里面的plugin插件，来处理一些需求，像transform-runtime，会对es6的语法进行转换，而不会对新的api进行转换，比如Promise，这时候可以考虑babel-polyfill来适配低版本的浏览器
+4）预设presets，预设是结合babel-preset-env主要对最新的语法糖进行编译，比如let，const
+5)stage 系列集合了一些对 es7 的草案支持的插件
 6)自己开发loader时，loader是一个函数，plugin是一个类,需要实现apply传入compiler对象，这个complier对象就是webpack实例，通过hooks来确定打包生命周期函数如hook.emit输出包的时刻里面callback一定要调用，hook.complie
 
 
@@ -64,5 +64,16 @@ x一.箭头函数和普通函数的区别
 2）当设计到多台服务器时，可以采用JWT的方式，将用户信息数据加密后返回给客户端，每次客户端请求都携带这个加密数据，服务器直接解密数据拿到用户信息
 3）当跨域时，先解决跨域问题，然后将用户信息存在服务器redis里面，然后服务器随机产生一个唯一的token值给到客户端,客户端每次请求主动携带这个token，当token过期时，先从服务器获取这个token
 
-十.
+十.Vue中的mode模式hash和history区别
+1）默认是hash模式，url不好看且又的浏览器会限制带有#号的请求，浏览器是通过监听hash的变化onhashchange来控制路由的，不会重新刷新页面，单页面应用的标配
+2）history模式采用h5新推出的api，pushState和replaceState，有兼容性，会将url替换且不会刷新页面，但是一旦刷新页面，就会向服务器请求这个页面，如果服务器没有配置这个路由就会显示404
+3）hastory模式只需要服务器将不存在的路径请求重定向到入口文件index.html即可
+
+十一.transform-runtime和babel-pollyfil的理解
+1)babel编译只转化语法，不会转化BOM里面的一些不兼容的api，比如Promise Set Symbol Array.from async等，这些需要polyfil来转化
+2）babel编译语法时需要一些插件支持，比如react es2015 stage-0 stage-1等，es2015是es6语法，stage-0等系列主要是对es7的草案的支持；
+3）对于一些不能转化的api，可以通过transfrom-runtime来支持，transform-runtime是在需要的时候自动加上babel-runtime，不会污染全局变量，多次使用只会打包一次，但不会转化一些实例方法，如Array.prototype.includes();
+4）通过babel-polyfil来改写全局的prorotype的方式实现一些api的支持，开始babel-polyfill可以直接在代码引入，也可以在webpack的entry中添加，也可以在babel的env中设置useBuildins为true来实现，缺点是打包后代码冗余较大，
+
+
 

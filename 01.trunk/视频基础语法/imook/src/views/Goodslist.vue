@@ -31,12 +31,13 @@
     <!--<router-link :to="{name:'cart',params:{cartId:123}}">跳转带参数</router-link>-->
 
 
-    <div class="box">
+    <!-- <div class="box">
       <div class="left" :class="font_cls" @click="chooseAction('left')">title</div>
       <div class="right" :class="{selected: isSel=='right'}" @click="chooseAction('right')">image</div>
     </div>
     <TTitle v-show="isSel=='left'"></TTitle>
-    <IImage v-show="isSel=='right'"></IImage>
+    <IImage v-show="isSel=='right'"></IImage> -->
+    <button @click="push">跳转下一个页面</button>
 
   </div>
 </template>
@@ -94,6 +95,9 @@
       }
     },
     methods: {
+      push() {
+         this.$router.push('/title')
+      },
       chooseAction(e) {
         this.isSel = e;
       },
@@ -104,9 +108,7 @@
 //            this.$router.push({path:"/cart"});
         // 跳转时传递参数
 //            this.$router.push({path: "/cart?goodsId=123"})
-
-        this.$router.go(1);
-
+     
 
         // 可以在这里导入Util.js文件，然后直接使用Util.js里面的方法（报错了！！！）
 //            import "../Utils"

@@ -27,27 +27,17 @@
 标签共同属性：id class style hidden data-* bind*/catch*绑定事件
 2)列表渲染 wx:for=“{{list}}”,data里面的属性必须用{{}} wx:for-item=“item” wx:key=“index”,不推荐使用index，而是使用唯一标示的
 3)条件渲染，wx：if=“{{condition === 1}}” wx:elif=“{{condition === 2}}”
-4)模版引用：其实就是Vue中的组件化，
-<template name=“tempItem”>
-  <view></view>
-</template>
-模版声明：
-<template is=“tempItem” data=“{{…item}}”></template> // 这里is属性可以动态绑定，需要传入的参数从data里面选择采用rest参数形式绑定；
-模版数据，每个模版的数据是有自己的作用域，只能通过data传入
-Page({
- data: {
-   item: {
-     name: ‘张三’,
-     phone: ‘123456’,
-     address: “中国”
-   }
- }
-})
+4)组件化：小程序组件化的方式有template模版/Component组件，分别用于不同的场景：
+template模版用于展示，不涉及事件处理，即使有事件处理也在父组件中直接调用，一个template包含wxml和wxss文件，一个wxml文件可包含多个template用name区分开，数据传递由页面传递，先<import src=""/>引用，在template使用name获取，和slot比较像，参数传递：
+{{name}}或者{{name, msg}},样式wxss也要用@import引入页面，绑定事件处理正常绑定， 调用实现在页面进行，import不具有继承性，相当于把代码拷贝过来，但是<include src=“”/>是将整个代码引入，一般里面定义一个模版
+Component是一个单独的功能模块，可以像一个页面一样，包含wxml wxss js json文件
+5)<include src="./incA.wxml" />会将incA.wxml代码拷贝进来，里面不需要用template包裹，引用也是直接引入放入即可，数据传递直接使用页面的，因为相当于是代码拷贝进来的,但是模块样式还是要@import进来
+
 4.<block></block>这个元素标签不会被渲染出来，可以最外层用作包装,类似template,用作容器或者结合wx:for来遍历得到子元素的列表
 5.wx:if=“{{condition === 1}}” 也可以单独使用，其实就和v-if一样，它会保证不现实时里面的事件绑定和子元素都不会渲染，hidden就和v-show一样只是改变样式上的显示隐藏而已；
 6.引用文件方式：
 1）<import src=“a.wxml”></import>配套要写:<template is=“a”></template>,且渲染的内容只能是template包装起来的内容，子模版template外引用了其他模版是不会生效的； 
-2）<include src=“a.wxml” /> 配套要写: <template is=“a”></template>,渲染的内容只能是template标签以外的内容；
+2）<include src=“a.wxml” />
 7.WXSS，WeiXin Style Sheets，基于CSS修改：
 1）rpx 尺寸单位，响应式单位 物理像素； CSS像素（逻辑像素）； PPI／DPI（每英寸的像素点数，越高越清晰）
 PPI=x平方+y平方的开方除以屏幕的英寸数 DPR：像素比 = 物理像素／css像素
@@ -66,7 +56,7 @@ PPI=x平方+y平方的开方除以屏幕的英寸数 DPR：像素比 = 物理像
 2.小程序的js： ECMAScript + 小程序框架 + 小程序API，没有DOM对象的，无法用NPM进行包管理
 3.浏览器的js：ECMAScript + DOM + BOM
 4.平台环境：IOS->JSCore andriod->X5内核 开发者工具->nwjs(基于chrome和nodejs)，由于支持的内核不一致所以存在兼容性问题，可以使用开发者工具里面的远程调试来看真机效果；
-5.WXS：模块(有自己的作用域，导出的才是可以被外界访问的) 变量 注释 运算符 语句 数据类型 基础类库，一般过滤处理和计算处理
+5.WXS：模块(有自己的作用域，导出的才是可以被外界访问的) 变量 注释 运算符 语句 数据类型 基础类库，一般直接在wxml中使用的函数，做类似Vue中的过滤处理和计算处理，和其他JS代码是隔离的
 6.WXS可以通过wxs标签声明使用：
 在index.wxml里面“
 <wxs module=“m1”>
@@ -84,7 +74,7 @@ module.exports = {
   message: “hello world”
 }
 8.wxs运算符: + - * / === ++ — —  > < == 等，不支持try catch语句
-9.wxs数据类型：number bool string object array function date regrep 
+9.wxs数据类型：number bool string object array function date regrex
 10.wxs类库：Number Date（Date.path, Date.now() Date.UTC） Global console.log Math JSON
 
 第四节课
@@ -181,6 +171,7 @@ canvas完成复杂动画
 1）HTTP基于tcp／ip通信协议，wesocket握手还是需要http协议，然后基于单个tcp连接的一种全双工通信协议，wss是在ws协议上做了一层加密的协议
 2）
 9.通过pm2启动package.json里面的脚本命令：pm2 start npm --watch  -- run dev
+<<<<<<< Updated upstream
 10.动画可以通过wx.createAnimation({
   duration: 1000,
   timeFunction: ‘ease’
@@ -189,3 +180,9 @@ canvas完成复杂动画
 第七节课
 1.项目目录：pages config(请求的api) images utils（工具类）app.js app.json app.wxss 
 2.服务端:bin(开启服务) conf(配置文件) controllers Dao middleware node_modules routes util app-token.js app.js
+3.Referer作用，在一个网站中打开另一个网站，比如在我的网站中通过url显示其他网站的图片，称为盗链
+1）可以通过判断请求头里面的refer防止盗链
+2）防止恶意请求
+3）当一个请求不是由链接触发就不会有Referer这个字段
+4）在防盗链中允许refer为空就意味着可以通过浏览器直接访问
+5）小程序中header里面不设置Referer，原因就是对于自己图片服务器设置了防盗链时，不设置默认refer就是微信小程序的域名，只需要在自己的服务器上设置微信小程序域名的白名单即可

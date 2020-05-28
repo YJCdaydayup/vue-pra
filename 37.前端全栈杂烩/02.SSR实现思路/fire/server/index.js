@@ -5,7 +5,7 @@ import { resolve } from 'path'
 const config = require('../nuxt.config.js')
 
 const MIDDLEWARES = [
-  'router'
+  'router.js'
 ]
 
 const r = path1 => resolve(__dirname, path1)
@@ -13,7 +13,7 @@ const r = path1 => resolve(__dirname, path1)
 class Server {
   constructor() {
     this.app = new Koa()
-    this.useMiddleWares(this.app)(MIDDLEWARES)
+    // this.useMiddleWares(this.app)(MIDDLEWARES)
   }
 
   useMiddleWares(app) {
