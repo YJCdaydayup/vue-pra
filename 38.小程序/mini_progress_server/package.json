@@ -27,9 +27,11 @@
     "koa-router": "^8.0.8",
     "koa-static": "^5.0.0",
     "md5": "^2.2.1",
+    "mongoose": "^5.9.16",
     "nodemon": "^2.0.3",
     "transform-runtime": "^0.0.0",
     "utf-8-validate": "^5.0.2",
+    "uuid": "^8.1.0",
     "ws": "^7.3.0"
   }
 }

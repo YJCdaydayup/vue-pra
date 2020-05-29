@@ -186,3 +186,24 @@ canvas完成复杂动画
 3）当一个请求不是由链接触发就不会有Referer这个字段
 4）在防盗链中允许refer为空就意味着可以通过浏览器直接访问
 5）小程序中header里面不设置Referer，原因就是对于自己图片服务器设置了防盗链时，不设置默认refer就是微信小程序的域名，只需要在自己的服务器上设置微信小程序域名的白名单即可
+
+第八节课(研究网上简单项目)
+1.全局数据可以在App({
+  globalData: {
+    userInfo: wx.getStorageSync('userInfo') // 自定义字段，通过getApp().globalData得到这个数据对象
+  }
+})
+2.判断组件是否可用：
+1)在data中： {canIUse: wx.canIUse('button.open-type.getUserInfo')}
+2)<button wx:if={{canIUse}} size="default" open-type="getUserInfo" bindgetuserinfo="getUserInfoAction">
+3.获取页面跳转传递的参数：onLoad: function (options) {
+    this.data.openId = options.openId
+  }
+4.组件或页面data的直接属性改变，必须用setData，且页面绑定的地方会刷新，如果组件的data的直接属性是对象，可以通过this.setData({'item.age': 100})来改变这个值且会造成对应的绑定刷新，如果只是修改且当作逻辑的使用不刷新页面就直接可以this.data.item.age = 100也会生效；
+5.<block></block>只是起包裹作用和可以用于wx:for循环，父标签用dispay:flex,block包裹的元素用flex:1即可，写样式就在block包裹的标签上面写
+6.父子组件通信，子组件派发事件this.triggerEvent('changeType', event.currentTarget.dataset.index)，父组件bind:changeType="changeType"
+7.wxs文件，采用的是commonJS规范，返回一个对象，对象里面可以有多个方法，这些方法可以直接用于wxml的{{}}模版语法中，类似vue中的过滤器，在wxs文件的最上面引入：<wxs src="../../../wxs/appType.wxs" module="typeFliter" />
+8.图片路径，导航路径，组件路径，wxs路径，template路径，都可以使用相对路径，不好写就直接写成绝对路径: /public/image.png,从最外层写起
+9.手机和PC适配时，可以采用响应式布局@media，也可以先写好手机和PC两份样式，通过动态绑定来选择需要的样式
+10.小程序特有的组件可以通过自定义如data-age来保存数据，然后在点击事件里面取：e.currentTarget.dataset.age拿到数据
+11.https://github.com/Eashionxie/boss-miniApp.git

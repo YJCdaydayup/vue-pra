@@ -2,7 +2,6 @@ import formidable from 'formidable'
 import fs from 'fs'
 import path,{resolve} from 'path'
 import md5 from 'md5'
-import path from 'path'
 
 export default {
     getInfo(ctx, next) {
