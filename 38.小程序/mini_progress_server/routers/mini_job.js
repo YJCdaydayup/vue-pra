@@ -6,5 +6,6 @@ const router = new Router({
 })
 
 router.get('/get-job-list', miniJob.getJobList)
+router.get('/get-job-types', miniJob.getJobTypes)
 
 export default router

@@ -14,5 +14,18 @@ export default {
             records
           }
         }
+    },
+    async getJobTypes(ctx, next) {
+        console.log(ctx.query)
+        ctx.body = {
+          status: 200,
+          errMsg: 'request:ok',
+          data: [
+                {
+                  childTypes: ['a','c','c'],
+                  jobTypes: ['a','b','c']
+                }
+            ]
+        }
     }
 }

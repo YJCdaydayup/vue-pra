@@ -171,7 +171,6 @@ canvas完成复杂动画
 1）HTTP基于tcp／ip通信协议，wesocket握手还是需要http协议，然后基于单个tcp连接的一种全双工通信协议，wss是在ws协议上做了一层加密的协议
 2）
 9.通过pm2启动package.json里面的脚本命令：pm2 start npm --watch  -- run dev
-<<<<<<< Updated upstream
 10.动画可以通过wx.createAnimation({
   duration: 1000,
   timeFunction: ‘ease’
@@ -206,4 +205,11 @@ canvas完成复杂动画
 8.图片路径，导航路径，组件路径，wxs路径，template路径，都可以使用相对路径，不好写就直接写成绝对路径: /public/image.png,从最外层写起
 9.手机和PC适配时，可以采用响应式布局@media，也可以先写好手机和PC两份样式，通过动态绑定来选择需要的样式
 10.小程序特有的组件可以通过自定义如data-age来保存数据，然后在点击事件里面取：e.currentTarget.dataset.age拿到数据
-11.https://github.com/Eashionxie/boss-miniApp.git
+11.小程序组件的使用也是很灵活的，和vue比较像，组件里面也可以使用组件，页面里面也可以使用组件，页面里使用组件嵌套组件时就结合slot即可；
+12.小程序里面的slot的用法和vue是一样的<slot name="desk"></slot>, <view slot="desk"></view>
+13.小程序有多个slot时，需要开启默认情况下，一个组件的wxml中只能有一个slot。需要使用多slot时，可以在组件js中声明启用options: {multipleSlots: true }，以不同的 name 来区分。
+14.小程序的properties属性，和vue中的props是一样的里面的每个属性要声明类型，但定义默认值用的是value,vue用的是default；
+15.小程序不支持跨组件通信，父孙组件只能一级一级往上传递事件，为了解决父孙组件通信的问题，可以在子组件中使用slot然后将孙组件通过slot写在page页面中；
+16.wxs文件使用commonjs规范，定义其他js文件模块依然使用es6的语法，比如export default
+17.微信小程序的点击事件的参数传递只能用data-params,然后通过e.currentTarget.dateset.params获取
+
