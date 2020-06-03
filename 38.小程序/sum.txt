@@ -212,4 +212,23 @@ canvas完成复杂动画
 15.小程序不支持跨组件通信，父孙组件只能一级一级往上传递事件，为了解决父孙组件通信的问题，可以在子组件中使用slot然后将孙组件通过slot写在page页面中；
 16.wxs文件使用commonjs规范，定义其他js文件模块依然使用es6的语法，比如export default
 17.微信小程序的点击事件的参数传递只能用data-params,然后通过e.currentTarget.dateset.params获取
+18.可以在app.js里面配置全局的变量:globalData: {}
+19.在js文件的顶部可以定义常量和得到app，const app = getApp();
+
+第九节课
+1.wepy腾讯开源的组件化开源框架，风格和vue相似，支持props mixin computed slot等
+2.支持组件化，组件隔离，嵌套，通信
+3.直接使用无平台依赖的npm包
+4.通过polygil支持Promise
+5.支持es6的语法
+6.原生小程序只支持5个并发请求，wepy支持10个请求的并发
+7.预编译器的风格less sass stylus
+8.可以方便使用wepy提供的插件，比如文件压缩，图片压缩，内容替换等
+9.wepy框架压缩后只有23k
+10.安装：$ cnpm i -g wept-cli
+11.$ wepy init stardardwepy-demo 生成一个wepy项目
+12.学习wepy框架的官方网站；
+
+第十节课
+1.
 
