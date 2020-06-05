@@ -45,5 +45,22 @@ let mid3 = function(params) {
 
 let arr = [mid1(), mid2(), mid3()]
 
-compose(arr)({})
+// compose(arr)({})
 
+function compose_new(middlewares) {
+    return function(ctx) {
+        function dispath(i) {
+            if (i === middlewares.length) {
+                return false
+            }
+            let fn = middlewares[i]
+            console.log(fn)
+            fn.call({},ctx, function() {
+                dispath(i + 1)
+            })
+        }
+        dispath(0)
+    }
+}
+
+compose_new([mid1(),mid2(),mid3()])({})

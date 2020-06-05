@@ -1,0 +1,12 @@
+<template lang="pug">
+    view.container
+        text.content {{msg}}
+</template>
+
+<script>
+    Page({
+        data: {
+            msg: 'ABCGEFG'
+        }
+    })
+</script>

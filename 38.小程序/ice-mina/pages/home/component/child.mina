@@ -1,0 +1,21 @@
+<template>
+    <view>
+        子组件
+    <view> 
+</template>
+
+<script>
+    Component({
+        properties: {
+            
+        },
+        data: {
+            msg: ''
+        },
+        methods: {
+            
+        }
+    }
+})
+
+</script>

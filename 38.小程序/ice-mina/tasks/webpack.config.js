@@ -62,6 +62,34 @@ module.exports = {
                 })
             },
             {
+              test: /\.stylus$/,
+              use: extractSass.extract({
+                use: [{
+                    loader: 'css-loader'
+                  },
+                  {
+                    loader: 'postcss-loader',
+                    options: {
+                      plugins: (loader) => [
+                        require('autoprefixer')({
+                          browsers: [
+                            'last 2 versions'
+                          ]
+                        })
+                      ]
+                    }
+                  },
+                  {
+                    loader: 'stylus-loader',
+                    options: {
+                      indentedSyntax: true
+                    },
+                  }
+                ],
+                fallback: 'style-loader'
+              })
+            },
+            {
                 test: /\.mina$/,
                 loader: 'wechat-mina-loader',
                 options: {

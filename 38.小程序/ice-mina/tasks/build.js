@@ -15,7 +15,7 @@ rm('rf', assetsPath)
 mkdir(assetsPath)
 // 2.
 
-const entry = () => _.reduce(config.pages, (en, i)=>{
+const entry = () => _.reduce(config.json.pages, (en, i)=>{
     en[i] = resolve(__dirname, '../', `${i}.mina`)
     return en
 }, {})
@@ -28,6 +28,7 @@ renderConf.output = {
 
 renderConf.entry = entry()
 renderConf.entry.app = config.app
+
 const compiler = webpack(renderConf)
 fs.writeFileSync(resolve(config.assetsPath, './app.json'), JSON.stringify(config.json), 'utf8')
 // 3.

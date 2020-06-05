@@ -214,12 +214,15 @@ canvas完成复杂动画
 17.微信小程序的点击事件的参数传递只能用data-params,然后通过e.currentTarget.dateset.params获取
 18.可以在app.js里面配置全局的变量:globalData: {}
 19.在js文件的顶部可以定义常量和得到app，const app = getApp();
+20.类似歌词遮罩样式mask的：  width: 100%;  height: 82rpx  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,1));
+21.小程序的在{{}}中无法使用es6的`${}`语法，{{}}里面要使用常量字符串，就{{'ascascas'}}
+22.小程序中的class只能写一个，多个class的话用：<view class="dIb {{userInfo.gender === 0 ? '' : 'bgc_Blue'}}" bindtap="changeGender" data-gender="{{1}}">男</view>,也可以直接绑定常量：class="{{'abc'}}"
 
 第九节课
 1.wepy腾讯开源的组件化开源框架，风格和vue相似，支持props mixin computed slot等
 2.支持组件化，组件隔离，嵌套，通信
 3.直接使用无平台依赖的npm包
-4.通过polygil支持Promise
+4.通过polyfil支持Promise
 5.支持es6的语法
 6.原生小程序只支持5个并发请求，wepy支持10个请求的并发
 7.预编译器的风格less sass stylus
@@ -230,5 +233,5 @@ canvas完成复杂动画
 12.学习wepy框架的官方网站；
 
 第十节课
-1.
-
+1.小程序时单向绑定的；
+2.小程序中没有cookie，但可以在header中添加cookie来实现登录校验；
