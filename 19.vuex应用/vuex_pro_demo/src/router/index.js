@@ -4,6 +4,8 @@ import Counter from '@/components/Counter'
 import Promise from './../components/Promise'
 import Module from './../components/Module.vue'
 import Watcher from './../components/Watcher.vue'
+import Binding from './../components/Binding.vue'
+
 
 // import Two from './../components/Login'
 // import Three from './../components/Logout'
@@ -18,7 +20,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/one'
+      redirect: '/two'
     },
     {
       path: '/one',
@@ -31,7 +33,7 @@ const router = new Router({
     {
       path: '/two',
       name: 'two',
-      component:  resolve => require(['./../components/Login.vue'], resolve),//懒加载
+      component:  resolve => require(['./../components/Binding.vue'], resolve),//懒加载
       meta: {
         requireAuth: false,
         sliderable: true
