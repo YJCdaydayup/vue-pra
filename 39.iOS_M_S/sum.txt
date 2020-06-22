@@ -1,0 +1,36 @@
+一.runtime的内存模型
+1）OC对象是由一个objc-object指针类型所指向的，这个objc-object是一个结构体，里面有个isa指针，指向这个对象的类对象Class，而这个class中存储的就是这个实例对象的属性列表，方法列表，成员变量列表
+2）OC中的类用也是有一个objc-class指针类型，也是结构体，存储super-class（父类） name 类名称 version info ivars变量列表 methodLists方法列表 cache缓存 protocols实现的协议列表
+3）类的super_class指向父类，类的isa指针指向的是元类对象，元类保存了类方法的列表，最终基类的元类是自己本身NSObject
+
+二.initialize和load方法
+1）load方法只会调用一次，类被加载的时候就调用，是采用函数的内存地址直接调用的方式，先调用父类的，在调用子类的，最后调用分类的
+2）initialize只会调用一次，类或子类第一次收到消息时调用，父类先调用，子类再调用，如果实现了分类那么只会调用分类的，不会调用本类的；
+
+三.weak实现原理以及sidetable结构
+1）weak其实就是维护了一个hash表结构，key是对象地址，value是weak的指针数组，weak表示弱引用不会对对象引用计数+1，当引用对象被释放时，其值被自动设置为nil，解决循环引用
+2）底层，runtime会调用objc_initWeak函数，初始化一个新的weak指针指向对象的地址
+3）objc_initWeak函数会调用objc_storeWeak函数，更新指针指向，创建对应的弱引用hash表
+4）释放时，调用clearDeallocing函数，根据对象地址获取所有weak指针地址的数组，然后遍历这个数组将里面的数据设置为nil，最后把这个entry从weak表删除，最后清理对象的记录
+5）sideTable结构：保证原子操作的自旋锁，引用计数hash表 weak引用的全局的hash表
+
+四.对象管理如何进行内存管理的，如何实现weak属性
+1）内存管理方面是通过在赋值的时候设置一个policy，根据这个policy的类型对设置的对象进行retain/copy等操作
+2）当policy为OBJC_ASSOCIATION_ASSIGN的时候，设置的关联值将是以weak的方式进行内存管理的
+
+五.Autoreleasepool所使用的数据结构是什么？AutoreleasePoolPage结构体；https://www.it610.com/article/1224831190939308032.htm
+1）自动释放池是若干个AutoreleasePoolPage以双向链表的形式组合而成
+2）单个节点是一个AutoreleasePoolPage，大小4kb，包括next thread parent child等
+3）程序执行的过程中向一个对象发送autorelease消息，就会往AutoreleasePoolPage中添加自动释放对象autorealse对象，next作为游标指向最新add进来的autorelease对象，当单个AutoreleasePoolPage装满时，会创建一个新的AutoreleasePoolPage，通过child和parent进行链接，
+4)当调用@autoreleasepool，就会调用objc_autoreleasePoolPush方法，会往AutoreleasePoolPage中添加一个哨兵对象，当{}里面的代码执行完毕，就会调用objc_autoreleasePoolPop将哨兵对象之后添加的所有autorelase对象清理掉
+如下：
+int main(int argc, char * argv[]) {
+    /* @autoreleasepool */ {
+        //创建自动释放池
+        __AtAutoreleasePool __autoreleasepool = objc_autoreleasePoolPush();
+        //TODO 执行各种操作，将对象加入自动释放池
+        
+        //释放自动释放池
+        objc_autoreleasePoolPop(__autoreleasepool)
+    }
+}

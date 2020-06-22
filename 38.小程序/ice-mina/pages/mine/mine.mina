@@ -1,12 +1,31 @@
-<template lang="pug">
-    view.container
-        text.content {{msg}}
+<template>
+    <view class="container">
+        <block wx:for="{{list}}" wx:key="*this">
+            <view class="box">
+                <text>{{item.name}}</text>
+                <text>{{item.timestamp}}</text>
+            </view>
+        </block>
+    </view>
 </template>
 
 <script>
     Page({
         data: {
-            msg: 'ABCGEFG'
+            list: [
+                {
+                    name: '花桥流水',
+                    timestamp: 14737272772
+                },
+                {
+                    name: '花桥流水',
+                    timestamp: 14737272772
+                },
+                {
+                    name: '花桥流水',
+                    timestamp: 14737272772
+                }
+            ]
         }
     })
 </script>

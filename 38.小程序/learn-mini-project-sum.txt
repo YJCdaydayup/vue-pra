@@ -1,0 +1,11 @@
+Day-01
+1)全局组件的配置可以直接在app.json里面进行配, "usingComponents": {"float-menu": "/components/float-menu/index"},后面任何页面可以直接使用，
+2)使用swiper组件的时候，里面的swiper-item可以用navigator进行包裹，如下：
+ <swiper class="notice_swiper" vertical autoplay circular>
+    <navigator wx:for="{{noticeList.dataList}}" wx:key="id" url="/pages/notice/show?id={{item.id}}">
+      <swiper-item>
+         <view class="notice_itemr">{{item.title}}</view>
+      </swiper-item>
+    </navigator>
+ </swiper>
+3）
