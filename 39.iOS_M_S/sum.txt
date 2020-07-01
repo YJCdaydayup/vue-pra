@@ -34,3 +34,54 @@ int main(int argc, char * argv[]) {
         objc_autoreleasePoolPop(__autoreleasepool)
     }
 }
+
+六.方法交换黑魔法注意点
+1）避免交换父类的方法
+2）交换方法放在分类的load方法中进行
+3）交换方法放到dispath_once中进行，防止手动调用load方法导致反复交互
+4）交换的方法名叫前缀避免方法冲突
+
+七.atomic原子行是否安全
+1)atomic是系统自动在setter和getter方法进行加锁操作，保证读写安全，属于自旋锁，效率比较低
+2）UI的操作都在主线程的，所以UI的属性要用noatimoc保证性能
+
+八.通知的实现原理
+1) 有三张表，named table传入通知名的表，nameless table没传入通知名的表 和wildcard既没有传通知名也没有传object对象的表，这个表是链表的数据结构；
+2）在named table中以通知名作为key，表作为value，表中以object为key，observer观察者为value，当不传object时，默认会响应当前通知名下的所有观察者；
+3）在nameless table中不存在通知名，会以object为key来响应对象的观察者；
+4）既没有通知名也没有object，就会响应链表中的所有的观察者；
+
+九.RunLoop
+1)一个线程对应一个runloop，主线程的runloop默认是打开的，子线程的runloop是未创建的，所以子线程执行完毕后就会推出当前线程；
+2）runloop分为两种，NSRunloop和CFRunloop，NSRunloop存在于Foundation框架基于CFRunloop的OC封装，CFRunloop存在于CoreFoundation框架线程安全的
+3）CFRunloop是一个结构体，有自己的mode模式，每个模式下可以分配事件源source，timer，Observer
+4）模式有默认模式主线程在这个模式下，屏幕追踪模式滑动屏幕时的模式，还有个占位模式，runloop只能在一个模式先运行，要进入另一个模式只能先退出当前模式
+5)获取某个线程的runloop，会从全局的字段查找，找不到就会创建一个并以当前线程为key保存在全局字典中
+6）常见应用：
+A）控制线程的生命周期，线程保活，原理是如果线程里面没有任何事件源source0/1/timer/observer就会立刻退出，为了不让它退出可以添加一个source1让线程常驻内存；
+B）tableview的延迟加载图片，[self.img performSelector:@selector(setImage:) withObject:image afterDelay:0 inModes:[NSDefaultRunLoopMode]];
+C）解决NSTimer计时器默认在当前线程的默认模式中可以转到占位模式
+D）通过对主线程的Runloop的监听来监测应用的卡顿，runloop在进入睡眠和唤醒后有两个状态，创建Observer监听主线程；
+
+十）KVO原理
+1）为需要观察的对象动态创建了一个子类，以NSKVONotifying_为前缀，并将需要观察的对象的isa指针指向这个新的子类，会重写class方法返回原来的类来尽量保证对原对象的修改，然后在新的子类中对需要观察的属性的getter/setter方法进行重写，调用willChangeValueForKey和didChangeValueForKey来记录新旧值，既而调用observeValueForKey的方法；
+2）造成崩溃：没有移除观察者 重复移除观察者 移除未注册的观察者 观察者被提前释放（局部变量或者weak修饰） 未实现observe方法，添加观察者时keypath为空
+
+十一）Block
+1）分三种：栈上block（使用来栈上的变量） 堆上block（使用copy或strong就会从栈区拷贝到堆区） 和 全局block（未引用任何栈上的变量）
+2）还有发生copy的时机：调用block的copy方法 block作为返回值 赋值给strong修饰的变量 调用GCD的block方法
+
+十二）锁
+1）互斥锁 @synchronized NSLock
+2）递归锁 NSRecursiveLock，处理递归任务
+3）信号量
+4）条件锁 NSCondition
+5）读写锁，其实就是将读和写分开，采用dispath_barrier_async来完成的
+6）自旋锁
+
+
+十三）几种计时器
+1）NSTimer，要主要他可能造成内存泄漏，其二就是当runloop进行连续性运算的时候，timer可能会延迟发出造成延后执行；
+2）CADisplayLink根据屏幕的刷新频率来的 1s60次
+3）dispatch_source_t 一定要设置成成员变量不然会被释放，不受runloop的影响但是不是100%精准
+
