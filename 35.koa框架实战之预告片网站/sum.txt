@@ -57,7 +57,7 @@ let obj = {
 // koa-compose中间件将中间件组合在一起就是利用这一原理通过迭代的方式从middleware中间件数组取出中间件去一一执行的，每个中间件执行完毕，就会在中间件的next（）方法里面调用dispatch(i + 1)来执行下一个中间件，所以一个中间件是一个函数，里面不执行next就不会从数组里面取出下一个中间件来执行，在return dispatch(i + 1)前面加了return就意味着要等下一个中间件返回了再去执行这个中间件next后面的代码
 核心源码：
 function compose(middleware) {
-    return function (context, next) {
+    return function (context) {
         let index = -1
         return dispatch(0)
         function dispatch(i) {

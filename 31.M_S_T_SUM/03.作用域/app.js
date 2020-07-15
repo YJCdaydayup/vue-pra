@@ -8,7 +8,7 @@ function Person(name, age) {
 }
 
 function f1(person) {
-    // 当是引用类型传递进来时，默认就有一个：ver person = person; 产生了一个新的引用，只是没看到而已
+    // 当是引用类型传递进来时，默认就有一个：var person = person; 产生了一个新的引用，只是没看到而已
     // var person = person; 指向同一个地址
     person.name = 'ls'; // 同一个地址的name改变了
     person = new Person('HEHE', 18); // 而新的person又指向了新的Person对象了

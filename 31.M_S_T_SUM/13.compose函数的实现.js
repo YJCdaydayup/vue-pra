@@ -30,7 +30,7 @@ let mid1 = function(params) {
 let mid2 = function(params) {
     return function (ctx, next) {
         console.log('mid2')
-        next() 
+        // next() 
         console.log('mid2')
     }   
 }

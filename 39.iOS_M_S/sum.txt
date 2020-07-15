@@ -140,5 +140,25 @@ CPU处理
 GPU处理
 屏幕成像原理：CPU计算 - GPU渲染 - 屏幕缓冲区 - 视频控制器读取展示
 
+十九）NSSet，三大容器之一(数组，字典，NSSet)
+1.是一种hash表，内部使用hash查找，查找速度更快，数组需要遍历
+2.内存地址不连续，无序，唯一，元素是对象类型
+3.NSHashTable是NSSet的通用版本，可以对元素进行弱引用，它只有可变类型，比如一个对象持有属性数组，数组又持有这个对象就出现了内存泄漏
+
+二十）NSOperation和GCD
+1）NSOperation是基于GCD的面向对象的封装
+2）在特殊需求，如取消任务，设置任务优先级，任务状态监听，NSOperation更方便
+3）NSOperation可以设置任务的依赖关系，GCD只能通过dispatch_barrier_async实现
+4）NSOperation可以定义NSInvocationOperation和NSBlockOperation
+
+二十一）hash表，也是通过数组来实现的
+1）一般的线性表的查找是通过遍历的，如果不通过遍历查找，而是通过关键值key通过f函数的计算得到内存地址来进行查找，效果更高
+2）核心是，存储位置和关键字key之间确立了一个对应关系，查找的过程中，只需要通过这个对应关系和给定的key就可以确定存储的位置
+
+
+
+
+
+
 
 
