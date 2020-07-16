@@ -1,3 +1,5 @@
+知识点：https://www.jianshu.com/p/f40caed71685
+
 一.runtime的内存模型
 1）OC对象是由一个objc-object指针类型所指向的，这个objc-object是一个结构体，里面有个isa指针，指向这个对象的类对象Class，而这个class中存储的就是这个实例对象的属性列表，方法列表，成员变量列表
 2）OC中的类用也是有一个objc-class指针类型，也是结构体，存储super-class（父类） name 类名称 version info ivars变量列表 methodLists方法列表 cache缓存 protocols实现的协议列表
@@ -139,6 +141,68 @@ Objc运行时初始化处理，类注册 分类注册 方法唯一性检查
 CPU处理 
 GPU处理
 屏幕成像原理：CPU计算 - GPU渲染 - 屏幕缓冲区 - 视频控制器读取展示
+
+十九）AOP面向切面编程，Aspects原理
+1）消息转发机制，lookUpImpOrForward逐级查找，查找不到就进行消息转发机制，实在没有处理就抛出错误
+2）原理：
+对象A或者类的方法m被添加切面方法
+创建A的子类B，并hook子类B的forwardingInvocation方法进行拦截转发，指向一个block回调函数
+把类A的isa指针指向类B，并重写类A的class方法返回类A，尽量减少对A的改动，比较类似于KVO的机制
+对于方法m，类B直接把方法的IMP指向objc_msgforward,这样就会直接走消息转发机制触发block
+
+二十）SDWebImage加载图片流程
+1）主要是通过SDWebImageManager这个类来进行管理实现的，采用了大量的抽象接口来实现，面向协议编程的方式
+2）首先展示placeHolder上面的图片，然后由SDWebImageManager根据url开始处理图片
+3）SDImageCache去内存缓存进行查找，找到就回调回来
+4）内存找不到，就生成NSInvocationOperation添加到队列从磁盘进行查找，找到后回调到主线程，保存在内存中，内存空间过小，会先清理内存缓存
+5）如果磁盘找不到，就使用SDWebImageDownloader下载图片，下载完毕后交给SDWebImageDecoder进行解码处理
+6）解码处理是在NSOperationQueue完成，子线程进行解码操作，解码完成后回调给SDWebImageDownloader，进而回调给SDWebImageManager告知图片已经下载完成
+7）使用SDWebImageCache将图片进行缓存，以及写入磁盘中，数据管理包括内存层面和磁盘层面的
+具体原理：四个类，多个抽象接口来实现的
+    SDWebImageManager 通过url来处理图片
+    SDWebImageCache 从缓存中获取图片，先从内存缓存获取，找不到就会开启一个子线程去磁盘里面找，找到后回调回来并存在内存缓存中
+    SDWebImageDownloader 磁盘中找不到就会创建这个类，开启线程池NSOparetionQueue下载图片
+    SDWebImageDecoder 对下载的图片在子线程进行强解压缩，得到能够显示的位图二进制数据，并回调给SDWebImageDownloader
+    SDWebImageDownloader回调给SDWebImageManager进行图片的显示
+    再交给SDWebImageCache对图片进行内存，磁盘的缓存
+
+二十一）performSelector理解
+1）performSelector调用后会在当前runloop中设置一个timer计时器来触发这个方法的执行，如果是在子线程上调用performSelector，那么由于子线程的runloop默认是没有创建的就不会执行，需要创建这个runloop，不回收的话，可以给这个runloop一个source0事件
+2）和NSInvocation的区别是，当参数多余2个时使用NSInvocation方便些
+
+二十二）https的单向 双向认证
+1）双向认证
+客户端向服务器发送请求，服务器返回自己的证书给客户端
+客户端检查证书是否是信赖的CA机构签发的证书，证书是否过期，如果不是就给客户一个警告
+如果是，客户端对比证书的信息，如域名，一致就认可这个服务器
+客户端发送自己的证书给服务器，收到后验证证书
+客户端告知服务器自己支持的对称加密方案，服务器选择一种后通过客户端的公钥加密后给到客户端
+客户端通过这个方案生成一个对称加密密钥，通过服务器的公约证书返回给服务器
+客户端和服务端就可以通过这个对称密钥进行通信了
+
+2）单向认证
+客户端向服务器发送请求，服务器返回自己的证书给客户端
+客户端检查证书是否是信赖的CA机构签发的证书，证书是否过期，如果不是就给客户一个警告
+如果是，客户端对比证书的信息，如域名，一致就认可这个服务器
+客户端随机生成一个对称密钥通过服务器公约证书返回给服务器
+
+3）双向认证则是需要服务端与客户端提供身份认证，只能是服务端允许的客户能去访问，安全性相对于要高一些；
+SSL单向认证只要求站点部署了ssl证书就行，任何用户都可以去访问(IP被限制除外等)，只是服务端提供了身份认证；
+
+4）AFN做https的认证，AFSecurityPolicy是将服务器的公钥放在客户端，ANF2.0支持去比对本地公钥和服务器返回的公钥，一致就可以排除中间人攻击了
+
+二十三）使用符号表dSYM对线上bug进行调试
+1）需要三个文件，.crash文件（需要崩溃的App所在手机导出） 符号文件（.dSYM）应用程序文件（.app文件）
+2）要到处.dSYN文件，需要Xcode进行设置，然后在achive的时候导出保存下来，以便后续需要这个文件定位bug
+3）使用Xcode的 symbolicatecrash 工具命令行进行生成
+4）符号表保存了内存地址，函数和文件名，行号等信息
+
+
+
+
+
+
+
 
 
 
