@@ -5,6 +5,7 @@ import Promise from './../components/Promise'
 import Module from './../components/Module.vue'
 import Watcher from './../components/Watcher.vue'
 import Binding from './../components/Binding.vue'
+import tjd from './../components/tjd.vue'
 
 
 // import Two from './../components/Login'
@@ -20,7 +21,12 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/two'
+      redirect: '/tjd'
+    },
+    {
+      path: '/tjd',
+      name: 'tjd',
+      component: resolve => require(['./../components/tjd.vue'], resolve), //懒加载
     },
     {
       path: '/one',

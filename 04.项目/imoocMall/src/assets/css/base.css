@@ -1160,6 +1160,7 @@ html {
 }
 
 .md-modal .confirm-tips p, .md-modal .alert-tips p {
+    margin-top: 20px;
   line-height: 1.8em;
 }
 

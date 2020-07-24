@@ -9,7 +9,7 @@
     <div id="app">
         <ul>
             <!-- food每输出一项，就渲染生成一个li -->
-            <li v-for="food in foodlist">
+            <li v-for="(food, index) in foodlist" :key="index">
                 {{food.name}} {{food.discount ? food.discount * food.price : food.price}}
             </li>
         </ul>

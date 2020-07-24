@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="md-modal modal-msg md-modal-transition" :class="{'md-show': mdShow}">
+      <div class="container md-modal modal-msg md-modal-transition" :class="{'md-show': mdShow}">
         <div class="md-modal-inner">
           <div class="md-top">
             <div class="md-title">Login in</div>
@@ -19,8 +19,12 @@
       <div class="md-overlay" v-if="mdShow" @click="closeModal"></div>
     </div>
 </template>
-<style>
-
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  .container
+    .md-top
+      color red
+      font-size 20px
+      text-align center
 </style>
 
 <script>
