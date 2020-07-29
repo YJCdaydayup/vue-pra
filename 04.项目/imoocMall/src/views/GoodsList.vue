@@ -162,9 +162,25 @@
       Modal
     },
     mounted: function () {
-      this.minPrice = 0;
-      this.maxPrice = this.goodsPrices[this.goodsPrices.length - 1].maxPrice;
-      this.getGoodsList();
+      // this.minPrice = 0;
+      // this.maxPrice = this.goodsPrices[this.goodsPrices.length - 1].maxPrice;
+      // this.getGoodsList();
+      console.log('AAAAA')
+      axios.post('http://172.23.1.196:8080/zzb/system/login', {
+            "functionId": "login",
+            "parameters": {
+              "userId": "13751135038",
+              "password": "ISGMyneATSuhkiwz4BURBQ==",
+            }
+      },{
+          headers: {
+              Authorization: 'Basic o5CZ976uIOA6l7dUl5KtoWggYYi4+v3VvRC7JtDby/I='
+          }
+      }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
     },
     methods: {
       // 这里的方法可以这样写
