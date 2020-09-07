@@ -22,9 +22,11 @@
 
 五.Autoreleasepool所使用的数据结构是什么？AutoreleasePoolPage结构体；https://www.it610.com/article/1224831190939308032.htm
 1）自动释放池是若干个AutoreleasePoolPage以双向链表的形式组合而成
-2）单个节点是一个AutoreleasePoolPage，大小4kb，包括next thread parent child等
+2）单个节点是一个AutoreleasePoolPage，大小4kb，包括next thread parent child，depth等
 3）程序执行的过程中向一个对象发送autorelease消息，就会往AutoreleasePoolPage中添加自动释放对象autorealse对象，next作为游标指向最新add进来的autorelease对象，当单个AutoreleasePoolPage装满时，会创建一个新的AutoreleasePoolPage，通过child和parent进行链接，
-4)当调用@autoreleasepool，就会调用objc_autoreleasePoolPush方法，会往AutoreleasePoolPage中添加一个哨兵对象，当{}里面的代码执行完毕，就会调用objc_autoreleasePoolPop将哨兵对象之后添加的所有autorelase对象清理掉
+4)当调用@autoreleasepool，就会调用objc_autoreleasePoolPush方法，会往AutoreleasePoolPage中添加一个哨兵对象，当{}里面的代码执行完毕，就会调用objc_autoreleasePoolPop将哨兵对象之后添加的所有autorelease对象发送release消息，让他们的引用计数器减1
+5）当{}里面的代码执行完毕其实就是当前runloop迭代结束时，系统在每个runloop迭代中都加入了自动释放池Push和Pop,其实就是对runloop进行了监听
+6）每个线程都会维护自己的autoreleasepool堆栈，换句话说每个线程对应一个autoreleasepool
 如下：
 int main(int argc, char * argv[]) {
     /* @autoreleasepool */ {
@@ -52,6 +54,7 @@ int main(int argc, char * argv[]) {
 2）在named table中以通知名作为key，表作为value，表中以object为key，observer观察者为value，当不传object时，默认会响应当前通知名下的所有观察者；
 3）在nameless table中不存在通知名，会以object为key来响应对象的观察者；
 4）既没有通知名也没有object，就会响应链表中的所有的观察者；
+5）发送通知在哪个线程，则执行通知的方法就是在哪个线程
 
 九.RunLoop
 1)一个线程对应一个runloop，主线程的runloop默认是打开的，子线程的runloop是未创建的，所以子线程执行完毕后就会推出当前线程；
@@ -59,6 +62,9 @@ int main(int argc, char * argv[]) {
 3）CFRunloop是一个结构体，有自己的mode模式，每个模式下可以分配事件源source，timer，Observer
 4）模式有默认模式主线程在这个模式下，屏幕追踪模式滑动屏幕时的模式，还有个占位模式，runloop只能在一个模式先运行，要进入另一个模式只能先退出当前模式
 5)获取某个线程的runloop，会从全局的字段查找，找不到就会创建一个并以当前线程为key保存在全局字典中
+6）source0 不是系统内核或者其他进程发送的
+7）source1来自系统内核，或者其他线程或进程的事件，可以主动唤起runloop，如事件响应 CADisplayLink 系统事件 Timer事件：计时器
+8）比如先触摸到屏幕，屏幕表面会把事件包装成Event，先告诉source1，唤起runloop，然后将事件分发给source0，有source0来处理
 6）常见应用：
 A）控制线程的生命周期，线程保活，原理是如果线程里面没有任何事件源source0/1/timer/observer就会立刻退出，为了不让它退出可以添加一个source1让线程常驻内存；
 B）tableview的延迟加载图片，[self.img performSelector:@selector(setImage:) withObject:image afterDelay:0 inModes:[NSDefaultRunLoopMode]];
@@ -68,6 +74,7 @@ D）通过对主线程的Runloop的监听来监测应用的卡顿，runloop在�
 十）KVO原理
 1）为需要观察的对象动态创建了一个子类，以NSKVONotifying_为前缀，并将需要观察的对象的isa指针指向这个新的子类，会重写class方法返回原来的类来尽量保证对原对象的修改，然后在新的子类中对需要观察的属性的getter/setter方法进行重写，调用willChangeValueForKey和didChangeValueForKey来记录新旧值，既而调用observeValueForKey的方法；
 2）造成崩溃：没有移除观察者 重复移除观察者 移除未注册的观察者 观察者被提前释放（局部变量或者weak修饰） 未实现observe方法，添加观察者时keypath为空
+3）不能对成员变量进行观察，因为成员变量没有setter方法
 
 十一）Block
 1）分三种：栈上block（使用来栈上的变量） 堆上block（使用copy或strong就会从栈区拷贝到堆区） 和 全局block（未引用任何栈上的变量）
@@ -79,7 +86,7 @@ D）通过对主线程的Runloop的监听来监测应用的卡顿，runloop在�
 3）信号量
 4）条件锁 NSCondition
 5）读写锁，其实就是将读和写分开，采用dispath_barrier_async来完成的
-6）自旋锁
+6）自旋锁，atomic，如果共享数据已经被其他线程加锁，线程会以死循环的方式等待解锁，一旦被访问的资源解锁，则等待资源的线程就会被唤醒
 
 
 十三）几种计时器
@@ -254,9 +261,79 @@ D）离屏渲染
 实例：
 预排版：把每个cell需要的数据在后台计算好封装成一个布局对象，每次从布局对象中取；
 
-
 三十一）block用copy修饰
 1）block默认内存是在栈上的，当用copy修饰后就拷贝到堆上面了，用retain也可以，底层也是用copy实现的
 2）栈上的block作用域仅限创建这个block时候的上下文，在这个作用域外调用就会崩溃，使用copy就会将block拷贝到堆区，这样作用域外调用就不会奔溃
+
+三十二）http1.1和http2区别
+1）http协议是建立在tcp协议之上的一种应用层协议，每次请求结束后会主动断开连接，属于短连接，由于是基于tcp的，也有三次握手，http1.1支持的长连接非常短，一般300s左右
+2）http2采用二进制格式非文本格式，报头压缩降低了开销
+3）支持服务器将响应主动推给客户端缓存中，当一个浏览器请求一个网页时，服务器会反返回html，在服务器发送js，css等资源文件时，需要等待浏览器解析html并发送内嵌资源的请求，而服务器通过推送服务将那些需要的资源推到客户端的缓存中
+4）http2.0支持同一个连接并发处理多个请求，而且并发请求数量比http1.1大好几个数量级，所以客户端之需要一个连接就可以加载一个页面
+
+三十三）拷贝，可变拷贝
+1）copy 不可变对象发生的拷贝都是浅拷贝，可变对象发生拷贝都是深拷贝
+2）mutableCopy 一定是深拷贝，产生的对象都是可变对象
+
+三十四）引用计数原理
+1）系统全局有一个引用计数hash表，这个表存放在sideTable中，通过当前对象获取其引用计数属性来进行加减1操作
+
+三十五）KVC理解
+1）健值编码，间接的访问对象的属性，当调用setValue:forKey时，会先调用setName:对象的setter方法，如果没有setter方法，就会检查accessInstanceVariablesDirectly方法，返回NO就会调用setValueforUndefinedKey，
+返回YES，就会查找下划线的成员变量和_isKey的成员变量，再找不到就会查找isKey的成员变量，是在找不到就调用setValueForUndefinedKey方法
+
+三十六）项目中引用多个第三方库冲突
+1）最快的方式是找到对用的framework，target Membership对勾去掉，编译会没有问题，后续可能会有其他问题
+2）第二种方式是通过lipo命令查看某个动态库的.o文件，解压出来后删除，再重新打包替换原来的文件
+mkdir armv7        lipo libALMovie.a -thin armv7 -output armv7/armv7.a   armv7     ar -t armv7/armv7.a             cd armv7 && ar xv armv7.a    object file  .o     rm ALButton.o                     cd ... && ar rcs armv7.a armv7/*.o     object file
+lipo -create armv7.a arm64.a -output new.a
+
+三十七）atmic实现机制，为什么不绝对安全
+1）atmic是property修饰词之一，表示原子性，编译器会在getter和setter方法中默认添加os_unfair_lock来进行加锁，保证读写原子性
+2）不能绝对安全例子
+A）仅仅保证了存取时的线程安全，假设修饰的对象时可变类型，就无法保证了
+B）编译器是自动在setter和getter方法上加锁的，放我们重写setter／getter方法时，就只能依靠自己来控制线程的安全
+
+三十八）mrc下的setter方法
+- (void)setCar:(Car *)car {
+   if (_car != car) {
+     [_car release];
+     _car = [car retain]
+   }
+}
+
+三十九）GCD有关问题:dispatch_sync(dispatch_get_main_queue(), ^{NSLog(@"Hello ?");}); 死锁的原因
+1）dispatch_sync需要等block执行完毕才执行后面的代码
+2）放在主线程的block任务需要等dispatch_sync执行完才执行形成了相互等待
+
+四十）一个空对象创建后在64位下会分配16个字节的空间，但实际占用8个字节
+
+四十一）引用计数器存放的位置
+1）如果对象支持TaggedPointer，会直接将对象的指针值作为引用计数器返回
+2）不支持，如果是64位环境且实用的是OC2.0，会使用对象isa指针的一部分空间存储引用计数器
+3）否则，就会使用一张hash表来管理引用计数，这个hash表存在sideTable里面
+
+四十二）事件响应机制
+1）触摸屏幕产生触摸事件后，触摸事件会被添加到UIApplication管理的事件队列中（首先接收到事件的是UIApplication）
+2）UIApplication会从事件队列中取出最前面的事件交给应用程序的主窗口keyWindow
+3）主窗口会在视图层次结构中找到一个最合适的视图进行处理事件
+4）最合适的视图会调用自己的touch方法来处理事件
+5）touch方法会吧事件顺着响应者链条向上抛
+6）事件传递是向下的（父控件->子控件）事件响应是向上的（子->父控件）
+
+四十三）应用程序如何找到最合适的控件
+1）首先判断主窗口keywindow能否处理事件
+2）判断触摸点是否在自己身上
+3）子控件数组从后往前进行遍历，即查找子控件数组中的最后一个元素开始
+4）如果没有符合的子控件，自己就是最合适处理者
+5）hitTest寻找并返回最合适view
+6）pointInside方法，判断点是否在自己身上
+
+
+四十四）NSTimer在占位模式下为什么有时候不准确
+1）某一时刻主线程发生阻塞，导致runloop循环不下去
+2）尽量避免耗时操作放在NSTimer触发的事件中
+
+
 
 
