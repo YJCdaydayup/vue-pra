@@ -34,4 +34,79 @@ LRU Cache
 
 9.做题 时间复杂度
 
+10.数组，查找O(1) 插入和删除O(n)
+
+11.链表，通过改变指针的指向来进行插入，删除操作即O(1),查找是O(n)
+
+12.面试题：
+1）反转链表：两两交换后，cur和pre同时向前移动一步
+1-2-3-4-5-nil 反转为 nil - 5-4-3-2-1
+def reverseList(self, head):
+  cur, pre = head,None 
+  while cur:
+    cur.next = pre
+    pre = cur
+    cur = cur.next 
+  return pre  
+
+2)两两节点反转
+function(head) {
+	pre = null
+	pre.next = head
+
+	while (pre.next && pre.next.next) {
+		var a = pre.next
+		var b = a.next
+		pre.next = b
+		b.next = a
+		a.next = b.next
+		pre = a 
+	}
+	return pre
+}
+
+3）判断链表有环
+1.不断的遍历链表，看是否会存在nil
+2.遍历链表，每走一个节点就往set表存放这个节点，每到一个新节点就去set里面查找O(n)
+3.快慢指针，判断是否相遇
+function(head) {
+	var fast = head
+	var slow = head
+	while(fast && slow && fast.next) {
+		slow = slow.next
+		fast = fast.next.next
+		if (slow == fast) {
+			return true
+		}
+	}
+	return false
+}
+
+13.栈，先进后出，队列，先进先出
+面试题：判断一个括号字符串是否有效?
+1.遍历这个字符串，如果出现”()”,”[]”,”{}”就立刻消掉，最后看这个字符串是否为空；
+2.使用栈的数据结构，一开始出现右括号就直接为false，出现左括号就添加到栈底，一旦出现右括号就判断这个括号和栈顶的符号是否是一对，是就移除栈
+
+14.用栈实现队列的效果，原理是定义两个栈，一个叫输入栈，一个叫输出栈，输出总是从输出栈出，输入总是输入到输入栈，每次pop就将输入栈的数据放到输出栈，这样就将栈底的数据拿到了栈顶，达到了队列的效果
+
+15.优先队列，有一个属性设置队列里面的任务的优先级
+实现机制：堆
+堆：类似二叉树
+小顶堆，根据根-左-右的顺序放，越小的数据放在越上面，每次取最上面的数据，每次插入一个元素，整个堆的节点都要进行调整
+大顶堆，一样的模式，每一个根节点都大于左右节点的数
+面试题：
+1.给定一个数组，流式窗口，每次显示K个元素找出最大元素，使用大顶堆
+2.找出第三大的数据，采用小顶堆
+
+16.hash表： hash函数的到整数，对数组长度取余，得到数组元素的下标
+解决hash碰撞：拉链法，多个key得到相同的下标就在数组的这个节点使用链表
+
+17.Map，映射表，{K:V} =》 hashMap
+
+18.Set，不可重复 =》hashSet
+
+
+
+   
+
 
