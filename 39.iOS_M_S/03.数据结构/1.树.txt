@@ -110,6 +110,20 @@ function(head) {
 查找数据列表总是否存在两个数等于K，如[2,7,11,15]是否存在两个数等于9？
 1）暴力，两层循环，注意第二层循环从i+1开始，时间复杂度O(n平方)
 2）set，y = 9 - x，枚举下x后，从set里面剔除x，然后判断9-x是否在set里面，时间复杂度O（n）
+// a + b = 9
+function twoSum(arr) {
+	let set = [...arr]
+	for (var i = 0;i<arr.length;i++) {
+		var a = arr[i]
+		var b = 9 - arr[i]
+		set.splice(set.indexOf(a), 1)
+		if (set.indexOf(b) > -1) {
+			return ture
+		}
+	}
+	return false
+}
+
 3) 三数之和，a+b+c=0，给定数组[-1,0,1,2,-1,4]是否存在a+b+c=0;
 解决方案：
 方案一：暴力求解，三层嵌套循环，O(n3)
@@ -131,10 +145,92 @@ function(head) {
  面试题：
 1）判断是否为有效二叉搜索树，
 办法1：中序遍历得到的数组是否为升序的数组
-办法2:
-
+2）寻找最小公共祖先节点？
+从根节点进行查找，如果左子树可以查到返回左子树根节点，如果右子树可以查到返回右子树根节点，两边都可以查看一个则root是最小公共祖先，只在一边可以查到就继续迭代左子树或者右子树，直至根节点等于其中一个就返回这个值
+function lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+	if (root == null || root == q || root = q) {
+		return root
+	}
+	TreeNode left = lowestCommonAncestor1(root.left, p, q)
+	TreeNode right = lowestCommonAncestor1(root.right, p, q)
+	if (left == null) {
+		return right
+	}	
+	if (right == null) {
+		return left
+	}
+	return root
+}
+3）寻找二叉搜索树的最小公共祖先
+function lowestCommonAncestor(root, p, q) {
+	while (root) {
+		if (p.val < root.val && q.val < root.val) {
+			root = root.left
+		}
+		if (p.val > root.val && q.val > root.val) {
+			root = root.right
+		}
+		return root
+	}
+}
 
 20.图，树就是特殊化的图，可以链回到自己的节点
+
+21.递归
+1）计算n！
+function factorial(n) {
+  if (n <= 1) {
+     return 1
+  }
+  return n * factorial(n - 1)
+}
+
+22.分治，将一个大问题，分解成二级小问题，再继续分解，最后将小问题一一解决
+面试题：
+1.计算x的n次方
+function xn(x ,n) {
+	if (n === 1) {
+		return x
+	}
+	return xn(x, n - 1) * x
+}
+
+2.判断数组是否有众数，count(x) > n/2
+1)暴力求解，2次循环 O(n2)
+2）map数据结构：{x: count_x}，最后找出最大的count，O（n）
+function zs(arr) {
+	let map = {}
+	for (var i = 0;i<arr.length;i++) {
+		var val = map[arr[i]] 
+		if (!val) {
+			map[arr[i]]= 1
+		}
+		map[arr[i]] ++
+	}
+	return map
+}
+
+3）先sort，再遍历，重复的次数大于n/2 O（nlogn）
+
+
+23.贪心算法
+面试题：知道几天的股价，最多持有1股，每天可以买卖无数次，求最大收益
+function stockBestTime(arr) {
+	var sum = 0
+	for (var i = 0;i<arr.length - 1;i++) {
+		if (arr[i + 1] > arr[i]) {
+			sum += arr[i+1] - arr[i] // 遍历每个数，只要后一天比前一天大，就获取后一天比						     前一天的差值
+		}
+	}
+	return sum
+}
+
+24.广度优先搜索，针对树进行一层一层的搜索，像水波浪一样逐步开来
+25.深度优先搜索，从子节点遍历到最深处，再回过头来看每个子节点有没有叶子节点再进行查找
+面试题：
+1）二叉树层次遍历 广度优先搜索
+
+
 
 
 
